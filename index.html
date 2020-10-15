@@ -381,6 +381,69 @@
 
 
   
+    <article id="post-flink-history-server" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2020/10/13/flink-history-server/" class="article-date">
+      <time datetime="2020-10-12T16:00:00.000Z" itemprop="datePublished">2020-10-13</time>
+</a>
+    </div>
+  
+  <div class="article-inner" id="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/10/13/flink-history-server/">用了 Flink History Server，妈妈再也不用担心我的作业半夜挂了</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody" id="article-entry">
+      
+          
+              <p>保存作业停止之前的信息</p>
+          
+      
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Flink/">Flink</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/大数据/">大数据</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/实时计算/">实时计算</a></li></ul>
+    </div>
+
+      
+        <p class="article-more-link">
+          <a  href="/2020/10/13/flink-history-server/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-flink-jvm-profiler" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -1434,69 +1497,6 @@
       
         <p class="article-more-link">
           <a  href="/2019/12/07/Flink_Forward_Asia_2019/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-flink-checkpoint-hdfs" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2019/11/30/flink-checkpoint-hdfs/" class="article-date">
-      <time datetime="2019-11-29T16:00:00.000Z" itemprop="datePublished">2019-11-30</time>
-</a>
-    </div>
-  
-  <div class="article-inner" id="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/11/30/flink-checkpoint-hdfs/">阿里巴巴 Flink 踩坑经验：如何大幅降低 HDFS 压力？</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody" id="article-entry">
-      
-          
-              <p>众所周知，Flink 是当前最为广泛使用的计算引擎之一，它使用 Checkpoint 机制进行容错处理 [1]，Checkpoint 会将状态快照备份到分布式存储系统，供后续恢复使用。在 Alibaba 内部，我们使用的存储主要是 HDFS，当同一个集群的 Job 到达一定数量后，会对 HDFS 造成非常大的压力，本文将介绍一种大幅度降低 HDFS 压力的方法——小文件合并。</p>
-          
-      
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Flink/">Flink</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/大数据/">大数据</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/流式计算/">流式计算</a></li></ul>
-    </div>
-
-      
-        <p class="article-more-link">
-          <a  href="/2019/11/30/flink-checkpoint-hdfs/#more">more >></a>
         </p>
       
       <div class="clearfix"></div>

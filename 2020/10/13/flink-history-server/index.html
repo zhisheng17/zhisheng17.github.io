@@ -17,24 +17,30 @@
    <meta name="keywords" content="Flink,Spark,大数据,Hive,Java,架构,后端,服务端,RocketMQ,分布式消息队列,分布式存储,技术博客,HBase,ElasticSearch,Spring,Spring Boot,Spring Boot 2.0,Spring Cloud,Spring MVC,Java EE,前端,HTML,MyBatis,Android,Docker,Mac,Consul,Kafka,Logstash,Kibana,MySQL,Maven,Nginx,Python,RabbitMQ,ActiveMQ,JVM">
 
 
-  <title>Flink 源码解析 —— Standalone session 模式启动流程 | zhisheng的博客</title>
+  <title>用了 Flink History Server，妈妈再也不用担心我的作业半夜挂了 | zhisheng的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Standalone session 模式启动流程">
-<meta name="keywords" content="Flink,大数据,流式计算">
+  <meta name="description" content="保存作业停止之前的信息">
+<meta name="keywords" content="Flink,大数据,实时计算">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Flink 源码解析 —— Standalone session 模式启动流程">
-<meta property="og:url" content="http://www.54tianzhisheng.cn/2019/03/15/Flink-code-Standalone-start/index.html">
+<meta property="og:title" content="用了 Flink History Server，妈妈再也不用担心我的作业半夜挂了">
+<meta property="og:url" content="http://www.54tianzhisheng.cn/2020/10/13/flink-history-server/index.html">
 <meta property="og:site_name" content="zhisheng的博客">
-<meta property="og:description" content="Standalone session 模式启动流程">
+<meta property="og:description" content="保存作业停止之前的信息">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-07-26-150037.jpg">
-<meta property="og:image" content="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-07-26-145923.jpg">
-<meta property="og:image" content="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-11-05-044731.jpg">
-<meta property="og:updated_time" content="2019-11-05T10:23:14.000Z">
+<meta property="og:image" content="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/2020-10-13-151818.jpg">
+<meta property="og:image" content="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/2020-10-13-141733.png">
+<meta property="og:image" content="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/2020-10-13-142108.png">
+<meta property="og:image" content="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/2020-10-13-152148.jpg">
+<meta property="og:image" content="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/2020-10-13-152227.jpg">
+<meta property="og:image" content="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/2020-10-13-152249.jpg">
+<meta property="og:image" content="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/2020-10-13-152331.jpg">
+<meta property="og:image" content="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-09-17-143454.jpg">
+<meta property="og:image" content="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-09-25-zsxq.jpg">
+<meta property="og:updated_time" content="2020-10-15T00:34:47.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Flink 源码解析 —— Standalone session 模式启动流程">
-<meta name="twitter:description" content="Standalone session 模式启动流程">
-<meta name="twitter:image" content="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-07-26-150037.jpg">
+<meta name="twitter:title" content="用了 Flink History Server，妈妈再也不用担心我的作业半夜挂了">
+<meta name="twitter:description" content="保存作业停止之前的信息">
+<meta name="twitter:image" content="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/2020-10-13-151818.jpg">
   
     <link rel="alternative" href="/atom.xml" title="zhisheng的博客" type="application/atom+xml">
   
@@ -251,11 +257,11 @@
         </header>                
     </div>
 </nav>
-      <div class="body-wrap"><article id="post-Flink-code-Standalone-start" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-flink-history-server" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2019/03/15/Flink-code-Standalone-start/" class="article-date">
-      <time datetime="2019-03-14T16:00:00.000Z" itemprop="datePublished">2019-03-15</time>
+      <a href="/2020/10/13/flink-history-server/" class="article-date">
+      <time datetime="2020-10-12T16:00:00.000Z" itemprop="datePublished">2020-10-13</time>
 </a>
     </div>
   
@@ -268,7 +274,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      Flink 源码解析 —— Standalone session 模式启动流程
+      用了 Flink History Server，妈妈再也不用担心我的作业半夜挂了
     </h1>
   
 
@@ -279,7 +285,7 @@
 
         
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Flink/">Flink</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/大数据/">大数据</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/流式计算/">流式计算</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Flink/">Flink</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/大数据/">大数据</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/实时计算/">实时计算</a></li></ul>
     </div>
 
         <div class="clearfix"></div>
@@ -289,90 +295,72 @@
     <div class="article-entry" itemprop="articleBody" id="article-entry">
       
           
-        <p>Standalone session 模式启动流程</p>
+        <p>保存作业停止之前的信息</p>
 <a id="more"></a>
-<p><a href="https://t.zsxq.com/EemAEIi">https://t.zsxq.com/EemAEIi</a></p>
-<h3 id="博客"><a href="#博客" class="headerlink" title="博客"></a>博客</h3><p>1、<a href="http://www.54tianzhisheng.cn/2018/10/13/flink-introduction/">Flink 从0到1学习 —— Apache Flink 介绍</a></p>
-<p>2、<a href="http://www.54tianzhisheng.cn/2018/09/18/flink-install">Flink 从0到1学习 —— Mac 上搭建 Flink 1.6.0 环境并构建运行简单程序入门</a></p>
-<p>3、<a href="http://www.54tianzhisheng.cn/2018/10/27/flink-config/">Flink 从0到1学习 —— Flink 配置文件详解</a></p>
-<p>4、<a href="http://www.54tianzhisheng.cn/2018/10/28/flink-sources/">Flink 从0到1学习 —— Data Source 介绍</a></p>
-<p>5、<a href="http://www.54tianzhisheng.cn/2018/10/30/flink-create-source/">Flink 从0到1学习 —— 如何自定义 Data Source ？</a></p>
-<p>6、<a href="http://www.54tianzhisheng.cn/2018/10/29/flink-sink/">Flink 从0到1学习 —— Data Sink 介绍</a></p>
-<p>7、<a href="http://www.54tianzhisheng.cn/2018/10/31/flink-create-sink/">Flink 从0到1学习 —— 如何自定义 Data Sink ？</a></p>
-<p>8、<a href="http://www.54tianzhisheng.cn/2018/11/04/Flink-Data-transformation/">Flink 从0到1学习 —— Flink Data transformation(转换)</a></p>
-<p>9、<a href="http://www.54tianzhisheng.cn/2018/12/08/Flink-Stream-Windows/">Flink 从0到1学习 —— 介绍 Flink 中的 Stream Windows</a></p>
-<p>10、<a href="http://www.54tianzhisheng.cn/2018/12/11/Flink-time/">Flink 从0到1学习 —— Flink 中的几种 Time 详解</a></p>
-<p>11、<a href="http://www.54tianzhisheng.cn/2018/12/30/Flink-ElasticSearch-Sink/">Flink 从0到1学习 —— Flink 读取 Kafka 数据写入到 ElasticSearch</a></p>
-<p>12、<a href="http://www.54tianzhisheng.cn/2019/01/05/Flink-run/">Flink 从0到1学习 —— Flink 项目如何运行？</a></p>
-<p>13、<a href="http://www.54tianzhisheng.cn/2019/01/06/Flink-Kafka-sink/">Flink 从0到1学习 —— Flink 读取 Kafka 数据写入到 Kafka</a></p>
-<p>14、<a href="http://www.54tianzhisheng.cn/2019/01/13/Flink-JobManager-High-availability/">Flink 从0到1学习 —— Flink JobManager 高可用性配置</a></p>
-<p>15、<a href="http://www.54tianzhisheng.cn/2019/01/14/Flink-parallelism-slot/">Flink 从0到1学习 —— Flink parallelism 和 Slot 介绍</a></p>
-<p>16、<a href="http://www.54tianzhisheng.cn/2019/01/15/Flink-MySQL-sink/">Flink 从0到1学习 —— Flink 读取 Kafka 数据批量写入到 MySQL</a></p>
-<p>17、<a href="http://www.54tianzhisheng.cn/2019/01/20/Flink-RabbitMQ-sink/">Flink 从0到1学习 —— Flink 读取 Kafka 数据写入到 RabbitMQ</a></p>
-<p>18、<a href="https://t.zsxq.com/zV7MnuJ">Flink 从0到1学习 —— Flink 读取 Kafka 数据写入到 HBase</a></p>
-<p>19、<a href="https://t.zsxq.com/zV7MnuJ">Flink 从0到1学习 —— Flink 读取 Kafka 数据写入到 HDFS</a></p>
-<p>20、<a href="https://t.zsxq.com/zV7MnuJ">Flink 从0到1学习 —— Flink 读取 Kafka 数据写入到 Redis</a></p>
-<p>21、<a href="https://t.zsxq.com/uVbi2nq">Flink 从0到1学习 —— Flink 读取 Kafka 数据写入到 Cassandra</a></p>
-<p>22、<a href="https://t.zsxq.com/zV7MnuJ">Flink 从0到1学习 —— Flink 读取 Kafka 数据写入到 Flume</a></p>
-<p>23、<a href="https://t.zsxq.com/zV7MnuJ">Flink 从0到1学习 —— Flink 读取 Kafka 数据写入到 InfluxDB</a></p>
-<p>24、<a href="https://t.zsxq.com/zV7MnuJ">Flink 从0到1学习 —— Flink 读取 Kafka 数据写入到 RocketMQ</a></p>
-<p>25、<a href="http://www.54tianzhisheng.cn/2019/03/13/flink-job-jars/">Flink 从0到1学习 —— 你上传的 jar 包藏到哪里去了</a></p>
-<p>26、<a href="https://t.zsxq.com/zV7MnuJ">Flink 从0到1学习 —— 你的 Flink job 日志跑到哪里去了</a></p>
-<p>27、<a href="http://www.54tianzhisheng.cn/2019/02/28/blink/">阿里巴巴开源的 Blink 实时计算框架真香</a></p>
-<p>28、<a href="http://www.54tianzhisheng.cn/2019/03/28/flink-additional-data/">Flink 从0到1学习 —— Flink 中如何管理配置？</a></p>
-<p>29、<a href="http://www.54tianzhisheng.cn/2019/06/12/flink-split/">Flink 从0到1学习—— Flink 不可以连续 Split(分流)？</a></p>
-<p>30、<a href="http://www.54tianzhisheng.cn/2019/06/13/flink-book-paper/">Flink 从0到1学习—— 分享四本 Flink 国外的书和二十多篇 Paper 论文</a></p>
-<p>31、<a href="http://www.54tianzhisheng.cn/2019/06/14/flink-architecture-deploy-test/">Flink 架构、原理与部署测试</a></p>
-<p>32、<a href="http://www.54tianzhisheng.cn/2019/06/15/Stream-processing/">为什么说流处理即未来？</a></p>
-<p>33、<a href="http://www.54tianzhisheng.cn/2019/06/16/flink-sql-oppo/">OPPO 数据中台之基石：基于 Flink SQL 构建实时数据仓库</a></p>
-<p>34、<a href="http://www.54tianzhisheng.cn/2019/06/17/flink-vs-storm/">流计算框架 Flink 与 Storm 的性能对比</a></p>
-<p>35、<a href="http://www.54tianzhisheng.cn/2019/06/18/flink-state/">Flink状态管理和容错机制介绍</a></p>
-<p>36、<a href="http://www.54tianzhisheng.cn/2019/06/20/flink-kafka-Exactly-Once/">Apache Flink 结合 Kafka 构建端到端的 Exactly-Once 处理</a></p>
-<p>37、<a href="http://www.54tianzhisheng.cn/2019/06/21/flink-in-360/">360深度实践：Flink与Storm协议级对比</a></p>
-<p>38、<a href="http://www.54tianzhisheng.cn/2019/06/26/flink-TensorFlow/">如何基于Flink+TensorFlow打造实时智能异常检测平台？只看这一篇就够了</a></p>
-<p>39、<a href="http://www.54tianzhisheng.cn/2019/07/01/flink-1.9-preview/">Apache Flink 1.9 重大特性提前解读</a></p>
-<p>40、<a href="http://www.54tianzhisheng.cn/2019/12/31/Flink-resources/">Flink 全网最全资源（视频、博客、PPT、入门、实战、源码解析、问答等持续更新）</a></p>
-<p>41、<a href="https://mp.weixin.qq.com/s/ok-YwuVbwAVtJz7hUCiZxg">Flink 灵魂两百问，这谁顶得住？</a></p>
-<p>42、<a href="http://www.54tianzhisheng.cn/2019/08/18/flink-side-output/">Flink 从0到1学习 —— 如何使用 Side Output 来分流？</a></p>
-<p>43、<a href="http://www.54tianzhisheng.cn/2019/08/06/flink-streaming-system/">你公司到底需不需要引入实时计算引擎？</a></p>
-<p>44、<a href="http://www.54tianzhisheng.cn/2019/08/19/flink/">一文让你彻底了解大数据实时计算引擎 Flink</a></p>
-<h3 id="源码解析"><a href="#源码解析" class="headerlink" title="源码解析"></a>源码解析</h3><p>1、<a href="http://www.54tianzhisheng.cn/2019/01/30/Flink-code-compile/">Flink 源码解析 —— 源码编译运行</a></p>
-<p>2、<a href="http://www.54tianzhisheng.cn/2019/03/14/Flink-code-structure/">Flink 源码解析 —— 项目结构一览</a></p>
-<p>3、<a href="http://www.54tianzhisheng.cn/tags/Flink/">Flink 源码解析—— local 模式启动流程</a></p>
-<p>4、<a href="http://www.54tianzhisheng.cn/2019/03/15/Flink-code-Standalone-start/">Flink 源码解析 —— standalone session 模式启动流程</a></p>
-<p>5、<a href="http://www.54tianzhisheng.cn/2019/03/16/Flink-code-Standalone-JobManager-start/">Flink 源码解析 —— Standalone Session Cluster 启动流程深度分析之 Job Manager 启动</a></p>
-<p>6、<a href="http://www.54tianzhisheng.cn/2019/03/17/Flink-code-Standalone-TaskManager-start/">Flink 源码解析 —— Standalone Session Cluster 启动流程深度分析之 Task Manager 启动</a></p>
-<p>7、<a href="http://www.54tianzhisheng.cn/2019/03/18/Flink-code-batch-wordcount-start/">Flink 源码解析 —— 分析 Batch WordCount 程序的执行过程</a></p>
-<p>8、<a href="http://www.54tianzhisheng.cn/2019/03/19/Flink-code-streaming-wordcount-start/">Flink 源码解析 —— 分析 Streaming WordCount 程序的执行过程</a></p>
-<p>9、<a href="http://www.54tianzhisheng.cn/2019/03/21/Flink-code-JobGraph/">Flink 源码解析 —— 如何获取 JobGraph？</a></p>
-<p>10、<a href="http://www.54tianzhisheng.cn/2019/03/20/Flink-code-StreamGraph/">Flink 源码解析 —— 如何获取 StreamGraph？</a></p>
-<p>11、<a href="http://www.54tianzhisheng.cn/2019/03/25/Flink-code-jobmanager/">Flink 源码解析 —— Flink JobManager 有什么作用？</a></p>
-<p>12、<a href="http://www.54tianzhisheng.cn/2019/03/25/Flink-code-taskmanager/">Flink 源码解析 —— Flink TaskManager 有什么作用？</a></p>
-<p>13、<a href="http://www.54tianzhisheng.cn/2019/03/27/Flink-code-JobManager-submitJob/">Flink 源码解析 —— JobManager 处理 SubmitJob 的过程</a></p>
-<p>14、<a href="http://www.54tianzhisheng.cn/2019/03/28/Flink-code-TaskManager-submitJob/">Flink 源码解析 —— TaskManager 处理 SubmitJob 的过程</a></p>
-<p>15、<a href="http://www.54tianzhisheng.cn/2019/03/23/Flink-code-checkpoint/">Flink 源码解析 —— 深度解析 Flink Checkpoint 机制</a></p>
-<p>16、<a href="http://www.54tianzhisheng.cn/2019/03/22/Flink-code-serialize/">Flink 源码解析 —— 深度解析 Flink 序列化机制</a></p>
-<p>17、<a href="http://www.54tianzhisheng.cn/2019/03/24/Flink-code-memory-management/">Flink 源码解析 —— 深度解析 Flink 是如何管理好内存的？</a></p>
-<p>18、<a href="http://www.54tianzhisheng.cn/2019/07/02/Flink-code-metrics/">Flink Metrics 源码解析 —— Flink-metrics-core</a></p>
-<p>19、<a href="http://www.54tianzhisheng.cn/2019/07/02/Flink-code-metrics/">Flink Metrics 源码解析 —— Flink-metrics-datadog</a></p>
-<p>20、<a href="http://www.54tianzhisheng.cn/2019/07/02/Flink-code-metrics/">Flink Metrics 源码解析 —— Flink-metrics-dropwizard</a></p>
-<p>21、<a href="http://www.54tianzhisheng.cn/2019/07/02/Flink-code-metrics/">Flink Metrics 源码解析 —— Flink-metrics-graphite</a></p>
-<p>22、<a href="http://www.54tianzhisheng.cn/2019/07/02/Flink-code-metrics/">Flink Metrics 源码解析 —— Flink-metrics-influxdb</a></p>
-<p>23、<a href="http://www.54tianzhisheng.cn/2019/07/02/Flink-code-metrics/">Flink Metrics 源码解析 —— Flink-metrics-jmx</a></p>
-<p>24、<a href="http://www.54tianzhisheng.cn/2019/07/02/Flink-code-metrics/">Flink Metrics 源码解析 —— Flink-metrics-slf4j</a></p>
-<p>25、<a href="http://www.54tianzhisheng.cn/2019/07/02/Flink-code-metrics/">Flink Metrics 源码解析 —— Flink-metrics-statsd</a></p>
-<p>26、<a href="http://www.54tianzhisheng.cn/2019/07/02/Flink-code-metrics/">Flink Metrics 源码解析 —— Flink-metrics-prometheus</a></p>
-<p><img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-07-26-150037.jpg" alt=""></p>
-<p>26、<a href="http://www.54tianzhisheng.cn/2019/07/03/Flink-code-Annotations/">Flink Annotations 源码解析</a></p>
-<p><img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-07-26-145923.jpg" alt=""></p>
-<p>27、<a href="http://www.54tianzhisheng.cn/2019/03/26/Flink-code-ExecutionGraph/">Flink 源码解析 —— 如何获取 ExecutionGraph ？</a></p>
-<p>28、<a href="https://t.zsxq.com/UvrRNJM">大数据重磅炸弹——实时计算框架 Flink</a></p>
-<p>29、<a href="https://t.zsxq.com/QVFqjea">Flink Checkpoint-轻量级分布式快照</a></p>
-<p>30、<a href="http://www.54tianzhisheng.cn/2019/07/04/Flink-code-clients/">Flink Clients 源码解析</a></p>
-<h3 id="专栏介绍"><a href="#专栏介绍" class="headerlink" title="专栏介绍"></a>专栏介绍</h3><p>扫码下面专栏二维码可以订阅该专栏</p>
-<p><img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-11-05-044731.jpg" alt=""></p>
-<p>首发地址：<a href="http://www.54tianzhisheng.cn/2019/11/15/flink-in-action/">http://www.54tianzhisheng.cn/2019/11/15/flink-in-action/</a></p>
-<p>专栏地址：<a href="https://gitbook.cn/gitchat/column/5dad4a20669f843a1a37cb4f">https://gitbook.cn/gitchat/column/5dad4a20669f843a1a37cb4f</a></p>
+<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>Flink On YARN 默认作业挂了之后打开的话，是一个如下这样的页面：</p>
+<p><img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/2020-10-13-151818.jpg" alt="作业失败后"></p>
+<p>对于这种我们页面我们只能查看 JobManager 的日志，不再可以查看作业挂掉之前的运行的 Web UI，很难清楚知道作业在挂的那一刻到底发生了啥？如果我们还没有 Metrics 监控的话，那么完全就只能通过日志去分析和定位问题了，所以如果能还原之前的 Web UI，我们可以通过 UI 发现和定位一些问题。</p>
+<h3 id="History-Server-介绍"><a href="#History-Server-介绍" class="headerlink" title="History Server 介绍"></a>History Server 介绍</h3><p>那么这里就需要利用 Flink 中的 History Server 来解决这个问题。那么 History Server 是什么呢？</p>
+<p>它可以用来在相应的 Flink 集群关闭后查询已完成作业的统计信息。例如有个批处理作业是凌晨才运行的，并且我们都知道只有当作业处于运行中的状态，才能够查看到相关的日志信息和统计信息。所以如果作业由于异常退出或者处理结果有问题，我们又无法及时查看（凌晨运行的）作业的相关日志信息。那么 History Server 就显得十分重要了，因为通过 History Server 我们才能查询这些已完成作业的统计信息，无论是正常退出还是异常退出。</p>
+<p>此外，它对外提供了 REST API，它接受 HTTP 请求并使用 JSON 数据进行响应。Flink 任务停止后，JobManager 会将已经完成任务的统计信息进行存档，History Server 进程则在任务停止后可以对任务统计信息进行查询。比如：最后一次的 Checkpoint、任务运行时的相关配置。</p>
+<p>那么如何开启这个呢？你需要在 flink-conf.yml 中配置如下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span>==============================================================================</span><br><span class="line"><span class="meta">#</span> HistoryServer</span><br><span class="line"><span class="meta">#</span>==============================================================================</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> The HistoryServer is started and stopped via bin/historyserver.sh (start|stop)</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> Directory to upload completed jobs to. Add this directory to the list of</span><br><span class="line"><span class="meta">#</span> monitored directories of the HistoryServer as well (see below). </span><br><span class="line"><span class="meta">#</span> flink job 运行完成后的日志存放目录</span><br><span class="line">jobmanager.archive.fs.dir: hdfs:///flink/history-log</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> The address under which the web-based HistoryServer listens.</span><br><span class="line"><span class="meta">#</span> flink history进程所在的主机</span><br><span class="line"><span class="meta">#</span>historyserver.web.address: 0.0.0.0</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> The port under which the web-based HistoryServer listens.</span><br><span class="line"><span class="meta">#</span> flink history进程的占用端口</span><br><span class="line"><span class="meta">#</span>historyserver.web.port: 8082</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> Comma separated list of directories to monitor for completed jobs.</span><br><span class="line"><span class="meta">#</span> flink history进程的hdfs监控目录</span><br><span class="line">historyserver.archive.fs.dir: hdfs:///flink/history-log</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> Interval in milliseconds for refreshing the monitored directories.</span><br><span class="line"><span class="meta">#</span> 刷新受监视目录的时间间隔（以毫秒为单位）</span><br><span class="line"><span class="meta">#</span>historyserver.archive.fs.refresh-interval: 10000</span><br></pre></td></tr></table></figure>
+<p>注意： <strong>jobmanager.archive.fs.dir 要和 historyserver.archive.fs.dir 配置的路径要一样</strong> </p>
+<p>执行命令：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./bin/historyserver.sh start</span><br></pre></td></tr></table></figure>
+<p>发现报错如下：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">2020-10-13 21:21:01,310 main INFO  org.apache.flink.core.fs.FileSystem                           - Hadoop is not in the classpath/dependencies. The extended set of supported File Systems via Hadoop is not available.</span><br><span class="line">2020-10-13 21:21:01,336 main INFO  org.apache.flink.runtime.security.modules.HadoopModuleFactory  - Cannot create Hadoop Security Module because Hadoop cannot be found in the Classpath.</span><br><span class="line">2020-10-13 21:21:01,352 main INFO  org.apache.flink.runtime.security.modules.JaasModule          - Jaas file will be created as /tmp/jaas-354359771751866787.conf.</span><br><span class="line">2020-10-13 21:21:01,355 main INFO  org.apache.flink.runtime.security.SecurityUtils               - Cannot install HadoopSecurityContext because Hadoop cannot be found in the Classpath.</span><br><span class="line">2020-10-13 21:21:01,363 main WARN  org.apache.flink.runtime.webmonitor.history.HistoryServer     - Failed to create Path or FileSystem for directory 'hdfs:///flink/history-log'. Directory will not be monitored.</span><br><span class="line">org.apache.flink.core.fs.UnsupportedFileSystemSchemeException: Could not find a file system implementation for scheme 'hdfs'. The scheme is not directly supported by Flink and no Hadoop file system to support this scheme could be loaded.</span><br><span class="line">        at org.apache.flink.core.fs.FileSystem.getUnguardedFileSystem(FileSystem.java:450)</span><br><span class="line">        at org.apache.flink.core.fs.FileSystem.get(FileSystem.java:362)</span><br><span class="line">        at org.apache.flink.core.fs.Path.getFileSystem(Path.java:298)</span><br><span class="line">        at org.apache.flink.runtime.webmonitor.history.HistoryServer.&lt;init&gt;(HistoryServer.java:187)</span><br><span class="line">        at org.apache.flink.runtime.webmonitor.history.HistoryServer.&lt;init&gt;(HistoryServer.java:137)</span><br><span class="line">        at org.apache.flink.runtime.webmonitor.history.HistoryServer$1.call(HistoryServer.java:122)</span><br><span class="line">        at org.apache.flink.runtime.webmonitor.history.HistoryServer$1.call(HistoryServer.java:119)</span><br><span class="line">        at org.apache.flink.runtime.security.NoOpSecurityContext.runSecured(NoOpSecurityContext.java:30)</span><br><span class="line">        at org.apache.flink.runtime.webmonitor.history.HistoryServer.main(HistoryServer.java:119)</span><br><span class="line">Caused by: org.apache.flink.core.fs.UnsupportedFileSystemSchemeException: Hadoop is not in the classpath/dependencies.</span><br><span class="line">        at org.apache.flink.core.fs.UnsupportedSchemeFactory.create(UnsupportedSchemeFactory.java:58)</span><br><span class="line">        at org.apache.flink.core.fs.FileSystem.getUnguardedFileSystem(FileSystem.java:446)</span><br><span class="line">        ... 8 more</span><br><span class="line">2020-10-13 21:21:01,367 main ERROR org.apache.flink.runtime.webmonitor.history.HistoryServer     - Failed to run HistoryServer.</span><br><span class="line">org.apache.flink.util.FlinkException: Failed to validate any of the configured directories to monitor.</span><br><span class="line">        at org.apache.flink.runtime.webmonitor.history.HistoryServer.&lt;init&gt;(HistoryServer.java:196)</span><br><span class="line">        at org.apache.flink.runtime.webmonitor.history.HistoryServer.&lt;init&gt;(HistoryServer.java:137)</span><br><span class="line">        at org.apache.flink.runtime.webmonitor.history.HistoryServer$1.call(HistoryServer.java:122)</span><br><span class="line">        at org.apache.flink.runtime.webmonitor.history.HistoryServer$1.call(HistoryServer.java:119)</span><br><span class="line">        at org.apache.flink.runtime.security.NoOpSecurityContext.runSecured(NoOpSecurityContext.java:30)</span><br><span class="line">        at org.apache.flink.runtime.webmonitor.history.HistoryServer.main(HistoryServer.java:119)</span><br></pre></td></tr></table></figure>
+<p>这个异常的原因是因为 Flink 集群的 CLASS_PATH 下缺少了 HDFS 相关的 jar，我们可以引入 HDFS 的依赖放到 lib 目录下面或者添加 Hadoop 的环境变量。</p>
+<p>这里我们在 historyserver.sh 脚本中增加下面脚本，目的就是添加 Hadoop 的环境变量：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> export hadoop classpath</span><br><span class="line">if [ `command -v hadoop` ];then</span><br><span class="line">  export HADOOP_CLASSPATH=`hadoop classpath`</span><br><span class="line">else</span><br><span class="line">  echo "hadoop command not found in path!"</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
+<h3 id="效果"><a href="#效果" class="headerlink" title="效果"></a>效果</h3><p>添加后再启动脚本则可以运行成功了，打开页面 <code>机器IP:8082</code> 则可以看到历史所有运行完成或者失败的作业列表信息。</p>
+<p><img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/2020-10-13-141733.png" alt="作业列表信息"></p>
+<p>点进单个作业可以看到作业挂之前的所有信息，便于我们去查看挂之前作业的运行情况（Exception 信息/Checkpoint 信息/算子的流入和流出数据量信息等）</p>
+<p><img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/2020-10-13-142108.png" alt="作业挂之前的运行情况"></p>
+<h3 id="原理分析"><a href="#原理分析" class="headerlink" title="原理分析"></a>原理分析</h3><p>再来看看配置的 <code>/flink/history-log/</code> 目录有什么东西呢？执行下面命令可以查看</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hdfs dfs -ls /flink/history-log/</span><br></pre></td></tr></table></figure>
+<p><img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/2020-10-13-152148.jpg" alt="hdfs 文件目录"></p>
+<p>其实 history server 会在本地存储已结束 Job 信息，你可以配置 <code>historyserver.web.tmpdir</code> 来决定存储在哪，默认的拼接规则为：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">System.getProperty(<span class="string">"java.io.tmpdir"</span>) + File.separator + <span class="string">"flink-web-history-"</span> + UUID.randomUUID()</span><br></pre></td></tr></table></figure>
+<p>Linux 系统临时目录为 /tmp，你可以看到源码中 HistoryServerOptions 该类中的可选参数。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">* The local directory used by the HistoryServer web-frontend.</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> ConfigOption&lt;String&gt; HISTORY_SERVER_WEB_DIR =</span><br><span class="line">    key(<span class="string">"historyserver.web.tmpdir"</span>)</span><br><span class="line">        .noDefaultValue()</span><br><span class="line">        .withDescription(<span class="string">"This configuration parameter allows defining the Flink web directory to be used by the"</span> +</span><br><span class="line">            <span class="string">" history server web interface. The web interface will copy its static files into the directory."</span>);</span><br></pre></td></tr></table></figure>
+<p>那么我们找到本地该临时目录，可以观察到里面保存着很多 JS 文件，其实就是我们刚才看到的页面</p>
+<p><img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/2020-10-13-152227.jpg" alt="本地临时目录"></p>
+<p>历史服务存储文件中，存储了用于页面展示的模板配置。历史任务信息存储在 Jobs 路径下，其中包含了已经完成的 Job，每次启动都会从 historyserver.archive.fs.dir 拉取所有的任务元数据信息。</p>
+<p><img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/2020-10-13-152249.jpg" alt="Jobs 目录"></p>
+<p>每个任务文件夹中包含我们需要获取的一些信息，通过 REST API 获取时指标时，就是返回这些内容（Checkpoint/Exception 信息等）。</p>
+<p><img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/2020-10-13-152331.jpg" alt="具体 Job"></p>
+<h3 id="REST-API"><a href="#REST-API" class="headerlink" title="REST API"></a>REST API</h3><p>以下是可用且带有示例 JSON 响应的请求列表。所有请求格式样例均为 <code>http://hostname:8082/jobs</code>，下面我们仅列出了 URLs 的 <em>path</em> 部分。 尖括号中的值为变量，例如作业 <code>7684be6004e4e955c2a558a9bc463f65</code> 的 <code>http://hostname:port/jobs/&lt;jobid&gt;/exceptions</code> 请求须写为 <code>http://hostname:port/jobs/7684be6004e4e955c2a558a9bc463f65/exceptions</code>。</p>
+<ul>
+<li><code>/config</code></li>
+<li><code>/jobs/overview</code></li>
+<li><code>/jobs/&lt;jobid&gt;</code></li>
+<li><code>/jobs/&lt;jobid&gt;/vertices</code></li>
+<li><code>/jobs/&lt;jobid&gt;/config</code></li>
+<li><code>/jobs/&lt;jobid&gt;/exceptions</code></li>
+<li><code>/jobs/&lt;jobid&gt;/accumulators</code></li>
+<li><code>/jobs/&lt;jobid&gt;/vertices/&lt;vertexid&gt;</code></li>
+<li><code>/jobs/&lt;jobid&gt;/vertices/&lt;vertexid&gt;/subtasktimes</code></li>
+<li><code>/jobs/&lt;jobid&gt;/vertices/&lt;vertexid&gt;/taskmanagers</code></li>
+<li><code>/jobs/&lt;jobid&gt;/vertices/&lt;vertexid&gt;/accumulators</code></li>
+<li><code>/jobs/&lt;jobid&gt;/vertices/&lt;vertexid&gt;/subtasks/accumulators</code></li>
+<li><code>/jobs/&lt;jobid&gt;/vertices/&lt;vertexid&gt;/subtasks/&lt;subtasknum&gt;</code></li>
+<li><code>/jobs/&lt;jobid&gt;/vertices/&lt;vertexid&gt;/subtasks/&lt;subtasknum&gt;/attempts/&lt;attempt&gt;</code></li>
+<li><code>/jobs/&lt;jobid&gt;/vertices/&lt;vertexid&gt;/subtasks/&lt;subtasknum&gt;/attempts/&lt;attempt&gt;/accumulators</code></li>
+<li><code>/jobs/&lt;jobid&gt;/plan</code></li>
+</ul>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>这样我们就可以开心的去查看作业挂之前的 Web UI 信息了，妈妈在也不用担心我的作业挂了！😁</p>
+<h3 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h3><ul>
+<li><a href="https://ci.apache.org/projects/flink/flink-docs-master/zh/monitoring/historyserver.html">History Server</a> </li>
+<li><a href="https://www.jianshu.com/p/48aaad9cfc7d">flink历史服务</a> </li>
+</ul>
+<h3 id="Github-代码仓库"><a href="#Github-代码仓库" class="headerlink" title="Github 代码仓库"></a>Github 代码仓库</h3><p><a href="https://github.com/zhisheng17/flink-learning/">https://github.com/zhisheng17/flink-learning/</a></p>
+<p>以后这个项目的所有代码都将放在这个仓库里，包含了自己学习 flink 的一些 demo 和博客</p>
+<h3 id="关注我"><a href="#关注我" class="headerlink" title="关注我"></a>关注我</h3><p>微信公众号：<strong>zhisheng</strong></p>
+<p>另外我自己整理了些 Flink 的学习资料，目前已经全部放到微信公众号（zhisheng）了，你可以回复关键字：<strong>Flink</strong> 即可无条件获取到。另外也可以加我微信 你可以加我的微信：<strong>yuanblog_tzs</strong>，探讨技术！</p>
+<p><img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-09-17-143454.jpg" alt=""></p>
+<p>更多私密资料请加入知识星球！</p>
+<p><img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-09-25-zsxq.jpg" alt=""></p>
 
       
       
@@ -439,13 +427,13 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2019/03/15/Flink-code-Standalone-start/">Flink 源码解析 —— Standalone session 模式启动流程</a></p>
+        <p><span>本文标题:</span><a href="/2020/10/13/flink-history-server/">用了 Flink History Server，妈妈再也不用担心我的作业半夜挂了</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 zhisheng 的个人博客">zhisheng</a></p>
-        <p><span>发布时间:</span>2019年03月15日 - 00时00分</p>
-        <p><span>最后更新:</span>2019年11月05日 - 18时23分</p>
+        <p><span>发布时间:</span>2020年10月13日 - 00时00分</p>
+        <p><span>最后更新:</span>2020年10月15日 - 08时34分</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2019/03/15/Flink-code-Standalone-start/" title="Flink 源码解析 —— Standalone session 模式启动流程">http://www.54tianzhisheng.cn/2019/03/15/Flink-code-Standalone-start/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://www.54tianzhisheng.cn/2019/03/15/Flink-code-Standalone-start/　　作者: zhisheng" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2020/10/13/flink-history-server/" title="用了 Flink History Server，妈妈再也不用担心我的作业半夜挂了">http://www.54tianzhisheng.cn/2020/10/13/flink-history-server/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://www.54tianzhisheng.cn/2020/10/13/flink-history-server/　　作者: zhisheng" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script src="/js/clipboard.min.js"></script>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
@@ -463,18 +451,9 @@
 
 <nav id="article-nav">
   
-    <a href="/2019/03/16/Flink-code-Standalone-JobManager-start/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption"><</strong>
-      <div class="article-nav-title">
-        
-          Flink 源码解析 —— Standalone Session Cluster 启动流程深度分析之 Job Manager 启动
-        
-      </div>
-    </a>
   
-  
-    <a href="/2019/03/14/Flink-code-structure/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Flink 源码解析 —— 项目结构一览</div>
+    <a href="/2020/10/05/flink-jvm-profiler/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">如何生成 Flink 作业的交互式火焰图？</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
@@ -485,7 +464,7 @@
 
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#博客"><span class="toc-number">1.</span> <span class="toc-text">博客</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#源码解析"><span class="toc-number">2.</span> <span class="toc-text">源码解析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#专栏介绍"><span class="toc-number">3.</span> <span class="toc-text">专栏介绍</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#History-Server-介绍"><span class="toc-number">2.</span> <span class="toc-text">History Server 介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#效果"><span class="toc-number">3.</span> <span class="toc-text">效果</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#原理分析"><span class="toc-number">4.</span> <span class="toc-text">原理分析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#REST-API"><span class="toc-number">5.</span> <span class="toc-text">REST API</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#总结"><span class="toc-number">6.</span> <span class="toc-text">总结</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#参考文章"><span class="toc-number">7.</span> <span class="toc-text">参考文章</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Github-代码仓库"><span class="toc-number">8.</span> <span class="toc-text">Github 代码仓库</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#关注我"><span class="toc-number">9.</span> <span class="toc-text">关注我</span></a></li></ol>
 </div>
 <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
 
@@ -551,13 +530,11 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2019/03/16/Flink-code-Standalone-JobManager-start/" title="上一篇: Flink 源码解析 —— Standalone Session Cluster 启动流程深度分析之 Job Manager 启动">
-                <i class="fa fa-angle-left"></i>
-            </a>
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
         
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
         
-            <a href="/2019/03/14/Flink-code-structure/" title="下一篇: Flink 源码解析 —— 项目结构一览">
+            <a href="/2020/10/05/flink-jvm-profiler/" title="下一篇: 如何生成 Flink 作业的交互式火焰图？">
                 <i class="fa fa-angle-right"></i>
             </a>
         
