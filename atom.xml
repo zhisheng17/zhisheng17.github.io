@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.54tianzhisheng.cn/"/>
-  <updated>2020-12-06T13:47:34.000Z</updated>
+  <updated>2020-12-21T15:12:02.000Z</updated>
   <id>http://www.54tianzhisheng.cn/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Flink Forward Asia 2020 全部 PPT 开放下载</title>
+    <link href="http://www.54tianzhisheng.cn/2020/12/21/flink-forward-Asia-2020/"/>
+    <id>http://www.54tianzhisheng.cn/2020/12/21/flink-forward-Asia-2020/</id>
+    <published>2020-12-20T16:00:00.000Z</published>
+    <updated>2020-12-21T15:12:02.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>Flink Forward Asia 2020 在北京召开的，有主会场和几个分会场（企业实践、Apache Flink 核心技术、开源大数据生态、实时数仓、人工智能），内容涉及很多，可以查看下面图片介绍。</p><a id="more"></a><p><img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/2020-12-21-142353.png" alt=""></p><p><img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/2020-12-21-142431.png" alt=""></p><p><img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/2020-12-21-142511.png" alt=""></p><p><img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/2020-12-21-142538.png" alt=""></p><p><img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/2020-12-21-142616.png" alt=""></p><p><img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/2020-12-21-142643.png" alt=""></p><h3 id="如何获取上面这些-PPT？"><a href="#如何获取上面这些-PPT？" class="headerlink" title="如何获取上面这些 PPT？"></a>如何获取上面这些 PPT？</h3><p>上面的这些 PPT 本人已经整理好了，你可以扫描下面二维码，关注微信公众号：zhisheng，然后在里面回复关键字: <strong>ffa2020</strong> 即可获取已放出的 PPT。</p><p><img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/2019-12-28-144329.jpg" alt=""></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Flink Forward Asia 2020 在北京召开的，有主会场和几个分会场（企业实践、Apache Flink 核心技术、开源大数据生态、实时数仓、人工智能），内容涉及很多，可以查看下面图片介绍。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="大数据" scheme="http://www.54tianzhisheng.cn/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/"/>
+    
+      <category term="Flink" scheme="http://www.54tianzhisheng.cn/tags/Flink/"/>
+    
+      <category term="实时计算" scheme="http://www.54tianzhisheng.cn/tags/%E5%AE%9E%E6%97%B6%E8%AE%A1%E7%AE%97/"/>
+    
+  </entry>
   
   <entry>
     <title>Flink 1.12 Release 文档解读</title>
@@ -475,30 +499,6 @@
       <category term="Flink" scheme="http://www.54tianzhisheng.cn/tags/Flink/"/>
     
       <category term="流式计算" scheme="http://www.54tianzhisheng.cn/tags/%E6%B5%81%E5%BC%8F%E8%AE%A1%E7%AE%97/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>基于 Apache Flink 的监控告警系统</title>
-    <link href="http://www.54tianzhisheng.cn/2019/12/23/flink-monitor-alert/"/>
-    <id>http://www.54tianzhisheng.cn/2019/12/23/flink-monitor-alert/</id>
-    <published>2019-12-22T16:00:00.000Z</published>
-    <updated>2020-03-01T14:43:13.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>本人在 Flink 社区钉钉群直播的视频</p><a id="more"></a><h3 id="监控告警"><a href="#监控告警" class="headerlink" title="监控告警"></a>监控告警</h3><iframe height=720 width=1150 src="//player.bilibili.com/player.html?aid=90890878&cid=155203148&page=1"> </iframe><h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>GitHub Flink 学习代码地址：<a href="https://github.com/zhisheng17/flink-learning">https://github.com/zhisheng17/flink-learning</a></p><p>微信公众号：<strong>zhisheng</strong></p><p>另外我自己整理了些 Flink 的学习资料，目前已经全部放到微信公众号（zhisheng）了，你可以回复关键字：<strong>Flink</strong> 即可无条件获取到。另外也可以加我微信 你可以加我的微信：<strong>yuanblog_tzs</strong>，探讨技术！</p><p><img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-09-17-143454.jpg" alt=""></p><p>更多私密资料请加入知识星球！</p><p><img src="hhttp://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-09-25-zsxq.jpg" alt=""></p><h3 id="专栏介绍"><a href="#专栏介绍" class="headerlink" title="专栏介绍"></a>专栏介绍</h3><p>扫码下面专栏二维码可以订阅该专栏</p><p><img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-11-05-044731.jpg" alt=""></p><p>首发地址：<a href="http://www.54tianzhisheng.cn/2019/11/15/flink-in-action/">http://www.54tianzhisheng.cn/2019/11/15/flink-in-action/</a></p><p>专栏地址：<a href="https://gitbook.cn/gitchat/column/5dad4a20669f843a1a37cb4f">https://gitbook.cn/gitchat/column/5dad4a20669f843a1a37cb4f</a></p><h3 id="博客"><a href="#博客" class="headerlink" title="博客"></a>博客</h3><p>1、<a href="http://www.54tianzhisheng.cn/2018/10/13/flink-introduction/">Flink 从0到1学习 —— Apache Flink 介绍</a></p><p>2、<a href="http://www.54tianzhisheng.cn/2018/09/18/flink-install">Flink 从0到1学习 —— Mac 上搭建 Flink 1.6.0 环境并构建运行简单程序入门</a></p><p>3、<a href="http://www.54tianzhisheng.cn/2018/10/27/flink-config/">Flink 从0到1学习 —— Flink 配置文件详解</a></p><p>4、<a href="http://www.54tianzhisheng.cn/2018/10/28/flink-sources/">Flink 从0到1学习 —— Data Source 介绍</a></p><p>5、<a href="http://www.54tianzhisheng.cn/2018/10/30/flink-create-source/">Flink 从0到1学习 —— 如何自定义 Data Source ？</a></p><p>6、<a href="http://www.54tianzhisheng.cn/2018/10/29/flink-sink/">Flink 从0到1学习 —— Data Sink 介绍</a></p><p>7、<a href="http://www.54tianzhisheng.cn/2018/10/31/flink-create-sink/">Flink 从0到1学习 —— 如何自定义 Data Sink ？</a></p><p>8、<a href="http://www.54tianzhisheng.cn/2018/11/04/Flink-Data-transformation/">Flink 从0到1学习 —— Flink Data transformation(转换)</a></p><p>9、<a href="http://www.54tianzhisheng.cn/2018/12/08/Flink-Stream-Windows/">Flink 从0到1学习 —— 介绍 Flink 中的 Stream Windows</a></p><p>10、<a href="http://www.54tianzhisheng.cn/2018/12/11/Flink-time/">Flink 从0到1学习 —— Flink 中的几种 Time 详解</a></p><p>11、<a href="http://www.54tianzhisheng.cn/2018/12/30/Flink-ElasticSearch-Sink/">Flink 从0到1学习 —— Flink 读取 Kafka 数据写入到 ElasticSearch</a></p><p>12、<a href="http://www.54tianzhisheng.cn/2019/01/05/Flink-run/">Flink 从0到1学习 —— Flink 项目如何运行？</a></p><p>13、<a href="http://www.54tianzhisheng.cn/2019/01/06/Flink-Kafka-sink/">Flink 从0到1学习 —— Flink 读取 Kafka 数据写入到 Kafka</a></p><p>14、<a href="http://www.54tianzhisheng.cn/2019/01/13/Flink-JobManager-High-availability/">Flink 从0到1学习 —— Flink JobManager 高可用性配置</a></p><p>15、<a href="http://www.54tianzhisheng.cn/2019/01/14/Flink-parallelism-slot/">Flink 从0到1学习 —— Flink parallelism 和 Slot 介绍</a></p><p>16、<a href="http://www.54tianzhisheng.cn/2019/01/15/Flink-MySQL-sink/">Flink 从0到1学习 —— Flink 读取 Kafka 数据批量写入到 MySQL</a></p><p>17、<a href="http://www.54tianzhisheng.cn/2019/01/20/Flink-RabbitMQ-sink/">Flink 从0到1学习 —— Flink 读取 Kafka 数据写入到 RabbitMQ</a></p><p>18、<a href="https://t.zsxq.com/zV7MnuJ">Flink 从0到1学习 —— Flink 读取 Kafka 数据写入到 HBase</a></p><p>19、<a href="https://t.zsxq.com/zV7MnuJ">Flink 从0到1学习 —— Flink 读取 Kafka 数据写入到 HDFS</a></p><p>20、<a href="https://t.zsxq.com/zV7MnuJ">Flink 从0到1学习 —— Flink 读取 Kafka 数据写入到 Redis</a></p><p>21、<a href="https://t.zsxq.com/uVbi2nq">Flink 从0到1学习 —— Flink 读取 Kafka 数据写入到 Cassandra</a></p><p>22、<a href="https://t.zsxq.com/zV7MnuJ">Flink 从0到1学习 —— Flink 读取 Kafka 数据写入到 Flume</a></p><p>23、<a href="https://t.zsxq.com/zV7MnuJ">Flink 从0到1学习 —— Flink 读取 Kafka 数据写入到 InfluxDB</a></p><p>24、<a href="https://t.zsxq.com/zV7MnuJ">Flink 从0到1学习 —— Flink 读取 Kafka 数据写入到 RocketMQ</a></p><p>25、<a href="http://www.54tianzhisheng.cn/2019/03/13/flink-job-jars/">Flink 从0到1学习 —— 你上传的 jar 包藏到哪里去了</a></p><p>26、<a href="https://t.zsxq.com/zV7MnuJ">Flink 从0到1学习 —— 你的 Flink job 日志跑到哪里去了</a></p><p>27、<a href="http://www.54tianzhisheng.cn/2019/02/28/blink/">阿里巴巴开源的 Blink 实时计算框架真香</a></p><p>28、<a href="http://www.54tianzhisheng.cn/2019/03/28/flink-additional-data/">Flink 从0到1学习 —— Flink 中如何管理配置？</a></p><p>29、<a href="http://www.54tianzhisheng.cn/2019/06/12/flink-split/">Flink 从0到1学习—— Flink 不可以连续 Split(分流)？</a></p><p>30、<a href="http://www.54tianzhisheng.cn/2019/06/13/flink-book-paper/">Flink 从0到1学习—— 分享四本 Flink 国外的书和二十多篇 Paper 论文</a></p><p>31、<a href="http://www.54tianzhisheng.cn/2019/06/14/flink-architecture-deploy-test/">Flink 架构、原理与部署测试</a></p><p>32、<a href="http://www.54tianzhisheng.cn/2019/06/15/Stream-processing/">为什么说流处理即未来？</a></p><p>33、<a href="http://www.54tianzhisheng.cn/2019/06/16/flink-sql-oppo/">OPPO 数据中台之基石：基于 Flink SQL 构建实时数据仓库</a></p><p>34、<a href="http://www.54tianzhisheng.cn/2019/06/17/flink-vs-storm/">流计算框架 Flink 与 Storm 的性能对比</a></p><p>35、<a href="http://www.54tianzhisheng.cn/2019/06/18/flink-state/">Flink状态管理和容错机制介绍</a></p><p>36、<a href="http://www.54tianzhisheng.cn/2019/06/20/flink-kafka-Exactly-Once/">Apache Flink 结合 Kafka 构建端到端的 Exactly-Once 处理</a></p><p>37、<a href="http://www.54tianzhisheng.cn/2019/06/21/flink-in-360/">360深度实践：Flink与Storm协议级对比</a></p><p>38、<a href="http://www.54tianzhisheng.cn/2019/06/26/flink-TensorFlow/">如何基于Flink+TensorFlow打造实时智能异常检测平台？只看这一篇就够了</a></p><p>39、<a href="http://www.54tianzhisheng.cn/2019/07/01/flink-1.9-preview/">Apache Flink 1.9 重大特性提前解读</a></p><p>40、<a href="http://www.54tianzhisheng.cn/2019/12/31/Flink-resources/">Flink 全网最全资源（视频、博客、PPT、入门、原理、实战、性能调优、源码解析、问答等持续更新）</a></p><p>41、<a href="https://mp.weixin.qq.com/s/ok-YwuVbwAVtJz7hUCiZxg">Flink 灵魂两百问，这谁顶得住？</a></p><p>42、<a href="http://www.54tianzhisheng.cn/2019/08/18/flink-side-output/">Flink 从0到1学习 —— 如何使用 Side Output 来分流？</a></p><p>43、<a href="http://www.54tianzhisheng.cn/2019/08/06/flink-streaming-system/">你公司到底需不需要引入实时计算引擎？</a></p><p>44、<a href="http://www.54tianzhisheng.cn/2019/08/19/flink/">一文让你彻底了解大数据实时计算引擎 Flink</a></p><h3 id="源码解析"><a href="#源码解析" class="headerlink" title="源码解析"></a>源码解析</h3><p>1、<a href="http://www.54tianzhisheng.cn/2019/01/30/Flink-code-compile/">Flink 源码解析 —— 源码编译运行</a></p><p>2、<a href="http://www.54tianzhisheng.cn/2019/03/14/Flink-code-structure/">Flink 源码解析 —— 项目结构一览</a></p><p>3、<a href="http://www.54tianzhisheng.cn/tags/Flink/">Flink 源码解析—— local 模式启动流程</a></p><p>4、<a href="http://www.54tianzhisheng.cn/2019/03/15/Flink-code-Standalone-start/">Flink 源码解析 —— standalone session 模式启动流程</a></p><p>5、<a href="http://www.54tianzhisheng.cn/2019/03/16/Flink-code-Standalone-JobManager-start/">Flink 源码解析 —— Standalone Session Cluster 启动流程深度分析之 Job Manager 启动</a></p><p>6、<a href="http://www.54tianzhisheng.cn/2019/03/17/Flink-code-Standalone-TaskManager-start/">Flink 源码解析 —— Standalone Session Cluster 启动流程深度分析之 Task Manager 启动</a></p><p>7、<a href="http://www.54tianzhisheng.cn/2019/03/18/Flink-code-batch-wordcount-start/">Flink 源码解析 —— 分析 Batch WordCount 程序的执行过程</a></p><p>8、<a href="http://www.54tianzhisheng.cn/2019/03/19/Flink-code-streaming-wordcount-start/">Flink 源码解析 —— 分析 Streaming WordCount 程序的执行过程</a></p><p>9、<a href="http://www.54tianzhisheng.cn/2019/03/21/Flink-code-JobGraph/">Flink 源码解析 —— 如何获取 JobGraph？</a></p><p>10、<a href="http://www.54tianzhisheng.cn/2019/03/20/Flink-code-StreamGraph/">Flink 源码解析 —— 如何获取 StreamGraph？</a></p><p>11、<a href="http://www.54tianzhisheng.cn/2019/03/25/Flink-code-jobmanager/">Flink 源码解析 —— Flink JobManager 有什么作用？</a></p><p>12、<a href="http://www.54tianzhisheng.cn/2019/03/25/Flink-code-taskmanager/">Flink 源码解析 —— Flink TaskManager 有什么作用？</a></p><p>13、<a href="http://www.54tianzhisheng.cn/2019/03/27/Flink-code-JobManager-submitJob/">Flink 源码解析 —— JobManager 处理 SubmitJob 的过程</a></p><p>14、<a href="http://www.54tianzhisheng.cn/2019/03/28/Flink-code-TaskManager-submitJob/">Flink 源码解析 —— TaskManager 处理 SubmitJob 的过程</a></p><p>15、<a href="http://www.54tianzhisheng.cn/2019/03/23/Flink-code-checkpoint/">Flink 源码解析 —— 深度解析 Flink Checkpoint 机制</a></p><p>16、<a href="http://www.54tianzhisheng.cn/2019/03/22/Flink-code-serialize/">Flink 源码解析 —— 深度解析 Flink 序列化机制</a></p><p>17、<a href="http://www.54tianzhisheng.cn/2019/03/24/Flink-code-memory-management/">Flink 源码解析 —— 深度解析 Flink 是如何管理好内存的？</a></p><p>18、<a href="http://www.54tianzhisheng.cn/2019/07/02/Flink-code-metrics/">Flink Metrics 源码解析 —— Flink-metrics-core</a></p><p>19、<a href="http://www.54tianzhisheng.cn/2019/07/02/Flink-code-metrics/">Flink Metrics 源码解析 —— Flink-metrics-datadog</a></p><p>20、<a href="http://www.54tianzhisheng.cn/2019/07/02/Flink-code-metrics/">Flink Metrics 源码解析 —— Flink-metrics-dropwizard</a></p><p>21、<a href="http://www.54tianzhisheng.cn/2019/07/02/Flink-code-metrics/">Flink Metrics 源码解析 —— Flink-metrics-graphite</a></p><p>22、<a href="http://www.54tianzhisheng.cn/2019/07/02/Flink-code-metrics/">Flink Metrics 源码解析 —— Flink-metrics-influxdb</a></p><p>23、<a href="http://www.54tianzhisheng.cn/2019/07/02/Flink-code-metrics/">Flink Metrics 源码解析 —— Flink-metrics-jmx</a></p><p>24、<a href="http://www.54tianzhisheng.cn/2019/07/02/Flink-code-metrics/">Flink Metrics 源码解析 —— Flink-metrics-slf4j</a></p><p>25、<a href="http://www.54tianzhisheng.cn/2019/07/02/Flink-code-metrics/">Flink Metrics 源码解析 —— Flink-metrics-statsd</a></p><p>26、<a href="http://www.54tianzhisheng.cn/2019/07/02/Flink-code-metrics/">Flink Metrics 源码解析 —— Flink-metrics-prometheus</a></p><p><img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-07-26-150037.jpg" alt=""></p><p>26、<a href="http://www.54tianzhisheng.cn/2019/07/03/Flink-code-Annotations/">Flink Annotations 源码解析</a></p><p><img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-07-26-145923.jpg" alt=""></p><p>27、<a href="http://www.54tianzhisheng.cn/2019/03/26/Flink-code-ExecutionGraph/">Flink 源码解析 —— 如何获取 ExecutionGraph ？</a></p><p>28、<a href="https://t.zsxq.com/UvrRNJM">大数据重磅炸弹——实时计算框架 Flink</a></p><p>29、<a href="https://t.zsxq.com/QVFqjea">Flink Checkpoint-轻量级分布式快照</a></p><p>30、<a href="http://www.54tianzhisheng.cn/2019/07/04/Flink-code-clients/">Flink Clients 源码解析</a></p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;本人在 Flink 社区钉钉群直播的视频&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="Flink" scheme="http://www.54tianzhisheng.cn/tags/Flink/"/>
-    
-      <category term="流式计算" scheme="http://www.54tianzhisheng.cn/tags/%E6%B5%81%E5%BC%8F%E8%AE%A1%E7%AE%97/"/>
-    
-      <category term="监控告警" scheme="http://www.54tianzhisheng.cn/tags/%E7%9B%91%E6%8E%A7%E5%91%8A%E8%AD%A6/"/>
     
   </entry>
   

@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://www.54tianzhisheng.cn/2020/12/21/flink-forward-Asia-2020/</loc>
+    
+    <lastmod>2020-12-21T15:12:02.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://www.54tianzhisheng.cn/2020/12/06/Flink-1.12/</loc>
     
     <lastmod>2020-12-06T13:47:34.000Z</lastmod>
@@ -219,14 +226,14 @@
   </url>
   
   <url>
-    <loc>http://www.54tianzhisheng.cn/2019/01/20/Flink-RabbitMQ-sink/</loc>
+    <loc>http://www.54tianzhisheng.cn/2018/12/08/Flink-Stream-Windows/</loc>
     
     <lastmod>2019-12-12T14:29:32.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://www.54tianzhisheng.cn/2018/12/08/Flink-Stream-Windows/</loc>
+    <loc>http://www.54tianzhisheng.cn/2019/01/20/Flink-RabbitMQ-sink/</loc>
     
     <lastmod>2019-12-12T14:29:32.000Z</lastmod>
     
@@ -317,14 +324,14 @@
   </url>
   
   <url>
-    <loc>http://www.54tianzhisheng.cn/2019/06/26/flink-TensorFlow/</loc>
+    <loc>http://www.54tianzhisheng.cn/2019/08/22/flink-1.9/</loc>
     
     <lastmod>2019-12-12T14:29:32.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://www.54tianzhisheng.cn/2019/08/22/flink-1.9/</loc>
+    <loc>http://www.54tianzhisheng.cn/2019/06/26/flink-TensorFlow/</loc>
     
     <lastmod>2019-12-12T14:29:32.000Z</lastmod>
     
@@ -450,14 +457,14 @@
   </url>
   
   <url>
-    <loc>http://www.54tianzhisheng.cn/2019/03/15/Flink-code-Standalone-start/</loc>
+    <loc>http://www.54tianzhisheng.cn/2019/03/17/Flink-code-Standalone-TaskManager-start/</loc>
     
     <lastmod>2019-11-05T10:23:14.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://www.54tianzhisheng.cn/2019/03/17/Flink-code-Standalone-TaskManager-start/</loc>
+    <loc>http://www.54tianzhisheng.cn/2019/03/15/Flink-code-Standalone-start/</loc>
     
     <lastmod>2019-11-05T10:23:14.000Z</lastmod>
     
@@ -527,14 +534,14 @@
   </url>
   
   <url>
-    <loc>http://www.54tianzhisheng.cn/2019/03/26/Flink-code-ExecutionGraph/</loc>
+    <loc>http://www.54tianzhisheng.cn/2019/07/03/Flink-code-Annotations/</loc>
     
     <lastmod>2019-11-05T10:23:13.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://www.54tianzhisheng.cn/2019/07/03/Flink-code-Annotations/</loc>
+    <loc>http://www.54tianzhisheng.cn/2019/03/26/Flink-code-ExecutionGraph/</loc>
     
     <lastmod>2019-11-05T10:23:13.000Z</lastmod>
     
