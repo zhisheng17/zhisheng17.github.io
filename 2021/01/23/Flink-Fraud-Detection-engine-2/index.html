@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+   <!-- 百度联盟 -->
+   <meta name="baidu_union_verify" content="46e227ad81d5513c6cd8288c18c6ebad">
+
+   <!-- google analytics -->
+   <meta name="google-site-verification" content="SzCGQVmA8Mtk40elee-bCGpq2YSCAmEulSNEZHYCkFc" />
+
+   <!--百度站长之家验证-->
+   <meta name="baidu-site-verification" content="4woRik4rfk" />
+
+   <meta name="description" content="坑要一个个填，路要一步步走！—— from zhisheng的博客">
+   <meta name="keywords" content="Flink,Spark,大数据,Hive,Java,架构,后端,服务端,RocketMQ,分布式消息队列,分布式存储,技术博客,HBase,ElasticSearch,Spring,Spring Boot,Spring Boot 2.0,Spring Cloud,Spring MVC,Java EE,前端,HTML,MyBatis,Android,Docker,Mac,Consul,Kafka,Logstash,Kibana,MySQL,Maven,Nginx,Python,RabbitMQ,ActiveMQ,JVM">
+
+
+  <title>基于 Flink 的动态欺诈检测系统(中) | zhisheng的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="如何实现呢？">
+<meta name="keywords" content="大数据,Flink,实时计算">
+<meta property="og:type" content="article">
+<meta property="og:title" content="基于 Flink 的动态欺诈检测系统(中)">
+<meta property="og:url" content="http://www.54tianzhisheng.cn/2021/01/23/Flink-Fraud-Detection-engine-2/index.html">
+<meta property="og:site_name" content="zhisheng的博客">
+<meta property="og:description" content="如何实现呢？">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/2021-01-23-134902.jpg">
+<meta property="og:image" content="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/2021-01-23-135336.jpg">
+<meta property="og:image" content="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/2021-01-23-143026.jpg">
+<meta property="og:image" content="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/2021-01-23-143447.jpg">
+<meta property="og:image" content="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/2021-01-23-144041.jpg">
+<meta property="og:image" content="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/2021-01-23-145129.jpg">
+<meta property="og:image" content="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-09-17-143454.jpg">
+<meta property="og:image" content="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-09-25-zsxq.jpg">
+<meta property="og:image" content="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-07-26-150037.jpg">
+<meta property="og:image" content="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-07-26-145923.jpg">
+<meta property="og:updated_time" content="2021-01-23T15:53:36.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="基于 Flink 的动态欺诈检测系统(中)">
+<meta name="twitter:description" content="如何实现呢？">
+<meta name="twitter:image" content="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/2021-01-23-134902.jpg">
+  
+    <link rel="alternative" href="/atom.xml" title="zhisheng的博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/img/favicon.ico">
+  
+  
+      <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  
+  
+      <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  
+  <!-- 加载特效 -->
+  <script src="/js/pace.js"></script>
+  <link href="/css/pace/pace-theme-flash.css" rel="stylesheet" />
+  <script>
+      var yiliaConfig = {
+          rootUrl: '/',
+          fancybox: true,
+          animate: true,
+          isHome: false,
+          isPost: true,
+          isArchive: false,
+          isTag: false,
+          isCategory: false,
+          open_in_new: true
+      }
+  </script>
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            
+            <img lazy-src="/img/avatar.png" class="js-avatar">
+            
+        </a>
+
+        <hgroup>
+          <h1 class="header-author"><a href="/">zhisheng</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">坑要一个个填，路要一步步走！</p>
+        
+        
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/tags/Flink/">Flink</a></li>
+                        
+                            <li><a href="/tags/ElasticSearch/">ElasticSearch</a></li>
+                        
+                            <li><a href="/tags/SpringBoot/">Spring Boot</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fl wechat" target="_blank" href="wechat:yuanblog_tzs" title="wechat">wechat</a>
+                            
+                                <a class="fl mail" target="_blank" href="mailto://zhisheng2018@gmail.com" title="mail">mail</a>
+                            
+                                <a class="fl github" target="_blank" href="https://github.com/zhisheng17/" title="github">github</a>
+                            
+                                <a class="fl zhihu" target="_blank" href="https://www.zhihu.com/people/zhisheng-34" title="zhihu">zhihu</a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <a href="/tags/AJAX/" style="font-size: 10px;">AJAX</a> <a href="/tags/ActiveMQ/" style="font-size: 10px;">ActiveMQ</a> <a href="/tags/Android/" style="font-size: 10px;">Android</a> <a href="/tags/Apollo/" style="font-size: 10px;">Apollo</a> <a href="/tags/Blink/" style="font-size: 10px;">Blink</a> <a href="/tags/Bootstrap/" style="font-size: 12.73px;">Bootstrap</a> <a href="/tags/Consul/" style="font-size: 10px;">Consul</a> <a href="/tags/Docker/" style="font-size: 10.91px;">Docker</a> <a href="/tags/ElasticSearch/" style="font-size: 16.36px;">ElasticSearch</a> <a href="/tags/Filter过滤器/" style="font-size: 10px;">Filter过滤器</a> <a href="/tags/Flink/" style="font-size: 20px;">Flink</a> <a href="/tags/GO/" style="font-size: 10px;">GO</a> <a href="/tags/Github-Page/" style="font-size: 10px;">Github Page</a> <a href="/tags/Guava/" style="font-size: 10px;">Guava</a> <a href="/tags/HBase/" style="font-size: 10px;">HBase</a> <a href="/tags/Hibernate-JPA/" style="font-size: 10.91px;">Hibernate JPA</a> <a href="/tags/IO/" style="font-size: 10.91px;">IO</a> <a href="/tags/JMM/" style="font-size: 10px;">JMM</a> <a href="/tags/JSON/" style="font-size: 10px;">JSON</a> <a href="/tags/JVM/" style="font-size: 10.91px;">JVM</a> <a href="/tags/Java/" style="font-size: 18.18px;">Java</a> <a href="/tags/Kafka/" style="font-size: 12.73px;">Kafka</a> <a href="/tags/Kibana/" style="font-size: 10px;">Kibana</a> <a href="/tags/LogStash/" style="font-size: 10px;">LogStash</a> <a href="/tags/Mac/" style="font-size: 10px;">Mac</a> <a href="/tags/Maven/" style="font-size: 10.91px;">Maven</a> <a href="/tags/MySQL/" style="font-size: 12.73px;">MySQL</a> <a href="/tags/Mybatis/" style="font-size: 13.64px;">Mybatis</a> <a href="/tags/NIO/" style="font-size: 10px;">NIO</a> <a href="/tags/Nacos/" style="font-size: 11.82px;">Nacos</a> <a href="/tags/Netty/" style="font-size: 10px;">Netty</a> <a href="/tags/Nginx/" style="font-size: 10.91px;">Nginx</a> <a href="/tags/Oracle/" style="font-size: 10px;">Oracle</a> <a href="/tags/Pyspider/" style="font-size: 10px;">Pyspider</a> <a href="/tags/Python/" style="font-size: 11.82px;">Python</a> <a href="/tags/RabbitMQ/" style="font-size: 11.82px;">RabbitMQ</a> <a href="/tags/Redis/" style="font-size: 10.91px;">Redis</a> <a href="/tags/RocketMQ/" style="font-size: 12.73px;">RocketMQ</a> <a href="/tags/Servlet/" style="font-size: 10px;">Servlet</a> <a href="/tags/Spark/" style="font-size: 10px;">Spark</a> <a href="/tags/Spring/" style="font-size: 11.82px;">Spring</a> <a href="/tags/Spring-MVC/" style="font-size: 14.55px;">Spring MVC</a> <a href="/tags/SpringBoot/" style="font-size: 17.27px;">SpringBoot</a> <a href="/tags/SpringMVC/" style="font-size: 12.73px;">SpringMVC</a> <a href="/tags/String/" style="font-size: 10px;">String</a> <a href="/tags/Velocity/" style="font-size: 10px;">Velocity</a> <a href="/tags/Zookeeper/" style="font-size: 10px;">Zookeeper</a> <a href="/tags/finally/" style="font-size: 10px;">finally</a> <a href="/tags/foreach/" style="font-size: 10px;">foreach</a> <a href="/tags/hexo/" style="font-size: 11.82px;">hexo</a> <a href="/tags/lombok/" style="font-size: 10px;">lombok</a> <a href="/tags/lua/" style="font-size: 10px;">lua</a> <a href="/tags/yilia/" style="font-size: 10.91px;">yilia</a> <a href="/tags/书籍/" style="font-size: 10px;">书籍</a> <a href="/tags/分布式锁/" style="font-size: 10px;">分布式锁</a> <a href="/tags/前端/" style="font-size: 11.82px;">前端</a> <a href="/tags/励志/" style="font-size: 10px;">励志</a> <a href="/tags/博客合集/" style="font-size: 10px;">博客合集</a> <a href="/tags/博客网站/" style="font-size: 10px;">博客网站</a> <a href="/tags/多线程/" style="font-size: 10.91px;">多线程</a> <a href="/tags/大数据/" style="font-size: 20px;">大数据</a> <a href="/tags/字符串/" style="font-size: 10.91px;">字符串</a> <a href="/tags/实习圈/" style="font-size: 10px;">实习圈</a> <a href="/tags/实时计算/" style="font-size: 17.27px;">实时计算</a> <a href="/tags/循环队列/" style="font-size: 10px;">循环队列</a> <a href="/tags/性能调优工具/" style="font-size: 10px;">性能调优工具</a> <a href="/tags/投资理财/" style="font-size: 10px;">投资理财</a> <a href="/tags/数据仓库/" style="font-size: 10px;">数据仓库</a> <a href="/tags/数据库/" style="font-size: 11.82px;">数据库</a> <a href="/tags/数据结构/" style="font-size: 12.73px;">数据结构</a> <a href="/tags/文件/" style="font-size: 10px;">文件</a> <a href="/tags/旋转词/" style="font-size: 10px;">旋转词</a> <a href="/tags/流式计算/" style="font-size: 19.09px;">流式计算</a> <a href="/tags/流控/" style="font-size: 10px;">流控</a> <a href="/tags/爬虫/" style="font-size: 11.82px;">爬虫</a> <a href="/tags/监控告警/" style="font-size: 10px;">监控告警</a> <a href="/tags/算法/" style="font-size: 11.82px;">算法</a> <a href="/tags/类加载机制/" style="font-size: 10px;">类加载机制</a> <a href="/tags/线程池/" style="font-size: 10px;">线程池</a> <a href="/tags/编码/" style="font-size: 10px;">编码</a> <a href="/tags/表达式/" style="font-size: 10px;">表达式</a> <a href="/tags/邮件发送/" style="font-size: 10px;">邮件发送</a> <a href="/tags/随笔/" style="font-size: 15.45px;">随笔</a> <a href="/tags/面经/" style="font-size: 15.45px;">面经</a>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://blog.csdn.net/tzs_1041218129">CSDN博客</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="https://juejin.im/user/57510b82128fe10056ca70fc">掘金</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.iocoder.cn/?vip">芋道源码</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.jiangxinlingdu.com/">匠心零度</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.honeypps.com">朱小厮</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">人在江湖飘，各种折腾！</div>
+                </section>
+                
+            </div>
+        </div>
+        <div>
+            <img src="/img/wx.jpg"  alt="zhisheng" />
+        </div>
+    </header>
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="Me">zhisheng</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                
+                    <img lazy-src="/img/avatar.png" class="js-avatar">
+                
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="Me">zhisheng</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">坑要一个个填，路要一步步走！</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/tags/Flink/">Flink</a></li>
+                
+                    <li><a href="/tags/ElasticSearch/">ElasticSearch</a></li>
+                
+                    <li><a href="/tags/SpringBoot/">Spring Boot</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a class="wechat" target="_blank" href="wechat:yuanblog_tzs" title="wechat">wechat</a>
+                    
+                        <a class="mail" target="_blank" href="mailto://zhisheng2018@gmail.com" title="mail">mail</a>
+                    
+                        <a class="github" target="_blank" href="https://github.com/zhisheng17/" title="github">github</a>
+                    
+                        <a class="zhihu" target="_blank" href="https://www.zhihu.com/people/zhisheng-34" title="zhihu">zhihu</a>
+                    
+                </div>
+            </nav>
+        </header>                
+    </div>
+</nav>
+      <div class="body-wrap"><article id="post-Flink-Fraud-Detection-engine-2" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2021/01/23/Flink-Fraud-Detection-engine-2/" class="article-date">
+      <time datetime="2021-01-22T16:00:00.000Z" itemprop="datePublished">2021-01-23</time>
+</a>
+    </div>
+  
+  <div class="article-inner" id="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      基于 Flink 的动态欺诈检测系统(中)
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Flink/">Flink</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/大数据/">大数据</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/实时计算/">实时计算</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody" id="article-entry">
+      
+          
+        <p>如何实现呢？</p>
+<a id="more"></a>
+<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>在上一篇博客中，我们对欺诈检测引擎的目标和所需要的功能进行了描述，我们还描述了如何基于可修改的规则而不是使用硬编码的 KeysExtractor 实现 Flink 应用程序的数据自定义分区。</p>
+<p>我们在上篇博客中特意省略了有关如何初始化应用的规则以及如何在作业运行时更新的细节，在本文我们将详细的介绍这些细节，你将学习如何将上篇博客中描述的数据分区防御与动态配置结合使用，当这两种模式结合使用的时候，可以省去重新编译代码和重新部署 Flink 作业的需要，从而可以应对多种业务场景逻辑修改的情况。</p>
+<h3 id="广播规则"><a href="#广播规则" class="headerlink" title="广播规则"></a>广播规则</h3><p>首先让我们看看预定义的数据处理代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">DataStream&lt;Alert&gt; alerts =</span><br><span class="line">    transactions</span><br><span class="line">        .process(<span class="keyword">new</span> DynamicKeyFunction())</span><br><span class="line">        .keyBy((keyed) -&gt; keyed.getKey());</span><br><span class="line">        .process(<span class="keyword">new</span> DynamicAlertFunction())</span><br></pre></td></tr></table></figure>
+<p>DynamicKeyFunction 函数提供动态数据分区，同时 DynamicAlertFunction 函数负责执行处理数据的主要逻辑并根据已定义的规则发动告警消息。</p>
+<p>在上篇文中中简化了用例，并假定已预先初始化了所应用的规则集数据，并可以通过 DynamicKeyFunction 的 <code>List&lt;Rules&gt;</code> 访问这些规则：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DynamicKeyFunction</span></span></span><br><span class="line"><span class="class">    <span class="keyword">extends</span> <span class="title">ProcessFunction</span>&lt;<span class="title">Transaction</span>, <span class="title">Keyed</span>&lt;<span class="title">Transaction</span>, <span class="title">String</span>, <span class="title">Integer</span>&gt;&gt; </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/* Simplified */</span></span><br><span class="line">  List&lt;Rule&gt; rules = <span class="comment">/* Rules that are initialized somehow.*/</span>;</span><br><span class="line">  ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>显然，在初始化阶段，可以直接在 Flink Job 的代码内部添加规则到此列表（创建<code>List</code>对象；使用它的<code>add</code>方法）。这样做的主要缺点是，每次修改规则后都需要重新编译作业。在真实的欺诈检测系统中，规则会经常更改，因此从业务和运营需求的角度来看，使此方法不可接受，需要一种不同的方法。</p>
+<p>接下来，让我们看一下在上一篇文章中介绍的示例规则定义：</p>
+<p><img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/2021-01-23-134902.jpg" alt=""></p>
+<p>上一篇文章介绍了使用 <code>DynamicKeyFunction</code>提取数据含 <code>groupingKeyNames</code> 里面字段组成数据分组 key 的方法。此规则第二部分中的参数由 <code>DynamicAlertFunction</code> 使用：它们定义了所执行操作的实际逻辑及其参数（例如告警触发限制）。这意味着相同的规则必须同时存在于<code>DynamicKeyFunction</code>和<code>DynamicAlertFunction</code>。</p>
+<p>下图展示了我们正在构建的系统的最终工作图：</p>
+<p><img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/2021-01-23-135336.jpg" alt=""></p>
+<p>上图的主要模块是：</p>
+<ul>
+<li><strong>Transaction Source</strong>：Flink 作业的 Source 端，它会并行的消费 Kafka 中的金融交易流数据</li>
+<li>**Dynamic Key Function：动态的提取数据分区的 key。随后的<code>keyBy</code>函数会将动态的 key 值进行 hash，并在后续运算符的所有并行实例之间相应地对数据进行分区。</li>
+<li><strong>Dynamic Alert Function</strong>：累积窗口中的数据，并基于该窗口创建告警。</li>
+</ul>
+<h3 id="Apache-Flink-内部的数据交换"><a href="#Apache-Flink-内部的数据交换" class="headerlink" title="Apache Flink 内部的数据交换"></a>Apache Flink 内部的数据交换</h3><p>上面的作业图还展示了运算符之间的各种数据交换模式，为了了解广播模式是如何工作的，我们先来看一下 Apache Flink 在分布式运行时存在哪些消息传播方法：</p>
+<ul>
+<li><p><strong>FORWARD</strong>：上图中 Transaction Source 后的 FORWARD 意味着每个 Transaction Source 的并行度实例消费到的数据都将精确的传输到后面的 DynamicKeyFunction 运算符的每个实例。它还表示两个连接的运算符处于相同的并行度，这种模式如下图所示：</p>
+<p>  <img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/2021-01-23-143026.jpg" alt=""></p>
+<ul>
+<li><p><strong>HASH</strong>：DynamicKeyFunction 和 DynamicAlertFunction 之间的 HASH 意味着每条消息都会计算一个哈希值，并且消息会在下一个运算符的所有可用并行度之间均匀分配，这种连接一般是通过 keyBy 算子。</p>
+<p>  <img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/2021-01-23-143447.jpg" alt=""></p>
+</li>
+</ul>
+</li>
+<li><p><strong>REBALANCE</strong>：这种情况下一般是手动的调用 rebalance() 函数或者并行度发生改变导致的，这样会导致数据以循环的方式重新分区，有助于某些情况喜爱的数据倾斜。</p>
+<p>  <img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/2021-01-23-144041.jpg" alt=""></p>
+<ul>
+<li><p><strong>BROADCAST</strong>：在本文图二中的欺诈检测作业图中包含了一个 Rules Source，它会从 Kafka 中消费规则数据，然后通过 <strong>BROADCAST </strong>的通道将规则数据发动到处理实时数据流的算子中去。与在运算符之间传输数据的其他方法（例如 forward、hash、rebalence，这三种仅会将数据发到下游运算符的某个并行度中去）不同，broadcast 可以使得每条消息都会在下游所有的并行度中处理。broadcast 适用于需要影响所有消息处理的任务，而不管消息的 key 或者 Source 的分区是多少。</p>
+<p>  <img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/2021-01-23-145129.jpg" alt=""></p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="广播状态"><a href="#广播状态" class="headerlink" title="广播状态"></a>广播状态</h3><p>为了使用规则数据流，我们需要将其连接到主数据流：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Streams setup</span></span><br><span class="line">DataStream&lt;Transaction&gt; transactions = [...]</span><br><span class="line">DataStream&lt;Rule&gt; rulesUpdateStream = [...]</span><br><span class="line"></span><br><span class="line">BroadcastStream&lt;Rule&gt; rulesStream = rulesUpdateStream.broadcast(RULES_STATE_DESCRIPTOR);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Processing pipeline setup</span></span><br><span class="line"> DataStream&lt;Alert&gt; alerts =</span><br><span class="line">     transactions</span><br><span class="line">         .connect(rulesStream)</span><br><span class="line">         .process(<span class="keyword">new</span> DynamicKeyFunction())</span><br><span class="line">         .keyBy((keyed) -&gt; keyed.getKey())</span><br><span class="line">         .connect(rulesStream)</span><br><span class="line">         .process(<span class="keyword">new</span> DynamicAlertFunction())</span><br></pre></td></tr></table></figure>
+<p>如您所见，可以通过调用<code>broadcast</code>方法并指定状态描述符，从任何常规流中创建广播流。在处理主数据流的事件时需要存储和查找广播的数据，因此，Flink 始终根据此状态描述符自动创建相应的<em>广播状态</em>。这与你在使用其他的状态类型不一样，那些是需要在 open 方法里面对其进行初始化。另请注意，广播状态始终是 KV 格式（<code>MapState</code>）。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> MapStateDescriptor&lt;Integer, Rule&gt; RULES_STATE_DESCRIPTOR =</span><br><span class="line">        <span class="keyword">new</span> MapStateDescriptor&lt;&gt;(<span class="string">"rules"</span>, Integer.class, Rule.class);</span><br></pre></td></tr></table></figure>
+<p>连接<code>rulesStream</code>后会导致 ProcessFunction 的内部发生某些变化。上一篇文章以稍微简化的方式介绍了<code>ProcessFunction</code>。但是 <code>DynamicKeyFunction</code>实际上是一个<code>BroadcastProcessFunction</code>。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">BroadcastProcessFunction</span>&lt;<span class="title">IN1</span>, <span class="title">IN2</span>, <span class="title">OUT</span>&gt; </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">processElement</span><span class="params">(IN1 value,</span></span></span><br><span class="line"><span class="function"><span class="params">                                        ReadOnlyContext ctx,</span></span></span><br><span class="line"><span class="function"><span class="params">                                        Collector&lt;OUT&gt; out)</span> <span class="keyword">throws</span> Exception</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">processBroadcastElement</span><span class="params">(IN2 value,</span></span></span><br><span class="line"><span class="function"><span class="params">                                                 Context ctx,</span></span></span><br><span class="line"><span class="function"><span class="params">                                                 Collector&lt;OUT&gt; out)</span> <span class="keyword">throws</span> Exception</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>不同的是，添加<code>processBroadcastElement</code> 了方法，该方法是用于处理到达的广播规则流。以下新版本的<code>DynamicKeyFunction</code> 函数允许在 processElement 方法里面中动态的修改数据分发的 key 列表：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DynamicKeyFunction</span></span></span><br><span class="line"><span class="class">    <span class="keyword">extends</span> <span class="title">BroadcastProcessFunction</span>&lt;<span class="title">Transaction</span>, <span class="title">Rule</span>, <span class="title">Keyed</span>&lt;<span class="title">Transaction</span>, <span class="title">String</span>, <span class="title">Integer</span>&gt;&gt; </span>&#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  <span class="meta">@Override</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">processBroadcastElement</span><span class="params">(Rule rule,</span></span></span><br><span class="line"><span class="function"><span class="params">                                     Context ctx,</span></span></span><br><span class="line"><span class="function"><span class="params">                                     Collector&lt;Keyed&lt;Transaction, String, Integer&gt;&gt; out)</span> </span>&#123;</span><br><span class="line">    BroadcastState&lt;Integer, Rule&gt; broadcastState = ctx.getBroadcastState(RULES_STATE_DESCRIPTOR);</span><br><span class="line">    broadcastState.put(rule.getRuleId(), rule);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@Override</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">processElement</span><span class="params">(Transaction event,</span></span></span><br><span class="line"><span class="function"><span class="params">                           ReadOnlyContext ctx,</span></span></span><br><span class="line"><span class="function"><span class="params">                           Collector&lt;Keyed&lt;Transaction, String, Integer&gt;&gt; out)</span></span>&#123;</span><br><span class="line">    ReadOnlyBroadcastState&lt;Integer, Rule&gt; rulesState =</span><br><span class="line">                                  ctx.getBroadcastState(RULES_STATE_DESCRIPTOR);</span><br><span class="line">    <span class="keyword">for</span> (Map.Entry&lt;Integer, Rule&gt; entry : rulesState.immutableEntries()) &#123;</span><br><span class="line">        <span class="keyword">final</span> Rule rule = entry.getValue();</span><br><span class="line">        out.collect(</span><br><span class="line">          <span class="keyword">new</span> Keyed&lt;&gt;(</span><br><span class="line">            event, KeysExtractor.getKey(rule.getGroupingKeyNames(), event), rule.getRuleId()));</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在上面的代码中，<code>processElement()</code>接收金融交易数据，并在 <code>processBroadcastElement()</code> 接收规则更新数据。创建新规则时，将如上面广播流的那张图所示进行分配，并会保存在所有使用 <code>processBroadcastState</code> 运算符的并行实例中。我们使用规则的 ID 作为存储和引用单个规则的 key。我们遍历动态更新的广播状态中的数据，而不是遍历硬编码的 <code>List&lt;Rules&gt;</code> 。</p>
+<p>在将规则存储在广播 MapState 中时，DynamicAlertFunction 遵循相同的逻辑。如第 1 部分中所述，通过processElement 方法输入的每条消息均应按照一个特定规则进行处理，并通过 DynamicKeyFunction 对其进行“预标记”并带有相应的ID。我们需要做的就是使用提供的 ID 从 BroadcastState 中检索相应规则，并根据该规则所需的逻辑对其进行处理。在此阶段，我们还将消息添加到内部函数状态，以便在所需的数据时间窗口上执行计算。我们将在下一篇文章中考虑如何实现这一点。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>在本文，我们继续研究了使用 Apache Flink 构建的欺诈检测系统的用例。我们研究了在并行运算符实例之间分配数据的不同方式，最重要的是广播状态。我们演示了如何通过广播状态提供的功能来组合和增强动态分区。在运行时发送动态更新的功能是 Apache Flink 的强大功能，适用于多种其他使用场景，例如控制状态（清除/插入/修复），运行 A / B 实验或执行 ML 模型系数的更新。</p>
+<blockquote>
+<p>本篇文章属于翻译文章，作者：zhisheng</p>
+<p>原文地址：<a href="http://www.54tianzhisheng.cn/2021/01/23/Flink-Fraud-Detection-engine-2/">http://www.54tianzhisheng.cn/2021/01/23/Flink-Fraud-Detection-engine-2/</a></p>
+<p>英文作者：<a href="https://twitter.com/alex_fedulov">alex_fedulov</a> </p>
+<p>英文原文地址：<a href="https://flink.apache.org/news/2020/03/24/demo-fraud-detection-2.html">https://flink.apache.org/news/2020/03/24/demo-fraud-detection-2.html</a></p>
+</blockquote>
+<h3 id="关注我"><a href="#关注我" class="headerlink" title="关注我"></a>关注我</h3><p>微信公众号：<strong>zhisheng</strong></p>
+<p>另外我自己整理了些 Flink 的学习资料，目前已经全部放到微信公众号（zhisheng）了，你可以回复关键字：<strong>Flink</strong> 即可无条件获取到。另外也可以加我微信 你可以加我的微信：<strong>yuanblog_tzs</strong>，探讨技术！</p>
+<p><img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-09-17-143454.jpg" alt=""></p>
+<p>更多私密资料请加入知识星球！</p>
+<p><img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-09-25-zsxq.jpg" alt=""></p>
+<h3 id="专栏介绍"><a href="#专栏介绍" class="headerlink" title="专栏介绍"></a>专栏介绍</h3><p>首发地址：<a href="http://www.54tianzhisheng.cn/2019/11/15/flink-in-action/">http://www.54tianzhisheng.cn/2019/11/15/flink-in-action/</a></p>
+<p>专栏地址：<a href="https://gitbook.cn/gitchat/column/5dad4a20669f843a1a37cb4f">https://gitbook.cn/gitchat/column/5dad4a20669f843a1a37cb4f</a></p>
+<h3 id="Github-代码仓库"><a href="#Github-代码仓库" class="headerlink" title="Github 代码仓库"></a>Github 代码仓库</h3><p><a href="https://github.com/zhisheng17/flink-learning/">https://github.com/zhisheng17/flink-learning/</a></p>
+<p>以后这个项目的所有代码都将放在这个仓库里，包含了自己学习 flink 的一些 demo 和博客</p>
+<h3 id="博客"><a href="#博客" class="headerlink" title="博客"></a>博客</h3><p>1、<a href="http://www.54tianzhisheng.cn/2018/10/13/flink-introduction/">Flink 从0到1学习 —— Apache Flink 介绍</a></p>
+<p>2、<a href="http://www.54tianzhisheng.cn/2018/09/18/flink-install">Flink 从0到1学习 —— Mac 上搭建 Flink 1.6.0 环境并构建运行简单程序入门</a></p>
+<p>3、<a href="http://www.54tianzhisheng.cn/2018/10/27/flink-config/">Flink 从0到1学习 —— Flink 配置文件详解</a></p>
+<p>4、<a href="http://www.54tianzhisheng.cn/2018/10/28/flink-sources/">Flink 从0到1学习 —— Data Source 介绍</a></p>
+<p>5、<a href="http://www.54tianzhisheng.cn/2018/10/30/flink-create-source/">Flink 从0到1学习 —— 如何自定义 Data Source ？</a></p>
+<p>6、<a href="http://www.54tianzhisheng.cn/2018/10/29/flink-sink/">Flink 从0到1学习 —— Data Sink 介绍</a></p>
+<p>7、<a href="http://www.54tianzhisheng.cn/2018/10/31/flink-create-sink/">Flink 从0到1学习 —— 如何自定义 Data Sink ？</a></p>
+<p>8、<a href="http://www.54tianzhisheng.cn/2018/11/04/Flink-Data-transformation/">Flink 从0到1学习 —— Flink Data transformation(转换)</a></p>
+<p>9、<a href="http://www.54tianzhisheng.cn/2018/12/08/Flink-Stream-Windows/">Flink 从0到1学习 —— 介绍 Flink 中的 Stream Windows</a></p>
+<p>10、<a href="http://www.54tianzhisheng.cn/2018/12/11/Flink-time/">Flink 从0到1学习 —— Flink 中的几种 Time 详解</a></p>
+<p>11、<a href="http://www.54tianzhisheng.cn/2018/12/30/Flink-ElasticSearch-Sink/">Flink 从0到1学习 —— Flink 读取 Kafka 数据写入到 ElasticSearch</a></p>
+<p>12、<a href="http://www.54tianzhisheng.cn/2019/01/05/Flink-run/">Flink 从0到1学习 —— Flink 项目如何运行？</a></p>
+<p>13、<a href="http://www.54tianzhisheng.cn/2019/01/06/Flink-Kafka-sink/">Flink 从0到1学习 —— Flink 读取 Kafka 数据写入到 Kafka</a></p>
+<p>14、<a href="http://www.54tianzhisheng.cn/2019/01/13/Flink-JobManager-High-availability/">Flink 从0到1学习 —— Flink JobManager 高可用性配置</a></p>
+<p>15、<a href="http://www.54tianzhisheng.cn/2019/01/14/Flink-parallelism-slot/">Flink 从0到1学习 —— Flink parallelism 和 Slot 介绍</a></p>
+<p>16、<a href="http://www.54tianzhisheng.cn/2019/01/15/Flink-MySQL-sink/">Flink 从0到1学习 —— Flink 读取 Kafka 数据批量写入到 MySQL</a></p>
+<p>17、<a href="http://www.54tianzhisheng.cn/2019/01/20/Flink-RabbitMQ-sink/">Flink 从0到1学习 —— Flink 读取 Kafka 数据写入到 RabbitMQ</a></p>
+<p>18、<a href="https://t.zsxq.com/zV7MnuJ">Flink 从0到1学习 —— Flink 读取 Kafka 数据写入到 HBase</a></p>
+<p>19、<a href="https://t.zsxq.com/zV7MnuJ">Flink 从0到1学习 —— Flink 读取 Kafka 数据写入到 HDFS</a></p>
+<p>20、<a href="https://t.zsxq.com/zV7MnuJ">Flink 从0到1学习 —— Flink 读取 Kafka 数据写入到 Redis</a></p>
+<p>21、<a href="https://t.zsxq.com/uVbi2nq">Flink 从0到1学习 —— Flink 读取 Kafka 数据写入到 Cassandra</a></p>
+<p>22、<a href="https://t.zsxq.com/zV7MnuJ">Flink 从0到1学习 —— Flink 读取 Kafka 数据写入到 Flume</a></p>
+<p>23、<a href="https://t.zsxq.com/zV7MnuJ">Flink 从0到1学习 —— Flink 读取 Kafka 数据写入到 InfluxDB</a></p>
+<p>24、<a href="https://t.zsxq.com/zV7MnuJ">Flink 从0到1学习 —— Flink 读取 Kafka 数据写入到 RocketMQ</a></p>
+<p>25、<a href="http://www.54tianzhisheng.cn/2019/03/13/flink-job-jars/">Flink 从0到1学习 —— 你上传的 jar 包藏到哪里去了</a></p>
+<p>26、<a href="https://t.zsxq.com/zV7MnuJ">Flink 从0到1学习 —— 你的 Flink job 日志跑到哪里去了</a></p>
+<p>27、<a href="http://www.54tianzhisheng.cn/2019/02/28/blink/">阿里巴巴开源的 Blink 实时计算框架真香</a></p>
+<p>28、<a href="http://www.54tianzhisheng.cn/2019/03/28/flink-additional-data/">Flink 从0到1学习 —— Flink 中如何管理配置？</a></p>
+<p>29、<a href="http://www.54tianzhisheng.cn/2019/06/12/flink-split/">Flink 从0到1学习—— Flink 不可以连续 Split(分流)？</a></p>
+<p>30、<a href="http://www.54tianzhisheng.cn/2019/06/13/flink-book-paper/">Flink 从0到1学习—— 分享四本 Flink 国外的书和二十多篇 Paper 论文</a></p>
+<p>31、<a href="http://www.54tianzhisheng.cn/2019/06/14/flink-architecture-deploy-test/">Flink 架构、原理与部署测试</a></p>
+<p>32、<a href="http://www.54tianzhisheng.cn/2019/06/15/Stream-processing/">为什么说流处理即未来？</a></p>
+<p>33、<a href="http://www.54tianzhisheng.cn/2019/06/16/flink-sql-oppo/">OPPO 数据中台之基石：基于 Flink SQL 构建实时数据仓库</a></p>
+<p>34、<a href="http://www.54tianzhisheng.cn/2019/06/17/flink-vs-storm/">流计算框架 Flink 与 Storm 的性能对比</a></p>
+<p>35、<a href="http://www.54tianzhisheng.cn/2019/06/18/flink-state/">Flink状态管理和容错机制介绍</a></p>
+<p>36、<a href="http://www.54tianzhisheng.cn/2019/06/20/flink-kafka-Exactly-Once/">Apache Flink 结合 Kafka 构建端到端的 Exactly-Once 处理</a></p>
+<p>37、<a href="http://www.54tianzhisheng.cn/2019/06/21/flink-in-360/">360深度实践：Flink与Storm协议级对比</a></p>
+<p>38、<a href="http://www.54tianzhisheng.cn/2019/06/26/flink-TensorFlow/">如何基于Flink+TensorFlow打造实时智能异常检测平台？只看这一篇就够了</a></p>
+<p>39、<a href="http://www.54tianzhisheng.cn/2019/07/01/flink-1.9-preview/">Apache Flink 1.9 重大特性提前解读</a></p>
+<p>40、<a href="http://www.54tianzhisheng.cn/2019/12/31/Flink-resources/">Flink 全网最全资源（视频、博客、PPT、入门、原理、实战、性能调优、源码解析、问答等持续更新）</a></p>
+<p>41、<a href="https://mp.weixin.qq.com/s/ok-YwuVbwAVtJz7hUCiZxg">Flink 灵魂两百问，这谁顶得住？</a></p>
+<p>42、<a href="http://www.54tianzhisheng.cn/2019/08/18/flink-side-output/">Flink 从0到1学习 —— 如何使用 Side Output 来分流？</a></p>
+<p>43、<a href="http://www.54tianzhisheng.cn/2019/08/06/flink-streaming-system/">你公司到底需不需要引入实时计算引擎？</a></p>
+<p>44、<a href="http://www.54tianzhisheng.cn/2019/08/19/flink/">一文让你彻底了解大数据实时计算引擎 Flink</a></p>
+<h3 id="源码解析"><a href="#源码解析" class="headerlink" title="源码解析"></a>源码解析</h3><p>1、<a href="http://www.54tianzhisheng.cn/2019/01/30/Flink-code-compile/">Flink 源码解析 —— 源码编译运行</a></p>
+<p>2、<a href="http://www.54tianzhisheng.cn/2019/03/14/Flink-code-structure/">Flink 源码解析 —— 项目结构一览</a></p>
+<p>3、<a href="http://www.54tianzhisheng.cn/tags/Flink/">Flink 源码解析—— local 模式启动流程</a></p>
+<p>4、<a href="http://www.54tianzhisheng.cn/2019/03/15/Flink-code-Standalone-start/">Flink 源码解析 —— standalone session 模式启动流程</a></p>
+<p>5、<a href="http://www.54tianzhisheng.cn/2019/03/16/Flink-code-Standalone-JobManager-start/">Flink 源码解析 —— Standalone Session Cluster 启动流程深度分析之 Job Manager 启动</a></p>
+<p>6、<a href="http://www.54tianzhisheng.cn/2019/03/17/Flink-code-Standalone-TaskManager-start/">Flink 源码解析 —— Standalone Session Cluster 启动流程深度分析之 Task Manager 启动</a></p>
+<p>7、<a href="http://www.54tianzhisheng.cn/2019/03/18/Flink-code-batch-wordcount-start/">Flink 源码解析 —— 分析 Batch WordCount 程序的执行过程</a></p>
+<p>8、<a href="http://www.54tianzhisheng.cn/2019/03/19/Flink-code-streaming-wordcount-start/">Flink 源码解析 —— 分析 Streaming WordCount 程序的执行过程</a></p>
+<p>9、<a href="http://www.54tianzhisheng.cn/2019/03/21/Flink-code-JobGraph/">Flink 源码解析 —— 如何获取 JobGraph？</a></p>
+<p>10、<a href="http://www.54tianzhisheng.cn/2019/03/20/Flink-code-StreamGraph/">Flink 源码解析 —— 如何获取 StreamGraph？</a></p>
+<p>11、<a href="http://www.54tianzhisheng.cn/2019/03/25/Flink-code-jobmanager/">Flink 源码解析 —— Flink JobManager 有什么作用？</a></p>
+<p>12、<a href="http://www.54tianzhisheng.cn/2019/03/25/Flink-code-taskmanager/">Flink 源码解析 —— Flink TaskManager 有什么作用？</a></p>
+<p>13、<a href="http://www.54tianzhisheng.cn/2019/03/27/Flink-code-JobManager-submitJob/">Flink 源码解析 —— JobManager 处理 SubmitJob 的过程</a></p>
+<p>14、<a href="http://www.54tianzhisheng.cn/2019/03/28/Flink-code-TaskManager-submitJob/">Flink 源码解析 —— TaskManager 处理 SubmitJob 的过程</a></p>
+<p>15、<a href="http://www.54tianzhisheng.cn/2019/03/23/Flink-code-checkpoint/">Flink 源码解析 —— 深度解析 Flink Checkpoint 机制</a></p>
+<p>16、<a href="http://www.54tianzhisheng.cn/2019/03/22/Flink-code-serialize/">Flink 源码解析 —— 深度解析 Flink 序列化机制</a></p>
+<p>17、<a href="http://www.54tianzhisheng.cn/2019/03/24/Flink-code-memory-management/">Flink 源码解析 —— 深度解析 Flink 是如何管理好内存的？</a></p>
+<p>18、<a href="http://www.54tianzhisheng.cn/2019/07/02/Flink-code-metrics/">Flink Metrics 源码解析 —— Flink-metrics-core</a></p>
+<p>19、<a href="http://www.54tianzhisheng.cn/2019/07/02/Flink-code-metrics/">Flink Metrics 源码解析 —— Flink-metrics-datadog</a></p>
+<p>20、<a href="http://www.54tianzhisheng.cn/2019/07/02/Flink-code-metrics/">Flink Metrics 源码解析 —— Flink-metrics-dropwizard</a></p>
+<p>21、<a href="http://www.54tianzhisheng.cn/2019/07/02/Flink-code-metrics/">Flink Metrics 源码解析 —— Flink-metrics-graphite</a></p>
+<p>22、<a href="http://www.54tianzhisheng.cn/2019/07/02/Flink-code-metrics/">Flink Metrics 源码解析 —— Flink-metrics-influxdb</a></p>
+<p>23、<a href="http://www.54tianzhisheng.cn/2019/07/02/Flink-code-metrics/">Flink Metrics 源码解析 —— Flink-metrics-jmx</a></p>
+<p>24、<a href="http://www.54tianzhisheng.cn/2019/07/02/Flink-code-metrics/">Flink Metrics 源码解析 —— Flink-metrics-slf4j</a></p>
+<p>25、<a href="http://www.54tianzhisheng.cn/2019/07/02/Flink-code-metrics/">Flink Metrics 源码解析 —— Flink-metrics-statsd</a></p>
+<p>26、<a href="http://www.54tianzhisheng.cn/2019/07/02/Flink-code-metrics/">Flink Metrics 源码解析 —— Flink-metrics-prometheus</a></p>
+<p><img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-07-26-150037.jpg" alt=""></p>
+<p>26、<a href="http://www.54tianzhisheng.cn/2019/07/03/Flink-code-Annotations/">Flink Annotations 源码解析</a></p>
+<p><img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-07-26-145923.jpg" alt=""></p>
+<p>27、<a href="http://www.54tianzhisheng.cn/2019/03/26/Flink-code-ExecutionGraph/">Flink 源码解析 —— 如何获取 ExecutionGraph ？</a></p>
+<p>28、<a href="https://t.zsxq.com/UvrRNJM">大数据重磅炸弹——实时计算框架 Flink</a></p>
+<p>29、<a href="https://t.zsxq.com/QVFqjea">Flink Checkpoint-轻量级分布式快照</a></p>
+<p>30、<a href="http://www.54tianzhisheng.cn/2019/07/04/Flink-code-clients/">Flink Clients 源码解析</a></p>
+
+      
+      
+        <div class="page-reward">
+          <p><a href="javascript:void(0)" onclick="dashangToggle()" class="dashang">赏</a></p>
+          <div class="hide_box"></div>
+          <div class="shang_box">
+            <a class="shang_close" href="javascript:void(0)" onclick="dashangToggle()">×</a>
+            <div class="shang_tit">
+              <p>纯属好玩</p>
+            </div>
+            <div class="shang_payimg">
+              <img src="/img/alipayimg.jpg" alt="扫码支持" title="扫一扫" />
+            </div>
+              <div class="pay_explain">扫码打赏，你说多少就多少</div>
+            <div class="shang_payselect">
+              
+                <div class="pay_item checked" data-id="alipay">
+                  <span class="radiobox"></span>
+                  <span class="pay_logo"><img src="/img/alipay.png" alt="支付宝" /></span>
+                </div>
+              
+              
+                <div class="pay_item" data-id="wechat">
+                  <span class="radiobox"></span>
+                  <span class="pay_logo"><img src="/img/weixin.png" alt="微信" /></span>
+                </div>
+              
+            </div>
+            <div class="shang_info">
+              <p>打开<span id="shang_pay_txt">支付宝</span>扫一扫，即可进行扫码打赏哦</p>
+            </div>
+          </div>
+        </div>
+        <script src="https://my.openwrite.cn/js/readmore.js" type="text/javascript"></script>
+        <script type="text/javascript">
+            const btw = new BTWPlugin();
+            btw.init({
+                    id: 'article-entry',
+                    blogId: '15013-1596463967175-355',
+                    name: 'Java 指南者',
+                    qrcode: 'http://www.javaguider.com/java/img/wx.jpg',
+                    keyword: 'zhisheng',
+            });
+        </script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/zepto/1.2.0/zepto.min.js"></script>
+        <script type="text/javascript">
+          $(".pay_item").click(function(){
+            $(this).addClass('checked').siblings('.pay_item').removeClass('checked');
+            var dataid=$(this).attr('data-id');
+            $(".shang_payimg img").attr("src","/img/"+dataid+"img.jpg");
+            $("#shang_pay_txt").text(dataid=="alipay"?"支付宝":"微信");
+          });
+          function dashangToggle(){
+
+            $(".hide_box").fadeToggle();
+            $(".shang_box").fadeToggle();
+          }
+        </script>
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2021/01/23/Flink-Fraud-Detection-engine-2/">基于 Flink 的动态欺诈检测系统(中)</a></p>
+        <p><span>文章作者:</span><a href="/" title="访问 zhisheng 的个人博客">zhisheng</a></p>
+        <p><span>发布时间:</span>2021年01月23日 - 00时00分</p>
+        <p><span>最后更新:</span>2021年01月23日 - 23时53分</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2021/01/23/Flink-Fraud-Detection-engine-2/" title="基于 Flink 的动态欺诈检测系统(中)">http://www.54tianzhisheng.cn/2021/01/23/Flink-Fraud-Detection-engine-2/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://www.54tianzhisheng.cn/2021/01/23/Flink-Fraud-Detection-engine-2/　　作者: zhisheng" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script src="/js/clipboard.min.js"></script>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>公众号:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://www.54tianzhisheng.cn" title="微信公众号：zhisheng" target = "_blank">zhisheng</a> 欢迎关注。
+        </p>
+        <p>
+            <div align="center">
+                <img src="/img/wx.jpg"  alt="zhisheng" />
+            </div>
+        </p>
+    </div>
+
+
+
+<nav id="article-nav">
+  
+  
+    <a href="/2021/01/22/Flink-Fraud-Detection-engine/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">基于 Flink 的动态欺诈检测系统(上)</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#广播规则"><span class="toc-number">2.</span> <span class="toc-text">广播规则</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Apache-Flink-内部的数据交换"><span class="toc-number">3.</span> <span class="toc-text">Apache Flink 内部的数据交换</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#广播状态"><span class="toc-number">4.</span> <span class="toc-text">广播状态</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#总结"><span class="toc-number">5.</span> <span class="toc-text">总结</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#关注我"><span class="toc-number">6.</span> <span class="toc-text">关注我</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#专栏介绍"><span class="toc-number">7.</span> <span class="toc-text">专栏介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Github-代码仓库"><span class="toc-number">8.</span> <span class="toc-text">Github 代码仓库</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#博客"><span class="toc-number">9.</span> <span class="toc-text">博客</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#源码解析"><span class="toc-number">10.</span> <span class="toc-text">源码解析</span></a></li></ol>
+</div>
+<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+<script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script>
+    var valueHide = "隐藏目录";
+    var valueShow = "显示目录";
+
+    if ($(".left-col").is(":hidden")) {
+        $("#tocButton").attr("value", valueShow);
+    }
+    $("#tocButton").click(function() {
+        if ($("#toc").is(":hidden")) {
+            $("#tocButton").attr("value", valueHide);
+            $("#toc").slideDown(320);
+        }
+        else {
+            $("#tocButton").attr("value", valueShow);
+            $("#toc").slideUp(350);
+        }
+    })
+    if ($(".toc").length < 1) {
+        $("#toc, #tocButton").hide();
+    }
+</script>
+
+
+
+
+
+<div class="bdsharebuttonbox">
+	<a href="#" class="fx fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+	<a href="#" class="fx fa-weixin bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+	<a href="#" class="fx fa-qq bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+	<a href="#" class="fx fa-facebook-official bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+	<a href="#" class="fx fa-twitter bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+	<a href="#" class="fx fa-linkedin bds_linkedin" data-cmd="linkedin" title="分享到linkedin"></a>
+	<a href="#" class="fx fa-files-o bds_copy" data-cmd="copy" title="分享到复制网址"></a>
+</div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+
+
+
+    
+        <div id="gitments"></div>
+<script src="/js/gitment.browser.js"></script>
+<script>
+    var gitment = new Gitment({
+      id: window.location.pathname,
+      owner: 'zhisheng',
+      repo: 'zhisheng17.github.io',
+      oauth: {
+        client_id: '',
+        client_secret: '',
+      },
+    })
+    gitment.render('gitments')
+</script>
+    
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+        
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+        
+            <a href="/2021/01/22/Flink-Fraud-Detection-engine/" title="下一篇: 基于 Flink 的动态欺诈检测系统(上)">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2021/01/23/Flink-Fraud-Detection-engine-2/">基于 Flink 的动态欺诈检测系统(中)</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/22/Flink-Fraud-Detection-engine/">基于 Flink 的动态欺诈检测系统(上)</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/12/21/flink-forward-Asia-2020/">Flink Forward Asia 2020 全部 PPT 开放下载</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/12/06/Flink-1.12/">Flink 1.12 Release 文档解读</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/10/18/Spark-book/">强烈推荐三本 Spark 新书籍</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/10/13/flink-history-server/">用了 Flink History Server，妈妈再也不用担心我的作业半夜挂了</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/10/05/flink-jvm-profiler/">如何生成 Flink 作业的交互式火焰图？</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/08/09/flink-zsxq/">Flink 精进学习知识星球内容整理</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/08/02/flink-1.11-log/">Flink 1.11 日志该如何配置？</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/29/flink-1.11/">Flink 1.11 Release 文档解读</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/16/flink-taskmanager-memory-model/">Apache Flink 1.10 TaskManager 内存管理优化</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/13/flink-forward-2020/">Flink Forward 2020 PPT 下载</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/07/flink-job-monitor/">如何实时监控 Flink 集群和作业？</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/15/flink-error-log-alert/">基于 Apache Flink 的实时 Error 日志告警</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/29/flink-nacos-checkpoint/">Flink 能否动态更改 Checkpoint 配置</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/23/flink-apollo/">Flink 整合 Apollo，动态更新 Flink 作业配置</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/22/flink-nacos/">Flink 整合 Nacos，让 Flink 作业配置动态更新不再是难事</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/22/flink-1.10-release/">Flink 1.10 新特性研究</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/20/flink-checkpoint/">Flink Checkpoint 问题排查实用指南</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/11/flink-1.10/">Apache Flink 1.10.0 重磅发布，新特性解读</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/31/Flink-resources/">Flink 视频、博客、PPT、入门、原理、实战、性能调优、源码解析、问答等持续更新</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/30/flink-meituan-real-time-warehouse/">美团点评基于 Flink 的实时数仓平台实践</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/23/flink-monitor-alert/">基于 Apache Flink 的监控告警系统</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/10/flink-real-time-data-analysis-platform/">基于 Apache Flink 的大规模准实时数据分析平台</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/07/Flink_Forward_Asia_2019/">Flink Forward Asia 2019 PPT 下载</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/30/flink-checkpoint-hdfs/">阿里巴巴 Flink 踩坑经验：如何大幅降低 HDFS 压力？</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/30/flink-in-58/">58 同城基于 Flink 的千亿级实时计算平台架构实践</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/30/flink-aqniu/">基于 Flink 构建关联分析引擎的挑战和实践</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/24/flink-in-action-directory/">《大数据实时计算引擎 Flink 实战与性能优化》目录大纲</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/23/real-time-warehouse/">数据仓库简介、发展、架构演进、实时数仓建设、与离线数仓对比</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/23/flink-metrics/">详解 Flink Metrics 原理与监控实战</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/15/flink-in-action/">《大数据实时计算引擎 Flink 实战与性能优化》新专栏</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/26/flink-back-pressure/">一文彻底搞懂 Flink 网络流控与反压机制</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/25/flink-didi/">滴滴实时计算发展之路及平台架构实践</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/24/Flink-Connector/">Flink Connector 深度解析</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/23/flink-ebay/">如何使用 Flink 每天实时处理百亿条日志？</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/22/flink-1.9/">修改代码150万行！Apache Flink 1.9.0做了这些重大修改！</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/21/Flink-Exactly_Once_vs_At_Least_Once/">一文搞懂 Flink 的 Exactly Once 和 At Least Once</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/20/Flink-meituan-dw/">美团点评基于 Flink 的实时数仓建设实践</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/19/flink/">一文让你彻底了解大数据实时计算引擎 Flink</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/18/flink-side-output/">Flink 从0到1学习 —— 如何使用 Side Output 来分流？</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/06/flink-streaming-system/">你公司到底需不需要引入实时计算引擎？</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/04/Flink-code-clients/">Flink Clients 源码解析</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/03/Flink-code-Annotations/">Flink Annotations 源码解析</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/02/Flink-code-metrics/">Flink Metrics 源码解析</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/01/flink-1.9-preview/">Apache Flink 1.9 重大特性提前解读</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/06/26/flink-TensorFlow/">如何基于Flink+TensorFlow打造实时智能异常检测平台？只看这一篇就够了</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/06/21/flink-in-360/">360深度实践：Flink与Storm协议级对比</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/06/20/flink-kafka-Exactly-Once/">Apache Flink 结合 Kafka 构建端到端的 Exactly-Once 处理</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/06/18/flink-state/">Flink状态管理和容错机制介绍</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/06/17/flink-vs-storm/">流计算框架 Flink 与 Storm 的性能对比</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/06/16/flink-sql-oppo/">OPPO 数据中台之基石：基于 Flink SQL 构建实时数据仓库</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/06/15/Stream-processing/">为什么说流处理即未来？</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/06/14/flink-architecture-deploy-test/">Flink 架构、原理与部署测试</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/06/13/flink-book-paper/">Flink 从0到1学习—— 分享四本 Flink 国外的书和二十多篇 Paper 论文</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/06/12/flink-split/">Flink 从0到1学习—— Flink 不可以连续 Split(分流)？</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/28/Flink-code-TaskManager-submitJob/">Flink 源码解析 —— TaskManager 处理 SubmitJob 的过程</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/28/flink-additional-data/">Flink 从0到1学习 —— Flink 中如何管理配置？</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/27/Flink-code-JobManager-submitJob/">Flink 源码解析 —— JobManager 处理 SubmitJob 的过程</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/26/Flink-code-ExecutionGraph/">Flink 源码解析 —— 如何获取 ExecutionGraph ？</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/25/Flink-code-jobmanager/">Flink 源码解析 —— Flink JobManager 有什么作用？</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/25/Flink-code-taskmanager/">Flink 源码解析 —— Flink TaskManager 有什么作用？</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/24/Flink-code-memory-management/">Flink 源码解析 —— 深度解析 Flink 是如何管理好内存的？</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/23/Flink-code-checkpoint/">Flink 源码解析 —— 深度解析 Flink Checkpoint 机制</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/22/Flink-code-serialize/">Flink 源码解析 —— 深度解析 Flink 序列化机制</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/21/Flink-code-JobGraph/">Flink 源码解析 —— 如何获取 JobGraph？</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/20/Flink-code-StreamGraph/">Flink 源码解析 —— 如何获取 StreamGraph？</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/19/Flink-code-streaming-wordcount-start/">Flink 源码解析 —— 分析 Streaming WordCount 程序的执行过程</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/18/Flink-code-batch-wordcount-start/">Flink 源码解析 —— 分析 Batch WordCount 程序的执行过程</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/17/Flink-code-Standalone-TaskManager-start/">Flink 源码解析 —— Standalone Session Cluster 启动流程深度分析之 Task Manager 启动</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/16/Flink-code-Standalone-JobManager-start/">Flink 源码解析 —— Standalone Session Cluster 启动流程深度分析之 Job Manager 启动</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/15/Flink-code-Standalone-start/">Flink 源码解析 —— Standalone session 模式启动流程</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/14/Flink-code-structure/">Flink 源码解析 —— 项目结构一览</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/13/flink-job-jars/">Flink 从 0 到 1 学习 —— 你上传的 jar 包藏到哪里去了?</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/02/28/blink/">阿里巴巴开源的 Blink 实时计算框架真香</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/01/30/Flink-code-compile/">Flink 源码解析 —— 源码编译运行</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/01/20/Flink-RabbitMQ-sink/">Flink 从 0 到 1 学习 —— Flink 读取 Kafka 数据写入到 RabbitMQ</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/01/15/Flink-MySQL-sink/">Flink 从 0 到 1 学习 —— Flink 读取 Kafka 数据批量写入到 MySQL</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/01/14/Flink-parallelism-slot/">Flink 从 0 到 1 学习 —— Flink parallelism 和 Slot 介绍</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/01/13/Flink-JobManager-High-availability/">Flink 从 0 到 1 学习 —— Flink JobManager 高可用性配置</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/01/06/Flink-Kafka-sink/">Flink 从 0 到 1 学习 —— Flink 写入数据到 Kafka</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/01/05/Flink-run/">Flink 从 0 到 1 学习 —— Flink 项目如何运行？</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/12/30/Flink-ElasticSearch-Sink/">Flink 从 0 到 1 学习 —— Flink 写入数据到 ElasticSearch</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/12/11/Flink-time/">Flink 从 0 到 1 学习 —— Flink 中几种 Time 详解</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/12/08/Flink-Stream-Windows/">Flink 从 0 到 1 学习 —— 介绍Flink中的Stream Windows</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/04/Flink-Data-transformation/">Flink 从 0 到 1 学习 —— Flink Data transformation(转换)</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/31/flink-create-sink/">Flink 从 0 到 1 学习 —— 如何自定义 Data Sink ？</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/30/flink-create-source/">Flink 从 0 到 1 学习 —— 如何自定义 Data Source ？</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/29/flink-sink/">Flink 从 0 到 1 学习 —— Data Sink 介绍</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/28/flink-sources/">Flink 从 0 到 1 学习 —— Data Source 介绍</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/27/flink-config/">Flink 从 0 到 1 学习 —— Flink 配置文件详解</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/13/flink-introduction/">Flink 从 0 到 1 学习 —— Apache Flink 介绍</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/18/flink-install/">Flink 从 0 到 1 学习 —— Mac 上搭建 Flink 1.6.0 环境并构建运行简单程序入门</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/30/go-sync/">Go 并发——实现协程同步的几种方式</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/14/idea-remote-debug-elasticsearch/">教你如何在 IDEA 远程 Debug ElasticSearch</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/12/es-code03/">渣渣菜鸡的 ElasticSearch 源码解析 —— 启动流程（下）</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/11/es-code02/">渣渣菜鸡的 ElasticSearch 源码解析 —— 启动流程（上）</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/05/es-code01/">渣渣菜鸡的 ElasticSearch 源码解析 —— 环境搭建</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/04/why-see-es-code/">渣渣菜鸡为什么要看 ElasticSearch 源码？</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/07/31/alipay02/">渣渣菜鸡的蚂蚁金服面试经历(二)</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/07/30/alipay01/">渣渣菜鸡的蚂蚁金服面试经历(一)</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/07/12/youzan/">渣渣菜鸡的有赞面试经历（一）</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/20/java-8-date/">20 个案例教你在 Java 8 中如何处理日期和时间?</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/19/SimpleDateFormat/">SimpleDateFormat 如何安全的使用？</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/26/paper/">苦逼的毕业论文经历</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/30/springboot_SpringApplication/">Spring Boot 2.0系列文章(七)：SpringApplication 深入探索</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/24/Distributed_lock/">分布式锁看这篇就够了</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/19/SpringBootApplication-annotation/">Spring Boot 2.0系列文章(六)：Spring Boot 2.0中SpringBootApplication注解详解</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/18/spring_boot2_project/">Spring Boot 2.0系列文章(五)：Spring Boot 2.0 项目源码结构预览</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/15/springboot2_code/">Spring Boot 2.0系列文章(四)：Spring Boot 2.0 源码阅读环境搭建</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/13/Spring_Boot_2.0_Configuration_Changelog/">Spring Boot 2.0系列文章(三)：Spring Boot 2.0 配置改变</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/03/27/blogs/">写这么多系列博客，怪不得找不到女朋友</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/03/06/SpringBoot2-new-features/">Spring Boot 2.0系列文章(二)：Spring Boot 2.0 新特性详解</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/03/06/SpringBoot2-Migration-Guide/">Spring Boot 2.0系列文章(一)：Spring Boot 2.0 迁移指南</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/02/28/Java-Memory-Model/">《深入理解 Java 内存模型》读书笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/02/07/rocketmq-example/">RocketMQ系列文章（三）：RocketMQ 简单的消息示例</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/02/07/SpringBoot-RocketMQ/">Spring Boot系列文章（六）：SpringBoot RocketMQ 整合使用和监控</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/02/06/RocketMQ-install/">RocketMQ系列文章（二）：RocketMQ 安装及快速入门</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/02/05/RocketMQ/">RocketMQ系列文章（一）：RocketMQ 初探</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/28/RabbitMQ/">Spring Boot系列文章（五）：SpringBoot RabbitMQ 整合进阶版</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/27/SpringBoot-ActiveMQ/">Spring Boot系列文章（四）：SpringBoot ActiveMQ 整合使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/26/SpringBoot-RabbitMQ/">Spring Boot系列文章（三）：SpringBoot  RabbitMQ 整合使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/25/Docker-install/">Docker系列文章（二）：Mac 安装 Docker 及常用命令</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/24/mac/">MacBook Pro 初体验</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/17/SpringBoot-Admin/">Spring Boot系列文章（二）：SpringBoot Admin 使用指南</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/09/lombok/">Lombok 看这篇就够了</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/05/SpringBoot-Kafka/">Spring Boot系列文章（一）：SpringBoot Kafka 整合使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/04/weixin/">为什么要重新运营以前的公众号呢？</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/04/Kafka/">Kafka 安装及快速入门</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/12/27/consul-install/">Windows 下安装 Consul</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/12/25/ELK/">Elasticsearch 系列文章（五）：ELK 实时日志分析平台环境搭建</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/12/18/hexo-yilia/">Hexo + yilia 搭建博客可能会遇到的所有疑问</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/12/13/Google-Developer-Days/">谷歌开发者大会收获满满，不去真 “可惜” 了</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/12/09/CodeMirror/">使用 CodeMirror 打造属于自己的在线代码编辑器</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/12/08/netty-01-env/">Netty系列文章（一）：Netty 源码阅读之初始环境搭建</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/12/03/RestTemplate/">RestTemplate 详解</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/12/02/wx-01/">实习圈群里提问小记</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/11/26/Docker-harbor/">Docker系列文章（一）：基于 Harbor 搭建 Docker 私有镜像仓库</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/11/18/Money-management/">谈谈我的理财</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/11/18/flow-control/">基于分布式环境下限流系统的设计</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/11/11/Maven-dependencies-dependencyManagement/">Maven 中 dependencies 与 dependencyManagement 的区别</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/11/11/recommended-books/">送你一份双十一剁手书单【墙裂推荐】</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/28/Data-Desensitization/">小白谈数据脱敏</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/21/HBase-metrics/">HBase 集群监控</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/18/ElasticSearch-nodes-metrics/">Elasticsearch 系列文章（四）：ElasticSearch 单个节点监控</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/15/ElasticSearch-cluster-health-metrics/">Elasticsearch 系列文章（三）：ElasticSearch 集群监控</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/14/JsonPath/">JsonPath —— JSON 解析神器</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/14/Nexus3-Maven/">Centos7 搭建最新 Nexus3 Maven 私服</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/23/Guava-limit/">Google Guava 缓存实现接口的限流</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/17/Interview-summary/">面试过阿里等互联网大公司，我知道了这些套路</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/15/linux-lua-lfs-install/">Linux 下 lua 开发环境安装及安装 luafilesystem</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/09/Elasticsearch-install/">Elasticsearch 系列文章（二）：全文搜索引擎 Elasticsearch 集群搭建入门教程</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/08/Elasticsearch-analyzers/">Elasticsearch 系列文章（一）：Elasticsearch 默认分词器和中分分词器之间的比较及使用方法</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/28/recommend-books/">那些年我看过的书 —— 致敬我的大学生活 —— Say Good Bye ！</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/18/Ubuntu-install-Nginx/">Ubuntu16.10 安装 Nginx</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/11/most-success/">马云热血励志演讲《最伟大的成功》</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/08/android-projects/">源码大招：不服来战！撸这些完整项目，你不牛逼都难！</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/05/Nginx/">Nginx 基本知识快速入门</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/04/alibaba/">秋招第三站 —— 内推阿里（一面）</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/04/iqiyi/">秋招第二站 —— 内推爱奇艺（一面二面）</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/04/yaxin/">秋招第一站 —— 亚信科技</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/29/ThreadPool/">Java 线程池艺术探索</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/25/Java-performance-tuning/">Java 性能调优需要格外注意的细节</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/21/Spring-MVC03/">Spring MVC系列文章（五）：看透 Spring MVC 源代码分析与实践 ——  Spring MVC 组件分析</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/14/Spring-MVC01/">Spring MVC系列文章（三）：看透 Spring MVC 源代码分析与实践 ——  网站基础知识</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/14/Spring-MVC02/">Spring MVC系列文章（四）：看透 Spring MVC 源代码分析与实践 ——  俯视 Spring MVC</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/09/servlet/">通过源码详解 Servlet</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/28/Velocity-foreach/">Velocity 循环指令一种好的解决方法</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/23/AJAX/">AJAX 学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/23/java-io/">Java IO流学习超详细总结（图文并茂）</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/20/Java-error1/">java.sql.SQLException Field 'id' doesn't have a default value</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/19/中缀表达式转换成前缀和后缀表达式这类题目的超实用解题技巧/">中缀表达式转换成前缀和后缀表达式这类题目的超实用解题技巧</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/18/循环队列的相关条件和公式/">循环队列的相关条件和公式</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/18/Bootstrap入门需掌握的知识点（一）/">Bootstrap入门需掌握的知识点（一）</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/18/Bootstrap入门需掌握的知识点（二）/">Bootstrap入门需掌握的知识点（二）</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/17/blog-talk/">搭建一个博客项目后的碎碎念</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/17/详解 Filter 过滤器/">详解 Filter 过滤器</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/17/详细深入分析 Java ClassLoader 工作机制/">详细深入分析 Java ClassLoader 工作机制</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/16/通过项目逐步深入了解Spring MVC（一）/">通过项目逐步深入了解Spring MVC（一）</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/15/通过项目逐步深入了解Mybatis(四)/">通过项目逐步深入了解Mybatis（四）</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/14/通过项目逐步深入了解Mybatis(三)/">通过项目逐步深入了解Mybatis（三）</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/13/Hexo-yilia-toc/">Hexo + yilia 主题实现文章目录</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/13/Java连接Oracle数据库的三种连接方式/">Java连接Oracle数据库的三种连接方式</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/13/MyBatis-foreach/">MyBatis的foreach语句详解</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/13/Spring MVC + Hibernate JPA + Bootstrap 搭建的博客系统/">Spring MVC系列文章（一）：Spring MVC + Hibernate JPA + Bootstrap 搭建的博客系统 Demo</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/13/String-new/">关于String s = new String("xyz"); 创建几个对象的问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/13/【字符串】字符串逆序/">字符串</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/13/【字符串】判断两字符串是否互为旋转词？/">【字符串】判断两字符串是否互为旋转词？</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/13/奇怪的Java题：为什么128 == 128返回为False，而127 == 127会返回为True-/">奇怪的Java题：为什么128 == 128返回为False，而127 == 127会返回为True?</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/13/程序访问文件的几种方式/">程序访问文件的几种方式</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/13/MySQL-select-good/">MySQL 处理海量数据时的一些优化查询速度方法</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/13/Pyspider框架 —— Python爬虫实战之爬取 V2EX 网站帖子/">Pyspider框架 —— Python爬虫实战之爬取 V2EX 网站帖子</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/13/Spring MVC+Hibernate JPA搭建的博客系统项目中所遇到的坑/">Spring MVC系列文章（二）：Spring MVC+Hibernate JPA搭建的博客系统项目中所遇到的坑</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/13/feiji/">记录下自己第一次坐飞机的感受</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/13/java-var/">从对象深入分析 Java 中实例变量和类变量的区别</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/13/java读取文件/">Java读取文件</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/13/利用Github Page 搭建个人博客网站/">利用Github Page 搭建个人博客网站</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/13/解决jdk1.8中发送邮件失败（handshake_failure）问题/">解决jdk1.8中发送邮件失败（handshake_failure）问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/13/HashMap-Hashtable/">HashMap、Hashtable、HashSet 和 ConcurrentHashMap 的比较</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/13/JVM性能调优监控工具jps、jstack、jmap、jhat、jstat等使用详解/">JVM性能调优监控工具jps、jstack、jmap、jhat、jstat等使用详解</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/13/Python爬虫实战之爬取糗事百科段子/">Python爬虫实战之爬取糗事百科段子</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/13/Python爬虫实战之爬取百度贴吧帖子/">Python爬虫实战之爬取百度贴吧帖子</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/13/深入分析 Java Web 中的中文编码问题/">深入分析 Java Web 中的中文编码问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/13/深度探究Java 中 finally 语句块/">深度探究Java 中 finally 语句块</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/13/通过项目逐步深入了解Mybatis(二)/">通过项目逐步深入了解Mybatis（二）</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/13/Java NIO 系列教程/">Java NIO 系列教程</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/13/Java-Thread/">《Java 多线程编程核心技术》学习笔记及总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/13/Java-16-lession/">《疯狂 Java 突破程序员基本功的 16 课》读书笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/12/通过项目逐步深入了解Mybatis(一)/">通过项目逐步深入了解Mybatis（一）</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/02/poetry2/"> 六月 —— 愿你做最美好的自己！</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/12/poetry/">最近很火的鸡汤，分享给大家</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/13/Hexo-yilia-changyan/">Github pages + Hexo 博客 yilia 主题使用畅言评论系统</a></li></ul>
+    <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+    <script>
+        $(".post-list").addClass("toc-article");
+        $(".post-list-item a").attr("target","_blank");
+        $("#post-nav-button > a:nth-child(2)").click(function() {
+            $(".fa-bars, .fa-times").toggle();
+            $(".post-list").toggle(300);
+            if ($(".toc").length > 0) {
+                $("#toc, #tocButton").toggle(200, function() {
+                    if ($(".switch-area").is(":visible")) {
+                        $("#tocButton").attr("value", valueHide);
+                        }
+                    })
+            }
+            else {
+            }
+        })
+    </script>
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                &copy; 2021 zhisheng
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" >本站总访问量: 
+                            <span id="busuanzi_value_site_pv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>, </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit">本文总阅读量: 
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                   <a href="http://beian.miit.gov.cn">赣ICP备16004176号</a>
+            </div>
+        
+    </div>
+</footer>
+
+    </div>
+    <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var backgroundnum = 24;
+            var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+            $("#mobile-nav").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+            $(".left-col").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+        })
+    </script>
+
+
+
+
+	<script>
+	var _hmt = _hmt || [];
+	(function() {
+	  var hm = document.createElement("script");
+	  hm.src = "https://hm.baidu.com/hm.js?c41be5a0c9f014e977695f66c065b5d3";
+	  var s = document.getElementsByTagName("script")[0]; 
+	  s.parentNode.insertBefore(hm, s);
+	})();
+	</script>
+
+
+<div class="scroll" id="scroll">
+    <a href="#"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    $(document).ready(function() {
+        if ($("#comments").length < 1) {
+            $("#scroll > a:nth-child(2)").hide();
+        };
+    })
+</script>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  <script language="javascript">
+    $(function() {
+        $("a[title]").each(function() {
+            var a = $(this);
+            var title = a.attr('title');
+            if (title == undefined || title == "") return;
+            a.data('title', title).removeAttr('title').hover(
+
+            function() {
+                var offset = a.offset();
+                $("<div id=\"anchortitlecontainer\"></div>").appendTo($("body")).html(title).css({
+                    top: offset.top - a.outerHeight() - 15,
+                    left: offset.left + a.outerWidth()/2 + 1
+                }).fadeIn(function() {
+                    var pop = $(this);
+                    setTimeout(function() {
+                        pop.remove();
+                    }, pop.text().length * 800);
+                });
+            }, function() {
+                $("#anchortitlecontainer").remove();
+            });
+        });
+    });
+</script>
+
+
+  </div>
+</body>
+</html>
