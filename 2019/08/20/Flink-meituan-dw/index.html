@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+   <!-- 百度联盟 -->
+   <meta name="baidu_union_verify" content="46e227ad81d5513c6cd8288c18c6ebad">
+
+   <!-- google analytics -->
+   <meta name="google-site-verification" content="SzCGQVmA8Mtk40elee-bCGpq2YSCAmEulSNEZHYCkFc" />
+
+   <!--百度站长之家验证-->
+   <meta name="baidu-site-verification" content="4woRik4rfk" />
+
+   <meta name="description" content="坑要一个个填，路要一步步走！—— from zhisheng的博客">
+   <meta name="keywords" content="Flink,Spark,大数据,Hive,Java,架构,后端,服务端,RocketMQ,分布式消息队列,分布式存储,技术博客,HBase,ElasticSearch,Spring,Spring Boot,Spring Boot 2.0,Spring Cloud,Spring MVC,Java EE,前端,HTML,MyBatis,Android,Docker,Mac,Consul,Kafka,Logstash,Kibana,MySQL,Maven,Nginx,Python,RabbitMQ,ActiveMQ,JVM">
+
+
+  <title>美团点评基于 Flink 的实时数仓建设实践 | zhisheng的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="引言近些年，企业对数据服务实时化服务需求日益增多。本文整理了常见实时数据组件的性能特点和适用场景，介绍了美团如何通过 Flink 引擎构建实时数据仓库，从而提供高效、稳健的实时数据服务。此前我们美团技术博客发布过一篇文章《流计算框架 Flink 与 Storm 的性能对比》，对 Flink 和 Storm 两个引擎的计算性能进行了比较。本文主要阐述使用 Flink 在实际数据生产上的经验。">
+<meta name="keywords" content="大数据,Flink,数据仓库">
+<meta property="og:type" content="article">
+<meta property="og:title" content="美团点评基于 Flink 的实时数仓建设实践">
+<meta property="og:url" content="http://www.54tianzhisheng.cn/2019/08/20/Flink-meituan-dw/index.html">
+<meta property="og:site_name" content="zhisheng的博客">
+<meta property="og:description" content="引言近些年，企业对数据服务实时化服务需求日益增多。本文整理了常见实时数据组件的性能特点和适用场景，介绍了美团如何通过 Flink 引擎构建实时数据仓库，从而提供高效、稳健的实时数据服务。此前我们美团技术博客发布过一篇文章《流计算框架 Flink 与 Storm 的性能对比》，对 Flink 和 Storm 两个引擎的计算性能进行了比较。本文主要阐述使用 Flink 在实际数据生产上的经验。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-09-22-055119.jpg">
+<meta property="og:image" content="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-09-22-055209.jpg">
+<meta property="og:image" content="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-09-22-055300.jpg">
+<meta property="og:image" content="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-09-22-055327.jpg">
+<meta property="og:image" content="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-09-22-055435.jpg">
+<meta property="og:image" content="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-09-22-055500.jpg">
+<meta property="og:image" content="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-09-22-055743.jpg">
+<meta property="og:image" content="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-09-17-143454.jpg">
+<meta property="og:image" content="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-09-25-zsxq.jpg">
+<meta property="og:image" content="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-11-05-044731.jpg">
+<meta property="og:image" content="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-07-26-150037.jpg">
+<meta property="og:image" content="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-07-26-145923.jpg">
+<meta property="og:updated_time" content="2019-12-12T14:29:32.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="美团点评基于 Flink 的实时数仓建设实践">
+<meta name="twitter:description" content="引言近些年，企业对数据服务实时化服务需求日益增多。本文整理了常见实时数据组件的性能特点和适用场景，介绍了美团如何通过 Flink 引擎构建实时数据仓库，从而提供高效、稳健的实时数据服务。此前我们美团技术博客发布过一篇文章《流计算框架 Flink 与 Storm 的性能对比》，对 Flink 和 Storm 两个引擎的计算性能进行了比较。本文主要阐述使用 Flink 在实际数据生产上的经验。">
+<meta name="twitter:image" content="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-09-22-055119.jpg">
+  
+    <link rel="alternative" href="/atom.xml" title="zhisheng的博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/img/favicon.ico">
+  
+  
+      <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  
+  
+      <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  
+  <!-- 加载特效 -->
+  <script src="/js/pace.js"></script>
+  <link href="/css/pace/pace-theme-flash.css" rel="stylesheet" />
+  <script>
+      var yiliaConfig = {
+          rootUrl: '/',
+          fancybox: true,
+          animate: true,
+          isHome: false,
+          isPost: true,
+          isArchive: false,
+          isTag: false,
+          isCategory: false,
+          open_in_new: true
+      }
+  </script>
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <!-- <a href="/" class="profilepic">
+            
+            <img src="//img/avatar.png" alt="zhisheng">
+            
+        </a> -->
+         <a href="/">
+        			<img src="/img/avatar.png" class="js-avatar" style="width: 70%;height: 70%;opacity: 1;">
+        </a>
+
+        <hgroup>
+          <h1 class="header-author"><a href="/">zhisheng</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">坑要一个个填，路要一步步走！</p>
+        
+        
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/tags/Flink/">Flink</a></li>
+                        
+                            <li><a href="/tags/ElasticSearch/">ElasticSearch</a></li>
+                        
+                            <li><a href="/tags/SpringBoot/">Spring Boot</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fl wechat" target="_blank" href="wechat:yuanblog_tzs" title="wechat">wechat</a>
+                            
+                                <a class="fl mail" target="_blank" href="mailto://zhisheng2018@gmail.com" title="mail">mail</a>
+                            
+                                <a class="fl github" target="_blank" href="https://github.com/zhisheng17/" title="github">github</a>
+                            
+                                <a class="fl zhihu" target="_blank" href="https://www.zhihu.com/people/zhisheng-34" title="zhihu">zhihu</a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <a href="/tags/AJAX/" style="font-size: 10px;">AJAX</a> <a href="/tags/ActiveMQ/" style="font-size: 10px;">ActiveMQ</a> <a href="/tags/Android/" style="font-size: 10px;">Android</a> <a href="/tags/Apollo/" style="font-size: 10px;">Apollo</a> <a href="/tags/Blink/" style="font-size: 10px;">Blink</a> <a href="/tags/Bootstrap/" style="font-size: 12.5px;">Bootstrap</a> <a href="/tags/Consul/" style="font-size: 10px;">Consul</a> <a href="/tags/Docker/" style="font-size: 10.83px;">Docker</a> <a href="/tags/ElasticSearch/" style="font-size: 15.83px;">ElasticSearch</a> <a href="/tags/Filter过滤器/" style="font-size: 10px;">Filter过滤器</a> <a href="/tags/Flink/" style="font-size: 20px;">Flink</a> <a href="/tags/GO/" style="font-size: 10px;">GO</a> <a href="/tags/Github-Page/" style="font-size: 10px;">Github Page</a> <a href="/tags/Guava/" style="font-size: 10px;">Guava</a> <a href="/tags/HBase/" style="font-size: 10px;">HBase</a> <a href="/tags/Hibernate-JPA/" style="font-size: 10.83px;">Hibernate JPA</a> <a href="/tags/IO/" style="font-size: 10.83px;">IO</a> <a href="/tags/JMM/" style="font-size: 10px;">JMM</a> <a href="/tags/JSON/" style="font-size: 10px;">JSON</a> <a href="/tags/JVM/" style="font-size: 10.83px;">JVM</a> <a href="/tags/Java/" style="font-size: 18.33px;">Java</a> <a href="/tags/Kafka/" style="font-size: 12.5px;">Kafka</a> <a href="/tags/Kibana/" style="font-size: 10px;">Kibana</a> <a href="/tags/LogStash/" style="font-size: 10px;">LogStash</a> <a href="/tags/Mac/" style="font-size: 10px;">Mac</a> <a href="/tags/Maven/" style="font-size: 10.83px;">Maven</a> <a href="/tags/MySQL/" style="font-size: 12.5px;">MySQL</a> <a href="/tags/Mybatis/" style="font-size: 13.33px;">Mybatis</a> <a href="/tags/NIO/" style="font-size: 10px;">NIO</a> <a href="/tags/Nacos/" style="font-size: 11.67px;">Nacos</a> <a href="/tags/Netty/" style="font-size: 10px;">Netty</a> <a href="/tags/Nginx/" style="font-size: 10.83px;">Nginx</a> <a href="/tags/Oracle/" style="font-size: 10px;">Oracle</a> <a href="/tags/Pyspider/" style="font-size: 10px;">Pyspider</a> <a href="/tags/Python/" style="font-size: 11.67px;">Python</a> <a href="/tags/RabbitMQ/" style="font-size: 11.67px;">RabbitMQ</a> <a href="/tags/Redis/" style="font-size: 10.83px;">Redis</a> <a href="/tags/RocketMQ/" style="font-size: 12.5px;">RocketMQ</a> <a href="/tags/Servlet/" style="font-size: 10px;">Servlet</a> <a href="/tags/Spark/" style="font-size: 10px;">Spark</a> <a href="/tags/Spring/" style="font-size: 11.67px;">Spring</a> <a href="/tags/Spring-MVC/" style="font-size: 14.17px;">Spring MVC</a> <a href="/tags/SpringBoot/" style="font-size: 16.67px;">SpringBoot</a> <a href="/tags/SpringMVC/" style="font-size: 12.5px;">SpringMVC</a> <a href="/tags/String/" style="font-size: 10px;">String</a> <a href="/tags/Velocity/" style="font-size: 10px;">Velocity</a> <a href="/tags/Zookeeper/" style="font-size: 10px;">Zookeeper</a> <a href="/tags/finally/" style="font-size: 10px;">finally</a> <a href="/tags/foreach/" style="font-size: 10px;">foreach</a> <a href="/tags/hexo/" style="font-size: 11.67px;">hexo</a> <a href="/tags/lombok/" style="font-size: 10px;">lombok</a> <a href="/tags/lua/" style="font-size: 10px;">lua</a> <a href="/tags/yilia/" style="font-size: 10.83px;">yilia</a> <a href="/tags/书籍/" style="font-size: 10px;">书籍</a> <a href="/tags/分布式锁/" style="font-size: 10px;">分布式锁</a> <a href="/tags/前端/" style="font-size: 11.67px;">前端</a> <a href="/tags/励志/" style="font-size: 10px;">励志</a> <a href="/tags/博客合集/" style="font-size: 10px;">博客合集</a> <a href="/tags/博客网站/" style="font-size: 10px;">博客网站</a> <a href="/tags/多线程/" style="font-size: 10.83px;">多线程</a> <a href="/tags/大数据/" style="font-size: 20px;">大数据</a> <a href="/tags/字符串/" style="font-size: 10.83px;">字符串</a> <a href="/tags/实习圈/" style="font-size: 10px;">实习圈</a> <a href="/tags/实时计算/" style="font-size: 17.5px;">实时计算</a> <a href="/tags/循环队列/" style="font-size: 10px;">循环队列</a> <a href="/tags/性能调优工具/" style="font-size: 10px;">性能调优工具</a> <a href="/tags/投资理财/" style="font-size: 10px;">投资理财</a> <a href="/tags/数据仓库/" style="font-size: 10px;">数据仓库</a> <a href="/tags/数据库/" style="font-size: 11.67px;">数据库</a> <a href="/tags/数据结构/" style="font-size: 12.5px;">数据结构</a> <a href="/tags/文件/" style="font-size: 10px;">文件</a> <a href="/tags/旋转词/" style="font-size: 10px;">旋转词</a> <a href="/tags/流式计算/" style="font-size: 19.17px;">流式计算</a> <a href="/tags/流控/" style="font-size: 10px;">流控</a> <a href="/tags/爬虫/" style="font-size: 11.67px;">爬虫</a> <a href="/tags/监控告警/" style="font-size: 10px;">监控告警</a> <a href="/tags/算法/" style="font-size: 11.67px;">算法</a> <a href="/tags/类加载机制/" style="font-size: 10px;">类加载机制</a> <a href="/tags/线程池/" style="font-size: 10px;">线程池</a> <a href="/tags/编码/" style="font-size: 10px;">编码</a> <a href="/tags/表达式/" style="font-size: 10px;">表达式</a> <a href="/tags/邮件发送/" style="font-size: 10px;">邮件发送</a> <a href="/tags/随笔/" style="font-size: 15px;">随笔</a> <a href="/tags/面经/" style="font-size: 15px;">面经</a>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://blog.csdn.net/tzs_1041218129">CSDN博客</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="https://juejin.im/user/57510b82128fe10056ca70fc">掘金</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">人在江湖飘，各种折腾！</div>
+                </section>
+                
+            </div>
+        </div>
+        <div>
+            <img src="/img/wx.jpg"  alt="zhisheng" />
+        </div>
+    </header>
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="Me">zhisheng</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+<!--             <a href="/" class="profilepic">
+                
+                    <img lazy-src="//img/avatar.png" class="js-avatar">
+                
+            </a> -->
+
+<!--             <a href="/">
+                <img src="//img/avatar.png" class="js-avatar" style="width: 100%; height: 100%; opacity: 1;">
+            </a> -->
+
+
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="Me">zhisheng</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">坑要一个个填，路要一步步走！</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/tags/Flink/">Flink</a></li>
+                
+                    <li><a href="/tags/ElasticSearch/">ElasticSearch</a></li>
+                
+                    <li><a href="/tags/SpringBoot/">Spring Boot</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a class="wechat" target="_blank" href="wechat:yuanblog_tzs" title="wechat">wechat</a>
+                    
+                        <a class="mail" target="_blank" href="mailto://zhisheng2018@gmail.com" title="mail">mail</a>
+                    
+                        <a class="github" target="_blank" href="https://github.com/zhisheng17/" title="github">github</a>
+                    
+                        <a class="zhihu" target="_blank" href="https://www.zhihu.com/people/zhisheng-34" title="zhihu">zhihu</a>
+                    
+                </div>
+            </nav>
+        </header>                
+    </div>
+</nav>
+      <div class="body-wrap"><article id="post-Flink-meituan-dw" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2019/08/20/Flink-meituan-dw/" class="article-date">
+      <time datetime="2019-08-19T16:00:00.000Z" itemprop="datePublished">2019-08-20</time>
+</a>
+    </div>
+  
+  <div class="article-inner" id="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      美团点评基于 Flink 的实时数仓建设实践
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Flink/">Flink</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/大数据/">大数据</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据仓库/">数据仓库</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody" id="article-entry">
+      
+          
+        <h3 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h3><p>近些年，企业对数据服务实时化服务需求日益增多。本文整理了常见实时数据组件的性能特点和适用场景，介绍了美团如何通过 Flink 引擎构建实时数据仓库，从而提供高效、稳健的实时数据服务。此前我们美团技术博客发布过一篇文章<a href="http://www.54tianzhisheng.cn/2019/06/17/flink-vs-storm/">《流计算框架 Flink 与 Storm 的性能对比》</a>，对 Flink 和 Storm 两个引擎的计算性能进行了比较。本文主要阐述使用 Flink 在实际数据生产上的经验。</p>
+<a id="more"></a>
+<h3 id="实时平台初期架构"><a href="#实时平台初期架构" class="headerlink" title="实时平台初期架构"></a>实时平台初期架构</h3><p>在实时数据系统建设初期，业务需求也相对较少，还没有形成完整的数据体系。我们采用的是“一路到底”的开发模式：通过在实时计算平台上部署 Storm 作业处理实时数据队列来提取数据指标，直接推送到实时应用服务中。 </p>
+<p><img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-09-22-055119.jpg" alt=""></p>
+<p>但是，随着产品和业务人员对实时数据需求的不断增多，新的挑战也随之发生。</p>
+<p>1、数据指标越来越多，“烟囱式”的开发导致代码耦合问题严重。</p>
+<p>2、需求越来越多，有的需要明细数据，有的需要 OLAP 分析。单一的开发模式难以应付多种需求。</p>
+<p>3、缺少完善的监控系统，无法在对业务产生影响之前发现并修复问题。</p>
+<h3 id="实时数据仓库的构建"><a href="#实时数据仓库的构建" class="headerlink" title="实时数据仓库的构建"></a>实时数据仓库的构建</h3><p>为解决以上问题，我们根据生产离线数据的经验，选择使用分层设计方案来建设实时数据仓库，其分层架构如下图所示：</p>
+<p><img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-09-22-055209.jpg" alt=""></p>
+<p>该方案由以下四层构成：</p>
+<ol>
+<li>ODS 层：Binlog 和流量日志以及各业务实时队列。 </li>
+<li>数据明细层：业务领域整合提取事实数据，离线全量和实时变化数据构建实时维度数据。 </li>
+<li>数据汇总层：使用宽表模型对明细数据补充维度数据，对共性指标进行汇总。 </li>
+<li>App 层：为了具体需求而构建的应用层，通过 RPC 框架对外提供服务。</li>
+</ol>
+<p>通过多层设计我们可以将处理数据的流程沉淀在各层完成。比如在数据明细层统一完成数据的过滤、清洗、规范、脱敏流程；在数据汇总层加工共性的多维指标汇总数据。提高了代码的复用率和整体生产效率。同时各层级处理的任务类型相似，可以采用统一的技术方案优化性能，使数仓技术架构更简洁。</p>
+<h4 id="技术选型"><a href="#技术选型" class="headerlink" title="技术选型"></a>技术选型</h4><h4 id="1-存储引擎的调研"><a href="#1-存储引擎的调研" class="headerlink" title="1. 存储引擎的调研"></a>1. 存储引擎的调研</h4><p>实时数仓在设计中不同于离线数仓在各层级使用同种储存方案，比如都存储在 Hive 、DB 中的策略。首先对中间过程的表，采用将结构化的数据通过消息队列存储和高速 KV 存储混合的方案。实时计算引擎可以通过监听消息消费消息队列内的数据，进行实时计算。而在高速 KV 存储上的数据则可以用于快速关联计算，比如维度数据。</p>
+<p>其次在应用层上，针对数据使用特点配置存储方案直接写入。避免了离线数仓应用层同步数据流程带来的处理延迟。为了解决不同类型的实时数据需求，合理的设计各层级存储方案，我们调研了美团内部使用比较广泛的几种存储方案。</p>
+<p><img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-09-22-055300.jpg" alt=""></p>
+<p>根据不同业务场景，实时数仓各个模型层次使用的存储方案大致如下：</p>
+<p><img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-09-22-055327.jpg" alt=""></p>
+<p>1、<strong>数据明细层</strong> 对于维度数据部分场景下关联的频率可达 10万多TPS，我们选择 Cellar（美团内部基于Tair开发的KV存储） 作为存储，封装维度服务为实时数仓提供维度数据。</p>
+<p>2、<strong>数据汇总层</strong> 对于通用的汇总指标，需要进行历史数据关联的数据，采用和维度数据一样的方案通过 Cellar 作为存储，用服务的方式进行关联操作。</p>
+<p>3、<strong>数据应用层</strong> 应用层设计相对复杂，再对比了几种不同存储方案后。我们制定了以数据读写频率 1000 QPS 为分界的判断依据。对于读写平均频率高于 1000 QPS 但查询不太复杂的实时应用，比如商户实时的经营数据。采用 Cellar 为存储，提供实时数据服务。对于一些查询复杂的和需要明细列表的应用，使用 Elasticsearch 作为存储则更为合适。而一些查询频率低，比如一些内部运营的数据。Druid 通过实时处理消息构建索引，并通过预聚合可以快速的提供实时数据 OLAP 分析功能。对于一些历史版本的数据产品进行实时化改造时，也可以使用 MySQL 存储便于产品迭代。</p>
+<h5 id="2-计算引擎的调研"><a href="#2-计算引擎的调研" class="headerlink" title="2. 计算引擎的调研"></a>2. 计算引擎的调研</h5><p>在实时平台建设初期我们使用 Storm 引擎来进行实时数据处理。Storm 引擎虽然在灵活性和性能上都表现不错。但是由于 API 过于底层，在数据开发过程中需要对一些常用的数据操作进行功能实现。比如表关联、聚合等，产生了很多额外的开发工作，不仅引入了很多外部依赖比如缓存，而且实际使用时性能也不是很理想。同时 Storm 内的数据对象 Tuple 支持的功能也很简单，通常需要将其转换为 Java 对象来处理。</p>
+<p>对于这种基于代码定义的数据模型，通常我们只能通过文档来进行维护。不仅需要额外的维护工作，同时在增改字段时也很麻烦。综合来看使用 Storm 引擎构建实时数仓难度较大。我们需要一个新的实时处理方案，要能够实现： </p>
+<ol>
+<li>提供高级 API，支持常见的数据操作比如关联聚合，最好是能支持 SQL。 </li>
+<li>具有状态管理和自动支持久化方案，减少对存储的依赖。 </li>
+<li>便于接入元数据服务，避免通过代码管理数据结构。 </li>
+<li>处理性能至少要和 Storm 一致。</li>
+</ol>
+<p>我们对主要的实时计算引擎进行了技术调研。总结了各类引擎特性如下表所示：</p>
+<p><img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-09-22-055435.jpg" alt=""></p>
+<p>从调研结果来看，Flink 和 Spark Streaming 的 API 、容错机制与状态持久化机制都可以解决一部分，我们目前使用 Storm 中遇到的问题。但 Flink 在数据延迟上和 Storm 更接近，对现有应用影响最小。而且在公司内部的测试中 Flink 的吞吐性能对比 Storm 有十倍左右提升。综合考量我们选定 Flink 引擎作为实时数仓的开发引擎。</p>
+<p>更加引起我们注意的是，Flink 的 Table 抽象和 SQL 支持。虽然使用 Strom 引擎也可以处理结构化数据。但毕竟依旧是基于消息的处理 API ，在代码层层面上不能完全享受操作结构化数据的便利。而 Flink 不仅支持了大量常用的 SQL 语句，基本覆盖了我们的开发场景。而且 Flink 的 Table 可以通过 TableSchema 进行管理，支持丰富的数据类型和数据结构以及数据源。可以很容易的和现有的元数据管理系统或配置管理系统结合。通过下图我们可以清晰的看出 Storm 和 Flink 在开发统过程中的区别。</p>
+<p><img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-09-22-055500.jpg" alt=""></p>
+<p>在使用 Storm 开发时处理逻辑与实现需要固化在 Bolt 的代码。Flink 则可以通过 SQL 进行开发，代码可读性更高，逻辑的实现由开源框架来保证可靠高效，对特定场景的优化只要修改 Flink SQL 优化器功能实现即可，而不影响逻辑代码。使我们可以把更多的精力放到数据开发中，而不是逻辑的实现。当需要离线数据和实时数据口径统一的场景时，我们只需对离线口径的 SQL 脚本稍加改造即可，极大地提高了开发效率。同时对比图中 Flink 和 Storm 使用的数据模型，Storm 需要通过一个 Java 的 Class 去定义数据结构，Flink Table 则可以通过元数据来定义。可以很好的和数据开发中的元数据，数据治理等系统结合，提高开发效率。</p>
+<h4 id="Flink使用心得"><a href="#Flink使用心得" class="headerlink" title="Flink使用心得"></a>Flink使用心得</h4><p>在利用 Flink-Table 构建实时数据仓库过程中。我们针对一些构建数据仓库的常用操作，比如数据指标的维度扩充，数据按主题关联，以及数据的聚合运算通过 Flink 来实现总结了一些使用心得。</p>
+<ol>
+<li>维度扩充</li>
+</ol>
+<p>数据指标的维度扩充，我们采用的是通过维度服务获取维度信息。虽然基于 Cellar 的维度服务通常的响应延迟可以在 1ms 以下。但是为了进一步优化 Flink 的吞吐，我们对维度数据的关联全部采用了异步接口访问的方式，避免了使用 RPC 调用影响数据吞吐。 </p>
+<p>对于一些数据量很大的流，比如流量日志数据量在 10万秒/条这个量级。在关联 UDF 的时候内置了缓存机制，可以根据命中率和时间对缓存进行淘汰，配合用关联的 Key 值进行分区，显著减少了对外部服务的请求次数，有效的减少了处理延迟和对外部系统的压力。</p>
+<ol>
+<li>数据关联</li>
+</ol>
+<p>数据主题合并，本质上就是多个数据源的关联，简单的来说就是 Join 操作。Flink 的 Table 是建立在无限流这个概念上的。在进行 Join 操作时并不能像离线数据一样对两个完整的表进行关联。采用的是在窗口时间内对数据进行关联的方案，相当于从两个数据流中各自截取一段时间的数据进行 Join 操作。有点类似于离线数据通过限制分区来进行关联。同时需要注意 Flink 关联表时必须有至少一个“等于”关联条件，因为等号两边的值会用来分组。 </p>
+<p>由于 Flink 会缓存窗口内的全部数据来进行关联，缓存的数据量和关联的窗口大小成正比。因此 Flink 的关联查询，更适合处理一些可以通过业务规则限制关联数据时间范围的场景。比如关联下单用户购买之前 30 分钟内的浏览日志。过大的窗口不仅会消耗更多的内存，同时会产生更大的 Checkpoint ，导致吞吐下降或 Checkpoint 超时。在实际生产中可以使用 RocksDB 和启用增量保存点模式，减少 Checkpoint 过程对吞吐产生影响。</p>
+<p>对于一些需要关联窗口期很长的场景，比如关联的数据可能是几天以前的数据。对于这些历史数据，我们可以将其理解为是一种已经固定不变的”维度”。可以将需要被关联的历史数据采用和维度数据一致的处理方法：”缓存 + 离线”数据方式存储，用接口的方式进行关联。另外需要注意 Flink 对多表关联是直接顺序链接的，因此需要注意先进行结果集小的关联。</p>
+<ol>
+<li>聚合运算</li>
+</ol>
+<p>使用聚合运算时，Flink 对常见的聚合运算如求和、极值、均值等都有支持。美中不足的是对于 Distinct 的支持，Flink-1.6 之前的采用的方案是通过先对去重字段进行分组再聚合实现。对于需要对多个字段去重聚合的场景，只能分别计算再进行关联处理效率很低。为此我们开发了自定义的 UDAF，实现了 MapView 精确去重、BloomFilter 非精确去重、 HyperLogLog 超低内存去重方案应对各种实时去重场景。</p>
+<p>但是在使用自定义的 UDAF 时，需要注意 RocksDBStateBackend 模式对于较大的 Key 进行更新操作时序列化和反序列化耗时很多。可以考虑使用 FsStateBackend 模式替代。另外要注意的一点 Flink 框架在计算比如 Rank 这样的分析函数时，需要缓存每个分组窗口下的全部数据才能进行排序，会消耗大量内存。建议在这种场景下优先转换为 TopN 的逻辑，看是否可以解决需求。</p>
+<p>下图展示一个完整的使用 Flink 引擎生产一张实时数据表的过程：</p>
+<p><img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-09-22-055743.jpg" alt=""></p>
+<h4 id="实时数仓成果"><a href="#实时数仓成果" class="headerlink" title="实时数仓成果"></a>实时数仓成果</h4><p>通过使用实时数仓代替原有流程，我们将数据生产中的各个流程抽象到实时数仓的各层当中。实现了全部实时数据应用的数据源统一，保证了应用数据指标、维度的口径的一致。在几次数据口径发生修改的场景中，我们通过对仓库明细和汇总进行改造，在完全不用修改应用代码的情况下就完成全部应用的口径切换。在开发过程中通过严格的把控数据分层、主题域划分、内容组织标准规范和命名规则。使数据开发的链路更为清晰，减少了代码的耦合。再配合上使用 Flink SQL 进行开发，代码加简洁。单个作业的代码量从平均 300+ 行的 Java 代码 ，缩减到几十行的 SQL 脚本。项目的开发时长也大幅减短，一人日开发多个实时数据指标情况也不少见。</p>
+<p>除此以外我们通过针对数仓各层级工作内容的不同特点，可以进行针对性的性能优化和参数配置。比如 ODS 层主要进行数据的解析、过滤等操作，不需要 RPC 调用和聚合运算。我们针对数据解析过程进行优化，减少不必要的 JSON 字段解析，并使用更高效的 JSON 包。在资源分配上，单个 CPU 只配置 1GB 的内存即可满需求。</p>
+<p>而汇总层主要则主要进行聚合与关联运算，可以通过优化聚合算法、内外存共同运算来提高性能、减少成本。资源配置上也会分配更多的内存，避免内存溢出。通过这些优化手段，虽然相比原有流程实时数仓的生产链路更长，但数据延迟并没有明显增加。同时实时数据应用所使用的计算资源也有明显减少。</p>
+<h3 id="展望"><a href="#展望" class="headerlink" title="展望"></a>展望</h3><p>我们的目标是将实时仓库建设成可以和离线仓库数据准确性，一致性媲美的数据系统。为商家，业务人员以及美团用户提供及时可靠的数据服务。同时作为到餐实时数据的统一出口，为集团其他业务部门助力。</p>
+<p>未来我们将更加关注在数据可靠性和实时数据指标管理。建立完善的数据监控，数据血缘检测，交叉检查机制。及时对异常数据或数据延迟进行监控和预警。同时优化开发流程，降低开发实时数据学习成本。让更多有实时数据需求的人，可以自己动手解决问题。</p>
+<h3 id="关于作者"><a href="#关于作者" class="headerlink" title="关于作者"></a>关于作者</h3><blockquote>
+<p>本文转载自美团技术公众号，作者是伟伦， 美团到店餐饮技术部实时数据负责人，2017年加入美团，长期从事数据平台、实时数据计算、数据架构方面的开发工作。在使用 Flink 进行实时数据生产和提高生产效率上，有一些心得和产出。同时也在积极推广 Flink 在实时数据处理中的实战经验</p>
+</blockquote>
+<h3 id="关注我"><a href="#关注我" class="headerlink" title="关注我"></a>关注我</h3><p>微信公众号：<strong>zhisheng</strong></p>
+<p>另外我自己整理了些 Flink 的学习资料，目前已经全部放到微信公众号（zhisheng）了，你可以回复关键字：<strong>Flink</strong> 即可无条件获取到。另外也可以加我微信 你可以加我的微信：<strong>yuanblog_tzs</strong>，探讨技术！</p>
+<p><img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-09-17-143454.jpg" alt=""></p>
+<p>更多私密资料请加入知识星球！</p>
+<p><img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-09-25-zsxq.jpg" alt=""></p>
+<h3 id="专栏介绍"><a href="#专栏介绍" class="headerlink" title="专栏介绍"></a>专栏介绍</h3><p>扫码下面专栏二维码可以订阅该专栏</p>
+<p><img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-11-05-044731.jpg" alt=""></p>
+<p>首发地址：<a href="http://www.54tianzhisheng.cn/2019/11/15/flink-in-action/">http://www.54tianzhisheng.cn/2019/11/15/flink-in-action/</a></p>
+<p>专栏地址：<a href="https://gitbook.cn/gitchat/column/5dad4a20669f843a1a37cb4f">https://gitbook.cn/gitchat/column/5dad4a20669f843a1a37cb4f</a></p>
+<h3 id="Github-代码仓库"><a href="#Github-代码仓库" class="headerlink" title="Github 代码仓库"></a>Github 代码仓库</h3><p><a href="https://github.com/zhisheng17/flink-learning/">https://github.com/zhisheng17/flink-learning/</a></p>
+<p>以后这个项目的所有代码都将放在这个仓库里，包含了自己学习 flink 的一些 demo 和博客</p>
+<h3 id="博客"><a href="#博客" class="headerlink" title="博客"></a>博客</h3><p>1、<a href="http://www.54tianzhisheng.cn/2018/10/13/flink-introduction/">Flink 从0到1学习 —— Apache Flink 介绍</a></p>
+<p>2、<a href="http://www.54tianzhisheng.cn/2018/09/18/flink-install">Flink 从0到1学习 —— Mac 上搭建 Flink 1.6.0 环境并构建运行简单程序入门</a></p>
+<p>3、<a href="http://www.54tianzhisheng.cn/2018/10/27/flink-config/">Flink 从0到1学习 —— Flink 配置文件详解</a></p>
+<p>4、<a href="http://www.54tianzhisheng.cn/2018/10/28/flink-sources/">Flink 从0到1学习 —— Data Source 介绍</a></p>
+<p>5、<a href="http://www.54tianzhisheng.cn/2018/10/30/flink-create-source/">Flink 从0到1学习 —— 如何自定义 Data Source ？</a></p>
+<p>6、<a href="http://www.54tianzhisheng.cn/2018/10/29/flink-sink/">Flink 从0到1学习 —— Data Sink 介绍</a></p>
+<p>7、<a href="http://www.54tianzhisheng.cn/2018/10/31/flink-create-sink/">Flink 从0到1学习 —— 如何自定义 Data Sink ？</a></p>
+<p>8、<a href="http://www.54tianzhisheng.cn/2018/11/04/Flink-Data-transformation/">Flink 从0到1学习 —— Flink Data transformation(转换)</a></p>
+<p>9、<a href="http://www.54tianzhisheng.cn/2018/12/08/Flink-Stream-Windows/">Flink 从0到1学习 —— 介绍 Flink 中的 Stream Windows</a></p>
+<p>10、<a href="http://www.54tianzhisheng.cn/2018/12/11/Flink-time/">Flink 从0到1学习 —— Flink 中的几种 Time 详解</a></p>
+<p>11、<a href="http://www.54tianzhisheng.cn/2018/12/30/Flink-ElasticSearch-Sink/">Flink 从0到1学习 —— Flink 读取 Kafka 数据写入到 ElasticSearch</a></p>
+<p>12、<a href="http://www.54tianzhisheng.cn/2019/01/05/Flink-run/">Flink 从0到1学习 —— Flink 项目如何运行？</a></p>
+<p>13、<a href="http://www.54tianzhisheng.cn/2019/01/06/Flink-Kafka-sink/">Flink 从0到1学习 —— Flink 读取 Kafka 数据写入到 Kafka</a></p>
+<p>14、<a href="http://www.54tianzhisheng.cn/2019/01/13/Flink-JobManager-High-availability/">Flink 从0到1学习 —— Flink JobManager 高可用性配置</a></p>
+<p>15、<a href="http://www.54tianzhisheng.cn/2019/01/14/Flink-parallelism-slot/">Flink 从0到1学习 —— Flink parallelism 和 Slot 介绍</a></p>
+<p>16、<a href="http://www.54tianzhisheng.cn/2019/01/15/Flink-MySQL-sink/">Flink 从0到1学习 —— Flink 读取 Kafka 数据批量写入到 MySQL</a></p>
+<p>17、<a href="http://www.54tianzhisheng.cn/2019/01/20/Flink-RabbitMQ-sink/">Flink 从0到1学习 —— Flink 读取 Kafka 数据写入到 RabbitMQ</a></p>
+<p>18、<a href="https://t.zsxq.com/zV7MnuJ">Flink 从0到1学习 —— Flink 读取 Kafka 数据写入到 HBase</a></p>
+<p>19、<a href="https://t.zsxq.com/zV7MnuJ">Flink 从0到1学习 —— Flink 读取 Kafka 数据写入到 HDFS</a></p>
+<p>20、<a href="https://t.zsxq.com/zV7MnuJ">Flink 从0到1学习 —— Flink 读取 Kafka 数据写入到 Redis</a></p>
+<p>21、<a href="https://t.zsxq.com/uVbi2nq">Flink 从0到1学习 —— Flink 读取 Kafka 数据写入到 Cassandra</a></p>
+<p>22、<a href="https://t.zsxq.com/zV7MnuJ">Flink 从0到1学习 —— Flink 读取 Kafka 数据写入到 Flume</a></p>
+<p>23、<a href="https://t.zsxq.com/zV7MnuJ">Flink 从0到1学习 —— Flink 读取 Kafka 数据写入到 InfluxDB</a></p>
+<p>24、<a href="https://t.zsxq.com/zV7MnuJ">Flink 从0到1学习 —— Flink 读取 Kafka 数据写入到 RocketMQ</a></p>
+<p>25、<a href="http://www.54tianzhisheng.cn/2019/03/13/flink-job-jars/">Flink 从0到1学习 —— 你上传的 jar 包藏到哪里去了</a></p>
+<p>26、<a href="https://t.zsxq.com/zV7MnuJ">Flink 从0到1学习 —— 你的 Flink job 日志跑到哪里去了</a></p>
+<p>27、<a href="http://www.54tianzhisheng.cn/2019/02/28/blink/">阿里巴巴开源的 Blink 实时计算框架真香</a></p>
+<p>28、<a href="http://www.54tianzhisheng.cn/2019/03/28/flink-additional-data/">Flink 从0到1学习 —— Flink 中如何管理配置？</a></p>
+<p>29、<a href="http://www.54tianzhisheng.cn/2019/06/12/flink-split/">Flink 从0到1学习—— Flink 不可以连续 Split(分流)？</a></p>
+<p>30、<a href="http://www.54tianzhisheng.cn/2019/06/13/flink-book-paper/">Flink 从0到1学习—— 分享四本 Flink 国外的书和二十多篇 Paper 论文</a></p>
+<p>31、<a href="http://www.54tianzhisheng.cn/2019/06/14/flink-architecture-deploy-test/">Flink 架构、原理与部署测试</a></p>
+<p>32、<a href="http://www.54tianzhisheng.cn/2019/06/15/Stream-processing/">为什么说流处理即未来？</a></p>
+<p>33、<a href="http://www.54tianzhisheng.cn/2019/06/16/flink-sql-oppo/">OPPO 数据中台之基石：基于 Flink SQL 构建实时数据仓库</a></p>
+<p>34、<a href="http://www.54tianzhisheng.cn/2019/06/17/flink-vs-storm/">流计算框架 Flink 与 Storm 的性能对比</a></p>
+<p>35、<a href="http://www.54tianzhisheng.cn/2019/06/18/flink-state/">Flink状态管理和容错机制介绍</a></p>
+<p>36、<a href="http://www.54tianzhisheng.cn/2019/06/20/flink-kafka-Exactly-Once/">Apache Flink 结合 Kafka 构建端到端的 Exactly-Once 处理</a></p>
+<p>37、<a href="http://www.54tianzhisheng.cn/2019/06/21/flink-in-360/">360深度实践：Flink与Storm协议级对比</a></p>
+<p>38、<a href="http://www.54tianzhisheng.cn/2019/06/26/flink-TensorFlow/">如何基于Flink+TensorFlow打造实时智能异常检测平台？只看这一篇就够了</a></p>
+<p>39、<a href="http://www.54tianzhisheng.cn/2019/07/01/flink-1.9-preview/">Apache Flink 1.9 重大特性提前解读</a></p>
+<p>40、<a href="http://www.54tianzhisheng.cn/2019/12/31/Flink-resources/">Flink 全网最全资源（视频、博客、PPT、入门、实战、源码解析、问答等持续更新）</a></p>
+<p>41、<a href="https://mp.weixin.qq.com/s/ok-YwuVbwAVtJz7hUCiZxg">Flink 灵魂两百问，这谁顶得住？</a></p>
+<p>42、<a href="http://www.54tianzhisheng.cn/2019/08/18/flink-side-output/">Flink 从0到1学习 —— 如何使用 Side Output 来分流？</a></p>
+<p>43、<a href="http://www.54tianzhisheng.cn/2019/08/06/flink-streaming-system/">你公司到底需不需要引入实时计算引擎？</a></p>
+<p>44、<a href="http://www.54tianzhisheng.cn/2019/08/19/flink/">一文让你彻底了解大数据实时计算引擎 Flink</a></p>
+<h3 id="源码解析"><a href="#源码解析" class="headerlink" title="源码解析"></a>源码解析</h3><p>1、<a href="http://www.54tianzhisheng.cn/2019/01/30/Flink-code-compile/">Flink 源码解析 —— 源码编译运行</a></p>
+<p>2、<a href="http://www.54tianzhisheng.cn/2019/03/14/Flink-code-structure/">Flink 源码解析 —— 项目结构一览</a></p>
+<p>3、<a href="http://www.54tianzhisheng.cn/tags/Flink/">Flink 源码解析—— local 模式启动流程</a></p>
+<p>4、<a href="http://www.54tianzhisheng.cn/2019/03/15/Flink-code-Standalone-start/">Flink 源码解析 —— standalone session 模式启动流程</a></p>
+<p>5、<a href="http://www.54tianzhisheng.cn/2019/03/16/Flink-code-Standalone-JobManager-start/">Flink 源码解析 —— Standalone Session Cluster 启动流程深度分析之 Job Manager 启动</a></p>
+<p>6、<a href="http://www.54tianzhisheng.cn/2019/03/17/Flink-code-Standalone-TaskManager-start/">Flink 源码解析 —— Standalone Session Cluster 启动流程深度分析之 Task Manager 启动</a></p>
+<p>7、<a href="http://www.54tianzhisheng.cn/2019/03/18/Flink-code-batch-wordcount-start/">Flink 源码解析 —— 分析 Batch WordCount 程序的执行过程</a></p>
+<p>8、<a href="http://www.54tianzhisheng.cn/2019/03/19/Flink-code-streaming-wordcount-start/">Flink 源码解析 —— 分析 Streaming WordCount 程序的执行过程</a></p>
+<p>9、<a href="http://www.54tianzhisheng.cn/2019/03/21/Flink-code-JobGraph/">Flink 源码解析 —— 如何获取 JobGraph？</a></p>
+<p>10、<a href="http://www.54tianzhisheng.cn/2019/03/20/Flink-code-StreamGraph/">Flink 源码解析 —— 如何获取 StreamGraph？</a></p>
+<p>11、<a href="http://www.54tianzhisheng.cn/2019/03/25/Flink-code-jobmanager/">Flink 源码解析 —— Flink JobManager 有什么作用？</a></p>
+<p>12、<a href="http://www.54tianzhisheng.cn/2019/03/25/Flink-code-taskmanager/">Flink 源码解析 —— Flink TaskManager 有什么作用？</a></p>
+<p>13、<a href="http://www.54tianzhisheng.cn/2019/03/27/Flink-code-JobManager-submitJob/">Flink 源码解析 —— JobManager 处理 SubmitJob 的过程</a></p>
+<p>14、<a href="http://www.54tianzhisheng.cn/2019/03/28/Flink-code-TaskManager-submitJob/">Flink 源码解析 —— TaskManager 处理 SubmitJob 的过程</a></p>
+<p>15、<a href="http://www.54tianzhisheng.cn/2019/03/23/Flink-code-checkpoint/">Flink 源码解析 —— 深度解析 Flink Checkpoint 机制</a></p>
+<p>16、<a href="http://www.54tianzhisheng.cn/2019/03/22/Flink-code-serialize/">Flink 源码解析 —— 深度解析 Flink 序列化机制</a></p>
+<p>17、<a href="http://www.54tianzhisheng.cn/2019/03/24/Flink-code-memory-management/">Flink 源码解析 —— 深度解析 Flink 是如何管理好内存的？</a></p>
+<p>18、<a href="http://www.54tianzhisheng.cn/2019/07/02/Flink-code-metrics/">Flink Metrics 源码解析 —— Flink-metrics-core</a></p>
+<p>19、<a href="http://www.54tianzhisheng.cn/2019/07/02/Flink-code-metrics/">Flink Metrics 源码解析 —— Flink-metrics-datadog</a></p>
+<p>20、<a href="http://www.54tianzhisheng.cn/2019/07/02/Flink-code-metrics/">Flink Metrics 源码解析 —— Flink-metrics-dropwizard</a></p>
+<p>21、<a href="http://www.54tianzhisheng.cn/2019/07/02/Flink-code-metrics/">Flink Metrics 源码解析 —— Flink-metrics-graphite</a></p>
+<p>22、<a href="http://www.54tianzhisheng.cn/2019/07/02/Flink-code-metrics/">Flink Metrics 源码解析 —— Flink-metrics-influxdb</a></p>
+<p>23、<a href="http://www.54tianzhisheng.cn/2019/07/02/Flink-code-metrics/">Flink Metrics 源码解析 —— Flink-metrics-jmx</a></p>
+<p>24、<a href="http://www.54tianzhisheng.cn/2019/07/02/Flink-code-metrics/">Flink Metrics 源码解析 —— Flink-metrics-slf4j</a></p>
+<p>25、<a href="http://www.54tianzhisheng.cn/2019/07/02/Flink-code-metrics/">Flink Metrics 源码解析 —— Flink-metrics-statsd</a></p>
+<p>26、<a href="http://www.54tianzhisheng.cn/2019/07/02/Flink-code-metrics/">Flink Metrics 源码解析 —— Flink-metrics-prometheus</a></p>
+<p><img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-07-26-150037.jpg" alt=""></p>
+<p>26、<a href="http://www.54tianzhisheng.cn/2019/07/03/Flink-code-Annotations/">Flink Annotations 源码解析</a></p>
+<p><img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-07-26-145923.jpg" alt=""></p>
+<p>27、<a href="http://www.54tianzhisheng.cn/2019/03/26/Flink-code-ExecutionGraph/">Flink 源码解析 —— 如何获取 ExecutionGraph ？</a></p>
+<p>28、<a href="https://t.zsxq.com/UvrRNJM">大数据重磅炸弹——实时计算框架 Flink</a></p>
+<p>29、<a href="https://t.zsxq.com/QVFqjea">Flink Checkpoint-轻量级分布式快照</a></p>
+<p>30、<a href="http://www.54tianzhisheng.cn/2019/07/04/Flink-code-clients/">Flink Clients 源码解析</a></p>
+
+      
+      
+        <div class="page-reward">
+          <p><a href="javascript:void(0)" onclick="dashangToggle()" class="dashang">赏</a></p>
+          <div class="hide_box"></div>
+          <div class="shang_box">
+            <a class="shang_close" href="javascript:void(0)" onclick="dashangToggle()">×</a>
+            <div class="shang_tit">
+              <p>纯属好玩</p>
+            </div>
+            <div class="shang_payimg">
+              <img src="/img/alipayimg.jpg" alt="扫码支持" title="扫一扫" />
+            </div>
+              <div class="pay_explain">扫码打赏，你说多少就多少</div>
+            <div class="shang_payselect">
+              
+                <div class="pay_item checked" data-id="alipay">
+                  <span class="radiobox"></span>
+                  <span class="pay_logo"><img src="/img/alipay.png" alt="支付宝" /></span>
+                </div>
+              
+              
+                <div class="pay_item" data-id="wechat">
+                  <span class="radiobox"></span>
+                  <span class="pay_logo"><img src="/img/weixin.png" alt="微信" /></span>
+                </div>
+              
+            </div>
+            <div class="shang_info">
+              <p>打开<span id="shang_pay_txt">支付宝</span>扫一扫，即可进行扫码打赏哦</p>
+            </div>
+          </div>
+        </div>
+        <script src="https://my.openwrite.cn/js/readmore.js" type="text/javascript"></script>
+        <script type="text/javascript">
+            const btw = new BTWPlugin();
+            btw.init({
+                    id: 'article-entry',
+                    blogId: '15013-1596463967175-355',
+                    name: 'Java 指南者',
+                    qrcode: 'http://www.javaguider.com/java/img/wx.jpg',
+                    keyword: 'zhisheng',
+            });
+        </script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/zepto/1.2.0/zepto.min.js"></script>
+        <script type="text/javascript">
+          $(".pay_item").click(function(){
+            $(this).addClass('checked').siblings('.pay_item').removeClass('checked');
+            var dataid=$(this).attr('data-id');
+            $(".shang_payimg img").attr("src","/img/"+dataid+"img.jpg");
+            $("#shang_pay_txt").text(dataid=="alipay"?"支付宝":"微信");
+          });
+          function dashangToggle(){
+
+            $(".hide_box").fadeToggle();
+            $(".shang_box").fadeToggle();
+          }
+        </script>
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2019/08/20/Flink-meituan-dw/">美团点评基于 Flink 的实时数仓建设实践</a></p>
+        <p><span>文章作者:</span><a href="/" title="访问 zhisheng 的个人博客">zhisheng</a></p>
+        <p><span>发布时间:</span>2019年08月20日 - 00时00分</p>
+        <p><span>最后更新:</span>2019年12月12日 - 22时29分</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2019/08/20/Flink-meituan-dw/" title="美团点评基于 Flink 的实时数仓建设实践">http://www.54tianzhisheng.cn/2019/08/20/Flink-meituan-dw/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://www.54tianzhisheng.cn/2019/08/20/Flink-meituan-dw/　　作者: zhisheng" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script src="/js/clipboard.min.js"></script>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>公众号:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://www.54tianzhisheng.cn" title="微信公众号：zhisheng" target = "_blank">zhisheng</a> 欢迎关注。
+        </p>
+        <p>
+            <div align="center">
+                <img src="/img/wx.jpg"  alt="zhisheng" />
+            </div>
+        </p>
+    </div>
+
+
+
+<nav id="article-nav">
+  
+    <a href="/2019/08/21/Flink-Exactly_Once_vs_At_Least_Once/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          一文搞懂 Flink 的 Exactly Once 和 At Least Once
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/08/19/flink/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">一文让你彻底了解大数据实时计算引擎 Flink</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#引言"><span class="toc-number">1.</span> <span class="toc-text">引言</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#实时平台初期架构"><span class="toc-number">2.</span> <span class="toc-text">实时平台初期架构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#实时数据仓库的构建"><span class="toc-number">3.</span> <span class="toc-text">实时数据仓库的构建</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#技术选型"><span class="toc-number">3.1.</span> <span class="toc-text">技术选型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-存储引擎的调研"><span class="toc-number">3.2.</span> <span class="toc-text">1. 存储引擎的调研</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#2-计算引擎的调研"><span class="toc-number">3.2.1.</span> <span class="toc-text">2. 计算引擎的调研</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Flink使用心得"><span class="toc-number">3.3.</span> <span class="toc-text">Flink使用心得</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#实时数仓成果"><span class="toc-number">3.4.</span> <span class="toc-text">实时数仓成果</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#展望"><span class="toc-number">4.</span> <span class="toc-text">展望</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#关于作者"><span class="toc-number">5.</span> <span class="toc-text">关于作者</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#关注我"><span class="toc-number">6.</span> <span class="toc-text">关注我</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#专栏介绍"><span class="toc-number">7.</span> <span class="toc-text">专栏介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Github-代码仓库"><span class="toc-number">8.</span> <span class="toc-text">Github 代码仓库</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#博客"><span class="toc-number">9.</span> <span class="toc-text">博客</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#源码解析"><span class="toc-number">10.</span> <span class="toc-text">源码解析</span></a></li></ol>
+</div>
+<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+<script src="http://apps.bdimg.com/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>
+    var valueHide = "隐藏目录";
+    var valueShow = "显示目录";
+
+    if ($(".left-col").is(":hidden")) {
+        $("#tocButton").attr("value", valueShow);
+    }
+    $("#tocButton").click(function() {
+        if ($("#toc").is(":hidden")) {
+            $("#tocButton").attr("value", valueHide);
+            $("#toc").slideDown(320);
+        }
+        else {
+            $("#tocButton").attr("value", valueShow);
+            $("#toc").slideUp(350);
+        }
+    })
+    if ($(".toc").length < 1) {
+        $("#toc, #tocButton").hide();
+    }
+</script>
+
+
+
+
+
+<div class="bdsharebuttonbox">
+	<a href="#" class="fx fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+	<a href="#" class="fx fa-weixin bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+	<a href="#" class="fx fa-qq bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+	<a href="#" class="fx fa-facebook-official bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+	<a href="#" class="fx fa-twitter bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+	<a href="#" class="fx fa-linkedin bds_linkedin" data-cmd="linkedin" title="分享到linkedin"></a>
+	<a href="#" class="fx fa-files-o bds_copy" data-cmd="copy" title="分享到复制网址"></a>
+</div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+
+
+
+    
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2019/08/21/Flink-Exactly_Once_vs_At_Least_Once/" title="上一篇: 一文搞懂 Flink 的 Exactly Once 和 At Least Once">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+        
+            <a href="/2019/08/19/flink/" title="下一篇: 一文让你彻底了解大数据实时计算引擎 Flink">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2021/11/11/flink-akka-framesize/">宕机一台机器，结果一百多个 Flink 作业挂了</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/09/26/realtime-platform-flink-version/">实时平台如何管理多个 Flink 版本？—— 为啥会出现多个版本？</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/13/flink-in-action-3.3/">《Flink 实战与性能优化》—— Flink 数据转换必须熟悉的算子（Operator)</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/12/flink-in-action-3.2/">《Flink 实战与性能优化》—— 如何使用 Flink Window 及 Window 基本概念与实现原理?</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/11/flink-in-action-3.1/">《Flink 实战与性能优化》—— Flink 中 Processing Time、Event Time、Ingestion Time 对比及其使用场景分析</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/10/flink-in-action-2.4/">《Flink 实战与性能优化》—— 案例2：实时处理 Socket 数据</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/09/flink-in-action-2.3/">《Flink 实战与性能优化》—— 案例1：WordCount 应用程序</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/08/flink-in-action-2.2/">《Flink 实战与性能优化》—— Flink 环境搭建</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/07/flink-in-action-2.1/">《Flink 实战与性能优化》—— Flink 环境准备</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/06/flink-in-action-1.3/">《Flink 实战与性能优化》—— 大数据计算框架对比</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/05/flink-in-action-1.2/">《Flink 实战与性能优化》—— 彻底了解大数据实时计算框架 Flink</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/04/flink-in-action-1.1/">《Flink 实战与性能优化》——你的公司是否需要引入实时计算引擎？</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/03/Flink-Fraud-Detection-engine-3/">基于 Flink 的动态欺诈检测系统(下)</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/23/Flink-Fraud-Detection-engine-2/">基于 Flink 的动态欺诈检测系统(中)</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/22/Flink-Fraud-Detection-engine/">基于 Flink 的动态欺诈检测系统(上)</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/12/21/flink-forward-Asia-2020/">Flink Forward Asia 2020 全部 PPT 开放下载</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/12/06/Flink-1.12/">Flink 1.12 Release 文档解读</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/10/18/Spark-book/">强烈推荐三本 Spark 新书籍</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/10/13/flink-history-server/">用了 Flink History Server，妈妈再也不用担心我的作业半夜挂了</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/10/05/flink-jvm-profiler/">如何生成 Flink 作业的交互式火焰图？</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/08/09/flink-zsxq/">Flink 精进学习知识星球内容整理</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/08/02/flink-1.11-log/">Flink 1.11 日志该如何配置？</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/29/flink-1.11/">Flink 1.11 Release 文档解读</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/16/flink-taskmanager-memory-model/">Apache Flink 1.10 TaskManager 内存管理优化</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/13/flink-forward-2020/">Flink Forward 2020 PPT 下载</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/07/flink-job-monitor/">如何实时监控 Flink 集群和作业？</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/15/flink-error-log-alert/">基于 Apache Flink 的实时 Error 日志告警</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/29/flink-nacos-checkpoint/">Flink 能否动态更改 Checkpoint 配置</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/23/flink-apollo/">Flink 整合 Apollo，动态更新 Flink 作业配置</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/22/flink-nacos/">Flink 整合 Nacos，让 Flink 作业配置动态更新不再是难事</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/22/flink-1.10-release/">Flink 1.10 新特性研究</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/20/flink-checkpoint/">Flink Checkpoint 问题排查实用指南</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/11/flink-1.10/">Apache Flink 1.10.0 重磅发布，新特性解读</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/31/Flink-resources/">Flink 视频、博客、PPT、入门、原理、实战、性能调优、源码解析、问答等持续更新</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/30/flink-meituan-real-time-warehouse/">美团点评基于 Flink 的实时数仓平台实践</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/23/flink-monitor-alert/">基于 Apache Flink 的监控告警系统</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/10/flink-real-time-data-analysis-platform/">基于 Apache Flink 的大规模准实时数据分析平台</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/07/Flink_Forward_Asia_2019/">Flink Forward Asia 2019 PPT 下载</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/30/flink-checkpoint-hdfs/">阿里巴巴 Flink 踩坑经验：如何大幅降低 HDFS 压力？</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/30/flink-in-58/">58 同城基于 Flink 的千亿级实时计算平台架构实践</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/30/flink-aqniu/">基于 Flink 构建关联分析引擎的挑战和实践</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/24/flink-in-action-directory/">《大数据实时计算引擎 Flink 实战与性能优化》目录大纲</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/23/real-time-warehouse/">数据仓库简介、发展、架构演进、实时数仓建设、与离线数仓对比</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/23/flink-metrics/">详解 Flink Metrics 原理与监控实战</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/15/flink-in-action/">《大数据实时计算引擎 Flink 实战与性能优化》新专栏</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/26/flink-back-pressure/">一文彻底搞懂 Flink 网络流控与反压机制</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/25/flink-didi/">滴滴实时计算发展之路及平台架构实践</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/24/Flink-Connector/">Flink Connector 深度解析</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/23/flink-ebay/">如何使用 Flink 每天实时处理百亿条日志？</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/22/flink-1.9/">修改代码150万行！Apache Flink 1.9.0做了这些重大修改！</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/21/Flink-Exactly_Once_vs_At_Least_Once/">一文搞懂 Flink 的 Exactly Once 和 At Least Once</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/20/Flink-meituan-dw/">美团点评基于 Flink 的实时数仓建设实践</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/19/flink/">一文让你彻底了解大数据实时计算引擎 Flink</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/18/flink-side-output/">Flink 从0到1学习 —— 如何使用 Side Output 来分流？</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/06/flink-streaming-system/">你公司到底需不需要引入实时计算引擎？</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/04/Flink-code-clients/">Flink Clients 源码解析</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/03/Flink-code-Annotations/">Flink Annotations 源码解析</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/02/Flink-code-metrics/">Flink Metrics 源码解析</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/01/flink-1.9-preview/">Apache Flink 1.9 重大特性提前解读</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/06/26/flink-TensorFlow/">如何基于Flink+TensorFlow打造实时智能异常检测平台？只看这一篇就够了</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/06/21/flink-in-360/">360深度实践：Flink与Storm协议级对比</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/06/20/flink-kafka-Exactly-Once/">Apache Flink 结合 Kafka 构建端到端的 Exactly-Once 处理</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/06/18/flink-state/">Flink状态管理和容错机制介绍</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/06/17/flink-vs-storm/">流计算框架 Flink 与 Storm 的性能对比</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/06/16/flink-sql-oppo/">OPPO 数据中台之基石：基于 Flink SQL 构建实时数据仓库</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/06/15/Stream-processing/">为什么说流处理即未来？</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/06/14/flink-architecture-deploy-test/">Flink 架构、原理与部署测试</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/06/13/flink-book-paper/">Flink 从0到1学习—— 分享四本 Flink 国外的书和二十多篇 Paper 论文</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/06/12/flink-split/">Flink 从0到1学习—— Flink 不可以连续 Split(分流)？</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/28/Flink-code-TaskManager-submitJob/">Flink 源码解析 —— TaskManager 处理 SubmitJob 的过程</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/28/flink-additional-data/">Flink 从0到1学习 —— Flink 中如何管理配置？</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/27/Flink-code-JobManager-submitJob/">Flink 源码解析 —— JobManager 处理 SubmitJob 的过程</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/26/Flink-code-ExecutionGraph/">Flink 源码解析 —— 如何获取 ExecutionGraph ？</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/25/Flink-code-jobmanager/">Flink 源码解析 —— Flink JobManager 有什么作用？</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/25/Flink-code-taskmanager/">Flink 源码解析 —— Flink TaskManager 有什么作用？</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/24/Flink-code-memory-management/">Flink 源码解析 —— 深度解析 Flink 是如何管理好内存的？</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/23/Flink-code-checkpoint/">Flink 源码解析 —— 深度解析 Flink Checkpoint 机制</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/22/Flink-code-serialize/">Flink 源码解析 —— 深度解析 Flink 序列化机制</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/21/Flink-code-JobGraph/">Flink 源码解析 —— 如何获取 JobGraph？</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/20/Flink-code-StreamGraph/">Flink 源码解析 —— 如何获取 StreamGraph？</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/19/Flink-code-streaming-wordcount-start/">Flink 源码解析 —— 分析 Streaming WordCount 程序的执行过程</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/18/Flink-code-batch-wordcount-start/">Flink 源码解析 —— 分析 Batch WordCount 程序的执行过程</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/17/Flink-code-Standalone-TaskManager-start/">Flink 源码解析 —— Standalone Session Cluster 启动流程深度分析之 Task Manager 启动</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/16/Flink-code-Standalone-JobManager-start/">Flink 源码解析 —— Standalone Session Cluster 启动流程深度分析之 Job Manager 启动</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/15/Flink-code-Standalone-start/">Flink 源码解析 —— Standalone session 模式启动流程</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/14/Flink-code-structure/">Flink 源码解析 —— 项目结构一览</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/13/flink-job-jars/">Flink 从 0 到 1 学习 —— 你上传的 jar 包藏到哪里去了?</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/02/28/blink/">阿里巴巴开源的 Blink 实时计算框架真香</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/01/30/Flink-code-compile/">Flink 源码解析 —— 源码编译运行</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/01/20/Flink-RabbitMQ-sink/">Flink 从 0 到 1 学习 —— Flink 读取 Kafka 数据写入到 RabbitMQ</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/01/15/Flink-MySQL-sink/">Flink 从 0 到 1 学习 —— Flink 读取 Kafka 数据批量写入到 MySQL</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/01/14/Flink-parallelism-slot/">Flink 从 0 到 1 学习 —— Flink parallelism 和 Slot 介绍</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/01/13/Flink-JobManager-High-availability/">Flink 从 0 到 1 学习 —— Flink JobManager 高可用性配置</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/01/06/Flink-Kafka-sink/">Flink 从 0 到 1 学习 —— Flink 写入数据到 Kafka</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/01/05/Flink-run/">Flink 从 0 到 1 学习 —— Flink 项目如何运行？</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/12/30/Flink-ElasticSearch-Sink/">Flink 从 0 到 1 学习 —— Flink 写入数据到 ElasticSearch</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/12/11/Flink-time/">Flink 从 0 到 1 学习 —— Flink 中几种 Time 详解</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/12/08/Flink-Stream-Windows/">Flink 从 0 到 1 学习 —— 介绍Flink中的Stream Windows</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/04/Flink-Data-transformation/">Flink 从 0 到 1 学习 —— Flink Data transformation(转换)</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/31/flink-create-sink/">Flink 从 0 到 1 学习 —— 如何自定义 Data Sink ？</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/30/flink-create-source/">Flink 从 0 到 1 学习 —— 如何自定义 Data Source ？</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/29/flink-sink/">Flink 从 0 到 1 学习 —— Data Sink 介绍</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/28/flink-sources/">Flink 从 0 到 1 学习 —— Data Source 介绍</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/27/flink-config/">Flink 从 0 到 1 学习 —— Flink 配置文件详解</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/13/flink-introduction/">Flink 从 0 到 1 学习 —— Apache Flink 介绍</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/18/flink-install/">Flink 从 0 到 1 学习 —— Mac 上搭建 Flink 1.6.0 环境并构建运行简单程序入门</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/30/go-sync/">Go 并发——实现协程同步的几种方式</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/14/idea-remote-debug-elasticsearch/">教你如何在 IDEA 远程 Debug ElasticSearch</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/12/es-code03/">渣渣菜鸡的 ElasticSearch 源码解析 —— 启动流程（下）</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/11/es-code02/">渣渣菜鸡的 ElasticSearch 源码解析 —— 启动流程（上）</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/05/es-code01/">渣渣菜鸡的 ElasticSearch 源码解析 —— 环境搭建</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/04/why-see-es-code/">渣渣菜鸡为什么要看 ElasticSearch 源码？</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/07/31/alipay02/">渣渣菜鸡的蚂蚁金服面试经历(二)</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/07/30/alipay01/">渣渣菜鸡的蚂蚁金服面试经历(一)</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/07/12/youzan/">渣渣菜鸡的有赞面试经历（一）</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/20/java-8-date/">20 个案例教你在 Java 8 中如何处理日期和时间?</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/19/SimpleDateFormat/">SimpleDateFormat 如何安全的使用？</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/26/paper/">苦逼的毕业论文经历</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/30/springboot_SpringApplication/">Spring Boot 2.0系列文章(七)：SpringApplication 深入探索</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/24/Distributed_lock/">分布式锁看这篇就够了</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/19/SpringBootApplication-annotation/">Spring Boot 2.0系列文章(六)：Spring Boot 2.0中SpringBootApplication注解详解</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/18/spring_boot2_project/">Spring Boot 2.0系列文章(五)：Spring Boot 2.0 项目源码结构预览</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/15/springboot2_code/">Spring Boot 2.0系列文章(四)：Spring Boot 2.0 源码阅读环境搭建</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/13/Spring_Boot_2.0_Configuration_Changelog/">Spring Boot 2.0系列文章(三)：Spring Boot 2.0 配置改变</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/03/27/blogs/">写这么多系列博客，怪不得找不到女朋友</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/03/06/SpringBoot2-new-features/">Spring Boot 2.0系列文章(二)：Spring Boot 2.0 新特性详解</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/03/06/SpringBoot2-Migration-Guide/">Spring Boot 2.0系列文章(一)：Spring Boot 2.0 迁移指南</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/02/28/Java-Memory-Model/">《深入理解 Java 内存模型》读书笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/02/07/rocketmq-example/">RocketMQ系列文章（三）：RocketMQ 简单的消息示例</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/02/07/SpringBoot-RocketMQ/">Spring Boot系列文章（六）：SpringBoot RocketMQ 整合使用和监控</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/02/06/RocketMQ-install/">RocketMQ系列文章（二）：RocketMQ 安装及快速入门</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/02/05/RocketMQ/">RocketMQ系列文章（一）：RocketMQ 初探</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/28/RabbitMQ/">Spring Boot系列文章（五）：SpringBoot RabbitMQ 整合进阶版</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/27/SpringBoot-ActiveMQ/">Spring Boot系列文章（四）：SpringBoot ActiveMQ 整合使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/26/SpringBoot-RabbitMQ/">Spring Boot系列文章（三）：SpringBoot  RabbitMQ 整合使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/25/Docker-install/">Docker系列文章（二）：Mac 安装 Docker 及常用命令</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/24/mac/">MacBook Pro 初体验</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/17/SpringBoot-Admin/">Spring Boot系列文章（二）：SpringBoot Admin 使用指南</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/09/lombok/">Lombok 看这篇就够了</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/05/SpringBoot-Kafka/">Spring Boot系列文章（一）：SpringBoot Kafka 整合使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/04/weixin/">为什么要重新运营以前的公众号呢？</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/04/Kafka/">Kafka 安装及快速入门</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/12/27/consul-install/">Windows 下安装 Consul</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/12/25/ELK/">Elasticsearch 系列文章（五）：ELK 实时日志分析平台环境搭建</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/12/18/hexo-yilia/">Hexo + yilia 搭建博客可能会遇到的所有疑问</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/12/13/Google-Developer-Days/">谷歌开发者大会收获满满，不去真 “可惜” 了</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/12/09/CodeMirror/">使用 CodeMirror 打造属于自己的在线代码编辑器</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/12/08/netty-01-env/">Netty系列文章（一）：Netty 源码阅读之初始环境搭建</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/12/03/RestTemplate/">RestTemplate 详解</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/12/02/wx-01/">实习圈群里提问小记</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/11/26/Docker-harbor/">Docker系列文章（一）：基于 Harbor 搭建 Docker 私有镜像仓库</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/11/18/Money-management/">谈谈我的理财</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/11/18/flow-control/">基于分布式环境下限流系统的设计</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/11/11/Maven-dependencies-dependencyManagement/">Maven 中 dependencies 与 dependencyManagement 的区别</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/11/11/recommended-books/">送你一份双十一剁手书单【墙裂推荐】</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/28/Data-Desensitization/">小白谈数据脱敏</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/21/HBase-metrics/">HBase 集群监控</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/18/ElasticSearch-nodes-metrics/">Elasticsearch 系列文章（四）：ElasticSearch 单个节点监控</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/15/ElasticSearch-cluster-health-metrics/">Elasticsearch 系列文章（三）：ElasticSearch 集群监控</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/14/JsonPath/">JsonPath —— JSON 解析神器</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/14/Nexus3-Maven/">Centos7 搭建最新 Nexus3 Maven 私服</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/23/Guava-limit/">Google Guava 缓存实现接口的限流</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/17/Interview-summary/">面试过阿里等互联网大公司，我知道了这些套路</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/15/linux-lua-lfs-install/">Linux 下 lua 开发环境安装及安装 luafilesystem</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/09/Elasticsearch-install/">Elasticsearch 系列文章（二）：全文搜索引擎 Elasticsearch 集群搭建入门教程</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/08/Elasticsearch-analyzers/">Elasticsearch 系列文章（一）：Elasticsearch 默认分词器和中分分词器之间的比较及使用方法</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/28/recommend-books/">那些年我看过的书 —— 致敬我的大学生活 —— Say Good Bye ！</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/18/Ubuntu-install-Nginx/">Ubuntu16.10 安装 Nginx</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/11/most-success/">马云热血励志演讲《最伟大的成功》</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/08/android-projects/">源码大招：不服来战！撸这些完整项目，你不牛逼都难！</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/05/Nginx/">Nginx 基本知识快速入门</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/04/alibaba/">秋招第三站 —— 内推阿里（一面）</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/04/iqiyi/">秋招第二站 —— 内推爱奇艺（一面二面）</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/04/yaxin/">秋招第一站 —— 亚信科技</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/29/ThreadPool/">Java 线程池艺术探索</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/25/Java-performance-tuning/">Java 性能调优需要格外注意的细节</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/21/Spring-MVC03/">Spring MVC系列文章（五）：看透 Spring MVC 源代码分析与实践 ——  Spring MVC 组件分析</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/14/Spring-MVC01/">Spring MVC系列文章（三）：看透 Spring MVC 源代码分析与实践 ——  网站基础知识</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/14/Spring-MVC02/">Spring MVC系列文章（四）：看透 Spring MVC 源代码分析与实践 ——  俯视 Spring MVC</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/09/servlet/">通过源码详解 Servlet</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/28/Velocity-foreach/">Velocity 循环指令一种好的解决方法</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/23/AJAX/">AJAX 学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/23/java-io/">Java IO流学习超详细总结（图文并茂）</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/20/Java-error1/">java.sql.SQLException Field 'id' doesn't have a default value</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/19/中缀表达式转换成前缀和后缀表达式这类题目的超实用解题技巧/">中缀表达式转换成前缀和后缀表达式这类题目的超实用解题技巧</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/18/循环队列的相关条件和公式/">循环队列的相关条件和公式</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/18/Bootstrap入门需掌握的知识点（二）/">Bootstrap入门需掌握的知识点（二）</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/18/Bootstrap入门需掌握的知识点（一）/">Bootstrap入门需掌握的知识点（一）</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/17/blog-talk/">搭建一个博客项目后的碎碎念</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/17/详解 Filter 过滤器/">详解 Filter 过滤器</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/17/详细深入分析 Java ClassLoader 工作机制/">详细深入分析 Java ClassLoader 工作机制</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/16/通过项目逐步深入了解Spring MVC（一）/">通过项目逐步深入了解Spring MVC（一）</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/15/通过项目逐步深入了解Mybatis(四)/">通过项目逐步深入了解Mybatis（四）</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/14/通过项目逐步深入了解Mybatis(三)/">通过项目逐步深入了解Mybatis（三）</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/13/Hexo-yilia-toc/">Hexo + yilia 主题实现文章目录</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/13/Java连接Oracle数据库的三种连接方式/">Java连接Oracle数据库的三种连接方式</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/13/MyBatis-foreach/">MyBatis的foreach语句详解</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/13/Spring MVC + Hibernate JPA + Bootstrap 搭建的博客系统/">Spring MVC系列文章（一）：Spring MVC + Hibernate JPA + Bootstrap 搭建的博客系统 Demo</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/13/String-new/">关于String s = new String("xyz"); 创建几个对象的问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/13/【字符串】判断两字符串是否互为旋转词？/">【字符串】判断两字符串是否互为旋转词？</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/13/【字符串】字符串逆序/">字符串</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/13/奇怪的Java题：为什么128 == 128返回为False，而127 == 127会返回为True-/">奇怪的Java题：为什么128 == 128返回为False，而127 == 127会返回为True?</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/13/程序访问文件的几种方式/">程序访问文件的几种方式</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/13/MySQL-select-good/">MySQL 处理海量数据时的一些优化查询速度方法</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/13/Pyspider框架 —— Python爬虫实战之爬取 V2EX 网站帖子/">Pyspider框架 —— Python爬虫实战之爬取 V2EX 网站帖子</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/13/Spring MVC+Hibernate JPA搭建的博客系统项目中所遇到的坑/">Spring MVC系列文章（二）：Spring MVC+Hibernate JPA搭建的博客系统项目中所遇到的坑</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/13/feiji/">记录下自己第一次坐飞机的感受</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/13/java-var/">从对象深入分析 Java 中实例变量和类变量的区别</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/13/java读取文件/">Java读取文件</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/13/利用Github Page 搭建个人博客网站/">利用Github Page 搭建个人博客网站</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/13/解决jdk1.8中发送邮件失败（handshake_failure）问题/">解决jdk1.8中发送邮件失败（handshake_failure）问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/13/HashMap-Hashtable/">HashMap、Hashtable、HashSet 和 ConcurrentHashMap 的比较</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/13/JVM性能调优监控工具jps、jstack、jmap、jhat、jstat等使用详解/">JVM性能调优监控工具jps、jstack、jmap、jhat、jstat等使用详解</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/13/Python爬虫实战之爬取百度贴吧帖子/">Python爬虫实战之爬取百度贴吧帖子</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/13/Python爬虫实战之爬取糗事百科段子/">Python爬虫实战之爬取糗事百科段子</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/13/深入分析 Java Web 中的中文编码问题/">深入分析 Java Web 中的中文编码问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/13/深度探究Java 中 finally 语句块/">深度探究Java 中 finally 语句块</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/13/通过项目逐步深入了解Mybatis(二)/">通过项目逐步深入了解Mybatis（二）</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/13/Java NIO 系列教程/">Java NIO 系列教程</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/13/Java-Thread/">《Java 多线程编程核心技术》学习笔记及总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/13/Java-16-lession/">《疯狂 Java 突破程序员基本功的 16 课》读书笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/12/通过项目逐步深入了解Mybatis(一)/">通过项目逐步深入了解Mybatis（一）</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/02/poetry2/"> 六月 —— 愿你做最美好的自己！</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/12/poetry/">最近很火的鸡汤，分享给大家</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/13/Hexo-yilia-changyan/">Github pages + Hexo 博客 yilia 主题使用畅言评论系统</a></li></ul>
+    <script src="http://apps.bdimg.com/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script>
+        $(".post-list").addClass("toc-article");
+        $(".post-list-item a").attr("target","_blank");
+        $("#post-nav-button > a:nth-child(2)").click(function() {
+            $(".fa-bars, .fa-times").toggle();
+            $(".post-list").toggle(300);
+            if ($(".toc").length > 0) {
+                $("#toc, #tocButton").toggle(200, function() {
+                    if ($(".switch-area").is(":visible")) {
+                        $("#tocButton").attr("value", valueHide);
+                        }
+                    })
+            }
+            else {
+            }
+        })
+    </script>
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                &copy; 2021 zhisheng
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" >本站总访问量: 
+                            <span id="busuanzi_value_site_pv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>, </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit">本文总阅读量: 
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                   <a href="http://beian.miit.gov.cn">赣ICP备16004176号</a>
+            </div>
+        
+    </div>
+</footer>
+
+    </div>
+    <script src="http://apps.bdimg.com/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="/js/main.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var backgroundnum = 24;
+            var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+            $("#mobile-nav").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+            $(".left-col").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+        })
+    </script>
+
+
+
+
+	<script>
+	var _hmt = _hmt || [];
+	(function() {
+	  var hm = document.createElement("script");
+	  hm.src = "https://hm.baidu.com/hm.js?c41be5a0c9f014e977695f66c065b5d3";
+	  var s = document.getElementsByTagName("script")[0]; 
+	  s.parentNode.insertBefore(hm, s);
+	})();
+	</script>
+
+
+<div class="scroll" id="scroll">
+    <a href="#"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    $(document).ready(function() {
+        if ($("#comments").length < 1) {
+            $("#scroll > a:nth-child(2)").hide();
+        };
+    })
+</script>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  <script language="javascript">
+    $(function() {
+        $("a[title]").each(function() {
+            var a = $(this);
+            var title = a.attr('title');
+            if (title == undefined || title == "") return;
+            a.data('title', title).removeAttr('title').hover(
+
+            function() {
+                var offset = a.offset();
+                $("<div id=\"anchortitlecontainer\"></div>").appendTo($("body")).html(title).css({
+                    top: offset.top - a.outerHeight() - 15,
+                    left: offset.left + a.outerWidth()/2 + 1
+                }).fadeIn(function() {
+                    var pop = $(this);
+                    setTimeout(function() {
+                        pop.remove();
+                    }, pop.text().length * 800);
+                });
+            }, function() {
+                $("#anchortitlecontainer").remove();
+            });
+        });
+    });
+</script>
+
+
+  </div>
+</body>
+</html>

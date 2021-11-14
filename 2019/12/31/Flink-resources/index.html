@@ -1,0 +1,1110 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+   <!-- 百度联盟 -->
+   <meta name="baidu_union_verify" content="46e227ad81d5513c6cd8288c18c6ebad">
+
+   <!-- google analytics -->
+   <meta name="google-site-verification" content="SzCGQVmA8Mtk40elee-bCGpq2YSCAmEulSNEZHYCkFc" />
+
+   <!--百度站长之家验证-->
+   <meta name="baidu-site-verification" content="4woRik4rfk" />
+
+   <meta name="description" content="坑要一个个填，路要一步步走！—— from zhisheng的博客">
+   <meta name="keywords" content="Flink,Spark,大数据,Hive,Java,架构,后端,服务端,RocketMQ,分布式消息队列,分布式存储,技术博客,HBase,ElasticSearch,Spring,Spring Boot,Spring Boot 2.0,Spring Cloud,Spring MVC,Java EE,前端,HTML,MyBatis,Android,Docker,Mac,Consul,Kafka,Logstash,Kibana,MySQL,Maven,Nginx,Python,RabbitMQ,ActiveMQ,JVM">
+
+
+  <title>Flink 视频、博客、PPT、入门、原理、实战、性能调优、源码解析、问答等持续更新 | zhisheng的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="keywords" content="大数据,Flink,流式计算">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Flink 视频、博客、PPT、入门、原理、实战、性能调优、源码解析、问答等持续更新">
+<meta property="og:url" content="http://www.54tianzhisheng.cn/2019/12/31/Flink-resources/index.html">
+<meta property="og:site_name" content="zhisheng的博客">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-09-25-zsxq.jpg">
+<meta property="og:image" content="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-11-05-055430.jpg">
+<meta property="og:image" content="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-05-25-124027.jpg">
+<meta property="og:image" content="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-07-23-125710.jpg">
+<meta property="og:image" content="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-09-27-121923.jpg">
+<meta property="og:image" content="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-07-23-125756.jpg">
+<meta property="og:image" content="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-09-17-143454.jpg">
+<meta property="og:image" content="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-07-23-124320.jpg">
+<meta property="og:image" content="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-07-26-150037.jpg">
+<meta property="og:image" content="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-07-26-145923.jpg">
+<meta property="og:updated_time" content="2020-10-11T14:12:09.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Flink 视频、博客、PPT、入门、原理、实战、性能调优、源码解析、问答等持续更新">
+<meta name="twitter:image" content="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-09-25-zsxq.jpg">
+  
+    <link rel="alternative" href="/atom.xml" title="zhisheng的博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/img/favicon.ico">
+  
+  
+      <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  
+  
+      <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  
+  <!-- 加载特效 -->
+  <script src="/js/pace.js"></script>
+  <link href="/css/pace/pace-theme-flash.css" rel="stylesheet" />
+  <script>
+      var yiliaConfig = {
+          rootUrl: '/',
+          fancybox: true,
+          animate: true,
+          isHome: false,
+          isPost: true,
+          isArchive: false,
+          isTag: false,
+          isCategory: false,
+          open_in_new: true
+      }
+  </script>
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <!-- <a href="/" class="profilepic">
+            
+            <img src="//img/avatar.png" alt="zhisheng">
+            
+        </a> -->
+         <a href="/">
+        			<img src="/img/avatar.png" class="js-avatar" style="width: 70%;height: 70%;opacity: 1;">
+        </a>
+
+        <hgroup>
+          <h1 class="header-author"><a href="/">zhisheng</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">坑要一个个填，路要一步步走！</p>
+        
+        
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/tags/Flink/">Flink</a></li>
+                        
+                            <li><a href="/tags/ElasticSearch/">ElasticSearch</a></li>
+                        
+                            <li><a href="/tags/SpringBoot/">Spring Boot</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fl wechat" target="_blank" href="wechat:yuanblog_tzs" title="wechat">wechat</a>
+                            
+                                <a class="fl mail" target="_blank" href="mailto://zhisheng2018@gmail.com" title="mail">mail</a>
+                            
+                                <a class="fl github" target="_blank" href="https://github.com/zhisheng17/" title="github">github</a>
+                            
+                                <a class="fl zhihu" target="_blank" href="https://www.zhihu.com/people/zhisheng-34" title="zhihu">zhihu</a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <a href="/tags/AJAX/" style="font-size: 10px;">AJAX</a> <a href="/tags/ActiveMQ/" style="font-size: 10px;">ActiveMQ</a> <a href="/tags/Android/" style="font-size: 10px;">Android</a> <a href="/tags/Apollo/" style="font-size: 10px;">Apollo</a> <a href="/tags/Blink/" style="font-size: 10px;">Blink</a> <a href="/tags/Bootstrap/" style="font-size: 12.5px;">Bootstrap</a> <a href="/tags/Consul/" style="font-size: 10px;">Consul</a> <a href="/tags/Docker/" style="font-size: 10.83px;">Docker</a> <a href="/tags/ElasticSearch/" style="font-size: 15.83px;">ElasticSearch</a> <a href="/tags/Filter过滤器/" style="font-size: 10px;">Filter过滤器</a> <a href="/tags/Flink/" style="font-size: 20px;">Flink</a> <a href="/tags/GO/" style="font-size: 10px;">GO</a> <a href="/tags/Github-Page/" style="font-size: 10px;">Github Page</a> <a href="/tags/Guava/" style="font-size: 10px;">Guava</a> <a href="/tags/HBase/" style="font-size: 10px;">HBase</a> <a href="/tags/Hibernate-JPA/" style="font-size: 10.83px;">Hibernate JPA</a> <a href="/tags/IO/" style="font-size: 10.83px;">IO</a> <a href="/tags/JMM/" style="font-size: 10px;">JMM</a> <a href="/tags/JSON/" style="font-size: 10px;">JSON</a> <a href="/tags/JVM/" style="font-size: 10.83px;">JVM</a> <a href="/tags/Java/" style="font-size: 18.33px;">Java</a> <a href="/tags/Kafka/" style="font-size: 12.5px;">Kafka</a> <a href="/tags/Kibana/" style="font-size: 10px;">Kibana</a> <a href="/tags/LogStash/" style="font-size: 10px;">LogStash</a> <a href="/tags/Mac/" style="font-size: 10px;">Mac</a> <a href="/tags/Maven/" style="font-size: 10.83px;">Maven</a> <a href="/tags/MySQL/" style="font-size: 12.5px;">MySQL</a> <a href="/tags/Mybatis/" style="font-size: 13.33px;">Mybatis</a> <a href="/tags/NIO/" style="font-size: 10px;">NIO</a> <a href="/tags/Nacos/" style="font-size: 11.67px;">Nacos</a> <a href="/tags/Netty/" style="font-size: 10px;">Netty</a> <a href="/tags/Nginx/" style="font-size: 10.83px;">Nginx</a> <a href="/tags/Oracle/" style="font-size: 10px;">Oracle</a> <a href="/tags/Pyspider/" style="font-size: 10px;">Pyspider</a> <a href="/tags/Python/" style="font-size: 11.67px;">Python</a> <a href="/tags/RabbitMQ/" style="font-size: 11.67px;">RabbitMQ</a> <a href="/tags/Redis/" style="font-size: 10.83px;">Redis</a> <a href="/tags/RocketMQ/" style="font-size: 12.5px;">RocketMQ</a> <a href="/tags/Servlet/" style="font-size: 10px;">Servlet</a> <a href="/tags/Spark/" style="font-size: 10px;">Spark</a> <a href="/tags/Spring/" style="font-size: 11.67px;">Spring</a> <a href="/tags/Spring-MVC/" style="font-size: 14.17px;">Spring MVC</a> <a href="/tags/SpringBoot/" style="font-size: 16.67px;">SpringBoot</a> <a href="/tags/SpringMVC/" style="font-size: 12.5px;">SpringMVC</a> <a href="/tags/String/" style="font-size: 10px;">String</a> <a href="/tags/Velocity/" style="font-size: 10px;">Velocity</a> <a href="/tags/Zookeeper/" style="font-size: 10px;">Zookeeper</a> <a href="/tags/finally/" style="font-size: 10px;">finally</a> <a href="/tags/foreach/" style="font-size: 10px;">foreach</a> <a href="/tags/hexo/" style="font-size: 11.67px;">hexo</a> <a href="/tags/lombok/" style="font-size: 10px;">lombok</a> <a href="/tags/lua/" style="font-size: 10px;">lua</a> <a href="/tags/yilia/" style="font-size: 10.83px;">yilia</a> <a href="/tags/书籍/" style="font-size: 10px;">书籍</a> <a href="/tags/分布式锁/" style="font-size: 10px;">分布式锁</a> <a href="/tags/前端/" style="font-size: 11.67px;">前端</a> <a href="/tags/励志/" style="font-size: 10px;">励志</a> <a href="/tags/博客合集/" style="font-size: 10px;">博客合集</a> <a href="/tags/博客网站/" style="font-size: 10px;">博客网站</a> <a href="/tags/多线程/" style="font-size: 10.83px;">多线程</a> <a href="/tags/大数据/" style="font-size: 20px;">大数据</a> <a href="/tags/字符串/" style="font-size: 10.83px;">字符串</a> <a href="/tags/实习圈/" style="font-size: 10px;">实习圈</a> <a href="/tags/实时计算/" style="font-size: 17.5px;">实时计算</a> <a href="/tags/循环队列/" style="font-size: 10px;">循环队列</a> <a href="/tags/性能调优工具/" style="font-size: 10px;">性能调优工具</a> <a href="/tags/投资理财/" style="font-size: 10px;">投资理财</a> <a href="/tags/数据仓库/" style="font-size: 10px;">数据仓库</a> <a href="/tags/数据库/" style="font-size: 11.67px;">数据库</a> <a href="/tags/数据结构/" style="font-size: 12.5px;">数据结构</a> <a href="/tags/文件/" style="font-size: 10px;">文件</a> <a href="/tags/旋转词/" style="font-size: 10px;">旋转词</a> <a href="/tags/流式计算/" style="font-size: 19.17px;">流式计算</a> <a href="/tags/流控/" style="font-size: 10px;">流控</a> <a href="/tags/爬虫/" style="font-size: 11.67px;">爬虫</a> <a href="/tags/监控告警/" style="font-size: 10px;">监控告警</a> <a href="/tags/算法/" style="font-size: 11.67px;">算法</a> <a href="/tags/类加载机制/" style="font-size: 10px;">类加载机制</a> <a href="/tags/线程池/" style="font-size: 10px;">线程池</a> <a href="/tags/编码/" style="font-size: 10px;">编码</a> <a href="/tags/表达式/" style="font-size: 10px;">表达式</a> <a href="/tags/邮件发送/" style="font-size: 10px;">邮件发送</a> <a href="/tags/随笔/" style="font-size: 15px;">随笔</a> <a href="/tags/面经/" style="font-size: 15px;">面经</a>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://blog.csdn.net/tzs_1041218129">CSDN博客</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="https://juejin.im/user/57510b82128fe10056ca70fc">掘金</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">人在江湖飘，各种折腾！</div>
+                </section>
+                
+            </div>
+        </div>
+        <div>
+            <img src="/img/wx.jpg"  alt="zhisheng" />
+        </div>
+    </header>
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="Me">zhisheng</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+<!--             <a href="/" class="profilepic">
+                
+                    <img lazy-src="//img/avatar.png" class="js-avatar">
+                
+            </a> -->
+
+<!--             <a href="/">
+                <img src="//img/avatar.png" class="js-avatar" style="width: 100%; height: 100%; opacity: 1;">
+            </a> -->
+
+
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="Me">zhisheng</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">坑要一个个填，路要一步步走！</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/tags/Flink/">Flink</a></li>
+                
+                    <li><a href="/tags/ElasticSearch/">ElasticSearch</a></li>
+                
+                    <li><a href="/tags/SpringBoot/">Spring Boot</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a class="wechat" target="_blank" href="wechat:yuanblog_tzs" title="wechat">wechat</a>
+                    
+                        <a class="mail" target="_blank" href="mailto://zhisheng2018@gmail.com" title="mail">mail</a>
+                    
+                        <a class="github" target="_blank" href="https://github.com/zhisheng17/" title="github">github</a>
+                    
+                        <a class="zhihu" target="_blank" href="https://www.zhihu.com/people/zhisheng-34" title="zhihu">zhihu</a>
+                    
+                </div>
+            </nav>
+        </header>                
+    </div>
+</nav>
+      <div class="body-wrap"><article id="post-Flink-resources" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2019/12/31/Flink-resources/" class="article-date">
+      <time datetime="2019-12-30T16:00:00.000Z" itemprop="datePublished">2019-12-31</time>
+</a>
+    </div>
+  
+  <div class="article-inner" id="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Flink 视频、博客、PPT、入门、原理、实战、性能调优、源码解析、问答等持续更新
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Flink/">Flink</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/大数据/">大数据</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/流式计算/">流式计算</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody" id="article-entry">
+      
+          
+        <p><img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-09-25-zsxq.jpg" alt=""></p>
+<a id="more"></a>
+<h3 id="Flink-专栏"><a href="#Flink-专栏" class="headerlink" title="Flink 专栏"></a>Flink 专栏</h3><p>首发地址：<a href="http://www.54tianzhisheng.cn/2019/11/15/flink-in-action/">http://www.54tianzhisheng.cn/2019/11/15/flink-in-action/</a></p>
+<p>专栏地址：<a href="https://gitbook.cn/gitchat/column/5dad4a20669f843a1a37cb4f">https://gitbook.cn/gitchat/column/5dad4a20669f843a1a37cb4f</a></p>
+<p>专栏大纲：</p>
+<p><img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-11-05-055430.jpg" alt=""></p>
+<h2 id="Flink-学习项目代码"><a href="#Flink-学习项目代码" class="headerlink" title="Flink 学习项目代码"></a>Flink 学习项目代码</h2><p><a href="https://github.com/zhisheng17/flink-learning">https://github.com/zhisheng17/flink-learning</a></p>
+<p>麻烦路过的各位亲给这个项目点个 star，太不易了，写了这么多，算是对我坚持下来的一种鼓励吧！</p>
+<p><img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-05-25-124027.jpg" alt=""></p>
+<h2 id="本项目结构"><a href="#本项目结构" class="headerlink" title="本项目结构"></a>本项目结构</h2><p><img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-07-23-125710.jpg" alt=""></p>
+<h2 id="How-to-build"><a href="#How-to-build" class="headerlink" title="How to build"></a>How to build</h2><p>Maybe your Maven conf file <code>settings.xml</code> mirrors can add aliyun central mirror :</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">mirror</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">id</span>&gt;</span>alimaven<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">mirrorOf</span>&gt;</span>central<span class="tag">&lt;/<span class="name">mirrorOf</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">name</span>&gt;</span>aliyun maven<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">url</span>&gt;</span>https://maven.aliyun.com/repository/central<span class="tag">&lt;/<span class="name">url</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">mirror</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>then you can run the following command :</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mvn clean package -Dmaven.test.skip=true</span><br></pre></td></tr></table></figure>
+<p>you can see following result if build success.</p>
+<p><img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-09-27-121923.jpg" alt=""></p>
+<h2 id="Change"><a href="#Change" class="headerlink" title="Change"></a>Change</h2><p>2019/09/06 将该项目的 Flink 版本升级到 1.9.0，有一些变动，Flink 1.8.0 版本的代码经群里讨论保存在分支 <a href="https://github.com/zhisheng17/flink-learning/tree/feature/flink-1.8.0">feature/flink-1.8.0</a> 以便部分同学需要。</p>
+<p>2019/06/08 新增 Flink 四本电子书籍的 PDF，在 books 目录下：</p>
+<ul>
+<li><p><a href="https://github.com/zhisheng17/flink-learning/blob/master/books/Introduction_to_Apache_Flink_book.pdf">Introduction_to_Apache_Flink_book.pdf</a>    这本书比较薄，处于介绍阶段，国内有这本的翻译书籍</p>
+</li>
+<li><p><a href="https://github.com/zhisheng17/flink-learning/blob/master/books/Learning_Apache_Flink.pdf">Learning Apache Flink.pdf</a>    这本书比较基础，初学的话可以多看看</p>
+</li>
+<li><p><a href="https://github.com/zhisheng17/flink-learning/blob/master/books/Stream_Processing_with_Apache_Flink.pdf">Stream Processing with Apache Flink.pdf</a>    这本书是 Flink PMC 写的</p>
+</li>
+<li><p><a href="https://github.com/zhisheng17/flink-learning/blob/master/books/Streaming_System.pdf">Streaming System.pdf</a>  这本书评价不是一般的高</p>
+</li>
+</ul>
+<p>2019/06/09 新增流处理引擎相关的 Paper，在 paper 目录下：</p>
+<ul>
+<li><a href="https://github.com/zhisheng17/flink-learning/blob/master/paper/paper.md">流处理引擎相关的 Paper</a></li>
+</ul>
+<h2 id="博客"><a href="#博客" class="headerlink" title="博客"></a>博客</h2><p>1、<a href="http://www.54tianzhisheng.cn/2018/10/13/flink-introduction/">Flink 从0到1学习 —— Apache Flink 介绍</a></p>
+<p>2、<a href="http://www.54tianzhisheng.cn/2018/09/18/flink-install">Flink 从0到1学习 —— Mac 上搭建 Flink 1.6.0 环境并构建运行简单程序入门</a></p>
+<p>3、<a href="http://www.54tianzhisheng.cn/2018/10/27/flink-config/">Flink 从0到1学习 —— Flink 配置文件详解</a></p>
+<p>4、<a href="http://www.54tianzhisheng.cn/2018/10/28/flink-sources/">Flink 从0到1学习 —— Data Source 介绍</a></p>
+<p>5、<a href="http://www.54tianzhisheng.cn/2018/10/30/flink-create-source/">Flink 从0到1学习 —— 如何自定义 Data Source ？</a></p>
+<p>6、<a href="http://www.54tianzhisheng.cn/2018/10/29/flink-sink/">Flink 从0到1学习 —— Data Sink 介绍</a></p>
+<p>7、<a href="http://www.54tianzhisheng.cn/2018/10/31/flink-create-sink/">Flink 从0到1学习 —— 如何自定义 Data Sink ？</a></p>
+<p>8、<a href="http://www.54tianzhisheng.cn/2018/11/04/Flink-Data-transformation/">Flink 从0到1学习 —— Flink Data transformation(转换)</a></p>
+<p>9、<a href="http://www.54tianzhisheng.cn/2018/12/08/Flink-Stream-Windows/">Flink 从0到1学习 —— 介绍 Flink 中的 Stream Windows</a></p>
+<p>10、<a href="http://www.54tianzhisheng.cn/2018/12/11/Flink-time/">Flink 从0到1学习 —— Flink 中的几种 Time 详解</a></p>
+<p>11、<a href="http://www.54tianzhisheng.cn/2018/12/30/Flink-ElasticSearch-Sink/">Flink 从0到1学习 —— Flink 读取 Kafka 数据写入到 ElasticSearch</a></p>
+<p>12、<a href="http://www.54tianzhisheng.cn/2019/01/05/Flink-run/">Flink 从0到1学习 —— Flink 项目如何运行？</a></p>
+<p>13、<a href="http://www.54tianzhisheng.cn/2019/01/06/Flink-Kafka-sink/">Flink 从0到1学习 —— Flink 读取 Kafka 数据写入到 Kafka</a></p>
+<p>14、<a href="http://www.54tianzhisheng.cn/2019/01/13/Flink-JobManager-High-availability/">Flink 从0到1学习 —— Flink JobManager 高可用性配置</a></p>
+<p>15、<a href="http://www.54tianzhisheng.cn/2019/01/14/Flink-parallelism-slot/">Flink 从0到1学习 —— Flink parallelism 和 Slot 介绍</a></p>
+<p>16、<a href="http://www.54tianzhisheng.cn/2019/01/15/Flink-MySQL-sink/">Flink 从0到1学习 —— Flink 读取 Kafka 数据批量写入到 MySQL</a></p>
+<p>17、<a href="https://t.zsxq.com/uVbi2nq">Flink 从0到1学习 —— Flink 读取 Kafka 数据写入到 RabbitMQ</a></p>
+<p>18、<a href="https://t.zsxq.com/zV7MnuJ">Flink 从0到1学习 —— Flink 读取 Kafka 数据写入到 HBase</a></p>
+<p>19、<a href="https://t.zsxq.com/zV7MnuJ">Flink 从0到1学习 —— Flink 读取 Kafka 数据写入到 HDFS</a></p>
+<p>20、<a href="https://t.zsxq.com/zV7MnuJ">Flink 从0到1学习 —— Flink 读取 Kafka 数据写入到 Redis</a></p>
+<p>21、<a href="https://t.zsxq.com/uVbi2nq">Flink 从0到1学习 —— Flink 读取 Kafka 数据写入到 Cassandra</a></p>
+<p>22、<a href="https://t.zsxq.com/zV7MnuJ">Flink 从0到1学习 —— Flink 读取 Kafka 数据写入到 Flume</a></p>
+<p>23、<a href="https://t.zsxq.com/zV7MnuJ">Flink 从0到1学习 —— Flink 读取 Kafka 数据写入到 InfluxDB</a></p>
+<p>24、<a href="https://t.zsxq.com/zV7MnuJ">Flink 从0到1学习 —— Flink 读取 Kafka 数据写入到 RocketMQ</a></p>
+<p>25、<a href="https://t.zsxq.com/uniY7mm">Flink 从0到1学习 —— 你上传的 jar 包藏到哪里去了</a></p>
+<p>26、<a href="https://t.zsxq.com/zV7MnuJ">Flink 从0到1学习 —— 你的 Flink job 日志跑到哪里去了</a></p>
+<h3 id="Flink-源码项目结构"><a href="#Flink-源码项目结构" class="headerlink" title="Flink 源码项目结构"></a>Flink 源码项目结构</h3><p><img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-07-23-125756.jpg" alt=""></p>
+<h2 id="学习资料"><a href="#学习资料" class="headerlink" title="学习资料"></a>学习资料</h2><p>另外我自己整理了些 Flink 的学习资料，目前已经全部放到微信公众号了。<br>你可以加我的微信：<strong>yuanblog_tzs</strong>，然后回复关键字：<strong>Flink</strong> 即可无条件获取到，转载请联系本人获取授权，违者必究。</p>
+<p><img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-09-17-143454.jpg" alt=""></p>
+<p>更多私密资料请加入知识星球！</p>
+<p><img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-07-23-124320.jpg" alt=""></p>
+<p>有人要问知识星球里面更新什么内容？值得加入吗？</p>
+<p>目前知识星球内已更新的系列文章：</p>
+<h3 id="大数据重磅炸弹"><a href="#大数据重磅炸弹" class="headerlink" title="大数据重磅炸弹"></a>大数据重磅炸弹</h3><p>1、<a href="https://t.zsxq.com/fqfuVRR​">《大数据重磅炸弹——实时计算引擎 Flink》开篇词</a></p>
+<p>2、、<a href="https://t.zsxq.com/emMBaQN​">你公司到底需不需要引入实时计算引擎？</a></p>
+<p>3、<a href="https://t.zsxq.com/eM3ZRf2">一文让你彻底了解大数据实时计算框架 Flink</a> ​</p>
+<p>4、<a href="https://t.zsxq.com/eAyRz7Y">别再傻傻的分不清大数据框架Flink、Blink、Spark Streaming、Structured Streaming和Storm之间的区别了</a>​</p>
+<p>5、<a href="https://t.zsxq.com/iaMJAe6​">Flink 环境准备看这一篇就够了</a>  </p>
+<p>6、<a href="https://t.zsxq.com/iaMJAe6​">一文讲解从 Flink 环境安装到源码编译运行</a></p>
+<p>7、<a href="https://t.zsxq.com/eaIIiAm">通过 WordCount 程序教你快速入门上手 Flink</a>  ​</p>
+<p>8、<a href="https://t.zsxq.com/Vnq72jY​">Flink 如何处理 Socket 数据及分析实现过程</a>  </p>
+<p>9、<a href="https://t.zsxq.com/BiyvFUZ​">Flink job 如何在 Standalone、YARN、Mesos、K8S 上部署运行？</a></p>
+<p>10、<a href="https://t.zsxq.com/fufUBiA">Flink 数据转换必须熟悉的算子（Operator）</a></p>
+<p>11、<a href="https://t.zsxq.com/r7aYB2V">Flink 中 Processing Time、Event Time、Ingestion Time 对比及其使用场景分析</a> </p>
+<p>12、<a href="https://t.zsxq.com/byZbyrb">如何使用 Flink Window 及 Window 基本概念与实现原理</a></p>
+<p>13、<a href="https://t.zsxq.com/VzNBi2r">如何使用 DataStream API 来处理数据？</a></p>
+<p>14、<a href="https://t.zsxq.com/Iub6IQf">Flink WaterMark 详解及结合 WaterMark 处理延迟数据</a></p>
+<h3 id="源码系列"><a href="#源码系列" class="headerlink" title="源码系列"></a>源码系列</h3><p>1、<a href="https://t.zsxq.com/UZfaYfE">Flink 源码解析 —— 源码编译运行</a></p>
+<p>2、<a href="https://t.zsxq.com/zZZjaYf">Flink 源码解析 —— 项目结构一览</a></p>
+<p>3、<a href="https://t.zsxq.com/zV7MnuJ">Flink 源码解析—— local 模式启动流程</a></p>
+<p>4、<a href="https://t.zsxq.com/QZVRZJA">Flink 源码解析 —— standalonesession 模式启动流程</a></p>
+<p>5、<a href="https://t.zsxq.com/u3fayvf">Flink 源码解析 —— Standalone Session Cluster 启动流程深度分析之 Job Manager 启动</a></p>
+<p>6、<a href="https://t.zsxq.com/MnQRByb">Flink 源码解析 —— Standalone Session Cluster 启动流程深度分析之 Task Manager 启动</a></p>
+<p>7、<a href="https://t.zsxq.com/YJ2Zrfi">Flink 源码解析 —— 分析 Batch WordCount 程序的执行过程</a></p>
+<p>8、<a href="https://t.zsxq.com/qnMFEUJ">Flink 源码解析 —— 分析 Streaming WordCount 程序的执行过程</a></p>
+<p>9、<a href="https://t.zsxq.com/naaMf6y">Flink 源码解析 —— 如何获取 JobGraph？</a></p>
+<p>10、<a href="https://t.zsxq.com/qRFIm6I">Flink 源码解析 —— 如何获取 StreamGraph？</a></p>
+<p>11、<a href="https://t.zsxq.com/2VRrbuf">Flink 源码解析 —— Flink JobManager 有什么作用？</a></p>
+<p>12、<a href="https://t.zsxq.com/RZbu7yN">Flink 源码解析 —— Flink TaskManager 有什么作用？</a></p>
+<p>13、<a href="https://t.zsxq.com/zV7MnuJ">Flink 源码解析 —— JobManager 处理 SubmitJob 的过程</a></p>
+<p>14、<a href="https://t.zsxq.com/zV7MnuJ">Flink 源码解析 —— TaskManager 处理 SubmitJob 的过程</a></p>
+<p>15、<a href="https://t.zsxq.com/ynQNbeM">Flink 源码解析 —— 深度解析 Flink Checkpoint 机制</a></p>
+<p>16、<a href="https://t.zsxq.com/JaQfeMf">Flink 源码解析 —— 深度解析 Flink 序列化机制</a></p>
+<p>17、<a href="https://t.zsxq.com/zjQvjeM">Flink 源码解析 —— 深度解析 Flink 是如何管理好内存的？</a></p>
+<p>18、<a href="https://t.zsxq.com/Mnm2nI6">Flink Metrics 源码解析 —— Flink-metrics-core</a></p>
+<p>19、<a href="https://t.zsxq.com/Mnm2nI6">Flink Metrics 源码解析 —— Flink-metrics-datadog</a></p>
+<p>20、<a href="https://t.zsxq.com/Mnm2nI6">Flink Metrics 源码解析 —— Flink-metrics-dropwizard</a></p>
+<p>21、<a href="https://t.zsxq.com/Mnm2nI6">Flink Metrics 源码解析 —— Flink-metrics-graphite</a></p>
+<p>22、<a href="https://t.zsxq.com/Mnm2nI6">Flink Metrics 源码解析 —— Flink-metrics-influxdb</a></p>
+<p>23、<a href="https://t.zsxq.com/Mnm2nI6">Flink Metrics 源码解析 —— Flink-metrics-jmx</a></p>
+<p>24、<a href="https://t.zsxq.com/Mnm2nI6">Flink Metrics 源码解析 —— Flink-metrics-slf4j</a></p>
+<p>25、<a href="https://t.zsxq.com/Mnm2nI6">Flink Metrics 源码解析 —— Flink-metrics-statsd</a></p>
+<p>26、<a href="https://t.zsxq.com/Mnm2nI6">Flink Metrics 源码解析 —— Flink-metrics-prometheus</a></p>
+<p><img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-07-26-150037.jpg" alt=""></p>
+<p>26、<a href="https://t.zsxq.com/f6eAu3J">Flink Annotations 源码解析</a></p>
+<p><img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-07-26-145923.jpg" alt=""></p>
+<p>除了《从1到100深入学习Flink》源码学习这个系列文章，《从0到1学习Flink》的案例文章也会优先在知识星球更新，让大家先通过一些 demo 学习 Flink，再去深入源码学习！</p>
+<p>如果学习 Flink 的过程中，遇到什么问题，可以在里面提问，我会优先解答，这里做个抱歉，自己平时工作也挺忙，微信的问题不能做全部做一些解答，<br>但肯定会优先回复给知识星球的付费用户的，庆幸的是现在星球里的活跃氛围还是可以的，有不少问题通过提问和解答的方式沉淀了下来。</p>
+<p>1、<a href="https://t.zsxq.com/62rZV7q">为何我使用 ValueState 保存状态 Job 恢复是状态没恢复？</a></p>
+<p>2、<a href="https://t.zsxq.com/yF2rjmY">flink中watermark究竟是如何生成的，生成的规则是什么，怎么用来处理乱序数据</a></p>
+<p>3、<a href="https://t.zsxq.com/uzFIeiq">消费kafka数据的时候，如果遇到了脏数据，或者是不符合规则的数据等等怎么处理呢？</a></p>
+<p>4、<a href="https://t.zsxq.com/Nz7QZBY">在Kafka 集群中怎么指定读取/写入数据到指定broker或从指定broker的offset开始消费？</a></p>
+<p>5、<a href="https://t.zsxq.com/7UVBeMj">Flink能通过oozie或者azkaban提交吗？</a></p>
+<p>6、<a href="https://t.zsxq.com/mUzRbY7">jobmanager挂掉后，提交的job怎么不经过手动重新提交执行？</a></p>
+<p>7、<a href="https://t.zsxq.com/Nju7EuV">使用flink-web-ui提交作业并执行 但是/opt/flink/log目录下没有日志文件 请问关于flink的日志（包括jobmanager、taskmanager、每个job自己的日志默认分别存在哪个目录 ）需要怎么配置？</a></p>
+<p>8、<a href="https://t.zsxq.com/6muRz3j">通过flink 仪表盘提交的jar 是存储在哪个目录下？</a></p>
+<p>9、<a href="https://t.zsxq.com/uvFQvFu">从Kafka消费数据进行etl清洗，把结果写入hdfs映射成hive表，压缩格式、hive直接能够读取flink写出的文件、按照文件大小或者时间滚动生成文件</a></p>
+<p>10、<a href="https://t.zsxq.com/ubIY33f">flink jar包上传至集群上运行，挂掉后，挂掉期间kafka中未被消费的数据，在重新启动程序后，是自动从checkpoint获取挂掉之前的kafka offset位置，自动消费之前的数据进行处理，还是需要某些手动的操作呢？</a></p>
+<p>11、<a href="https://t.zsxq.com/UfA2rBy">flink 启动时不自动创建 上传jar的路径，能指定一个创建好的目录吗</a></p>
+<p>12、<a href="https://t.zsxq.com/zBMnIA6">Flink sink to es 集群上报 slot 不够，单机跑是好的，为什么？</a></p>
+<p>13、<a href="https://t.zsxq.com/qrZBAQJ">Fllink to elasticsearch如何创建索引文档期时间戳？</a></p>
+<p>14、<a href="https://t.zsxq.com/J2JiIMv">blink有没有api文档或者demo，是否建议blink用于生产环境。</a></p>
+<p>15、<a href="https://t.zsxq.com/ZVVrjuv">flink的Python api怎样？bug多吗？</a></p>
+<p>16、<a href="https://t.zsxq.com/zbybQNf">Flink VS Spark Streaming VS Storm VS Kafka Stream </a></p>
+<p>17、<a href="https://t.zsxq.com/Zf6meAm">你们做实时大屏的技术架构是什么样子的？flume→kafka→flink→redis，然后后端去redis里面捞数据，酱紫可行吗？</a></p>
+<p>18、<a href="https://t.zsxq.com/YniI2JQ">做一个统计指标的时候，需要在Flink的计算过程中多次读写redis，感觉好怪，星主有没有好的方案？</a></p>
+<p>19、<a href="https://t.zsxq.com/fYZZfYf">Flink 使用场景大分析，列举了很多的常用场景，可以好好参考一下</a></p>
+<p>20、<a href="https://t.zsxq.com/I6eEqR7">将kafka中数据sink到mysql时，metadata的数据为空，导入mysql数据不成功？？？</a></p>
+<p>21、<a href="https://t.zsxq.com/62rZV7q">使用了ValueState来保存中间状态，在运行时中间状态保存正常，但是在手动停止后，再重新运行，发现中间状态值没有了，之前出现的键值是从0开始计数的，这是为什么？是需要实现CheckpointedFunction吗？</a></p>
+<p>22、<a href="https://t.zsxq.com/mQ7YbQJ">flink on yarn jobmanager的HA需要怎么配置。还是说yarn给管理了</a></p>
+<p>23、<a href="https://t.zsxq.com/q3VvB6U">有两个数据流就行connect，其中一个是实时数据流（kafka 读取)，另一个是配置流。由于配置流是从关系型数据库中读取，速度较慢，导致实时数据流流入数据的时候，配置信息还未发送，这样会导致有些实时数据读取不到配置信息。目前采取的措施是在connect方法后的flatmap的实现的在open 方法中，提前加载一次配置信息，感觉这种实现方式不友好，请问还有其他的实现方式吗？</a></p>
+<p>24、<a href="https://t.zsxq.com/7UVBeMj">Flink能通过oozie或者azkaban提交吗？</a></p>
+<p>25、<a href="https://t.zsxq.com/mUzRbY7">不采用yarm部署flink，还有其他的方案吗？ 主要想解决服务器重启后，flink服务怎么自动拉起？ jobmanager挂掉后，提交的job怎么不经过手动重新提交执行？</a></p>
+<p>26、<a href="https://t.zsxq.com/bYnimQv">在一个 Job 里将同份数据昨晚清洗操作后，sink 到后端多个地方（看业务需求），如何保持一致性？（一个sink出错，另外的也保证不能插入）</a></p>
+<p>27、<a href="https://t.zsxq.com/YvBAyrV">flink sql任务在某个特定阶段会发生tm和jm丢失心跳，是不是由于gc时间过长呢，</a></p>
+<p>28、<a href="https://t.zsxq.com/fayf2Vv">有这样一个需求，统计用户近两周进入产品详情页的来源（1首页大搜索，2产品频道搜索，3其他），为php后端提供数据支持，该信息在端上报事件中，php直接获取有点困难。 我现在的解决方案 通过flink滚动窗口（半小时），统计用户半小时内3个来源pv，然后按照日期序列化，直接写mysql。php从数据库中解析出来，再去统计近两周占比。 问题1，这个需求适合用flink去做吗？ 问题2，我的方案总感觉怪怪的，有没有好的方案？</a></p>
+<p>29、<a href="https://t.zsxq.com/ZFiY3VZ">一个task slot  只能同时运行一个任务还是多个任务呢？如果task  slot运行的任务比较大，会出现OOM的情况吗？</a></p>
+<p>30、<a href="https://t.zsxq.com/Yn2JqB6">你们怎么对线上flink做监控的，如果整个程序失败了怎么自动重启等等</a></p>
+<p>31、<a href="https://t.zsxq.com/YFMFeaA">flink cep规则动态解析有接触吗？有没有成型的框架？</a></p>
+<p>32、<a href="https://t.zsxq.com/VZvRrjm">每一个Window都有一个watermark吗？window是怎么根据watermark进行触发或者销毁的？</a></p>
+<p>33、<a href="https://t.zsxq.com/R3ZZJUF"> CheckPoint与SavePoint的区别是什么？</a></p>
+<p>34、<a href="https://t.zsxq.com/Aa62Bim">flink可以在算子中共享状态吗？或者大佬你有什么方法可以共享状态的呢？</a></p>
+<p>35、<a href="https://t.zsxq.com/ayFmmMF">运行几分钟就报了，看taskmager日志，报的是 failed elasticsearch bulk request null，可是我代码里面已经做过空值判断了呀 而且也过滤掉了，flink版本1.7.2 es版本6.3.1</a></p>
+<p>36、<a href="https://t.zsxq.com/Yzzzb2b">这种情况，我们调并行度 还是配置参数好</a></p>
+<p>37、<a href="https://t.zsxq.com/AqBUR3f">大家都用jdbc写，各种数据库增删查改拼sql有没有觉得很累，ps.set代码一大堆，还要计算每个参数的位置</a></p>
+<p>38、<a href="https://t.zsxq.com/AqBUR3f">关于datasource的配置，每个taskmanager对应一个datasource?还是每个slot? 实际运行下来，每个slot中datasorce线程池只要设置1就行了，多了也用不到?</a></p>
+<p>39、<a href="https://t.zsxq.com/AqBUR3f">kafka现在每天出现数据丢失，现在小批量数据，一天200W左右, kafka版本为 1.0.0，集群总共7个节点，TOPIC有十六个分区，单条报文1.5k左右</a></p>
+<p>40、<a href="https://t.zsxq.com/AqBUR3f">根据key.hash的绝对值 对并发度求模，进行分组，假设10各并发度，实际只有8个分区有处理数据，有2个始终不处理，还有一个分区处理的数据是其他的三倍，如截图</a></p>
+<p>41、<a href="https://t.zsxq.com/AqBUR3f">flink每7小时不知道在处理什么， CPU 负载 每7小时，有一次高峰，5分钟内平均负载超过0.8，如截图</a></p>
+<p>42、<a href="https://t.zsxq.com/M3fIMbu">有没有Flink写的项目推荐？我想看到用Flink写的整体项目是怎么组织的，不单单是一个单例子</a></p>
+<p>43、<a href="https://t.zsxq.com/yv7EQFA">Flink 源码的结构图</a></p>
+<p>44、<a href="https://t.zsxq.com/vBAYNJq">我想根据不同业务表（case when）进行不同的redis sink（hash ，set），我要如何操作？</a></p>
+<p>45、<a href="https://t.zsxq.com/b2zbUJa">这个需要清理什么数据呀，我把hdfs里面的已经清理了 启动还是报这个</a></p>
+<p>46、<a href="https://t.zsxq.com/QjQFmQr">  在流处理系统，在机器发生故障恢复之后，什么情况消息最多会被处理一次？什么情况消息最少会被处理一次呢？</a></p>
+<p>47、<a href="https://t.zsxq.com/zbQNfuJ">我检查点都调到5分钟了，这是什么问题</a></p>
+<p>48、<a href="https://t.zsxq.com/ZrjEauN">reduce方法后 那个交易时间 怎么不是最新的，是第一次进入的那个时间，</a></p>
+<p>49、<a href="https://t.zsxq.com/VJyr3bM">Flink  on Yarn 模式，用yarn session脚本启动的时候，我在后台没有看到到Jobmanager，TaskManager，ApplicationMaster这几个进程，想请问一下这是什么原因呢？因为之前看官网的时候，说Jobmanager就是一个jvm进程，Taskmanage也是一个JVM进程</a></p>
+<p>50、<a href="https://t.zsxq.com/VJyr3bM">Flink  on Yarn的时候得指定 多少个TaskManager和每个TaskManager slot去运行任务，这样做感觉不太合理，因为用户也不知道需要多少个TaskManager适合，Flink 有动态启动TaskManager的机制吗。</a></p>
+<p>51、<a href="https://t.zsxq.com/UBmUJMv">参考这个例子，Flink 零基础实战教程：如何计算实时热门商品 | Jark’s Blog， 窗口聚合的时候，用keywindow，用的是timeWindowAll，然后在aggregate的时候用aggregate(new CustomAggregateFunction(), new CustomWindowFunction())，打印结果后，发现窗口中一直使用的重复的数据，统计的结果也不变，去掉CustomWindowFunction()就正常了 ？ 非常奇怪</a></p>
+<p>52、<a href="https://t.zsxq.com/naQb6aI">用户进入产品预定页面（端埋点上报），并填写了一些信息（端埋点上报），但半小时内并没有产生任何订单，然后给该类用户发送一个push。 1. 这种需求适合用flink去做吗？2. 如果适合，说下大概的思路</a></p>
+<p>53、<a href="https://t.zsxq.com/AUf2VNz">业务场景是实时获取数据存redis，请问我要如何按天、按周、按月分别存入redis里？（比方说过了一天自动换一个位置存redis）</a></p>
+<p>54、<a href="https://t.zsxq.com/UJ6Y7m2">有人 AggregatingState 的例子吗, 感觉官方的例子和 官网的不太一样?</a></p>
+<p>55、<a href="https://t.zsxq.com/r3BaAY3">flink-jdbc这个jar有吗？怎么没找到啊？1.8.0的没找到，1.6.2的有</a></p>
+<p>56、<a href="https://t.zsxq.com/jiybIee">现有个关于savepoint的问题，操作流程为，取消任务时设置保存点，更新任务，从保存点启动任务；现在遇到个问题，假设我中间某个算子重写，原先通过state编写，有用定时器，现在更改后，采用窗口，反正就是实现方式完全不一样；从保存点启动就会一直报错，重启，原先的保存点不能还原，此时就会有很多数据重复等各种问题，如何才能保证数据不丢失，不重复等，恢复到停止的时候，现在想到的是记下kafka的偏移量，再做处理，貌似也不是很好弄，有什么解决办法吗</a></p>
+<p>57、<a href="https://t.zsxq.com/eMJmiQz">需要在flink计算app页面访问时长，消费Kafka计算后输出到Kafka。第一条log需要等待第二条log的时间戳计算访问时长。我想问的是，flink是分布式的，那么它能否保证执行的顺序性？后来的数据有没有可能先被执行？</a></p>
+<p>58、<a href="https://t.zsxq.com/Y7e6aIu">我公司想做实时大屏，现有技术是将业务所需指标实时用spark拉到redis里存着，然后再用一条spark streaming流计算简单乘除运算，指标包含了各月份的比较。请问我该如何用flink简化上述流程？</a></p>
+<p>59、<a href="https://t.zsxq.com/QbIayJ6">flink on yarn 方式，这样理解不知道对不对，yarn-session这个脚本其实就是准备yarn环境的，执行run任务的时候，根据yarn-session初始化的yarnDescription 把 flink 任务的jobGraph提交到yarn上去执行</a></p>
+<p>60、<a href="https://t.zsxq.com/VFMRbYN">同样的代码逻辑写在单独的main函数中就可以成功的消费kafka ，写在一个spring boot的程序中，接受外部请求，然后执行相同的逻辑就不能消费kafka。你遇到过吗？能给一些查问题的建议，或者在哪里打个断点，能看到为什么消费不到kafka的消息呢？</a></p>
+<p>61、<a href="https://t.zsxq.com/QNvjI6Q">请问下flink可以实现一个流中同时存在订单表和订单商品表的数据 两者是一对多的关系  能实现得到 以订单表为主 一个订单多个商品 这种需求嘛</a></p>
+<p>62、<a href="https://t.zsxq.com/6ie66EE">在用中间状态的时候，如果中间一些信息保存在state中，有没有必要在redis中再保存一份，来做第三方的存储。</a></p>
+<p>63、<a href="https://t.zsxq.com/bm6mYjI">能否出一期flink state的文章。什么场景下用什么样的state？如，最简单的，实时累加update到state。</a></p>
+<p>64、<a href="https://t.zsxq.com/II6AEe2">flink的双流join博主有使用的经验吗？会有什么常见的问题吗</a></p>
+<p>65、<a href="https://t.zsxq.com/V7EmUZR">窗口触发的条件问题</a></p>
+<p>66、<a href="https://t.zsxq.com/JY3NJam">flink 定时任务怎么做？有相关的demo么？</a></p>
+<p>67、<a href="https://t.zsxq.com/7YZ3Fuz">流式处理过程中数据的一致性如何保证或者如何检测</a></p>
+<p>68、<a href="https://t.zsxq.com/nEEQvzR">重启flink单机集群，还报job not found 异常。</a></p>
+<p>69、<a href="https://t.zsxq.com/qJyvzNj">kafka的数据是用 org.apache.kafka.common.serialization.ByteArraySerialize序列化的，flink这边消费的时候怎么通过FlinkKafkaConsumer创建DataStream<String>？</a></p>
+<p>70、<a href="https://t.zsxq.com/byvnaEi">现在公司有一个需求，一些用户的支付日志，通过sls收集，要把这些日志处理后，结果写入到MySQL，关键这些日志可能连着来好几条才是一个用户的，因为发起请求，响应等每个环节都有相应的日志，这几条日志综合处理才能得到最终的结果，请问博主有什么好的方法没有？</a></p>
+<p>71、<a href="https://t.zsxq.com/qfie6qR">flink 支持hadoop 主备么？ hadoop主节点挂了 flink 会切换到hadoop 备用节点？</a></p>
+<p>72、<a href="https://t.zsxq.com/ZVZzZv7">请教大家: 实际 flink 开发中用 scala 多还是 java多些？ 刚入手 flink 大数据 scala 需要深入学习么？</a></p>
+<p>73、<a href="https://t.zsxq.com/Qzbi6yn">我使用的是flink是1.7.2最近用了split的方式分流，但是底层的SplitStream上却标注为Deprecated，请问是官方不推荐使用分流的方式吗？</a></p>
+<p>74、<a href="https://t.zsxq.com/Auf2NVR">KeyBy 的正确理解，和数据倾斜问题的解释</a></p>
+<p>75、<a href="https://t.zsxq.com/3vnIm62">用flink时，遇到个问题 checkpoint大概有2G左右， 有背压时，flink会重启有遇到过这个问题吗</a></p>
+<p>76、<a href="https://t.zsxq.com/URzVBIm">flink使用yarn-session方式部署，如何保证yarn-session的稳定性，如果yarn-session挂了，需要重新部署一个yarn-session，如何恢复之前yarn-session上的job呢，之前的checkpoint还能使用吗？</a></p>
+<p>77、<a href="https://t.zsxq.com/MjyN7Uf">我想请教一下关于sink的问题。我现在的需求是从Kafka消费Json数据，这个Json数据字段可能会增加，然后将拿到的json数据以parquet的格式存入hdfs。现在我可以拿到json数据的schema，但是在保存parquet文件的时候不知道怎么处理。一是flink没有专门的format parquet，二是对于可变字段的Json怎么处理成parquet比较合适？</a></p>
+<p>78、<a href="https://t.zsxq.com/6qBqVvZ">flink如何在较大的数据量中做去重计算。</a></p>
+<p>79、<a href="https://t.zsxq.com/Eqjyju7">flink能在没有数据的时候也定时执行算子吗？</a></p>
+<p>80、<a href="https://t.zsxq.com/i2zVfIi">使用rocksdb状态后端，自定义pojo怎么实现序列化和反序列化的，有相关demo么？</a></p>
+<p>81、<a href="https://t.zsxq.com/vRJujAi">check point 老是失败，是不是自定义的pojo问题？到本地可以，到hdfs就不行，网上也有很多类似的问题 都没有一个很好的解释和解决方案</a></p>
+<p>82、<a href="https://t.zsxq.com/MVFmuB6">cep规则如图，当start事件进入时，时间00:00:15，而后进入end事件，时间00:00:40。我发现规则无法命中。请问within 是从start事件开始计时？还是跟window一样根据系统时间划分的？如果是后者，请问怎么配置才能从start开始计时？</a></p>
+<p>83、<a href="https://t.zsxq.com/EybM3vR">Flink聚合结果直接写Mysql的幂等性设计问题</a></p>
+<p>84、<a href="https://t.zsxq.com/62VzNRF">Flink job打开了checkpoint，用的rocksdb，通过观察hdfs上checkpoint目录，为啥算副本总量会暴增爆减</a></p>
+<p>85、<a href="">Flink 提交任务的 jar包可以指定路径为 HDFS 上的吗</a></p>
+<p>86、<a href="https://t.zsxq.com/VfimieI">在flink web Ui上提交的任务，设置的并行度为2，flink是stand alone部署的。两个任务都正常的运行了几天了，今天有个地方逻辑需要修改，于是将任务cancel掉(在命令行cancel也试了)，结果taskmanger挂掉了一个节点。后来用其他任务试了，也同样会导致节点挂掉</a></p>
+<p>87、<a href="https://t.zsxq.com/nee6qRv">一个配置动态更新的问题折腾好久（配置用个静态的map变量存着，有个线程定时去数据库捞数据然后存在这个map里面更新一把），本地 idea 调试没问题，集群部署就一直报 空指针异常。下游的算子使用这个静态变量map去get key在集群模式下会出现这个空指针异常，估计就是拿不到 map</a></p>
+<p>88、<a href="https://t.zsxq.com/3bEUZfQ">批量写入MySQL，完成HBase批量写入</a></p>
+<p>89、<a href="https://t.zsxq.com/Zb6AM3V">用flink清洗数据，其中要访问redis，根据redis的结果来决定是否把数据传递到下流，这有可能实现吗？</a></p>
+<p>90、<a href="https://t.zsxq.com/RbeYZvb">监控页面流处理的时候这个发送和接收字节为0。</a></p>
+<p>91、<a href="https://t.zsxq.com/MN7iuZf">sink到MySQL，如果直接用idea的话可以运行，并且成功，大大的代码上面用的FlinkKafkaConsumer010，而我的Flink版本为1.7，kafka版本为2.12，所以当我用FlinkKafkaConsumer010就有问题，于是改为<br>    FlinkKafkaConsumer就可以直接在idea完成sink到MySQL，但是为何当我把该程序打成Jar包，去运行的时候，就是报FlinkKafkaConsumer找不到呢</a></p>
+<p>92、<a href="https://t.zsxq.com/e2VNN7Y">SocketTextStreamWordCount中输入中文统计不出来，请问这个怎么解决，我猜测应该是需要修改一下代码，应该是这个例子默认统计英文</a></p>
+<p>93、<a href="https://t.zsxq.com/RVRn6AE"> Flink 应用程序本地 ide 里面运行的时候并行度是怎么算的？</a></p>
+<p>94、<a href="https://t.zsxq.com/rzbIQBi"> 请问下flink中对于窗口的全量聚合有apply和process两种 他们有啥区别呢</a></p>
+<p>95、<a href="https://t.zsxq.com/UJIubub">不知道大大熟悉Hbase不，我想直接在Hbase中查询某一列数据，因为有重复数据，所以想使用distinct统计实际数据量，请问Hbase中有没有类似于sql的distinct关键字。如果没有，想实现这种可以不？</a></p>
+<p>96、<a href="https://t.zsxq.com/VFaQn2j"> 来分析一下现在Flink,Kafka方面的就业形势，以及准备就业该如何准备的这方面内容呢？</a></p>
+<p>97、<a href="https://t.zsxq.com/Zn2FEQZ"> 大佬知道flink的dataStream可以转换为dataSet吗？因为数据需要11分钟一个批次计算五六个指标，并且涉及好几步reduce，计算的指标之间有联系，用Stream卡住了。</a></p>
+<p>98、<a href="https://t.zsxq.com/aIqjmQN">1.如何在同一窗口内实现多次的聚合，比如像spark中的这样2.多个实时流的jion可以用window来处理一批次的数据吗？</a></p>
+<p>99、<a href="https://t.zsxq.com/ZNvb2FM">写的批处理的功能，现在本机跑是没问题的，就是在linux集群上出现了问题，就是不知道如果通过本地调用远程jar包然后传参数和拿到结果参数返回本机</a></p>
+<p>100、<a href="https://t.zsxq.com/femmiqf">我用standalone开启一个flink集群，上传flink官方用例Socket Window WordCount做测试，开启两个parallelism能正常运行，但是开启4个parallelism后出现错误</a></p>
+<p>101、<a href="https://t.zsxq.com/YZ3vbY3"> 有使用AssignerWithPunctuatedWatermarks 的案例Demo吗？网上找了都是AssignerWithPeriodicWatermarks的，不知道具体怎么使用？</a></p>
+<p>102、<a href="https://t.zsxq.com/uzFyVJe"> 有一个datastream(从文件读取的)，然后我用flink sql进行计算，这个sql是一个加总的运算，然后通过retractStreamTableSink可以把文件做sql的结果输出到文件吗？这个输出到文件的接口是用什么呢？</a></p>
+<p>103、<a href="https://t.zsxq.com/6QNNrZz"> 为啥split这个流设置为过期的</a></p>
+<p>104、<a href="https://t.zsxq.com/Q7YNRBE"> 需要使用flink table的水印机制控制时间的乱序问题，这种场景下我就使用水印+窗口了，我现在写的demo遇到了问题，就是在把触发计算的窗口table（WindowedTable）转换成table进行sql操作时发现窗口中的数据还是乱序的，是不是flink table的WindowedTable不支持水印窗口转table-sql的功能</a></p>
+<p>105、<a href="https://t.zsxq.com/Jmayrbi"> Flink 对 SQL 的重视性</a></p>
+<p>106、<a href="https://t.zsxq.com/ZrZfa2Z"> flink job打开了checkpoint，任务跑了几个小时后就出现下面的错，截图是打出来的日志，有个OOM，又遇到过的没？</a></p>
+<p>107、<a href="https://t.zsxq.com/emaAeyj"> 本地测试是有数据的，之前该任务放在集群也是有数据的，可能提交过多次，现在读不到数据了 group id 也换过了， 只能重启集群解决么？</a></p>
+<p>108、<a href="https://t.zsxq.com/ayBa6am">使用flink清洗数据存到es中，直接在flatmap中对处理出来的数据用es自己的ClientInterface类直接将数据存入es当中，不走sink，这样的处理逻辑是不是会有问题。</a></p>
+<p>108、<a href="https://t.zsxq.com/QNvbE62"> flink从kafka拿数据（即增量数据）与存量数据进行内存聚合的需求，现在有一个方案就是程序启动的时候先用flink table将存量数据加载到内存中创建table中，然后将stream的增量数据与table的数据进行关联聚合后输出结束，不知道这种方案可行么。目前个人认为有两个主要问题：1是增量数据stream转化成append table后不知道能与存量的table关联聚合不，2是聚合后输出的结果数据是否过于频繁造成网络传输压力过大</a></p>
+<p>109、<a href="https://t.zsxq.com/yzjAQ7a"> 设置时间时间特性有什么区别呢,  分别在什么场景下使用呢?两种设置时间延迟有什么区别呢 , 分别在什么场景下使用</a></p>
+<p>110、<a href="https://t.zsxq.com/qRrJEaa"> flink从rabbitmq中读取数据，设置了rabbitmq的CorrelationDataId和checkpoint为EXACTLY_ONCE；如果flink完成一次checkpoint后，在这次checkpoint之前消费的数据都会从mq中删除。如果某次flink停机更新，那就会出现mq中的一些数据消费但是处于Unacked状态。在flink又重新开启后这批数据又会重新消费。那这样是不是就不能保证EXACTLY_ONCE了</a></p>
+<p>111、<a href="https://t.zsxq.com/mAqn2RF">1. 在Flink checkpoint 中, 像 operator的状态信息 是在设置了checkpoint 之后自动的进行快照吗 ?2. 上面这个和我们手动存储的 Keyed State 进行快照(这个应该是增量快照)</a></p>
+<p>112、<a href="https://t.zsxq.com/E2BeQ3f">现在有个实时商品数，交易额这种统计需求，打算用 flink从kafka读取binglog日志进行计算，但binglog涉及到insert和update这种操作时 怎么处理才能统计准确，避免那种重复计算的问题？</a></p>
+<p>113、<a href="https://t.zsxq.com/vjIeyFI">我这边用flink做实时监控，功能很简单，就是每条消息做keyby然后三分钟窗口，然后做些去重操作，触发阈值则报警，现在问题是同一个时间窗口同一个人的告警会触发两次，集群是三台机器，standalone cluster，初步结果是三个算子里有两个收到了同样的数据</a></p>
+<p>114、<a href="https://t.zsxq.com/unq3FIa">在使用WaterMark的时候，默认是每200ms去设置一次watermark，那么每个taskmanager之间，由于得到的数据不同，所以往往产生的最大的watermark不同。 那么这个时候，是各个taskmanager广播这个watermark，得到全局的最大的watermark，还是说各个taskmanager都各自用自己的watermark。主要没看到广播watermark的源码。不知道是自己观察不仔细还是就是没有广播这个变量。</a></p>
+<p>115、<a href="https://t.zsxq.com/AeUnAyN">现在遇到一个需求，需要在job内部定时去读取redis的信息，想请教flink能实现像普通程序那样的定时任务吗？</a></p>
+<p>116、<a href="https://t.zsxq.com/z7uZbY3">有个触发事件开始聚合，等到数量足够，或者超时则sink推mq 环境 flink 1.6 用了mapState 记录触发事件 1 数据足够这个OK 2 超时state ttl 1.6支持，但是问题来了，如何在超时时候增加自定义处理？</a></p>
+<p>117、<a href="https://t.zsxq.com/R7UjeUF">请问impala这种mpp架构的sql引擎，为什么稳定性比较差呢？</a></p>
+<p>118、<a href="https://t.zsxq.com/q7myfAQ">watermark跟并行度相关不是，过于全局了，期望是keyby之后再针对每个keyed stream 打watermark，这个有什么好的实践呢？</a></p>
+<p>119、<a href="https://t.zsxq.com/rB6yfeA">请问如果把一个文件的内容读取成datastream和dataset，有什么区别吗？？他们都是一条数据一条数据的被读取吗？</a></p>
+<p>120、<a href="https://t.zsxq.com/j2j6EyJ">有没有kylin相关的资料，或者调优的经验？</a></p>
+<p>121、<a href="https://t.zsxq.com/iMjmQVV">flink先从jdbc读取配置表到流中，另外从kafka中新增或者修改这个配置，这个场景怎么把两个流一份配置流？我用的connect,接着发不成广播变量，再和实体流合并，但在合并时报Exception in thread “main” java.lang.IllegalArgumentException</a></p>
+<p>122、<a href="https://t.zsxq.com/RFQNFIa">Flink  exactly-once，kafka版本为0.11.0 ，sink基于FlinkKafkaProducer011 每五分钟一次checkpoint，但是checkpoint开始后系统直接卡死，at-lease-once 一分钟能完成的checkpoint， 现在十分钟无法完成没进度还是0， 不知道哪里卡住了</a></p>
+<p>123、<a href="https://t.zsxq.com/NJq3rj2">flink的状态是默认存在于内存的(也可以设置为rocksdb或hdfs)，而checkpoint里面是定时存放某个时刻的状态信息，可以设置hdfs或rocksdb是这样理解的吗？</a></p>
+<p>124、<a href="https://t.zsxq.com/NJq3rj2">Flink异步IO中，下图这两种有什么区别？为啥要加 CompletableFuture.supplyAsync，不太明白？</a></p>
+<p>125、<a href="https://t.zsxq.com/NJq3rj2">flink的状态是默认存在于内存的(也可以设置为rocksdb或hdfs)，而checkpoint里面是定时存放某个时刻的状态信息，可以设置hdfs或rocksdb是这样理解的吗？</a></p>
+<p>126、<a href="https://t.zsxq.com/rniUrjm">有个计算场景，从kafka消费两个数据源，两个数据结构都有时间段概念，计算需要做的是匹配两个时间段，匹配到了，就生成一条新的记录。请问使用哪个工具更合适，flink table还是cep？请大神指点一下 我这边之前的做法，将两个数据流转为table.两个table over window后join成新的表。结果job跑一会就oom.</a></p>
+<p>127、<a href="https://t.zsxq.com/vRZ7qJ2">一个互联网公司，或者一个业务系统，如果想做一个全面的监控要怎么做？有什么成熟的方案可以参考交流吗？有什么有什么度量指标吗？</a></p>
+<p>128、<a href="https://t.zsxq.com/3vfyJau">怎么深入学习flink,或者其他大数据组件，能为未来秋招找一份大数据相关（计算方向）的工作增加自己的竞争力？</a></p>
+<p>129、<a href="https://t.zsxq.com/VBIunun">oppo的实时数仓，其中明细层和汇总层都在kafka中，他们的关系库的实时数据也抽取到kafka的ods，那么在构建数仓的，需要join 三四个大业务表，业务表会变化，那么是大的业务表是从kafka的ods读取吗？实时数仓，多个大表join可以吗</a></p>
+<p>130、<a href="https://t.zsxq.com/vnaURzj">Tuple类型有什么方法转换成json字符串吗？现在的场景是，结果在存储到sink中时希望存的是json字符串，这样应用程序获取数据比较好转换一点。如果Tuple不好转换json字符串，那么应该以什么数据格式存储到sink中</a></p>
+<p>140、<a href="https://t.zsxq.com/J6eAmYb">端到端的数据保证，是否意味着中间处理程序中断，也不会造成该批次处理失败的消息丢失，处理程序重新启动之后，会再次处理上次未处理的消息</a></p>
+<p>141、<a href="https://t.zsxq.com/7qBMrBe">关于flink datastream window相关的。比如我现在使用滚动窗口，统计一周内去重用户指标，按照正常watermark触发计算，需要等到当前周的window到达window的endtime时，才会触发，这样指标一周后才能产出结果。我能不能实现一小时触发一次计算，每次统计截止到当前时间，window中所有到达元素的去重数量。</a></p>
+<p>142、<a href="https://t.zsxq.com/uJqzBIe">FLIP-16 Loop Fault Tolerance 是讲现在的checkpoint机制无法在stream loop的时候容错吗？现在这个问题解决了没有呀？</a></p>
+<p>143、<a href="https://t.zsxq.com/uZnmQzv">现在的需求是，统计各个key的今日累计值，一分钟输出一次。如，各个用户今日累计点击次数。这种需求用datastream还是table API方便点？</a></p>
+<p>144、<a href="https://t.zsxq.com/BqnYRN7">本地idea可以跑的工程，放在standalone集群上，总报错，报错截图如下，大佬请问这是啥原因</a></p>
+<p>145、<a href="https://t.zsxq.com/7MJujMb">比如现在用k8s起了一个flink集群，这时候数据源kafka或者hdfs会在同一个集群上吗，还是会单独再起一个hdfs/kafka集群</a></p>
+<p>146、<a href="https://t.zsxq.com/6U7QFMj">flink kafka sink 的FlinkFixedPartitioner 分配策略，在并行度小于topic的partitions时，一个并行实例固定的写消息到固定的一个partition，那么就有一些partition没数据写进去？</a></p>
+<p>147、<a href="https://t.zsxq.com/fmq3fYF">基于事件时间，每五分钟一个窗口，五秒钟滑动一次，同时watermark的时间同样是基于事件事件时间的，延迟设为1分钟，假如数据流从12：00开始，如果12：07-12：09期间没有产生任何一条数据，即在12：07-12：09这段间的数据流情况为···· （12：07:00，xxx）,(12:09:00,xxx)······，那么窗口[12:02:05-12:07:05]，[12:02:10-12:07:10]等几个窗口的计算是否意味着只有等到，12：09：00的数据到达之后才会触发</a></p>
+<p>148、<a href="https://t.zsxq.com/MRvv3ZV">使用flink1.7，当消费到某条消息(protobuf格式)，报Caused by: org.apache.kafka.common.KafkaException: Record batch for partition Notify-18 at offset 1803009 is invalid, cause: Record is corrupt 这个异常。 如何设置跳过已损坏的消息继续消费下一条来保证业务不终断？ 我看了官网kafka connectors那里，说在DeserializationSchema.deserialize(…)方法中返回null，flink就会跳过这条消息，然而依旧报这个异常</a></p>
+<p>149、<a href="https://t.zsxq.com/MRJeAuj">是否可以抽空总结一篇Flink 的 watermark 的原理案例？一直没搞明白基于事件时间处理时的数据乱序和数据迟到底咋回事</a></p>
+<p>150、<a href="https://t.zsxq.com/2rJyNrF">flink中rpc通信的原理，与几个类的讲解，有没有系统详细的文章样，如有求分享，谢谢</a></p>
+<p>151、<a href="https://t.zsxq.com/bM3ZZRf">Flink中如何使用基于事件时间处理，但是又不使用Watermarks? 我在会话窗口中使用遇到一些问题，图一是基于处理时间的，测试结果session是基于keyby(用户)的，图二是基于事件时间的，不知道是我用法不对还是怎么的，测试结果发现并不是基于keyby(用户的)，而是全局的session。不知道怎么修改？</a></p>
+<p>152、<a href="https://t.zsxq.com/BMVzzzB">flink实时计算平台，yarn模式日志收集怎么做，为什么会checkpoint失败，报警处理，后需要做什么吗？job监控怎么做</a></p>
+<p>153、<a href="https://t.zsxq.com/237EAay">有flink与jstorm的在不同应用场景下, 性能比较的数据吗? 从网络上能找大部分都是flink与storm的比较. 在jstorm官网上有一份比较的图表, 感觉参考意义不大, 应该是比较早的flink版本.</a></p>
+<p>154、<a href="https://t.zsxq.com/J6eAmYb">为什么使用SessionWindows.withGap窗口的话，State存不了东西呀，每次加1 ，拿出来都是null, 我换成 TimeWindow就没问题。</a></p>
+<p>155、<a href="https://t.zsxq.com/y3nYZrf">请问一下，flink datastream流处理怎么统计去重指标？  官方文档中只看到批处理有distinct概念。</a></p>
+<p>156、<a href="https://t.zsxq.com/qRjqFY3">好全的一篇文章，对比分析 Flink，Spark Streaming，Storm 框架</a></p>
+<p>157、<a href="https://t.zsxq.com/Eau7qNB">关于 structured_streaming 的 paper</a></p>
+<p>158、<a href="https://t.zsxq.com/rFYbEeq">zookeeper集群切换领导了，flink集群项目重启了就没有数据的输入和输出了，这个该从哪方面入手解决？</a></p>
+<p>159、<a href="https://t.zsxq.com/nEAaYNF">我想请教下datastream怎么和静态数据join呢</a></p>
+<p>160、<a href="https://t.zsxq.com/IAAeiA6">时钟问题导致收到了明天的数据，这时候有什么比较好的处理方法？看到有人设置一个最大的跳跃阈值，如果当前数据时间 - 历史最大时间 超过阈值就不更新。如何合理的设计水印，有没有一些经验呢？</a></p>
+<p>161、<a href="https://t.zsxq.com/EuJ2RRf">大佬们flink怎么定时查询数据库？</a></p>
+<p>162、<a href="https://t.zsxq.com/vzZBmYB">现在我们公司有个想法，就是提供一个页面，在页面上选择source sink 填写上sql语句，然后后台生成一个flink的作业，然后提交到集群。功能有点类似于华为的数据中台，就是页面傻瓜式操作。后台能自动根据相应配置得到结果。请问拘你的了解，可以实现吗？如何实现？有什么好的思路。现在我无从下手</a></p>
+<p>163、<a href="https://t.zsxq.com/VRFIMfy">请教一下 flink on yarn 的 ha机制</a></p>
+<p>164、<a href="https://t.zsxq.com/FAiiEyr">在一般的流处理以及cep, 都可以对于eventtime设置watermark, 有时可能需要设置相对大一点的值, 这内存压力就比较大, 有没有办法不应用jvm中的内存, 而用堆外内存, 或者其他缓存, 最好有cache机制, 这样可以应对大流量的峰值.</a></p>
+<p>165、<a href="https://t.zsxq.com/YnI2F66">请教一个flink sql的问题。我有两个聚合后的流表A和B，A和Bjoin得到C表。在设置state TTL 的时候是直接对C表设置还是，对A表和B表设置比较好？</a></p>
+<p>166、<a href="https://t.zsxq.com/unyneEU">spark改写为flink，会不会很复杂，还有这两者在SQL方面的支持差别大吗？</a></p>
+<p>167、<a href="https://t.zsxq.com/RfyZFUR">请问flink allowedLateness导致窗口被多次fire，最终数据重复消费，这种问题怎么处理，数据是写到es中</a></p>
+<p>168、<a href="https://t.zsxq.com/bIAEyFe">设置taskmanager.numberOfTaskSlots: 4的时候没有问题，但是cpu没有压上去，只用了30%左右，于是设置了taskmanager.numberOfTaskSlots: 8，但是就报错误找不到其中一个自定义的类，然后kafka数据就不消费了。为什么？cpu到多少合适？slot是不是和cpu数量一致是最佳配置？kafka分区数多少合适，是不是和slot,parallesim一致最佳？</a></p>
+<p>169、<a href="https://t.zsxq.com/BUNfYnY">需求是根据每条日志切分出需要9个字段，有五个指标再根据9个字段的不同组合去做计算。  第一个方法是：我目前做法是切分的9个字段开5分钟大小1分钟计算一次的滑动窗口窗口，进行一次reduce去重，然后再map取出需要的字段，然后过滤再开5分钟大小1分钟计算一次的滑动窗口窗口进行计算保存结果，这个思路遇到的问题是上一个滑动窗口会每一分钟会计算5分钟数据，到第二个窗口划定的5分钟范围的数据会有好多重复，这个思路会造成数据重复。 第二个方法是：切分的9个字段开5分钟大小1分钟计算一次的滑动窗口窗口，再pross方法里完成所有的过滤，聚合计算，但是再高峰期每分钟400万条数据，这个思路担心在高峰期flink计算不过来</a></p>
+<p>170、<a href="https://t.zsxq.com/aAqBEY7">a,b,c三个表，a和c有eventtime，a和c直接join可以，a和b join后再和c join 就会报错，这是怎么回事呢</a></p>
+<p>171、<a href="https://t.zsxq.com/zZNNRzr">自定义的source是这样的（图一所示） 使用的时候是这样的（图二所示），为什么无论 sum.print().setParallelism(2)（图2所示）的并行度设置成几最后结果都是这样的</a></p>
+<p>172、<a href="https://t.zsxq.com/i6Mz7Yj">刚接触flink，如有问的不合适的地方，请见谅。 1、为什么说flink是有状态的计算？ 2、这个状态是什么？3、状态存在哪里</a></p>
+<p>173、<a href="https://t.zsxq.com/vNjAIMN">这边用flink 1.8.1的版本，采用flink on yarn，hadoop版本2.6.0。代码是一个简单的滚动窗口统计函数，但启动的时候报错，如下图片。  （2）然后我把flink版本换成1.7.1，重新提交到2.6.0的yarn平台，就能正常运行了。 （3）我们测试集群hadoop版本是3.0，我用flink 1.8.1版本将这个程序再次打包，提交到3.0版本的yarn平台，也能正常运行。 貌似是flink 1.8.1版本与yarn 2.6.0版本不兼容造成的这个问题</a></p>
+<p>174、<a href="https://t.zsxq.com/2rVbm6Y">StateBackend我使用的是MemoryStateBackend， State是怎么释放内存的，例如我在函数中用ValueState存储了历史状态信息。但是历史状态数据我没有手动释放，那么程序会自动释放么？还是一直驻留在内存中</a></p>
+<p>175、<a href="https://t.zsxq.com/3bIEAyv">请问老师是否可以提供一些Apachebeam的学习资料 谢谢</a></p>
+<p>176、<a href="https://t.zsxq.com/yFEyZVB">flink 的 DataSet或者DataStream支持索引查询以及删除吗，像spark rdd，如果不支持的话，该转换成什么</a></p>
+<p>177、<a href="https://t.zsxq.com/VNrn6iI">关于flink的状态，能否把它当做数据库使用，类似于内存数据库，在处理过程中存业务数据。如果是数据库可以算是分布式数据库吗?是不是使用rocksdb这种存储方式才算是?支持的单库大小是不是只是跟本地机器的磁盘大小相关?如果使用硬盘存储会不会效率性能有影响</a></p>
+<p>178、<a href="https://t.zsxq.com/yfmiUvf">我这边做了个http sink，想要批量发送数据，不过现在只能用数量控制发送，但最后的几个记录没法触发发送动作，想问下有没有什么办法</a></p>
+<p>179、<a href="https://t.zsxq.com/vNvrfmE">请问下如何做定时去重计数，就是根据时间分窗口，窗口内根据id去重计数得出结果，多谢。试了不少办法，没有简单直接办法</a></p>
+<p>180、<a href="https://t.zsxq.com/rzZbQFA">我有个job使用了elastic search sink. 设置了批量5000一写入，但是看es监控显示每秒只能插入500条。是不是bulkprocessor的currentrequest为0有关</a></p>
+<p>181、<a href="https://t.zsxq.com/aIur7ai">有docker部署flink的资料吗</a></p>
+<p>182、<a href="https://t.zsxq.com/VjQjqF6">在说明KeyBy的StreamGraph执行过程时，keyBy的ID为啥是6？  根据前面说，ID是一个静态变量，每取一次就递增1，我觉得应该是3啊，是我理解错了吗</a></p>
+<p>183、<a href="https://t.zsxq.com/BEmAIQv">有没计划出Execution Graph的远码解析</a></p>
+<p>184、<a href="https://t.zsxq.com/vVjiYJQ">可以分享下物理执行图怎样划分task，以及task如何执行，还有他们之间数据如何传递这块代码嘛？</a></p>
+<p>185、<a href="https://t.zsxq.com/FyNJQbQ">Flink源码和这个学习项目的结构图</a></p>
+<p>186、<a href="https://t.zsxq.com/qrjmmaU">请问flink1.8，如何做到动态加载外部udf-jar包呢？</a></p>
+<p>187、<a href="https://t.zsxq.com/ZFQjQnm">同一个Task Manager中不同的Slot是怎么交互的，比如：source处理完要传递给map的时候，如果在不同的Slot中，他们的内存是相互隔离，是怎么交互的呢？  我猜是通过序列化和反序列化对象，并且通过网络来进行交互的</a></p>
+<p>188、<a href="https://t.zsxq.com/YBQFufi">你们有没有这种业务场景。flink从kafka里面取数据，每一条数据里面有mongdb表A的id,这时我会在map的时候采用flink的异步IO连接A表，然后查询出A表的字段1，再根据该字段1又需要异步IO去B表查询字段2，然后又根据字段2去C表查询字段3…..像这样的业务场景，如果多来几种逻辑，我应该用什么方案最好呢</a></p>
+<p>189、<a href="https://t.zsxq.com/vnufYFY">今天本地运行flink程序，消费socket中的数据，连续只能消费两条，第三条flink就消费不了了</a></p>
+<p>190、<a href="https://t.zsxq.com/me6EmM3">源数据经过过滤后分成了两条流，然后再分别提取事件时间和水印，做时间窗口，我测试时一条流没有数据，另一条的数据看日志到了窗口操作那边就没走下去，貌似窗口一直没有等到触发</a></p>
+<p>191、<a href="https://t.zsxq.com/fubQrvj">有做flink cep的吗，有资料没？</a></p>
+<p>192、<a href="https://t.zsxq.com/fEQVjAe">麻烦问一下 BucketingSink跨集群写，如果任务运行在hadoop A集群，从kafka读取数据处理后写到Hadoo B集群，即使把core-site.xml和hdfs-site.xml拷贝到代码resources下，路径使用hdfs://hadoopB/xxx，会提示ava.lang.RuntimeException: Error while creating FileSystem when initializing the state of the BucketingSink.，跨集群写这个问题  flink不支持吗？</a></p>
+<p>193、<a href="https://t.zsxq.com/fIMVJ2J">想咨询下，如何对flink中的datastream和dataset进行数据采样</a></p>
+<p>194、<a href="https://t.zsxq.com/7MVjyzz">一个flink作业经常发生oom，可能是什么原因导致的。  处理流程只有15+字段的解析，redis数据读取等操作，TM配置10g。  业务会在夜间刷数据，qps能打到2500左右~</a></p>
+<p>195、<a href="https://t.zsxq.com/jA2NVnU">我看到flink 1.8的状态过期仅支持Processing Time，那么如果我使用的是Event time那么状态就不会过期吗</a></p>
+<p>196、<a href="https://t.zsxq.com/BQv33Rb">请问我想每隔一小时统计一个属性从当天零点到当前时间的平均值，这样的时间窗该如何定义？</a></p>
+<p>197、<a href="https://t.zsxq.com/nEAiIea">flink任务里面反序列化一个类，报ClassNotFoundException，可是包里面是有这个类的，有遇到这种情况吗？</a></p>
+<p>198、<a href="https://t.zsxq.com/RnayrVn">在构造StreamGraph，类似PartitionTransformmation 这种类型的 transform，为什么要添加成一个虚拟节点，而不是一个实际的物理节点呢？</a></p>
+<p>199、<a href="https://t.zsxq.com/A2fYNFA">flink消费kafka的数据写入到hdfs中，我采用了BucketingSink 这个sink将operator出来的数据写入到hdfs文件上，并通过在hive中建外部表来查询这个。但现在有个问题，处于in-progress的文件，hive是无法识别出来该文件中的数据，可我想能在hive中实时查询进来的数据，且不想产生很多的小文件，这个该如何处理呢</a></p>
+<p>200、<a href="https://t.zsxq.com/7AurJU3">采用Flink单机集群模式一个jobmanager和两个taskmanager，机器是单机是24核，现在做个简单的功能从kafka的一个topic转满足条件的消息到另一个topic，topic的分区是30，我设置了程序默认并发为30，现在每秒消费2w多数据，不够快，请问可以怎么提高job的性能呢？</a></p>
+<p>201、<a href="https://t.zsxq.com/Mnm2nI6">Flink Metric 源码分析</a></p>
+<p>202、<a href="https://t.zsxq.com/iAi6QRb">请问怎么理解官网的这段话？按官网的例子，难道只keyby之后才有keyed state，才能托管Flink存储状态么？source和map如果没有自定义operator state的话，状态是不会被保存的？</a></p>
+<p>203、<a href="https://t.zsxq.com/3rbeuju">想用Flink做业务监控告警，并要能够支持动态添加CEP规则，问下可以直接使用Flink CEP还是siddhi CEP? 有没有相关的资料学习下？谢谢！</a></p>
+<p>204、<a href="https://t.zsxq.com/eYJUbm6">请问一下，有没有关于水印，触发器的Java方面的demo啊</a></p>
+<p>205、<a href="https://t.zsxq.com/QvbAqVB">老师，最近我们线上偶尔出现这种情况，就是40个并行度，其他有一个并行度CheckPoint一直失败，其他39个并行度都是毫秒级别就可以CheckPoint成功，这个怎么定位问题呢？还有个问题 CheckPoint的时间分为三部分 Checkpoint Duration (Async）和 Checkpoint Duration (Sync），还有个 end to end 减去同步和异步的时间，这三部分 分别指代哪块？如果发现这三者中的任意一个步骤时间长，该怎么去优化</a></p>
+<p>206、<a href="https://t.zsxq.com/JaUZvbY">我这边有个场景很依赖消费出来的数据的顺序。在源头侧做了很多处理，将kafka修改成一个分区等等很多尝试，最后消费出来的还是乱序的。能不能在flink消费的时候做处理，来保证处理的数据的顺序。</a></p>
+<p>207、<a href="https://t.zsxq.com/iQfaAeu">有一个类似于实时计算今天的pv，uv需求，采用source-&gt;keyby-&gt;window-&gt;trigger-&gt;process后，在process里采用ValueState计算uv  ,问题是 这个window内一天的所有数据是都会缓存到flink嘛？ 一天的数据量如果大点，这样实现就有问题了，  这个有其他的实现思路嘛？</a></p>
+<p>208、<a href="https://t.zsxq.com/f6eAu3J">Flink 注解源码解析</a></p>
+<p>209、<a href="https://t.zsxq.com/IuRJYne">如何监控 Flink 的 TaskManager 和 JobManager</a></p>
+<p>210、<a href="https://t.zsxq.com/v7yfEIq">问下，在真实流计算过程中，并行度的设置，是与 kafka topic的partition数一样的吗？</a></p>
+<p>211、<a href="https://t.zsxq.com/Zf2F6mM">Flink的日志 如果自己做平台封装在自己的界面中 请问job Manger 和 taskManger 还有用户自己的程序日志 怎么获取呢 有api还是自己需要利用flume 采集到ELK？</a></p>
+<p>212、<a href="https://t.zsxq.com/72VzBEy">我想问下一般用Flink统计pv uv是怎么做的？uv存到redis? 每个uv都存到redis，会不会撑爆？</a></p>
+<p>213、<a href="https://t.zsxq.com/zBmm2fq">Flink的Checkpoint 机制，在有多个source的时候，barrier n 的流将被暂时搁置，从其他流接收的记录将不会被处理，但是会放进一个输入缓存input buffer。如果被缓存的record大小超出了input buffer会怎么样？不可能一直缓存下去吧，如果其中某一条就一直没数据的话，整个过程岂不是卡死了？</a></p>
+<p>214、<a href="https://t.zsxq.com/ZnIAi2j">公司想实时展示订单数据，汇总金额，并需要和前端交互，实时生成数据需要告诉前端，展示成折线图，这种场景的技术选型是如何呢？包括数据的存储，临时汇总数据的存储，何种形式告诉前端</a></p>
+<p>215、<a href="https://t.zsxq.com/7EIeEyJ">请问下checkpoint中存储了哪些东西？</a></p>
+<p>216、<a href="https://t.zsxq.com/euvFaYz">我这边有个需求是实时计算当前车辆与前车距离，用经纬度求距离。大概6000台车，10秒一条经纬度数据。gps流与自己join的地方在进行checkpoint的时候特别缓，每次要好几分钟。checkpoint 状态后端是rocksDB。有什么比较好的方案吗？自己实现一个类似last_value的函数取车辆最新的经纬再join，或者弄个10秒的滑动窗口输出车辆最新的经纬度再进行join，这样可行吗？</a></p>
+<p>217、<a href="https://t.zsxq.com/YRnEUFe">flink在启动的时候能不能指定一个时间点从kafka里面恢复数据呢</a></p>
+<p>218、<a href="https://t.zsxq.com/7QJEEyr">我们线上有个问题，很多业务都去读某个hive表，但是当这个hive表正在写数据的时候，偶尔出现过 读到表里数据为空的情况，这个问题怎么解决呢？</a></p>
+<p>219、<a href="https://t.zsxq.com/yVnaYR7">使用 InfluxDB 和 Grafana 搭建监控 Flink 的平台</a></p>
+<p>220、<a href="https://t.zsxq.com/uvFU7aY">flink消费kafka两个不同的topic,然后进行join操作，如果使用事件时间，两个topic都要设置watermaker吗，如果只设置了topic  A的watermaker,topic B的不设置会有什么影响吗？</a></p>
+<p>221、<a href="https://t.zsxq.com/NNFYJMn">请教一个问题，我的Flink程序运行一段时间就会报这个错误，定位好多天都没有定位到。checkpoint 时间是5秒，20秒都不行。Caused by: java.io.IOException: Could not flush and close the file system output stream to hdfs://HDFSaaaa/flink/PointWideTable_OffTest_Test2/1eb66edcfccce6124c3b2d6ae402ec39/chk-355/1005127c-cee3-4099-8b61-aef819d72404 in order to obtain the stream state handle</a></p>
+<p>222、<a href="https://t.zsxq.com/yvRNFEI">Flink的反压机制相比于Storm的反压机制有什么优势呢？问题2: Flink的某一个节点发生故障，是否会影响其他节点的正常工作？还是会通过Checkpoint容错机制吗把任务转移到其他节点去运行呢？</a></p>
+<p>223、<a href="https://t.zsxq.com/ZJmiqZz">我在验证checkpoint的时候遇到给问题，不管是key state 还是operator state，默认和指定uid是可以的恢复state数据的，当指定uidHash时候无法恢复state数据，麻烦大家给解答一样。我操作state是实现了CheckpointedFunction接口，覆写snapshotState和initializeState，再这两个方法里操作的，然后让程序定时抛出异常，观察发现指定uidHash后snapshotState()方法里context.isRestored()为false，不太明白具体是什么原因</a></p>
+<p>224、<a href="https://t.zsxq.com/mYV37qF">kafka 中的每条数据需要和 es 中的所有数据(动态增加)关联，关联之后会做一些额外的操作，这个有什么比较可行的方案？</a></p>
+<p>225、<a href="https://t.zsxq.com/buFeyZr">flink消费kafka数据，设置1分钟checkpoint一次，假如第一次checkpoint完成以后，还没等到下一次checkpoint，程序就挂了，kafka offset还是第一次checkpoint记录的offset,那么下次重新启动程序，岂不是多消费数据了？那flink的 exactly one消费语义是怎么样的？</a></p>
+<p>226、<a href="https://t.zsxq.com/Znyja62">程序频繁发生Heartbeat of TaskManager with id container_e36_1564049750010_5829_01_000024 timed out. 心跳超时，一天大概10次左右。是内存没给够吗？还是网络波动引起的</a></p>
+<p>227、<a href="https://t.zsxq.com/AA6ma2Z">有没有性能优化方面的指导文章？</a></p>
+<p>228、<a href="https://t.zsxq.com/a2N37a6">flink消费kafka是如何监控消费是否正常的，有啥好办法？</a></p>
+<p>229、<a href="https://t.zsxq.com/m2FeeMf">我按照官方的wordcount案例写了一个例子，然后在main函数中起了一个线程，原本是准备定时去更新某些配置，准备测试一下是否可行，所以直接在线程函数中打印一条语句测试是否可行。现在测试的结果是不可行，貌似这个线程根本就没有执行，请问这是什么原因呢？   按照理解，JobClient中不是反射类执行main函数吗， 执行main函数的时候为什么没有执行这个线程的打印函数呢？</a></p>
+<p>230、<a href="https://t.zsxq.com/EyFUb6m">请问我想保留最近多个完成的checkpoint数据，是通过设置 state.checkpoints.num-retained 吗？要怎么使用？</a></p>
+<p>231、<a href="https://t.zsxq.com/rFeIAeA">有没有etl实时数仓相关案例么？比如二十张事实表流join</a></p>
+<p>232、<a href="https://t.zsxq.com/n2RFmyN">为什么我扔到flink 的stream job，立刻就finished</a></p>
+<p>233、<a href="https://t.zsxq.com/iqJiyvN">有没有在flink上机器学习算法的一些例子啊，除了官网提供的flink exampke里的和flink ml里已有的</a></p>
+<p>234、<a href="https://t.zsxq.com/uB6aUzZ">如果我想扩展sql的关键词，比如添加一些数据支持，有什么思路，现在想的感觉都要改calcite（刚碰flink感觉难度太大了）</a></p>
+<p>235、<a href="https://t.zsxq.com/2BEeu3Z">我想实现统计每5秒中每个类型的次数，这个现在不输出，问题出在哪儿啊</a></p>
+<p>236、<a href="https://t.zsxq.com/VBA6IUR">我用flink往hbase里写数据，有那种直接批量写hfile的方式的demo没</a></p>
+<p>237、<a href="https://t.zsxq.com/IieMFMB">请问怎么监控Kafka消费是否延迟，是否出现消息积压？你有demo吗？这种是用Springboot自己写一个监控，还是咋整啊？</a></p>
+<p>238、<a href="https://t.zsxq.com/j2fM3BM">请问有计算pv uv的例子吗</a></p>
+<p>239、<a href="https://t.zsxq.com/Rb2Z7uB">通过控制流动态修改window算子窗口类型和长度要怎么写</a></p>
+<p>240、<a href="https://t.zsxq.com/UVbaQfM">flink的远程调试能出一版么？网上资料坑的多</a></p>
+<p>241、<a href="https://t.zsxq.com/AYVjAuB">企业里，Flink开发，java用得多，还是scala用得多？</a></p>
+<p>242、<a href="https://t.zsxq.com/j6QfMzf">flink的任务运行在yarn的环境上，在yarn的resourcemanager在进行主备切换时，所有的flink任务都失败了，而MR的任务可以正常运行。报错信息如下：AM is not registered for known application attempt: appattempt_1565306391442_89321_000001 or RM had restarted after AM registered . AM should re-register<br>     请问这是什么原因，该如何处理呢？</a></p>
+<p>243、<a href="https://t.zsxq.com/IUVZjUv">请教一个分布式问题，比如在Flink的多个TaskManager上统计指标count，TM1有两条数据，TM2有一条数据，程序是怎么计算出来是3呢？原理是怎么样的</a></p>
+<p>244、<a href="https://t.zsxq.com/7MFEQR3">现在公司部分sql查询oracle数据特别的慢，因为查询条件很多想问一下有什么方法，例如基于大数据组件可以加快查询速度的吗？</a></p>
+<p>245、<a href="https://t.zsxq.com/Mfa6aQB">想咨询下有没有做过flink同步配置做自定义计算的系统？或者有没有什么好的建议？业务诉求是希望业务用户可以自助配置计算规则做流式计算</a></p>
+<p>246、<a href="https://t.zsxq.com/z3bunyN">我这边有个实时同步数据的任务，白天运行的时候一直是正常的，一到凌晨2点多之后就没有数据sink进mysql。晚上会有一些离线任务和一些dataX任务同步数据到mysql。但是任务一切都是正常的，ck也很快20ms，数据也是正常消费。看了yarn上的日志，没有任何error。自定义的sink里面也设置了日志打印，但是log里没有。这种如何快速定位问题。</a></p>
+<p>247、<a href="https://t.zsxq.com/Y3fe6Mn">有没有flink处理异常数据的案例资料</a></p>
+<p>248、<a href="https://t.zsxq.com/I2Z7Ybm">flink中如何传递一个全局变量</a></p>
+<p>249、<a href="https://t.zsxq.com/iIUZrju">台4核16G的Flink taskmanager配一个单独的Yarn需要一台啥样的服务器？其他功能都不需要就一个调度的东西？</a></p>
+<p>250、<a href="https://t.zsxq.com/m6I2BEE">side-output 的分享</a></p>
+<p>251、<a href="https://t.zsxq.com/amURFme">使用 InfluxDB + Grafana 监控flink能否配置告警。是不是prometheus更强大点？</a></p>
+<p>252、<a href="https://t.zsxq.com/rZfyZvn">我们线上遇到一个问题，带状态的算子没有指定 uid，现在代码必须改，那个带状态的算子 不能正常恢复了，有解吗？通过某种方式能获取到系统之前自动生成的uid吗？</a></p>
+<p>253、<a href="https://t.zsxq.com/uZz3Z7Q">tableEnv.registerDataStream(“Orders”, ds, “user, product, amount, proctime.proctime, rowtime.rowtime”);请问像这样把流注册成表的时候，这两个rowtime分别是什么意思</a></p>
+<p>254、<a href="https://t.zsxq.com/yBiEyf2">我想问一下 flink on yarn session 模式下提交任务官网给的例子是 flink run -c xxx.MainClass job.jar 这里是怎么知道 yarn 上的哪个是 flink 的 appid 呢？</a></p>
+<p>255、<a href="https://t.zsxq.com/yBeyfqv">Flink Netty Connector 这个有详细的使用例子？ 通过Netty建立的source能直接回复消息吗？还是只能被动接受消息？</a></p>
+<p>256、<a href="https://t.zsxq.com/FIEia6M">请问flink sqlclient 提交的作业可以用于生产环境吗？</a></p>
+<p>257、<a href="https://t.zsxq.com/ZBIaUvF">flink批处理写回mysql是否没法用tableEnv.sqlUpdate(“insert into t2 select * from t1”)？作为sink表的t2要如何注册？查跟jdbc相关的就两个TableSink，JDBCAppendTableSink用于BatchTableSink，JDBCUpertTablSink用于StreamTableSink。前者只接受insert into  values语法。所以我是先通过select from查询获取到DataSet再JDBCAppendTableSink.emitDataSet(ds)实现的，但这样达不到sql rule any目标</a></p>
+<p>258、<a href="https://t.zsxq.com/aq3BIU7">请问在stream模式下，flink的计算结果在不落库的情况下，可以通过什么restful api获取计算结果吗</a></p>
+<p>259、<a href="https://t.zsxq.com/NbYnAYF">现在我有场景，需要把一定的消息发送给kafka topic指定的partition，该怎么搞？</a></p>
+<p>260、<a href="https://t.zsxq.com/YfmAMfm">请问我的job作业在idea上运行正常 提交到生产集群里提示Caused by: java.lang.NoSuchMethodError: org.apache.flink.api.java.ClosureCleaner.clean(Ljava/lang/Object;Z)V请问如何解决</a></p>
+<p>261、<a href="https://t.zsxq.com/72n6MVb">遇到一个很奇怪的问题，在使用streamingSQL时，发现timestamp在datastream的时候还是正常的，在注册成表print出来的时候就少了八小时，大佬知道是什么原因么？</a></p>
+<p>262、<a href="https://t.zsxq.com/RjQFmIQ">请问将flink的产生的一些记录日志异步到kafka中，需要如何配置，配置后必须要重启集群才会生效吗</a></p>
+<p>263、<a href="https://t.zsxq.com/Q7u3vzR">星主你好，问下flink1.9对维表join的支持怎么样了？有文档吗</a></p>
+<p>264、<a href="https://t.zsxq.com/aEEA66M">请问下 flink slq： SELECT city_name as city_name, count(1) as total, max(create_time) as create_time FROM * 。代码里面设置窗口为： retractStream.timeWindowAll(Time.minutes(5))一个global窗口，数据写入hdfs   结果数据重复 ，存在两条完全重复的数据如下 常州、2283、 1566230703）：请问这是为什么</a></p>
+<p>265、<a href="https://t.zsxq.com/YNrfyrj">我用rocksdb存储checkpoint，线上运行一段时间发展checkpoint占用空间越来越大，我是直接存本地磁盘上的，怎么样能让它自动清理呢？</a></p>
+<p>266、<a href="https://t.zsxq.com/aAaqFYn">flink应该在哪个用户下启动呢，是root的还是在其他的用户呢</a></p>
+<p>267、<a href="https://t.zsxq.com/2nUBIAI">link可以读取lzo的文件吗</a></p>
+<p>268、<a href="https://t.zsxq.com/beIY7mY">怎么快速从es里面便利数据？我们公司现在所有的数据都存在Es里面的;我发现每次从里面scan数据的时候特别慢;你那有没有什么好的办法？</a></p>
+<p>269、<a href="https://t.zsxq.com/fYnYrR7">如果想让数据按照其中一个假如f0进行分区，然后每一个分区做处理的时候并行度都是1怎么设置呢</a></p>
+<p>270、<a href="https://t.zsxq.com/nQFYrBm">近在写算子的过程中,使用scala语言写flink比较快,而且在process算子中实现ontime方式时,可以使用scala中的listbuff来输出一个top3的记录;那么到了java中,只能用ArrayList将flink中的ListState使用get()方法取出之后放在ArrayList吗?</a></p>
+<p>271、<a href="https://t.zsxq.com/eyRRv7q">请问老师能否出一些1.9版本维表join的例子 包括async和维表缓存？</a></p>
+<p>272、<a href="https://t.zsxq.com/aMRzjMb">flink kaka source设置为从组内消费，有个问题是第一次启动任务，我发现kafka中的历史数据不会被消费，而是从当前的数据开始消费，而第二次启动的时候才会从组的offset开始消费，有什么办法可以让第一次启动任务的时候可以消费kafka中的历史数据吗</a></p>
+<p>273、<a href="https://t.zsxq.com/3ZjiEMv">1.使用flink定时处理离线数据，有时间戳字段，如何求出每分钟的最大值，类似于流处理窗口那样，2如果想自己实现批流统一，有什么好的合并方向吗？比如想让流处理使用批处理的一个算子。</a></p>
+<p>274、<a href="https://t.zsxq.com/AIYnEQN">flink怎么实现流式数据批量对待？流的数据是自定义的source，读取的redis多个Hash表，需要控制批次的概念</a></p>
+<p>275、<a href="https://t.zsxq.com/yJuFEYb">有人说不推荐在一个task中开多个线程，这个你怎么看？</a></p>
+<p>276、<a href="https://t.zsxq.com/3f6YBmu">想做一个运行在hbase+es架构上的sql查询方案，flink sql能做吗，或者有没有其他的解决方案或者思路？</a></p>
+<p>277、<a href="https://t.zsxq.com/jIAqVnm">正在紧急做第一个用到Flink的项目，咨询一下，Flink 1.8.1写入ES7就是用自带的Sink吗？有没有例子分享一下，我搜到的都是写ES6的。这种要求我知道不适合提，主要是急，自己试几下没成功。T T</a></p>
+<p>278、<a href="https://t.zsxq.com/2fAiuzf">手动停止任务后，已经保存了最近一次保存点，任务重新启动后，如何使用上一次检查点？</a></p>
+<p>279、<a href="https://t.zsxq.com/BIiImQN">批处理使用流环境（为了使用窗口），那如何确定批处理结束，就是我的任务可以知道批文件读取完事，并且处理完数据后关闭任务，如果不能，那批处理如何实现窗口功能</a></p>
+<p>280、<a href="https://t.zsxq.com/Mjyzj66">如果限制只能在window 内进行去重，数据量还比较大，有什么好的方法吗？</a></p>
+<p>281、<a href="https://t.zsxq.com/yv7Ujme">端到端exactly once有没有出文章</a></p>
+<p>282、<a href="https://t.zsxq.com/IqNZFey">流怎么动态加？，流怎么动态删除？，参数怎么动态修改 （广播</a></p>
+<p>283、<a href="https://t.zsxq.com/r7AqvBq">自定义的source数据源实现了有批次的概念，然后Flink将这个一个批次流注册为多个表join操作，有办法知道这个sql什么时候计算完成了？</a></p>
+<p>284、<a href="https://t.zsxq.com/rvJiyf6">编译 Flink 报错，群主遇到过没，什么原因</a></p>
+<p>285、[我现在是flink on yarn用zookeeper做HA现在在zk里查看检查点信息，为什么里面的文件是ip，而不是路径呢？我该如何拿到那个路径。</p>
+<pre><code>- 排除rest api 方式获取，因为任务关了restapi就没了
+-排除history server，有点不好用](https://t.zsxq.com/nufIaey)
+</code></pre><p>286、<a href="https://t.zsxq.com/Fy3RfE6">在使用streamfilesink消费kafka之后进行hdfs写入的时候，当直接关闭flink程序的时候，下次再启动程序消费写入hdfs的时候，文件又是从part-0-0开始，这样就跟原来写入的冲突了，该文件就一直处于ingress状态。</a></p>
+<p>287、<a href="https://t.zsxq.com/myNF2zj">现在有一个实时数据分析的需求，数据量不大，但要求sink到mysql，因为是实时更新的，我现在能想到的处理方法就是每次插入一条数据的时候，先从mysql读数据，如果有这条，就执行update，没有的话就insert，但是这样的话每写一条数据就有两次交互了。想问一下老师有没有更好的办法，或者flink有没有内置的api可以执行这种不确定是更新还是插入的操作</a></p>
+<p>288、<a href="https://t.zsxq.com/ZFiMzrF">Flink设置了checkpoint，job manage会定期删除check point数据，但是task manage不删除，这个是什么原因</a></p>
+<p>289、<a href="https://t.zsxq.com/z3RzJUV">请教一下使用rocksdb作为statebackend ，在哪里可以监控rocksdb io 内存指标呢</a></p>
+<p>290、<a href="https://t.zsxq.com/AUjE2ZR">状态的使用场景，以及用法能出个文章不，这块不太了解</a></p>
+<p>291、<a href="https://t.zsxq.com/aaynii6">请问一下  Flink 1.9  SQL API中distinct count 是如何实现高效的流式去重的？</a></p>
+<p>292、<a href="https://t.zsxq.com/mmEyVJA">在算子内如何获取当前算子并行度以及当前是第几个task</a></p>
+<p>293、<a href="https://t.zsxq.com/fIqNF6y">有没有flink1.9结合hive的demo。kafka到hive</a></p>
+<p>294、<a href="https://t.zsxq.com/ne6UZrB">能给讲讲apache calcite吗</a></p>
+<p>295、<a href="https://t.zsxq.com/VbUVFMr">请问一下像这种窗口操作，怎么保证程序异常重启后保持数据的状态呢？</a></p>
+<p>296、<a href="https://t.zsxq.com/EMZFyZz">请问一下，我在使用kafkasource的时候，把接过来的Jsonstr转化成自定义的一个类型，用的是gson. fromJson（jsonstr,classOf[Entity]）报图片上的错误了，不知道怎么解决，在不转直接打印的情况下是没问题的</a></p>
+<p>297、<a href="https://t.zsxq.com/IEieI6a">DataStream读数据库的表，做多表join，能设置时间窗口么，一天去刷一次。流程序会一直拉数据，数据库扛不住了</a></p>
+<p>298、<a href="https://t.zsxq.com/IemmiY7">请问一下flink支持多路径通配读取吗？例如路径：s3n://pekdc2-deeplink-01/Kinesis/firehose/2019/07/03/<em>/</em>  ，通配读取找不到路径。是否需要特殊设置</a></p>
+<p>299、<a href="https://t.zsxq.com/QvZFUNN">flink yarn环境部署 但是把容器的url地址删除。就会跳转到的hadoop的首页。怎么屏蔽hadoop的yarn首页地址呢？要不暴露这个地址用户能看到所有任务很危险</a></p>
+<p>300、<a href="https://t.zsxq.com/2JiubeM">flink sql怎么写一个流，每秒输出当前时间呢</a></p>
+<p>301、<a href="https://t.zsxq.com/bQ33BmM">因为想通过sql弄一个数据流。哈哈 另外想问一个问题，我把全局设置为根据处理时间的时间窗口，那么我在processAllWindowFunction里面要怎么知道进来的每个元素的处理时间是多少呢？这个元素进入这个时间窗口的依据是什么</a></p>
+<p>302、<a href="https://t.zsxq.com/rB6ybYF">如何实现一个设备上报的数据存储到同一个hdfs文件中？</a></p>
+<p>303、<a href="https://t.zsxq.com/MVfeeiu">我自己写的kafka生产者测试，数据格式十分简单（key,i）key是一个固定的不变的字符串，i是自增的，flink consumer这边我开了checkpoint. 并且是exactly once，然后程序很简单，就是flink读取kafka的数据然后直接打印出来，我发现比如我看到打印到key，10的时候我直接关掉程序，然后重新启动程序，按理来说应当是从上次的offset继续消费，也就是key,11，但实际上我看到的可能是从key，9开始，然后依次递增，这是是不是说明是重复消费了，那exactly one需要怎么样去保障？</a></p>
+<p>304、<a href="https://t.zsxq.com/meqzJme">假设有一个数据源在源源不断的产生数据，到Flink的反压来到source端的时候，由于Flink处理数据的速度跟不上数据源产生数据的速度，<br>     问题1: 这个时候在Flink的source端会怎么处理呢？是将处理不完的数据丢弃还是进行缓存呢？<br>     问题2: 如果是缓存，怎么进行缓存呢？</a></p>
+<p>305、<a href="https://t.zsxq.com/2fEeMny">一个stream 在sink多个时，这多个sink是串行 还是并行的。</a></p>
+<p>306、<a href="https://t.zsxq.com/NJY76uf">我想在流上做一个窗口，触发窗口的条件是固定的时间间隔或者数据量达到预切值，两个条件只要有一个满足就触发，除了重写trigger在，还有什么别的方法吗？</a></p>
+<p>307、<a href="https://t.zsxq.com/A6UN7eE">使用rocksdb作为状态后端，对于使用sql方式对时间字段进行group by，以达到去窗口化，但是这样没办法对之前的数据清理，导致磁盘空间很大，对于这种非编码方式，有什么办法设置ttl，清理以前的数据吗</a></p>
+<p>308、<a href="https://t.zsxq.com/a2fUnEM">请问什么时间窗为什么会有TimeWindow{start=362160000, end=362220000}<br>     和 TimeWindow{start=1568025300000, end=1568025360000}这两种形式，我都用的是一分钟的TumblingEventTimeWindows，为什么会出现不同的情况？</a></p>
+<p>309、<a href="https://t.zsxq.com/Y3jqjuj">比如我统计一天的订单量。但是某个数据延迟一天才到达。比如2019.08.01这一天订单量应该是1000，但是有个100的单据迟到了，在2019.08.02才到达，那么导致2019.08.01这一天统计的是900.后面怎么纠正这个错误的结果呢</a></p>
+<p>310、<a href="https://t.zsxq.com/zJaMNne">flink streaming 模式下只使用堆内内存么</a></p>
+<p>311、<a href="https://t.zsxq.com/EmMrvVb">如果考虑到集群的迁移，状态能迁移吗</a></p>
+<p>312、<a href="https://t.zsxq.com/6EUFeqr">我们现在有一个业务场景，数据上报的值是这样的格式（时间，累加值），我们需要这样的格式数据（时间，当前值）。当前值=累加值-前一个数据的累加值。flink如何做到呢，有考虑过state机制，但是服务宕机后，state就被清空了</a></p>
+<p>313、<a href="https://t.zsxq.com/y7U7Mzf">Flink  On  k8s 与 Flink on  Yarn相比的优缺点是什么？那个更适合在生产环境中使用呢</a></p>
+<p>314、<a href="https://t.zsxq.com/zVNbaYn">有没有datahub链接flink的 连接器呀</a></p>
+<p>315、<a href="https://t.zsxq.com/FQRNJ2j">单点resourcemanager 挂了，对任务会产生什么影响呢</a></p>
+<p>316、<a href="https://t.zsxq.com/rnemUN3">flink监控binlog,跟另一张维表做join后，sink到MySQL的最终表。对于最终表的增删改操作，需要定义不同的sink么？</a></p>
+<p>317、<a href="https://t.zsxq.com/JaaQFqB">请问窗口是在什么时候合并的呢？例如：数据进入windowoperator的processElement，如果不是sessionwindow，是否会进行窗口合并呢？</a></p>
+<p>318、<a href="https://t.zsxq.com/AqNFM33">Flink中一条流能参与多路计算，并多处输出吗？他们之前会不会相互影响？</a></p>
+<p>319、<a href="https://t.zsxq.com/nUzbiYj">keyBy算子定义是将一个流拆分成不相交的分区，每个分区包含具有相同的key的元素。我不明白的地方是: keyBy怎么设置分区数，是给这个算子设置并行度吗？ 分区数和slot数量是什么关系？</a></p>
+<p>320、<a href="https://t.zsxq.com/66URfQb">动态cep-pattern，能否详细说下？滴滴方案未公布，您贴出来的几张图片是基于1.7的。或者有什么想法也可以讲解下，谢谢了</a></p>
+<p>321、<a href="https://t.zsxq.com/maEQ3NR">问题1：使用常驻型session ./bin/yarn-session.sh -n 10 -s 3 -d启动，这个时候分配的资源是yarn 队列里面的, flink提交任务 flink run xx.jar,  其余机器是怎样获取到flink需要运行时的环境的，因为我只在集群的一台机器上有flink 安装包。</a></p>
+<p>322、<a href="https://t.zsxq.com/YjEYjQz">flink task manager中slot间的内存隔离，cpu隔离是怎么实现的？flink 设计slot的概念有什么意义，为什么不像spark executor那样，内部没有做隔离？</a></p>
+<p>323、<a href="https://t.zsxq.com/nuzvVzZ">spark和kafka集成，direct模式，spark的一个分区对应kafka的一个主题的一个分区。那flink和kafka集成的时候，怎么消费kafka的数据，假设kafka某个主题5个partition</a></p>
+<p>324、<a href="https://t.zsxq.com/27u3ZZf">./bin/flink run -m yarn-cluster 执行的flink job ，作业自己打印的日志通过yarn application的log查看不了，只有集群自身的日志，程序中logger.info打印日志存放在哪，还是我打包的方式问题，打日志用的是slf4j。</a></p>
+<p>325、<a href="https://t.zsxq.com/miuzFY3">在物联网平台中，需要对每个key下的数据做越限判断，由于每个key的越限值是不同的，越限值配置在实时数据库中。<br>     若将越限值加载到state中，由于key的量很大（大概3亿左右），会导致state太大，可能造成内存溢出。若在处理数据时从实时数据库中读取越限值，由于网络IO开销，可能造成实时性下降。请问该如何处理？谢谢</a></p>
+<p>326、<a href="https://t.zsxq.com/amURvZR">如果我一个flink程序有多个window操作，时间戳和watermark是不是每个window都需要分配，还有就是事件时间是不是一定要在数据源中就存在某个字段</a></p>
+<p>327、<a href="https://t.zsxq.com/eqFuBYz">有没有flink1.9刚支持的用ddl链接kafka并写入hbase的资料，我们公司想把离线的数仓逐渐转成实时的，写sql对于我们来说上手更快一些，就想找一些这方面的资料学习一下。</a></p>
+<p>328、<a href="https://t.zsxq.com/yVvR3V3">flink1.9 进行了数据类型的转化时发生了不匹配的问题，  目前使用的Type被弃用，推荐使用是datatypes 类型，但是之前使用的Type类型的方法 对应的schema typeinformation 目前跟datatypes的返回值不对应，请问下  该怎么去调整适配？</a></p>
+<p>329、<a href="https://t.zsxq.com/6AIQnEi">link中处理数据其中一条出了异常都会导致整个job挂掉?有没有方法(除了异常捕获)让这条数据记录错误日志就行 下面的数据接着处理呢? 粗略看过一些容错处理，是关于程度挂了重启后从检查点拉取数据，但是如果这条数据本身就问提(特别生产上，这样就导致job直接挂了，影响有点大)，那应该怎么过滤掉这条问题数据呢(异常捕获是最后的方法</a></p>
+<p>330、<a href="https://t.zsxq.com/RBmi2vB">我在一个做日报的统计中使用rabbitmq做数据源，为什么rabbitmq中的数据一直处于unacked状态，每分钟触发一次窗口计算，并驱逐计算过的元素，我在测试环境数据都能ack,但是一到生产环境就不行了，也没有报错，有可能是哪里出了问题啊</a></p>
+<p>331、<a href="https://t.zsxq.com/fuNfuBi">我们目前数据流向是这样的，kafka source ，etl，redis sink 。这样chk 是否可以保证端到端语义呢？</a></p>
+<p>332、<a href="https://t.zsxq.com/mIeMzvf">1.在通过 yarn-session 提交 flink job 的时候。flink-core, flink-clients, flink-scala, flink-streaming-scala, scala-library, flink-connector-kafka-0.10 那些应该写 provided scope，那些应该写 compile scope，才是正确、避免依赖冲突的姿势？<br>    2.flink-dist_2.11-1.8.0.jar 究竟包含了哪些依赖？（这个文件打包方式不同于 springboot，无法清楚看到有哪些 jar 依赖）</a></p>
+<p>333、<a href="https://t.zsxq.com/AQzj6Qv">Flink 中使用 count window 会有这样的问题就是，最后有部分数据一直没有达到 count 的值，然后窗口就一直不触发，这里看到个思路，可以将 time window + count window 组合起来</a></p>
+<p>334、<a href="https://t.zsxq.com/VvR3Bai">flink流处理时，注册一个流数据为Table后，该流的历史数据也会一直在Table里面么？为什么每次来新数据，历史处理过得数据会重新被执行？</a></p>
+<p>335、<a href="https://t.zsxq.com/jMfyNZv">available是变化数据，除了最新的数据被插入数据库，之前处理过数据又重新执行了几次</a></p>
+<p>336、<a href="https://t.zsxq.com/m6Yrv7Q">这里两天在研究flink的广播变量，发现一个问题，DataSet数据集中获取广播变量，获取的内存地址是一样的（一台机器维护一个广播数据集）。在DataStream中获取广播变量就成了一个task维护一个数据集。（可能是我使用方式有问题）  所以想请教下星主，DataStream中获取一个画面变量可以如DataSet中一台机器维护一个数据吗？</a></p>
+<p>337、<a href="https://t.zsxq.com/nqzZrbq">Flink程序开启checkpoint 机制后，用yarn命令多次killed以后，ckeckpoint目录下有多个job id，再次开辟资源重新启动程序，程序如何找到上一次jobid目录下，而不是找到其他的jobid目录下？默认是最后一个还是需要制定特定的jobid？</a></p>
+<p>338、<a href="https://t.zsxq.com/RNzfQ7e">发展昨天的数据重复插入问题，是把kafka里进来的数据流registerDataStream注册为Table做join时，打印表的长度发现，数据会一直往表里追加，怎样才能来一条处理一条，不往上追加呀</a></p>
+<p>339、<a href="https://t.zsxq.com/AqRvNNj">flink1.9 sql 有没有类似分区表那样的处理方式呢？我们现在有一个业务是1个source，但是要分别计算5分钟，10分钟，15分钟的数据。</a></p>
+<p>340、<a href="https://t.zsxq.com/q3feIuv">我刚弄了个服务器，在启动基础的命令时候发现task没有启动起来，导致web页是三个0，我看了log也没有报错信息，请问您知道可能是什么问题吗？</a></p>
+<p>241、<a href="https://t.zsxq.com/EIiyjeU">我自定义了个 Sink extends RichSinkFunction，有了 field： private transient Object lock;<br>     这个 lock 我直接初始化  private transient Object lock = new Object(); 就不行，在 invoke 里 使用lock时空指针，如果lock在 自定义 Sink 的 构造器初始化也不行。但是在 open 方法里初始化就可以，为什么？能解释一下 执行原理吗？如果一个slot 运行着5个 sink实例，那么 这个sink对象会new 5个还是1个？</a></p>
+<p>342、<a href="https://t.zsxq.com/aMNnIy3">请问Kafka的broker 个数怎么估算？</a></p>
+<p>343、<a href="https://t.zsxq.com/BU7iqbi">flink on yarn如何远程调试</a></p>
+<p>344、<a href="https://t.zsxq.com/F6U7YbY">目前有个需求：就是源数据是dataA、dataB、DataC通过kafka三个topic获取，然后进行合并。<br>     但是有有几个问题，目前不知道怎么解决：<br>     dataA=”id:10001,info:<strong><em>,date:2019-08-01 12:23:33,entry1:1,entryInfo1:</em></strong>“<br>     dataB=”id:10001,org:<strong><em>,entry:1”  dataC=”id:10001,location:</em></strong>“<br>     (1) 如何将三个流合并？ (1) 数据中dataA是有时间的，但是dataB和dataC中都没有时间戳，那么如何解决eventTime及迟到乱序的问题？帮忙看下，谢谢</a></p>
+<p>345、<a href="https://t.zsxq.com/JmIqfaE">我flink从kafka读json数据，在反序列化后中文部分变成了一串问号，请问如何做才能使中文正常</a></p>
+<p>346、<a href="https://t.zsxq.com/3BMZfAM">我有好几个Flink程序（独立jar），在线业务数据分析时都会用到同样的一批MySQL中的配置数据(5千多条)，现在的实现方法是每一个程序都是独立把这些配置数据装到内存中，便于快速使用，但现在感觉有些浪费资源和结构不够美观，请问这类情况有什么其他的解决方案吗？谢谢</a></p>
+<p>347、<a href="https://t.zsxq.com/RFMjYZn">Flink  checkpoint  选 RocksDBStateBackend 还是 FsStatebackEnd ，我们目前是任务执行一段时间之后 任务就会被卡死。</a></p>
+<p>348、<a href="https://t.zsxq.com/uVv7uJU">flink on k8s的高可用、扩缩容这块目前还有哪些问题？</a></p>
+<p>349、<a href="https://t.zsxq.com/zFq3fqb">有个问题问一下，是这样的现在Kafka4个分区每秒钟生产4000多到5000条日志数据，但是在消费者FLINK这边接收我只开了4个solt接收，这边只是接收后做切分存储，现在出现了延迟现象，我不清楚是我这边处切分慢了还是Flink接收kafka的数据慢了？Flink UI界面显示这两个背压高</a></p>
+<p>等等等，还有很多，复制粘贴的我手累啊 😂</p>
+<p>另外里面还会及时分享 Flink 的一些最新的资料（包括数据、视频、PPT、优秀博客，持续更新，保证全网最全，因为我知道 Flink 目前的资料还不多）</p>
+<p><a href="https://t.zsxq.com/AybAimM">关于自己对 Flink 学习的一些想法和建议</a></p>
+<p><a href="https://t.zsxq.com/iaEiyB2">Flink 全网最全资料获取，持续更新，点击可以获取</a></p>
+<p>再就是星球用户给我提的一点要求：不定期分享一些自己遇到的 Flink 项目的实战，生产项目遇到的问题，是如何解决的等经验之谈！</p>
+<p>1、<a href="https://t.zsxq.com/Zz3ny3V">如何查看自己的 Job 执行计划并获取执行计划图</a></p>
+<p>2、<a href="https://t.zsxq.com/AIAQrnq">当实时告警遇到 Kafka 千万数据量堆积该咋办？</a></p>
+<p>3、<a href="https://t.zsxq.com/QnYjy7M">如何在流数据中比两个数据的大小？多种解决方法</a></p>
+<p>4、<a href="https://t.zsxq.com/6Q3vN3b">kafka 系列文章</a></p>
+<p>5、<a href="https://t.zsxq.com/iiYfMBe">Flink环境部署、应用配置及运行应用程序</a></p>
+<p>6、<a href="https://t.zsxq.com/yfYrvFA">监控平台该有架构是长这样子的</a></p>
+<p>7、<a href="https://t.zsxq.com/beu7Mvj">《大数据“重磅炸弹”——实时计算框架 Flink》专栏系列文章目录大纲</a></p>
+<p>8、<a href="https://t.zsxq.com/UvrRNJM">《大数据“重磅炸弹”——实时计算框架 Flink》Chat 付费文章</a></p>
+<p>9、<a href="https://t.zsxq.com/zjQvjeM">Apache Flink 是如何管理好内存的？</a></p>
+<p>10、<a href="https://t.zsxq.com/eYNBaAa">Flink On K8s</a></p>
+<p>11、<a href="https://t.zsxq.com/Mnm2nI6">Flink-metrics-core</a></p>
+<p>12、<a href="https://t.zsxq.com/Mnm2nI6">Flink-metrics-datadog</a></p>
+<p>13、<a href="https://t.zsxq.com/Mnm2nI6">Flink-metrics-dropwizard</a></p>
+<p>14、<a href="https://t.zsxq.com/Mnm2nI6">Flink-metrics-graphite</a></p>
+<p>15、<a href="https://t.zsxq.com/Mnm2nI6">Flink-metrics-influxdb</a></p>
+<p>16、<a href="https://t.zsxq.com/Mnm2nI6">Flink-metrics-jmx</a></p>
+<p>17、<a href="https://t.zsxq.com/Mnm2nI6">Flink-metrics-slf4j</a></p>
+<p>18、<a href="https://t.zsxq.com/Mnm2nI6">Flink-metrics-statsd</a></p>
+<p>19、<a href="https://t.zsxq.com/Mnm2nI6">Flink-metrics-prometheus</a></p>
+<p>20、<a href="https://t.zsxq.com/f6eAu3J">Flink 注解源码解析</a></p>
+<p>21、<a href="https://t.zsxq.com/yVnaYR7">使用 InfluxDB 和 Grafana 搭建监控 Flink 的平台</a></p>
+<p>22、<a href="https://t.zsxq.com/UVfqfae">一文搞懂Flink内部的Exactly Once和At Least Once</a></p>
+<p>23、<a href="https://t.zsxq.com/eM3ZRf2">一文让你彻底了解大数据实时计算框架 Flink</a></p>
+<p>当然，除了更新 Flink 相关的东西外，我还会更新一些大数据相关的东西，因为我个人之前不是大数据开发，所以现在也要狂补些知识！总之，希望进来的童鞋们一起共同进步！</p>
+<p>1、<a href="https://t.zsxq.com/7I6Iyrf">Java 核心知识点整理.pdf</a></p>
+<p>2、<a href="https://t.zsxq.com/myJYZRF">假如我是面试官，我会问你这些问题</a></p>
+<p>3、<a href="https://t.zsxq.com/iUZnamE">Kafka 系列文章和学习视频</a></p>
+<p>4、<a href="https://t.zsxq.com/r7eIeyJ">重新定义 Flink 第二期 pdf</a></p>
+<p>5、<a href="https://t.zsxq.com/ZjiYrVr">GitChat Flink 文章答疑记录</a></p>
+<p>6、<a href="https://t.zsxq.com/QZVJyz7">Java 并发课程要掌握的知识点</a></p>
+<p>7、<a href="https://t.zsxq.com/VVN7YB2">Lightweight Asynchronous Snapshots for Distributed Dataflows</a></p>
+<p>8、<a href="https://t.zsxq.com/VVN7YB2">Apache Flink™- Stream and Batch Processing in a Single Engine</a></p>
+<p>9、<a href="https://t.zsxq.com/NjAQFi2">Flink状态管理与容错机制</a></p>
+<p>10、<a href="https://t.zsxq.com/MvfUvzN">Flink 流批一体的技术架构以及在阿里的实践</a></p>
+<p>11、<a href="https://t.zsxq.com/QVFqjea">Flink Checkpoint-轻量级分布式快照</a></p>
+<p>12、<a href="https://t.zsxq.com/MvfUvzN">Flink 流批一体的技术架构以及在阿里的实践</a></p>
+<p>13、<a href="https://t.zsxq.com/N37mUzB">Stream Processing with Apache Flink pdf</a></p>
+<p>14、<a href="https://t.zsxq.com/m6EAaQ3">Flink 结合机器学习算法的监控平台实践</a></p>
+<p>15、<a href="https://t.zsxq.com/emMBaQN">《大数据重磅炸弹-实时计算Flink》预备篇——大数据实时计算介绍及其常用使用场景 pdf 和视频</a></p>
+<p>16、<a href="https://t.zsxq.com/fqfuVRR">《大数据重磅炸弹-实时计算Flink》开篇词 pdf 和视频</a></p>
+<p>17、<a href="https://t.zsxq.com/rVBQFI6">四本 Flink 书</a></p>
+<p>18、<a href="https://t.zsxq.com/rVBQFI6">流处理系统 的相关 paper</a></p>
+<p>19、<a href="https://t.zsxq.com/FyzvRne">Apache Flink 1.9 特性解读</a></p>
+<p>20、<a href="https://t.zsxq.com/FyzvRne">打造基于Flink Table API的机器学习生态</a></p>
+<p>21、<a href="https://t.zsxq.com/FyzvRne">基于Flink on Kubernetes的大数据平台</a></p>
+<p>22、<a href="https://t.zsxq.com/FyzvRne">基于Apache Flink的高性能机器学习算法库</a></p>
+<p>23、<a href="https://t.zsxq.com/FyzvRne">Apache Flink在快手的应用与实践</a></p>
+<p>24、<a href="https://t.zsxq.com/FyzvRne">Apache Flink-1.9与Hive的兼容性</a></p>
+<p>25、<a href="https://t.zsxq.com/FyzvRne">打造基于Flink Table API的机器学习生态</a></p>
+<p>26、<a href="https://t.zsxq.com/rVBQFI6">流处理系统的相关 paper</a></p>
+
+      
+      
+        <div class="page-reward">
+          <p><a href="javascript:void(0)" onclick="dashangToggle()" class="dashang">赏</a></p>
+          <div class="hide_box"></div>
+          <div class="shang_box">
+            <a class="shang_close" href="javascript:void(0)" onclick="dashangToggle()">×</a>
+            <div class="shang_tit">
+              <p>纯属好玩</p>
+            </div>
+            <div class="shang_payimg">
+              <img src="/img/alipayimg.jpg" alt="扫码支持" title="扫一扫" />
+            </div>
+              <div class="pay_explain">扫码打赏，你说多少就多少</div>
+            <div class="shang_payselect">
+              
+                <div class="pay_item checked" data-id="alipay">
+                  <span class="radiobox"></span>
+                  <span class="pay_logo"><img src="/img/alipay.png" alt="支付宝" /></span>
+                </div>
+              
+              
+                <div class="pay_item" data-id="wechat">
+                  <span class="radiobox"></span>
+                  <span class="pay_logo"><img src="/img/weixin.png" alt="微信" /></span>
+                </div>
+              
+            </div>
+            <div class="shang_info">
+              <p>打开<span id="shang_pay_txt">支付宝</span>扫一扫，即可进行扫码打赏哦</p>
+            </div>
+          </div>
+        </div>
+        <script src="https://my.openwrite.cn/js/readmore.js" type="text/javascript"></script>
+        <script type="text/javascript">
+            const btw = new BTWPlugin();
+            btw.init({
+                    id: 'article-entry',
+                    blogId: '15013-1596463967175-355',
+                    name: 'Java 指南者',
+                    qrcode: 'http://www.javaguider.com/java/img/wx.jpg',
+                    keyword: 'zhisheng',
+            });
+        </script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/zepto/1.2.0/zepto.min.js"></script>
+        <script type="text/javascript">
+          $(".pay_item").click(function(){
+            $(this).addClass('checked').siblings('.pay_item').removeClass('checked');
+            var dataid=$(this).attr('data-id');
+            $(".shang_payimg img").attr("src","/img/"+dataid+"img.jpg");
+            $("#shang_pay_txt").text(dataid=="alipay"?"支付宝":"微信");
+          });
+          function dashangToggle(){
+
+            $(".hide_box").fadeToggle();
+            $(".shang_box").fadeToggle();
+          }
+        </script>
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2019/12/31/Flink-resources/">Flink 视频、博客、PPT、入门、原理、实战、性能调优、源码解析、问答等持续更新</a></p>
+        <p><span>文章作者:</span><a href="/" title="访问 zhisheng 的个人博客">zhisheng</a></p>
+        <p><span>发布时间:</span>2019年12月31日 - 00时00分</p>
+        <p><span>最后更新:</span>2020年10月11日 - 22时12分</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2019/12/31/Flink-resources/" title="Flink 视频、博客、PPT、入门、原理、实战、性能调优、源码解析、问答等持续更新">http://www.54tianzhisheng.cn/2019/12/31/Flink-resources/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://www.54tianzhisheng.cn/2019/12/31/Flink-resources/　　作者: zhisheng" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script src="/js/clipboard.min.js"></script>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>公众号:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://www.54tianzhisheng.cn" title="微信公众号：zhisheng" target = "_blank">zhisheng</a> 欢迎关注。
+        </p>
+        <p>
+            <div align="center">
+                <img src="/img/wx.jpg"  alt="zhisheng" />
+            </div>
+        </p>
+    </div>
+
+
+
+<nav id="article-nav">
+  
+    <a href="/2020/02/11/flink-1.10/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          Apache Flink 1.10.0 重磅发布，新特性解读
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/12/30/flink-meituan-real-time-warehouse/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">美团点评基于 Flink 的实时数仓平台实践</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Flink-专栏"><span class="toc-number">1.</span> <span class="toc-text">Flink 专栏</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Flink-学习项目代码"><span class="toc-number"></span> <span class="toc-text">Flink 学习项目代码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#本项目结构"><span class="toc-number"></span> <span class="toc-text">本项目结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#How-to-build"><span class="toc-number"></span> <span class="toc-text">How to build</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Change"><span class="toc-number"></span> <span class="toc-text">Change</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#博客"><span class="toc-number"></span> <span class="toc-text">博客</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Flink-源码项目结构"><span class="toc-number">1.</span> <span class="toc-text">Flink 源码项目结构</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#学习资料"><span class="toc-number"></span> <span class="toc-text">学习资料</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#大数据重磅炸弹"><span class="toc-number">1.</span> <span class="toc-text">大数据重磅炸弹</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#源码系列"><span class="toc-number">2.</span> <span class="toc-text">源码系列</span></a></li></ol>
+</div>
+<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+<script src="http://apps.bdimg.com/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>
+    var valueHide = "隐藏目录";
+    var valueShow = "显示目录";
+
+    if ($(".left-col").is(":hidden")) {
+        $("#tocButton").attr("value", valueShow);
+    }
+    $("#tocButton").click(function() {
+        if ($("#toc").is(":hidden")) {
+            $("#tocButton").attr("value", valueHide);
+            $("#toc").slideDown(320);
+        }
+        else {
+            $("#tocButton").attr("value", valueShow);
+            $("#toc").slideUp(350);
+        }
+    })
+    if ($(".toc").length < 1) {
+        $("#toc, #tocButton").hide();
+    }
+</script>
+
+
+
+
+
+<div class="bdsharebuttonbox">
+	<a href="#" class="fx fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+	<a href="#" class="fx fa-weixin bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+	<a href="#" class="fx fa-qq bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+	<a href="#" class="fx fa-facebook-official bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+	<a href="#" class="fx fa-twitter bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+	<a href="#" class="fx fa-linkedin bds_linkedin" data-cmd="linkedin" title="分享到linkedin"></a>
+	<a href="#" class="fx fa-files-o bds_copy" data-cmd="copy" title="分享到复制网址"></a>
+</div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+
+
+
+    
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2020/02/11/flink-1.10/" title="上一篇: Apache Flink 1.10.0 重磅发布，新特性解读">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+        
+            <a href="/2019/12/30/flink-meituan-real-time-warehouse/" title="下一篇: 美团点评基于 Flink 的实时数仓平台实践">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2021/11/11/flink-akka-framesize/">宕机一台机器，结果一百多个 Flink 作业挂了</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/09/26/realtime-platform-flink-version/">实时平台如何管理多个 Flink 版本？—— 为啥会出现多个版本？</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/13/flink-in-action-3.3/">《Flink 实战与性能优化》—— Flink 数据转换必须熟悉的算子（Operator)</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/12/flink-in-action-3.2/">《Flink 实战与性能优化》—— 如何使用 Flink Window 及 Window 基本概念与实现原理?</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/11/flink-in-action-3.1/">《Flink 实战与性能优化》—— Flink 中 Processing Time、Event Time、Ingestion Time 对比及其使用场景分析</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/10/flink-in-action-2.4/">《Flink 实战与性能优化》—— 案例2：实时处理 Socket 数据</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/09/flink-in-action-2.3/">《Flink 实战与性能优化》—— 案例1：WordCount 应用程序</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/08/flink-in-action-2.2/">《Flink 实战与性能优化》—— Flink 环境搭建</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/07/flink-in-action-2.1/">《Flink 实战与性能优化》—— Flink 环境准备</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/06/flink-in-action-1.3/">《Flink 实战与性能优化》—— 大数据计算框架对比</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/05/flink-in-action-1.2/">《Flink 实战与性能优化》—— 彻底了解大数据实时计算框架 Flink</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/04/flink-in-action-1.1/">《Flink 实战与性能优化》——你的公司是否需要引入实时计算引擎？</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/03/Flink-Fraud-Detection-engine-3/">基于 Flink 的动态欺诈检测系统(下)</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/23/Flink-Fraud-Detection-engine-2/">基于 Flink 的动态欺诈检测系统(中)</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/22/Flink-Fraud-Detection-engine/">基于 Flink 的动态欺诈检测系统(上)</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/12/21/flink-forward-Asia-2020/">Flink Forward Asia 2020 全部 PPT 开放下载</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/12/06/Flink-1.12/">Flink 1.12 Release 文档解读</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/10/18/Spark-book/">强烈推荐三本 Spark 新书籍</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/10/13/flink-history-server/">用了 Flink History Server，妈妈再也不用担心我的作业半夜挂了</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/10/05/flink-jvm-profiler/">如何生成 Flink 作业的交互式火焰图？</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/08/09/flink-zsxq/">Flink 精进学习知识星球内容整理</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/08/02/flink-1.11-log/">Flink 1.11 日志该如何配置？</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/29/flink-1.11/">Flink 1.11 Release 文档解读</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/16/flink-taskmanager-memory-model/">Apache Flink 1.10 TaskManager 内存管理优化</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/13/flink-forward-2020/">Flink Forward 2020 PPT 下载</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/07/flink-job-monitor/">如何实时监控 Flink 集群和作业？</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/15/flink-error-log-alert/">基于 Apache Flink 的实时 Error 日志告警</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/29/flink-nacos-checkpoint/">Flink 能否动态更改 Checkpoint 配置</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/23/flink-apollo/">Flink 整合 Apollo，动态更新 Flink 作业配置</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/22/flink-nacos/">Flink 整合 Nacos，让 Flink 作业配置动态更新不再是难事</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/22/flink-1.10-release/">Flink 1.10 新特性研究</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/20/flink-checkpoint/">Flink Checkpoint 问题排查实用指南</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/11/flink-1.10/">Apache Flink 1.10.0 重磅发布，新特性解读</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/31/Flink-resources/">Flink 视频、博客、PPT、入门、原理、实战、性能调优、源码解析、问答等持续更新</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/30/flink-meituan-real-time-warehouse/">美团点评基于 Flink 的实时数仓平台实践</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/23/flink-monitor-alert/">基于 Apache Flink 的监控告警系统</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/10/flink-real-time-data-analysis-platform/">基于 Apache Flink 的大规模准实时数据分析平台</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/07/Flink_Forward_Asia_2019/">Flink Forward Asia 2019 PPT 下载</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/30/flink-checkpoint-hdfs/">阿里巴巴 Flink 踩坑经验：如何大幅降低 HDFS 压力？</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/30/flink-in-58/">58 同城基于 Flink 的千亿级实时计算平台架构实践</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/30/flink-aqniu/">基于 Flink 构建关联分析引擎的挑战和实践</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/24/flink-in-action-directory/">《大数据实时计算引擎 Flink 实战与性能优化》目录大纲</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/23/real-time-warehouse/">数据仓库简介、发展、架构演进、实时数仓建设、与离线数仓对比</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/23/flink-metrics/">详解 Flink Metrics 原理与监控实战</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/15/flink-in-action/">《大数据实时计算引擎 Flink 实战与性能优化》新专栏</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/26/flink-back-pressure/">一文彻底搞懂 Flink 网络流控与反压机制</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/25/flink-didi/">滴滴实时计算发展之路及平台架构实践</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/24/Flink-Connector/">Flink Connector 深度解析</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/23/flink-ebay/">如何使用 Flink 每天实时处理百亿条日志？</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/22/flink-1.9/">修改代码150万行！Apache Flink 1.9.0做了这些重大修改！</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/21/Flink-Exactly_Once_vs_At_Least_Once/">一文搞懂 Flink 的 Exactly Once 和 At Least Once</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/20/Flink-meituan-dw/">美团点评基于 Flink 的实时数仓建设实践</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/19/flink/">一文让你彻底了解大数据实时计算引擎 Flink</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/18/flink-side-output/">Flink 从0到1学习 —— 如何使用 Side Output 来分流？</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/06/flink-streaming-system/">你公司到底需不需要引入实时计算引擎？</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/04/Flink-code-clients/">Flink Clients 源码解析</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/03/Flink-code-Annotations/">Flink Annotations 源码解析</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/02/Flink-code-metrics/">Flink Metrics 源码解析</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/01/flink-1.9-preview/">Apache Flink 1.9 重大特性提前解读</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/06/26/flink-TensorFlow/">如何基于Flink+TensorFlow打造实时智能异常检测平台？只看这一篇就够了</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/06/21/flink-in-360/">360深度实践：Flink与Storm协议级对比</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/06/20/flink-kafka-Exactly-Once/">Apache Flink 结合 Kafka 构建端到端的 Exactly-Once 处理</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/06/18/flink-state/">Flink状态管理和容错机制介绍</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/06/17/flink-vs-storm/">流计算框架 Flink 与 Storm 的性能对比</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/06/16/flink-sql-oppo/">OPPO 数据中台之基石：基于 Flink SQL 构建实时数据仓库</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/06/15/Stream-processing/">为什么说流处理即未来？</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/06/14/flink-architecture-deploy-test/">Flink 架构、原理与部署测试</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/06/13/flink-book-paper/">Flink 从0到1学习—— 分享四本 Flink 国外的书和二十多篇 Paper 论文</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/06/12/flink-split/">Flink 从0到1学习—— Flink 不可以连续 Split(分流)？</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/28/Flink-code-TaskManager-submitJob/">Flink 源码解析 —— TaskManager 处理 SubmitJob 的过程</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/28/flink-additional-data/">Flink 从0到1学习 —— Flink 中如何管理配置？</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/27/Flink-code-JobManager-submitJob/">Flink 源码解析 —— JobManager 处理 SubmitJob 的过程</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/26/Flink-code-ExecutionGraph/">Flink 源码解析 —— 如何获取 ExecutionGraph ？</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/25/Flink-code-jobmanager/">Flink 源码解析 —— Flink JobManager 有什么作用？</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/25/Flink-code-taskmanager/">Flink 源码解析 —— Flink TaskManager 有什么作用？</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/24/Flink-code-memory-management/">Flink 源码解析 —— 深度解析 Flink 是如何管理好内存的？</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/23/Flink-code-checkpoint/">Flink 源码解析 —— 深度解析 Flink Checkpoint 机制</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/22/Flink-code-serialize/">Flink 源码解析 —— 深度解析 Flink 序列化机制</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/21/Flink-code-JobGraph/">Flink 源码解析 —— 如何获取 JobGraph？</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/20/Flink-code-StreamGraph/">Flink 源码解析 —— 如何获取 StreamGraph？</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/19/Flink-code-streaming-wordcount-start/">Flink 源码解析 —— 分析 Streaming WordCount 程序的执行过程</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/18/Flink-code-batch-wordcount-start/">Flink 源码解析 —— 分析 Batch WordCount 程序的执行过程</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/17/Flink-code-Standalone-TaskManager-start/">Flink 源码解析 —— Standalone Session Cluster 启动流程深度分析之 Task Manager 启动</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/16/Flink-code-Standalone-JobManager-start/">Flink 源码解析 —— Standalone Session Cluster 启动流程深度分析之 Job Manager 启动</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/15/Flink-code-Standalone-start/">Flink 源码解析 —— Standalone session 模式启动流程</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/14/Flink-code-structure/">Flink 源码解析 —— 项目结构一览</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/13/flink-job-jars/">Flink 从 0 到 1 学习 —— 你上传的 jar 包藏到哪里去了?</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/02/28/blink/">阿里巴巴开源的 Blink 实时计算框架真香</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/01/30/Flink-code-compile/">Flink 源码解析 —— 源码编译运行</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/01/20/Flink-RabbitMQ-sink/">Flink 从 0 到 1 学习 —— Flink 读取 Kafka 数据写入到 RabbitMQ</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/01/15/Flink-MySQL-sink/">Flink 从 0 到 1 学习 —— Flink 读取 Kafka 数据批量写入到 MySQL</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/01/14/Flink-parallelism-slot/">Flink 从 0 到 1 学习 —— Flink parallelism 和 Slot 介绍</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/01/13/Flink-JobManager-High-availability/">Flink 从 0 到 1 学习 —— Flink JobManager 高可用性配置</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/01/06/Flink-Kafka-sink/">Flink 从 0 到 1 学习 —— Flink 写入数据到 Kafka</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/01/05/Flink-run/">Flink 从 0 到 1 学习 —— Flink 项目如何运行？</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/12/30/Flink-ElasticSearch-Sink/">Flink 从 0 到 1 学习 —— Flink 写入数据到 ElasticSearch</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/12/11/Flink-time/">Flink 从 0 到 1 学习 —— Flink 中几种 Time 详解</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/12/08/Flink-Stream-Windows/">Flink 从 0 到 1 学习 —— 介绍Flink中的Stream Windows</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/04/Flink-Data-transformation/">Flink 从 0 到 1 学习 —— Flink Data transformation(转换)</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/31/flink-create-sink/">Flink 从 0 到 1 学习 —— 如何自定义 Data Sink ？</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/30/flink-create-source/">Flink 从 0 到 1 学习 —— 如何自定义 Data Source ？</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/29/flink-sink/">Flink 从 0 到 1 学习 —— Data Sink 介绍</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/28/flink-sources/">Flink 从 0 到 1 学习 —— Data Source 介绍</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/27/flink-config/">Flink 从 0 到 1 学习 —— Flink 配置文件详解</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/13/flink-introduction/">Flink 从 0 到 1 学习 —— Apache Flink 介绍</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/18/flink-install/">Flink 从 0 到 1 学习 —— Mac 上搭建 Flink 1.6.0 环境并构建运行简单程序入门</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/30/go-sync/">Go 并发——实现协程同步的几种方式</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/14/idea-remote-debug-elasticsearch/">教你如何在 IDEA 远程 Debug ElasticSearch</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/12/es-code03/">渣渣菜鸡的 ElasticSearch 源码解析 —— 启动流程（下）</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/11/es-code02/">渣渣菜鸡的 ElasticSearch 源码解析 —— 启动流程（上）</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/05/es-code01/">渣渣菜鸡的 ElasticSearch 源码解析 —— 环境搭建</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/04/why-see-es-code/">渣渣菜鸡为什么要看 ElasticSearch 源码？</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/07/31/alipay02/">渣渣菜鸡的蚂蚁金服面试经历(二)</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/07/30/alipay01/">渣渣菜鸡的蚂蚁金服面试经历(一)</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/07/12/youzan/">渣渣菜鸡的有赞面试经历（一）</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/20/java-8-date/">20 个案例教你在 Java 8 中如何处理日期和时间?</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/19/SimpleDateFormat/">SimpleDateFormat 如何安全的使用？</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/26/paper/">苦逼的毕业论文经历</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/30/springboot_SpringApplication/">Spring Boot 2.0系列文章(七)：SpringApplication 深入探索</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/24/Distributed_lock/">分布式锁看这篇就够了</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/19/SpringBootApplication-annotation/">Spring Boot 2.0系列文章(六)：Spring Boot 2.0中SpringBootApplication注解详解</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/18/spring_boot2_project/">Spring Boot 2.0系列文章(五)：Spring Boot 2.0 项目源码结构预览</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/15/springboot2_code/">Spring Boot 2.0系列文章(四)：Spring Boot 2.0 源码阅读环境搭建</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/13/Spring_Boot_2.0_Configuration_Changelog/">Spring Boot 2.0系列文章(三)：Spring Boot 2.0 配置改变</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/03/27/blogs/">写这么多系列博客，怪不得找不到女朋友</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/03/06/SpringBoot2-new-features/">Spring Boot 2.0系列文章(二)：Spring Boot 2.0 新特性详解</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/03/06/SpringBoot2-Migration-Guide/">Spring Boot 2.0系列文章(一)：Spring Boot 2.0 迁移指南</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/02/28/Java-Memory-Model/">《深入理解 Java 内存模型》读书笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/02/07/rocketmq-example/">RocketMQ系列文章（三）：RocketMQ 简单的消息示例</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/02/07/SpringBoot-RocketMQ/">Spring Boot系列文章（六）：SpringBoot RocketMQ 整合使用和监控</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/02/06/RocketMQ-install/">RocketMQ系列文章（二）：RocketMQ 安装及快速入门</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/02/05/RocketMQ/">RocketMQ系列文章（一）：RocketMQ 初探</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/28/RabbitMQ/">Spring Boot系列文章（五）：SpringBoot RabbitMQ 整合进阶版</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/27/SpringBoot-ActiveMQ/">Spring Boot系列文章（四）：SpringBoot ActiveMQ 整合使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/26/SpringBoot-RabbitMQ/">Spring Boot系列文章（三）：SpringBoot  RabbitMQ 整合使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/25/Docker-install/">Docker系列文章（二）：Mac 安装 Docker 及常用命令</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/24/mac/">MacBook Pro 初体验</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/17/SpringBoot-Admin/">Spring Boot系列文章（二）：SpringBoot Admin 使用指南</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/09/lombok/">Lombok 看这篇就够了</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/05/SpringBoot-Kafka/">Spring Boot系列文章（一）：SpringBoot Kafka 整合使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/04/weixin/">为什么要重新运营以前的公众号呢？</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/04/Kafka/">Kafka 安装及快速入门</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/12/27/consul-install/">Windows 下安装 Consul</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/12/25/ELK/">Elasticsearch 系列文章（五）：ELK 实时日志分析平台环境搭建</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/12/18/hexo-yilia/">Hexo + yilia 搭建博客可能会遇到的所有疑问</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/12/13/Google-Developer-Days/">谷歌开发者大会收获满满，不去真 “可惜” 了</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/12/09/CodeMirror/">使用 CodeMirror 打造属于自己的在线代码编辑器</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/12/08/netty-01-env/">Netty系列文章（一）：Netty 源码阅读之初始环境搭建</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/12/03/RestTemplate/">RestTemplate 详解</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/12/02/wx-01/">实习圈群里提问小记</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/11/26/Docker-harbor/">Docker系列文章（一）：基于 Harbor 搭建 Docker 私有镜像仓库</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/11/18/Money-management/">谈谈我的理财</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/11/18/flow-control/">基于分布式环境下限流系统的设计</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/11/11/Maven-dependencies-dependencyManagement/">Maven 中 dependencies 与 dependencyManagement 的区别</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/11/11/recommended-books/">送你一份双十一剁手书单【墙裂推荐】</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/28/Data-Desensitization/">小白谈数据脱敏</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/21/HBase-metrics/">HBase 集群监控</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/18/ElasticSearch-nodes-metrics/">Elasticsearch 系列文章（四）：ElasticSearch 单个节点监控</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/15/ElasticSearch-cluster-health-metrics/">Elasticsearch 系列文章（三）：ElasticSearch 集群监控</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/14/JsonPath/">JsonPath —— JSON 解析神器</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/14/Nexus3-Maven/">Centos7 搭建最新 Nexus3 Maven 私服</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/23/Guava-limit/">Google Guava 缓存实现接口的限流</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/17/Interview-summary/">面试过阿里等互联网大公司，我知道了这些套路</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/15/linux-lua-lfs-install/">Linux 下 lua 开发环境安装及安装 luafilesystem</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/09/Elasticsearch-install/">Elasticsearch 系列文章（二）：全文搜索引擎 Elasticsearch 集群搭建入门教程</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/08/Elasticsearch-analyzers/">Elasticsearch 系列文章（一）：Elasticsearch 默认分词器和中分分词器之间的比较及使用方法</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/28/recommend-books/">那些年我看过的书 —— 致敬我的大学生活 —— Say Good Bye ！</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/18/Ubuntu-install-Nginx/">Ubuntu16.10 安装 Nginx</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/11/most-success/">马云热血励志演讲《最伟大的成功》</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/08/android-projects/">源码大招：不服来战！撸这些完整项目，你不牛逼都难！</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/05/Nginx/">Nginx 基本知识快速入门</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/04/alibaba/">秋招第三站 —— 内推阿里（一面）</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/04/iqiyi/">秋招第二站 —— 内推爱奇艺（一面二面）</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/04/yaxin/">秋招第一站 —— 亚信科技</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/29/ThreadPool/">Java 线程池艺术探索</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/25/Java-performance-tuning/">Java 性能调优需要格外注意的细节</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/21/Spring-MVC03/">Spring MVC系列文章（五）：看透 Spring MVC 源代码分析与实践 ——  Spring MVC 组件分析</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/14/Spring-MVC01/">Spring MVC系列文章（三）：看透 Spring MVC 源代码分析与实践 ——  网站基础知识</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/14/Spring-MVC02/">Spring MVC系列文章（四）：看透 Spring MVC 源代码分析与实践 ——  俯视 Spring MVC</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/09/servlet/">通过源码详解 Servlet</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/28/Velocity-foreach/">Velocity 循环指令一种好的解决方法</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/23/AJAX/">AJAX 学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/23/java-io/">Java IO流学习超详细总结（图文并茂）</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/20/Java-error1/">java.sql.SQLException Field 'id' doesn't have a default value</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/19/中缀表达式转换成前缀和后缀表达式这类题目的超实用解题技巧/">中缀表达式转换成前缀和后缀表达式这类题目的超实用解题技巧</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/18/循环队列的相关条件和公式/">循环队列的相关条件和公式</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/18/Bootstrap入门需掌握的知识点（二）/">Bootstrap入门需掌握的知识点（二）</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/18/Bootstrap入门需掌握的知识点（一）/">Bootstrap入门需掌握的知识点（一）</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/17/blog-talk/">搭建一个博客项目后的碎碎念</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/17/详解 Filter 过滤器/">详解 Filter 过滤器</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/17/详细深入分析 Java ClassLoader 工作机制/">详细深入分析 Java ClassLoader 工作机制</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/16/通过项目逐步深入了解Spring MVC（一）/">通过项目逐步深入了解Spring MVC（一）</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/15/通过项目逐步深入了解Mybatis(四)/">通过项目逐步深入了解Mybatis（四）</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/14/通过项目逐步深入了解Mybatis(三)/">通过项目逐步深入了解Mybatis（三）</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/13/Hexo-yilia-toc/">Hexo + yilia 主题实现文章目录</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/13/Java连接Oracle数据库的三种连接方式/">Java连接Oracle数据库的三种连接方式</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/13/MyBatis-foreach/">MyBatis的foreach语句详解</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/13/Spring MVC + Hibernate JPA + Bootstrap 搭建的博客系统/">Spring MVC系列文章（一）：Spring MVC + Hibernate JPA + Bootstrap 搭建的博客系统 Demo</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/13/String-new/">关于String s = new String("xyz"); 创建几个对象的问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/13/【字符串】判断两字符串是否互为旋转词？/">【字符串】判断两字符串是否互为旋转词？</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/13/【字符串】字符串逆序/">字符串</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/13/奇怪的Java题：为什么128 == 128返回为False，而127 == 127会返回为True-/">奇怪的Java题：为什么128 == 128返回为False，而127 == 127会返回为True?</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/13/程序访问文件的几种方式/">程序访问文件的几种方式</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/13/MySQL-select-good/">MySQL 处理海量数据时的一些优化查询速度方法</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/13/Pyspider框架 —— Python爬虫实战之爬取 V2EX 网站帖子/">Pyspider框架 —— Python爬虫实战之爬取 V2EX 网站帖子</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/13/Spring MVC+Hibernate JPA搭建的博客系统项目中所遇到的坑/">Spring MVC系列文章（二）：Spring MVC+Hibernate JPA搭建的博客系统项目中所遇到的坑</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/13/feiji/">记录下自己第一次坐飞机的感受</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/13/java-var/">从对象深入分析 Java 中实例变量和类变量的区别</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/13/java读取文件/">Java读取文件</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/13/利用Github Page 搭建个人博客网站/">利用Github Page 搭建个人博客网站</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/13/解决jdk1.8中发送邮件失败（handshake_failure）问题/">解决jdk1.8中发送邮件失败（handshake_failure）问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/13/HashMap-Hashtable/">HashMap、Hashtable、HashSet 和 ConcurrentHashMap 的比较</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/13/JVM性能调优监控工具jps、jstack、jmap、jhat、jstat等使用详解/">JVM性能调优监控工具jps、jstack、jmap、jhat、jstat等使用详解</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/13/Python爬虫实战之爬取百度贴吧帖子/">Python爬虫实战之爬取百度贴吧帖子</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/13/Python爬虫实战之爬取糗事百科段子/">Python爬虫实战之爬取糗事百科段子</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/13/深入分析 Java Web 中的中文编码问题/">深入分析 Java Web 中的中文编码问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/13/深度探究Java 中 finally 语句块/">深度探究Java 中 finally 语句块</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/13/通过项目逐步深入了解Mybatis(二)/">通过项目逐步深入了解Mybatis（二）</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/13/Java NIO 系列教程/">Java NIO 系列教程</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/13/Java-Thread/">《Java 多线程编程核心技术》学习笔记及总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/13/Java-16-lession/">《疯狂 Java 突破程序员基本功的 16 课》读书笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/12/通过项目逐步深入了解Mybatis(一)/">通过项目逐步深入了解Mybatis（一）</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/02/poetry2/"> 六月 —— 愿你做最美好的自己！</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/12/poetry/">最近很火的鸡汤，分享给大家</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/13/Hexo-yilia-changyan/">Github pages + Hexo 博客 yilia 主题使用畅言评论系统</a></li></ul>
+    <script src="http://apps.bdimg.com/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script>
+        $(".post-list").addClass("toc-article");
+        $(".post-list-item a").attr("target","_blank");
+        $("#post-nav-button > a:nth-child(2)").click(function() {
+            $(".fa-bars, .fa-times").toggle();
+            $(".post-list").toggle(300);
+            if ($(".toc").length > 0) {
+                $("#toc, #tocButton").toggle(200, function() {
+                    if ($(".switch-area").is(":visible")) {
+                        $("#tocButton").attr("value", valueHide);
+                        }
+                    })
+            }
+            else {
+            }
+        })
+    </script>
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                &copy; 2021 zhisheng
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" >本站总访问量: 
+                            <span id="busuanzi_value_site_pv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>, </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit">本文总阅读量: 
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                   <a href="http://beian.miit.gov.cn">赣ICP备16004176号</a>
+            </div>
+        
+    </div>
+</footer>
+
+    </div>
+    <script src="http://apps.bdimg.com/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="/js/main.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var backgroundnum = 24;
+            var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+            $("#mobile-nav").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+            $(".left-col").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+        })
+    </script>
+
+
+
+
+	<script>
+	var _hmt = _hmt || [];
+	(function() {
+	  var hm = document.createElement("script");
+	  hm.src = "https://hm.baidu.com/hm.js?c41be5a0c9f014e977695f66c065b5d3";
+	  var s = document.getElementsByTagName("script")[0]; 
+	  s.parentNode.insertBefore(hm, s);
+	})();
+	</script>
+
+
+<div class="scroll" id="scroll">
+    <a href="#"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    $(document).ready(function() {
+        if ($("#comments").length < 1) {
+            $("#scroll > a:nth-child(2)").hide();
+        };
+    })
+</script>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  <script language="javascript">
+    $(function() {
+        $("a[title]").each(function() {
+            var a = $(this);
+            var title = a.attr('title');
+            if (title == undefined || title == "") return;
+            a.data('title', title).removeAttr('title').hover(
+
+            function() {
+                var offset = a.offset();
+                $("<div id=\"anchortitlecontainer\"></div>").appendTo($("body")).html(title).css({
+                    top: offset.top - a.outerHeight() - 15,
+                    left: offset.left + a.outerWidth()/2 + 1
+                }).fadeIn(function() {
+                    var pop = $(this);
+                    setTimeout(function() {
+                        pop.remove();
+                    }, pop.text().length * 800);
+                });
+            }, function() {
+                $("#anchortitlecontainer").remove();
+            });
+        });
+    });
+</script>
+
+
+  </div>
+</body>
+</html>

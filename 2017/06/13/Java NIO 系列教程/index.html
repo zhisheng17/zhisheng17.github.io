@@ -1,0 +1,1030 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+   <!-- 百度联盟 -->
+   <meta name="baidu_union_verify" content="46e227ad81d5513c6cd8288c18c6ebad">
+
+   <!-- google analytics -->
+   <meta name="google-site-verification" content="SzCGQVmA8Mtk40elee-bCGpq2YSCAmEulSNEZHYCkFc" />
+
+   <!--百度站长之家验证-->
+   <meta name="baidu-site-verification" content="4woRik4rfk" />
+
+   <meta name="description" content="坑要一个个填，路要一步步走！—— from zhisheng的博客">
+   <meta name="keywords" content="Flink,Spark,大数据,Hive,Java,架构,后端,服务端,RocketMQ,分布式消息队列,分布式存储,技术博客,HBase,ElasticSearch,Spring,Spring Boot,Spring Boot 2.0,Spring Cloud,Spring MVC,Java EE,前端,HTML,MyBatis,Android,Docker,Mac,Consul,Kafka,Logstash,Kibana,MySQL,Maven,Nginx,Python,RabbitMQ,ActiveMQ,JVM">
+
+
+  <title>Java NIO 系列教程 | zhisheng的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Java NIO（New IO）是从Java 1.4版本开始引入的一个新的IO API，可以替代标准的Java IO API。 Java NIO提供了与标准IO不同的IO工作方式：  Channels and Buffers（通道和缓冲区）：标准的IO基于字节流和字符流进行操作的，而NIO是基于通道（Channel）和缓冲区（Buffer）进行操作，数据总是从通道读取到缓冲区中，或者从缓冲区写入到">
+<meta name="keywords" content="Java,NIO">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java NIO 系列教程">
+<meta property="og:url" content="http://www.54tianzhisheng.cn/2017/06/13/Java NIO 系列教程/index.html">
+<meta property="og:site_name" content="zhisheng的博客">
+<meta property="og:description" content="Java NIO（New IO）是从Java 1.4版本开始引入的一个新的IO API，可以替代标准的Java IO API。 Java NIO提供了与标准IO不同的IO工作方式：  Channels and Buffers（通道和缓冲区）：标准的IO基于字节流和字符流进行操作的，而NIO是基于通道（Channel）和缓冲区（Buffer）进行操作，数据总是从通道读取到缓冲区中，或者从缓冲区写入到">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://ifeve.com/wp-content/uploads/2013/06/overview-channels-buffers1.png">
+<meta property="og:image" content="http://ifeve.com/wp-content/uploads/2013/06/overview-selectors.png">
+<meta property="og:image" content="http://ifeve.com/wp-content/uploads/2013/06/overview-channels-buffers.png">
+<meta property="og:image" content="http://ifeve.com/wp-content/uploads/2013/06/buffers-modes.png">
+<meta property="og:image" content="http://ifeve.com/wp-content/uploads/2013/06/scatter.png">
+<meta property="og:image" content="http://ifeve.com/wp-content/uploads/2013/06/gather.png">
+<meta property="og:image" content="http://ifeve.com/wp-content/uploads/2013/06/overview-selectors.png">
+<meta property="og:image" content="http://ifeve.com/wp-content/uploads/2013/06/pipe.bmp">
+<meta property="og:image" content="http://dl2.iteye.com/upload/attachment/0096/5635/d816b6e7-0b89-3cbf-bc24-dc7e1bb971de.png">
+<meta property="og:image" content="http://dl2.iteye.com/upload/attachment/0096/5637/e97ec9e9-62d4-3375-80a6-d4238d6a0664.png">
+<meta property="og:image" content="http://dl2.iteye.com/upload/attachment/0096/5639/8c8b13c9-0d38-3599-99d3-e0d1aa90589d.png">
+<meta property="og:image" content="http://dl2.iteye.com/upload/attachment/0096/5641/72c44e71-8219-3989-a787-b67ced3c7ab1.png">
+<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tNc79gy1fp3jkmizmpj30o00didgn.jpg">
+<meta property="og:updated_time" content="2018-03-06T16:12:38.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Java NIO 系列教程">
+<meta name="twitter:description" content="Java NIO（New IO）是从Java 1.4版本开始引入的一个新的IO API，可以替代标准的Java IO API。 Java NIO提供了与标准IO不同的IO工作方式：  Channels and Buffers（通道和缓冲区）：标准的IO基于字节流和字符流进行操作的，而NIO是基于通道（Channel）和缓冲区（Buffer）进行操作，数据总是从通道读取到缓冲区中，或者从缓冲区写入到">
+<meta name="twitter:image" content="http://ifeve.com/wp-content/uploads/2013/06/overview-channels-buffers1.png">
+  
+    <link rel="alternative" href="/atom.xml" title="zhisheng的博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/img/favicon.ico">
+  
+  
+      <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  
+  
+      <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  
+  <!-- 加载特效 -->
+  <script src="/js/pace.js"></script>
+  <link href="/css/pace/pace-theme-flash.css" rel="stylesheet" />
+  <script>
+      var yiliaConfig = {
+          rootUrl: '/',
+          fancybox: true,
+          animate: true,
+          isHome: false,
+          isPost: true,
+          isArchive: false,
+          isTag: false,
+          isCategory: false,
+          open_in_new: true
+      }
+  </script>
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <!-- <a href="/" class="profilepic">
+            
+            <img src="//img/avatar.png" alt="zhisheng">
+            
+        </a> -->
+         <a href="/">
+        			<img src="/img/avatar.png" class="js-avatar" style="width: 70%;height: 70%;opacity: 1;">
+        </a>
+
+        <hgroup>
+          <h1 class="header-author"><a href="/">zhisheng</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">坑要一个个填，路要一步步走！</p>
+        
+        
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/tags/Flink/">Flink</a></li>
+                        
+                            <li><a href="/tags/ElasticSearch/">ElasticSearch</a></li>
+                        
+                            <li><a href="/tags/SpringBoot/">Spring Boot</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fl wechat" target="_blank" href="wechat:yuanblog_tzs" title="wechat">wechat</a>
+                            
+                                <a class="fl mail" target="_blank" href="mailto://zhisheng2018@gmail.com" title="mail">mail</a>
+                            
+                                <a class="fl github" target="_blank" href="https://github.com/zhisheng17/" title="github">github</a>
+                            
+                                <a class="fl zhihu" target="_blank" href="https://www.zhihu.com/people/zhisheng-34" title="zhihu">zhihu</a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <a href="/tags/AJAX/" style="font-size: 10px;">AJAX</a> <a href="/tags/ActiveMQ/" style="font-size: 10px;">ActiveMQ</a> <a href="/tags/Android/" style="font-size: 10px;">Android</a> <a href="/tags/Apollo/" style="font-size: 10px;">Apollo</a> <a href="/tags/Blink/" style="font-size: 10px;">Blink</a> <a href="/tags/Bootstrap/" style="font-size: 12.5px;">Bootstrap</a> <a href="/tags/Consul/" style="font-size: 10px;">Consul</a> <a href="/tags/Docker/" style="font-size: 10.83px;">Docker</a> <a href="/tags/ElasticSearch/" style="font-size: 15.83px;">ElasticSearch</a> <a href="/tags/Filter过滤器/" style="font-size: 10px;">Filter过滤器</a> <a href="/tags/Flink/" style="font-size: 20px;">Flink</a> <a href="/tags/GO/" style="font-size: 10px;">GO</a> <a href="/tags/Github-Page/" style="font-size: 10px;">Github Page</a> <a href="/tags/Guava/" style="font-size: 10px;">Guava</a> <a href="/tags/HBase/" style="font-size: 10px;">HBase</a> <a href="/tags/Hibernate-JPA/" style="font-size: 10.83px;">Hibernate JPA</a> <a href="/tags/IO/" style="font-size: 10.83px;">IO</a> <a href="/tags/JMM/" style="font-size: 10px;">JMM</a> <a href="/tags/JSON/" style="font-size: 10px;">JSON</a> <a href="/tags/JVM/" style="font-size: 10.83px;">JVM</a> <a href="/tags/Java/" style="font-size: 18.33px;">Java</a> <a href="/tags/Kafka/" style="font-size: 12.5px;">Kafka</a> <a href="/tags/Kibana/" style="font-size: 10px;">Kibana</a> <a href="/tags/LogStash/" style="font-size: 10px;">LogStash</a> <a href="/tags/Mac/" style="font-size: 10px;">Mac</a> <a href="/tags/Maven/" style="font-size: 10.83px;">Maven</a> <a href="/tags/MySQL/" style="font-size: 12.5px;">MySQL</a> <a href="/tags/Mybatis/" style="font-size: 13.33px;">Mybatis</a> <a href="/tags/NIO/" style="font-size: 10px;">NIO</a> <a href="/tags/Nacos/" style="font-size: 11.67px;">Nacos</a> <a href="/tags/Netty/" style="font-size: 10px;">Netty</a> <a href="/tags/Nginx/" style="font-size: 10.83px;">Nginx</a> <a href="/tags/Oracle/" style="font-size: 10px;">Oracle</a> <a href="/tags/Pyspider/" style="font-size: 10px;">Pyspider</a> <a href="/tags/Python/" style="font-size: 11.67px;">Python</a> <a href="/tags/RabbitMQ/" style="font-size: 11.67px;">RabbitMQ</a> <a href="/tags/Redis/" style="font-size: 10.83px;">Redis</a> <a href="/tags/RocketMQ/" style="font-size: 12.5px;">RocketMQ</a> <a href="/tags/Servlet/" style="font-size: 10px;">Servlet</a> <a href="/tags/Spark/" style="font-size: 10px;">Spark</a> <a href="/tags/Spring/" style="font-size: 11.67px;">Spring</a> <a href="/tags/Spring-MVC/" style="font-size: 14.17px;">Spring MVC</a> <a href="/tags/SpringBoot/" style="font-size: 16.67px;">SpringBoot</a> <a href="/tags/SpringMVC/" style="font-size: 12.5px;">SpringMVC</a> <a href="/tags/String/" style="font-size: 10px;">String</a> <a href="/tags/Velocity/" style="font-size: 10px;">Velocity</a> <a href="/tags/Zookeeper/" style="font-size: 10px;">Zookeeper</a> <a href="/tags/finally/" style="font-size: 10px;">finally</a> <a href="/tags/foreach/" style="font-size: 10px;">foreach</a> <a href="/tags/hexo/" style="font-size: 11.67px;">hexo</a> <a href="/tags/lombok/" style="font-size: 10px;">lombok</a> <a href="/tags/lua/" style="font-size: 10px;">lua</a> <a href="/tags/yilia/" style="font-size: 10.83px;">yilia</a> <a href="/tags/书籍/" style="font-size: 10px;">书籍</a> <a href="/tags/分布式锁/" style="font-size: 10px;">分布式锁</a> <a href="/tags/前端/" style="font-size: 11.67px;">前端</a> <a href="/tags/励志/" style="font-size: 10px;">励志</a> <a href="/tags/博客合集/" style="font-size: 10px;">博客合集</a> <a href="/tags/博客网站/" style="font-size: 10px;">博客网站</a> <a href="/tags/多线程/" style="font-size: 10.83px;">多线程</a> <a href="/tags/大数据/" style="font-size: 20px;">大数据</a> <a href="/tags/字符串/" style="font-size: 10.83px;">字符串</a> <a href="/tags/实习圈/" style="font-size: 10px;">实习圈</a> <a href="/tags/实时计算/" style="font-size: 17.5px;">实时计算</a> <a href="/tags/循环队列/" style="font-size: 10px;">循环队列</a> <a href="/tags/性能调优工具/" style="font-size: 10px;">性能调优工具</a> <a href="/tags/投资理财/" style="font-size: 10px;">投资理财</a> <a href="/tags/数据仓库/" style="font-size: 10px;">数据仓库</a> <a href="/tags/数据库/" style="font-size: 11.67px;">数据库</a> <a href="/tags/数据结构/" style="font-size: 12.5px;">数据结构</a> <a href="/tags/文件/" style="font-size: 10px;">文件</a> <a href="/tags/旋转词/" style="font-size: 10px;">旋转词</a> <a href="/tags/流式计算/" style="font-size: 19.17px;">流式计算</a> <a href="/tags/流控/" style="font-size: 10px;">流控</a> <a href="/tags/爬虫/" style="font-size: 11.67px;">爬虫</a> <a href="/tags/监控告警/" style="font-size: 10px;">监控告警</a> <a href="/tags/算法/" style="font-size: 11.67px;">算法</a> <a href="/tags/类加载机制/" style="font-size: 10px;">类加载机制</a> <a href="/tags/线程池/" style="font-size: 10px;">线程池</a> <a href="/tags/编码/" style="font-size: 10px;">编码</a> <a href="/tags/表达式/" style="font-size: 10px;">表达式</a> <a href="/tags/邮件发送/" style="font-size: 10px;">邮件发送</a> <a href="/tags/随笔/" style="font-size: 15px;">随笔</a> <a href="/tags/面经/" style="font-size: 15px;">面经</a>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://blog.csdn.net/tzs_1041218129">CSDN博客</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="https://juejin.im/user/57510b82128fe10056ca70fc">掘金</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">人在江湖飘，各种折腾！</div>
+                </section>
+                
+            </div>
+        </div>
+        <div>
+            <img src="/img/wx.jpg"  alt="zhisheng" />
+        </div>
+    </header>
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="Me">zhisheng</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+<!--             <a href="/" class="profilepic">
+                
+                    <img lazy-src="//img/avatar.png" class="js-avatar">
+                
+            </a> -->
+
+<!--             <a href="/">
+                <img src="//img/avatar.png" class="js-avatar" style="width: 100%; height: 100%; opacity: 1;">
+            </a> -->
+
+
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="Me">zhisheng</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">坑要一个个填，路要一步步走！</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/tags/Flink/">Flink</a></li>
+                
+                    <li><a href="/tags/ElasticSearch/">ElasticSearch</a></li>
+                
+                    <li><a href="/tags/SpringBoot/">Spring Boot</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a class="wechat" target="_blank" href="wechat:yuanblog_tzs" title="wechat">wechat</a>
+                    
+                        <a class="mail" target="_blank" href="mailto://zhisheng2018@gmail.com" title="mail">mail</a>
+                    
+                        <a class="github" target="_blank" href="https://github.com/zhisheng17/" title="github">github</a>
+                    
+                        <a class="zhihu" target="_blank" href="https://www.zhihu.com/people/zhisheng-34" title="zhihu">zhihu</a>
+                    
+                </div>
+            </nav>
+        </header>                
+    </div>
+</nav>
+      <div class="body-wrap"><article id="post-Java NIO 系列教程" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2017/06/13/Java NIO 系列教程/" class="article-date">
+      <time datetime="2017-06-12T16:00:00.000Z" itemprop="datePublished">2017-06-13</time>
+</a>
+    </div>
+  
+  <div class="article-inner" id="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Java NIO 系列教程
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/NIO/">NIO</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody" id="article-entry">
+      
+          
+        <p>Java NIO（New IO）是从Java 1.4版本开始引入的一个新的IO API，可以替代标准的Java IO API。</p>
+<p>Java NIO提供了与标准IO不同的IO工作方式：</p>
+<ul>
+<li><p><strong>Channels and Buffers（通道和缓冲区）</strong>：标准的IO基于字节流和字符流进行操作的，而NIO是基于通道（Channel）和缓冲区（Buffer）进行操作，数据总是从通道读取到缓冲区中，或者从缓冲区写入到通道中。</p>
+</li>
+<li><p><strong>Asynchronous IO（异步IO）</strong>：Java NIO可以让你异步的使用IO，例如：当线程从通道读取数据到缓冲区时，线程还是可以进行其他事情。当数据被写入到缓冲区时，线程可以继续处理它。从缓冲区写入通道也类似。</p>
+</li>
+<li><p><strong>Selectors（选择器）</strong>：Java NIO引入了选择器的概念，选择器用于监听多个通道的事件（比如：连接打开，数据到达）。因此，单个的线程可以监听多个数据通道。</p>
+</li>
+</ul>
+<a id="more"></a>
+<p><strong>下面就来详细介绍Java NIO的相关知识。</strong></p>
+<h3 id="1、Java-NIO-概述"><a href="#1、Java-NIO-概述" class="headerlink" title="1、Java NIO 概述"></a>1、Java NIO 概述</h3><p>Java NIO 由以下几个核心部分组成：</p>
+<ul>
+<li>Channels</li>
+<li>Buffers</li>
+<li>Selectors</li>
+</ul>
+<p>虽然 Java NIO 中除此之外还有很多类和组件，但在我看来，Channel，Buffer 和 Selector 构成了核心的 API。其它组件，如 Pipe 和 FileLock，只不过是与三个核心组件共同使用的工具类。因此，在概述中我将集中在这三个组件上。其它组件会在单独的章节中讲到。</p>
+<h4 id="Channel-和-Buffer"><a href="#Channel-和-Buffer" class="headerlink" title="Channel 和 Buffer"></a>Channel 和 Buffer</h4><p>基本上，所有的 IO 在NIO 中都从一个 Channel 开始。Channel 有点象流。 数据可以从 Channel 读到 Buffer 中，也可以从 Buffer 写到 Channel 中。这里有个图示：</p>
+<p><img src="http://ifeve.com/wp-content/uploads/2013/06/overview-channels-buffers1.png" alt=""></p>
+<p>Channel 和 Buffer 有好几种类型。下面是 JAVA NIO 中的一些主要 Channel 的实现：</p>
+<ul>
+<li>FileChannel</li>
+<li>DatagramChannel</li>
+<li>SocketChannel</li>
+<li>ServerSocketChannel</li>
+</ul>
+<p>正如你所看到的，这些通道涵盖了 UDP 和 TCP 网络 IO，以及文件 IO。</p>
+<p>与这些类一起的有一些有趣的接口，但为简单起见，我尽量在概述中不提到它们。本教程其它章节与它们相关的地方我会进行解释。</p>
+<p>以下是 Java NIO 里关键的 Buffer 实现：</p>
+<ul>
+<li>ByteBuffer</li>
+<li>CharBuffer</li>
+<li>DoubleBuffer</li>
+<li>FloatBuffer</li>
+<li>IntBuffer</li>
+<li>LongBuffer</li>
+<li>ShortBuffer</li>
+</ul>
+<p>这些 Buffer 覆盖了你能通过 IO 发送的基本数据类型：byte, short, int, long, float, double 和 char。</p>
+<p>Java NIO 还有个 MappedByteBuffer，用于表示内存映射文件， 我也不打算在概述中说明。</p>
+<h4 id="Selector"><a href="#Selector" class="headerlink" title="Selector"></a>Selector</h4><p>Selector 允许单线程处理多个 Channel。如果你的应用打开了多个连接（通道），但每个连接的流量都很低，使用 Selector 就会很方便。例如，在一个聊天服务器中。</p>
+<p>这是在一个单线程中使用一个 Selector 处理3个 Channel 的图示：</p>
+<p><img src="http://ifeve.com/wp-content/uploads/2013/06/overview-selectors.png" alt=""></p>
+<p>要使用 Selector，得向 Selector 注册 Channel，然后调用它的 select() 方法。这个方法会一直阻塞到某个注册的通道有事件就绪。一旦这个方法返回，线程就可以处理这些事件，事件的例子有如新连接进来，数据接收等。</p>
+<hr>
+<h3 id="2、Channel"><a href="#2、Channel" class="headerlink" title="2、Channel"></a>2、Channel</h3><p>Java NIO 的通道类似流，但又有些不同：</p>
+<ul>
+<li>既可以从通道中读取数据，又可以写数据到通道。但流的读写通常是单向的。</li>
+<li>通道可以异步地读写。</li>
+<li>通道中的数据总是要先读到一个 Buffer，或者总是要从一个 Buffer 中写入。</li>
+</ul>
+<p>正如上面所说，从通道读取数据到缓冲区，从缓冲区写入数据到通道。如下图所示：</p>
+<p><img src="http://ifeve.com/wp-content/uploads/2013/06/overview-channels-buffers.png" alt=""></p>
+<h4 id="Channel-的实现"><a href="#Channel-的实现" class="headerlink" title="Channel 的实现"></a>Channel 的实现</h4><p>这些是 Java NIO 中最重要的通道的实现：</p>
+<ul>
+<li>FileChannel</li>
+<li>DatagramChannel</li>
+<li>SocketChannel</li>
+<li>ServerSocketChannel</li>
+<li>FileChannel 从文件中读写数据。</li>
+</ul>
+<p>DatagramChannel 能通过 UDP 读写网络中的数据。</p>
+<p>SocketChannel 能通过 TCP 读写网络中的数据。</p>
+<p>ServerSocketChannel 可以监听新进来的 TCP 连接，像 Web 服务器那样。对每一个新进来的连接都会创建一个 SocketChannel。</p>
+<h4 id="基本的-Channel-示例"><a href="#基本的-Channel-示例" class="headerlink" title="基本的 Channel 示例"></a>基本的 Channel 示例</h4><p>下面是一个使用 FileChannel 读取数据到 Buffer 中的示例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">RandomAccessFile aFile = new RandomAccessFile(&quot;data/nio-data.txt&quot;, &quot;rw&quot;);</span><br><span class="line">FileChannel inChannel = aFile.getChannel();</span><br><span class="line"></span><br><span class="line">ByteBuffer buf = ByteBuffer.allocate(48);</span><br><span class="line"></span><br><span class="line">int bytesRead = inChannel.read(buf);</span><br><span class="line">while (bytesRead != -1) &#123;</span><br><span class="line"></span><br><span class="line">System.out.println(&quot;Read &quot; + bytesRead);</span><br><span class="line">buf.flip();</span><br><span class="line"></span><br><span class="line">while(buf.hasRemaining())&#123;</span><br><span class="line">System.out.print((char) buf.get());</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">buf.clear();</span><br><span class="line">bytesRead = inChannel.read(buf);</span><br><span class="line">&#125;</span><br><span class="line">aFile.close();</span><br></pre></td></tr></table></figure>
+<p>注意 buf.flip() 的调用，首先读取数据到Buffer，然后反转Buffer,接着再从Buffer中读取数据。下一节会深入讲解Buffer的更多细节。</p>
+<hr>
+<h3 id="3、Buffer"><a href="#3、Buffer" class="headerlink" title="3、Buffer"></a>3、Buffer</h3><p>Java NIO 中的 Buffer 用于和 NIO 通道进行交互。如你所知，数据是从通道读入缓冲区，从缓冲区写入到通道中的。</p>
+<p>缓冲区本质上是一块可以写入数据，然后可以从中读取数据的内存。这块内存被包装成 NIO Buffer 对象，并提供了一组方法，用来方便的访问该块内存。</p>
+<h4 id="Buffer-的基本用法"><a href="#Buffer-的基本用法" class="headerlink" title="Buffer 的基本用法"></a>Buffer 的基本用法</h4><p>使用 Buffer 读写数据一般遵循以下四个步骤：</p>
+<ul>
+<li>写入数据到 Buffer</li>
+<li>调用 flip() 方法</li>
+<li>从 Buffer 中读取数据</li>
+<li>调用 clear() 方法或者 compact() 方法</li>
+</ul>
+<p>当向 buffer 写入数据时，buffer 会记录下写了多少数据。一旦要读取数据，需要先通过 flip() 方法将 Buffer 从写模式切换到读模式。在读模式下，可以读取之前写入到 buffer 的所有数据。</p>
+<p>一旦读完了所有的数据，就需要清空缓冲区，让它可以再次被写入。有两种方式能清空缓冲区：调用 clear() 或 compact() 方法。clear() 方法会清空整个缓冲区。compact() 方法只会清除已经读过的数据，任何未读的数据都被移到缓冲区的起始处，新写入的数据将放到缓冲区未读数据的后面。</p>
+<p>下面是一个使用Buffer的例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">RandomAccessFile aFile = new RandomAccessFile(&quot;data/nio-data.txt&quot;, &quot;rw&quot;);</span><br><span class="line">FileChannel inChannel = aFile.getChannel();</span><br><span class="line"></span><br><span class="line">//create buffer with capacity of 48 bytes</span><br><span class="line">ByteBuffer buf = ByteBuffer.allocate(48);</span><br><span class="line"></span><br><span class="line">int bytesRead = inChannel.read(buf); //read into buffer.</span><br><span class="line">while (bytesRead != -1) &#123;</span><br><span class="line"></span><br><span class="line">  buf.flip();  //make buffer ready for read</span><br><span class="line"></span><br><span class="line">  while(buf.hasRemaining())&#123;</span><br><span class="line">      System.out.print((char) buf.get()); // read 1 byte at a time</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  buf.clear(); //make buffer ready for writing</span><br><span class="line">  bytesRead = inChannel.read(buf);</span><br><span class="line">&#125;</span><br><span class="line">aFile.close();</span><br></pre></td></tr></table></figure>
+<h4 id="Buffer-的-capacity、-position-和-limit"><a href="#Buffer-的-capacity、-position-和-limit" class="headerlink" title="Buffer 的 capacity、 position 和 limit"></a>Buffer 的 capacity、 position 和 limit</h4><p>缓冲区本质上是一块可以写入数据，然后可以从中读取数据的内存。这块内存被包装成 NIO Buffer 对象，并提供了一组方法，用来方便的访问该块内存。</p>
+<p>为了理解 Buffer 的工作原理，需要熟悉它的三个属性：</p>
+<ul>
+<li>capacity</li>
+<li>position</li>
+<li>limit</li>
+</ul>
+<p>position 和 limit 的含义取决于 Buffer 处在读模式还是写模式。不管 Buffer 处在什么模式，capacity 的含义总是一样的。</p>
+<p>这里有一个关于 capacity，position 和 limit 在读写模式中的说明，详细的解释在插图后面。</p>
+<p><img src="http://ifeve.com/wp-content/uploads/2013/06/buffers-modes.png" alt=""></p>
+<p><strong>capacity</strong></p>
+<p>作为一个内存块，Buffer 有一个固定的大小值，也叫“capacity”.你只能往里写 capacity 个byte、long，char 等类型。一旦 Buffer 满了，需要将其清空（通过读数据或者清除数据）才能继续写数据往里写数据。</p>
+<p><strong>position</strong></p>
+<p>当你写数据到 Buffer 中时，position 表示当前的位置。初始的 position 值为 0。当一个 byte、long 等数据写到 Buffer 后， position 会向前移动到下一个可插入数据的 Buffer 单元。position  最大可为 capacity – 1.</p>
+<p>当读取数据时，也是从某个特定位置读。当将 Buffer 从写模式切换到读模式，position 会被重置为 0. 当从 Buffer 的 position 处读取数据时，position 向前移动到下一个可读的位置。</p>
+<p><strong>limit</strong></p>
+<p>在写模式下，Buffer 的 limit 表示你最多能往 Buffer 里写多少数据。 写模式下，limit 等于Buffer 的 capacity。</p>
+<p>当切换 Buffer 到读模式时， limit 表示你最多能读到多少数据。因此，当切换 Buffer 到读模式时，limit 会被设置成写模式下的 position 值。换句话说，你能读到之前写入的所有数据（limit被设置成已写数据的数量，这个值在写模式下就是 position）</p>
+<h4 id="Buffer的类型"><a href="#Buffer的类型" class="headerlink" title="Buffer的类型"></a>Buffer的类型</h4><p>Java NIO 有以下Buffer类型</p>
+<ul>
+<li>ByteBuffer</li>
+<li>MappedByteBuffer</li>
+<li>CharBuffer</li>
+<li>DoubleBuffer</li>
+<li>FloatBuffer</li>
+<li>IntBuffer</li>
+<li>LongBuffer</li>
+<li>ShortBuffer</li>
+</ul>
+<p>如你所见，这些Buffer类型代表了不同的数据类型。换句话说，就是可以通过char，short，int，long，float 或 double类型来操作缓冲区中的字节。</p>
+<p>MappedByteBuffer 有些特别，在涉及它的专门章节中再讲。</p>
+<h4 id="Buffer-的分配"><a href="#Buffer-的分配" class="headerlink" title="Buffer 的分配"></a>Buffer 的分配</h4><p>要想获得一个 Buffer 对象首先要进行分配。 每一个 Buffer 类都有一个 allocate 方法。下面是一个分配48字节 capacity 的 ByteBuffer 的例子。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ByteBuffer buf = ByteBuffer.allocate(48);</span><br></pre></td></tr></table></figure>
+<p>这是分配一个可存储1024个字符的 CharBuffer：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CharBuffer buf = CharBuffer.allocate(1024);</span><br></pre></td></tr></table></figure>
+<h4 id="向-Buffer-中写数据"><a href="#向-Buffer-中写数据" class="headerlink" title="向 Buffer 中写数据"></a>向 Buffer 中写数据</h4><p>写数据到 Buffer 有两种方式：</p>
+<ul>
+<li>从 Channel 写到 Buffer。</li>
+<li>通过 Buffer 的 put() 方法写到 Buffer 里。</li>
+</ul>
+<p>从 Channel 写到 Buffer 的例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">int bytesRead = inChannel.read(buf); //read into buffer.</span><br></pre></td></tr></table></figure>
+<p>通过put方法写Buffer的例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">buf.put(127);</span><br></pre></td></tr></table></figure>
+<p>put 方法有很多版本，允许你以不同的方式把数据写入到 Buffer 中。例如， 写到一个指定的位置，或者把一个字节数组写入到 Buffer。 更多Buffer实现的细节参考JavaDoc。</p>
+<p><strong>flip() 方法</strong></p>
+<p>flip() 方法将 Buffer 从写模式切换到读模式。调用 flip() 方法会将 position 设回 0，并将 limit 设置成之前 position 的值。</p>
+<p>换句话说，position 现在用于标记读的位置，limit 表示之前写进了多少个 byte、char等 —— 现在能读取多少个byte、char等。</p>
+<h4 id="从Buffer中读取数据"><a href="#从Buffer中读取数据" class="headerlink" title="从Buffer中读取数据"></a>从Buffer中读取数据</h4><p>从Buffer中读取数据有两种方式：</p>
+<ul>
+<li>从Buffer读取数据到Channel。</li>
+<li>使用get()方法从Buffer中读取数据。</li>
+</ul>
+<p>从Buffer读取数据到Channel的例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">//read from buffer into channel.</span><br><span class="line">int bytesWritten = inChannel.write(buf);</span><br></pre></td></tr></table></figure>
+<p>使用get()方法从Buffer中读取数据的例子</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">byte aByte = buf.get();</span><br></pre></td></tr></table></figure>
+<p>get方法有很多版本，允许你以不同的方式从Buffer中读取数据。例如，从指定position读取，或者从Buffer中读取数据到字节数组。更多Buffer实现的细节参考JavaDoc。</p>
+<h4 id="rewind-方法"><a href="#rewind-方法" class="headerlink" title="rewind()方法"></a>rewind()方法</h4><p>Buffer.rewind()将position设回0，所以你可以重读Buffer中的所有数据。limit保持不变，仍然表示能从Buffer中读取多少个元素（byte、char等）。</p>
+<h4 id="clear-与compact-方法"><a href="#clear-与compact-方法" class="headerlink" title="clear()与compact()方法"></a>clear()与compact()方法</h4><p>一旦读完Buffer中的数据，需要让Buffer准备好再次被写入。可以通过clear()或compact()方法来完成。</p>
+<p>如果调用的是clear()方法，position将被设回0，limit被设置成 capacity的值。换句话说，Buffer 被清空了。Buffer中的数据并未清除，只是这些标记告诉我们可以从哪里开始往Buffer里写数据。</p>
+<p>如果Buffer中有一些未读的数据，调用clear()方法，数据将“被遗忘”，意味着不再有任何标记会告诉你哪些数据被读过，哪些还没有。</p>
+<p>如果Buffer中仍有未读的数据，且后续还需要这些数据，但是此时想要先先写些数据，那么使用compact()方法。</p>
+<p>compact()方法将所有未读的数据拷贝到Buffer起始处。然后将position设到最后一个未读元素正后面。limit属性依然像clear()方法一样，设置成capacity。现在Buffer准备好写数据了，但是不会覆盖未读的数据。</p>
+<h4 id="mark-与reset-方法"><a href="#mark-与reset-方法" class="headerlink" title="mark()与reset()方法"></a>mark()与reset()方法</h4><p>通过调用Buffer.mark()方法，可以标记Buffer中的一个特定position。之后可以通过调用Buffer.reset()方法恢复到这个position。例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">buffer.mark();</span><br><span class="line">//call buffer.get() a couple of times, e.g. during parsing.</span><br><span class="line">buffer.reset();  //set position back to mark.</span><br></pre></td></tr></table></figure>
+<h4 id="equals-与compareTo-方法"><a href="#equals-与compareTo-方法" class="headerlink" title="equals()与compareTo()方法"></a>equals()与compareTo()方法</h4><p>可以使用equals()和compareTo()方法两个Buffer。</p>
+<p><strong>equals()</strong></p>
+<p>当满足下列条件时，表示两个Buffer相等：</p>
+<ul>
+<li>有相同的类型（byte、char、int等）。</li>
+<li>Buffer中剩余的byte、char等的个数相等。</li>
+<li>Buffer中所有剩余的byte、char等都相同。</li>
+</ul>
+<p>如你所见，equals只是比较Buffer的一部分，不是每一个在它里面的元素都比较。实际上，它只比较Buffer中的剩余元素。</p>
+<p><strong>compareTo()方法</strong></p>
+<p>compareTo()方法比较两个Buffer的剩余元素(byte、char等)， 如果满足下列条件，则认为一个Buffer“小于”另一个Buffer：</p>
+<ul>
+<li>第一个不相等的元素小于另一个Buffer中对应的元素 。</li>
+<li>所有元素都相等，但第一个Buffer比另一个先耗尽(第一个Buffer的元素个数比另一个少)。</li>
+</ul>
+<p>（译注：剩余元素是从 position到limit之间的元素）</p>
+<hr>
+<h3 id="4、Scatter-Gather"><a href="#4、Scatter-Gather" class="headerlink" title="4、Scatter/Gather"></a>4、Scatter/Gather</h3><p>Java NIO 开始支持 scatter/gather，scatter/gather 用于描述从 Channel（译者注：Channel 在中文经常翻译为通道）中读取或者写入到 Channel 的操作。</p>
+<p>分散（scatter）从 Channel 中读取是指在读操作时将读取的数据写入多个 buffer 中。因此，Channel 将从 Channel 中读取的数据“分散（scatter）”到多个Buffer中。</p>
+<p>聚集（gather）写入Channel是指在写操作时将多个buffer的数据写入同一个Channel，因此，Channel 将多个Buffer中的数据“聚集（gather）”后发送到Channel。</p>
+<p>scatter / gather经常用于需要将传输的数据分开处理的场合，例如传输一个由消息头和消息体组成的消息，你可能会将消息体和消息头分散到不同的buffer中，这样你可以方便的处理消息头和消息体。</p>
+<h4 id="Scattering-Reads"><a href="#Scattering-Reads" class="headerlink" title="Scattering Reads"></a>Scattering Reads</h4><p>Scattering Reads是指数据从一个channel读取到多个buffer中。如下图描述：</p>
+<p><img src="http://ifeve.com/wp-content/uploads/2013/06/scatter.png" alt=""></p>
+<p>代码示例如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">ByteBuffer header = ByteBuffer.allocate(128);</span><br><span class="line">ByteBuffer body   = ByteBuffer.allocate(1024);</span><br><span class="line"></span><br><span class="line">ByteBuffer[] bufferArray = &#123; header, body &#125;;</span><br><span class="line"></span><br><span class="line">channel.read(bufferArray);</span><br></pre></td></tr></table></figure>
+<p>注意buffer首先被插入到数组，然后再将数组作为channel.read() 的输入参数。read()方法按照buffer在数组中的顺序将从channel中读取的数据写入到buffer，当一个buffer被写满后，channel紧接着向另一个buffer中写。</p>
+<p>Scattering Reads在移动下一个buffer前，必须填满当前的buffer，这也意味着它不适用于动态消息(译者注：消息大小不固定)。换句话说，如果存在消息头和消息体，消息头必须完成填充（例如 128byte），Scattering Reads才能正常工作。</p>
+<h4 id="Gathering-Writes"><a href="#Gathering-Writes" class="headerlink" title="Gathering Writes"></a>Gathering Writes</h4><p>Gathering Writes是指数据从多个buffer写入到同一个channel。如下图描述：</p>
+<p><img src="http://ifeve.com/wp-content/uploads/2013/06/gather.png" alt=""></p>
+<p>代码示例如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">ByteBuffer header = ByteBuffer.allocate(128);</span><br><span class="line">ByteBuffer body   = ByteBuffer.allocate(1024);</span><br><span class="line"></span><br><span class="line">//write data into buffers</span><br><span class="line"></span><br><span class="line">ByteBuffer[] bufferArray = &#123; header, body &#125;;</span><br><span class="line"></span><br><span class="line">channel.write(bufferArray);</span><br></pre></td></tr></table></figure>
+<p>buffers数组是write()方法的入参，write()方法会按照buffer在数组中的顺序，将数据写入到channel，注意只有position和limit之间的数据才会被写入。因此，如果一个buffer的容量为128byte，但是仅仅包含58byte的数据，那么这58byte的数据将被写入到channel中。因此与Scattering Reads相反，Gathering Writes能较好的处理动态消息。</p>
+<hr>
+<h3 id="5、通道之间的数据传输"><a href="#5、通道之间的数据传输" class="headerlink" title="5、通道之间的数据传输"></a>5、通道之间的数据传输</h3><p>在Java NIO中，如果两个通道中有一个是FileChannel，那你可以直接将数据从一个channel（译者注：channel中文常译作通道）传输到另外一个channel。</p>
+<h4 id="transferFrom"><a href="#transferFrom" class="headerlink" title="transferFrom()"></a>transferFrom()</h4><p>FileChannel的transferFrom()方法可以将数据从源通道传输到FileChannel中（译者注：这个方法在JDK文档中的解释为将字节从给定的可读取字节通道传输到此通道的文件中）。</p>
+<p>下面是一个简单的例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">RandomAccessFile fromFile = new RandomAccessFile(&quot;fromFile.txt&quot;, &quot;rw&quot;);</span><br><span class="line">FileChannel      fromChannel = fromFile.getChannel();</span><br><span class="line"></span><br><span class="line">RandomAccessFile toFile = new RandomAccessFile(&quot;toFile.txt&quot;, &quot;rw&quot;);</span><br><span class="line">FileChannel      toChannel = toFile.getChannel();</span><br><span class="line"></span><br><span class="line">long position = 0;</span><br><span class="line">long count = fromChannel.size();</span><br><span class="line"></span><br><span class="line">toChannel.transferFrom(position, count, fromChannel);</span><br></pre></td></tr></table></figure>
+<p>方法的输入参数position表示从position处开始向目标文件写入数据，count表示最多传输的字节数。如果源通道的剩余空间小于 count 个字节，则所传输的字节数要小于请求的字节数。</p>
+<p>此外要注意，在SoketChannel的实现中，SocketChannel只会传输此刻准备好的数据（可能不足count字节）。因此，SocketChannel可能不会将请求的所有数据(count个字节)全部传输到FileChannel中。</p>
+<h4 id="transferTo"><a href="#transferTo" class="headerlink" title="transferTo()"></a>transferTo()</h4><p>transferTo()方法将数据从FileChannel传输到其他的channel中。</p>
+<p>下面是一个简单的例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">RandomAccessFile fromFile = new RandomAccessFile(&quot;fromFile.txt&quot;, &quot;rw&quot;);</span><br><span class="line">FileChannel      fromChannel = fromFile.getChannel();</span><br><span class="line"></span><br><span class="line">RandomAccessFile toFile = new RandomAccessFile(&quot;toFile.txt&quot;, &quot;rw&quot;);</span><br><span class="line">FileChannel      toChannel = toFile.getChannel();</span><br><span class="line"></span><br><span class="line">long position = 0;</span><br><span class="line">long count = fromChannel.size();</span><br><span class="line"></span><br><span class="line">fromChannel.transferTo(position, count, toChannel);</span><br></pre></td></tr></table></figure>
+<p>是不是发现这个例子和前面那个例子特别相似？除了调用方法的FileChannel对象不一样外，其他的都一样。</p>
+<p>上面所说的关于SocketChannel的问题在transferTo()方法中同样存在。SocketChannel会一直传输数据直到目标buffer被填满。</p>
+<hr>
+<h3 id="6、Selector"><a href="#6、Selector" class="headerlink" title="6、Selector"></a>6、Selector</h3><p>Selector（选择器）是Java NIO中能够检测一到多个NIO通道，并能够知晓通道是否为诸如读写事件做好准备的组件。这样，一个单独的线程可以管理多个channel，从而管理多个网络连接。</p>
+<h4 id="为什么使用Selector"><a href="#为什么使用Selector" class="headerlink" title="为什么使用Selector?"></a>为什么使用Selector?</h4><p>仅用单个线程来处理多个Channels的好处是，只需要更少的线程来处理通道。事实上，可以只用一个线程处理所有的通道。对于操作系统来说，线程之间上下文切换的开销很大，而且每个线程都要占用系统的一些资源（如内存）。因此，使用的线程越少越好。</p>
+<p>但是，需要记住，现代的操作系统和CPU在多任务方面表现的越来越好，所以多线程的开销随着时间的推移，变得越来越小了。实际上，如果一个CPU有多个内核，不使用多任务可能是在浪费CPU能力。不管怎么说，关于那种设计的讨论应该放在另一篇不同的文章中。在这里，只要知道使用Selector能够处理多个通道就足够了。</p>
+<p>下面是单线程使用一个Selector处理3个channel的示例图：</p>
+<p><img src="http://ifeve.com/wp-content/uploads/2013/06/overview-selectors.png" alt=""></p>
+<h4 id="Selector的创建"><a href="#Selector的创建" class="headerlink" title="Selector的创建"></a>Selector的创建</h4><p>通过调用Selector.open()方法创建一个Selector，如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Selector selector = Selector.open();</span><br></pre></td></tr></table></figure>
+<h4 id="向Selector注册通道"><a href="#向Selector注册通道" class="headerlink" title="向Selector注册通道"></a>向Selector注册通道</h4><p>为了将Channel和Selector配合使用，必须将channel注册到selector上。通过SelectableChannel.register()方法来实现，如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">channel.configureBlocking(false);</span><br><span class="line">SelectionKey key = channel.register(selector,</span><br><span class="line">	Selectionkey.OP_READ);</span><br></pre></td></tr></table></figure>
+<p>与Selector一起使用时，Channel必须处于非阻塞模式下。这意味着不能将FileChannel与Selector一起使用，因为FileChannel不能切换到非阻塞模式。而套接字通道都可以。</p>
+<p>注意register()方法的第二个参数。这是一个“interest集合”，意思是在通过Selector监听Channel时对什么事件感兴趣。可以监听四种不同类型的事件：</p>
+<ul>
+<li>Connect</li>
+<li>Accept</li>
+<li>Read</li>
+<li>Write</li>
+</ul>
+<p>通道触发了一个事件意思是该事件已经就绪。所以，某个channel成功连接到另一个服务器称为“连接就绪”。一个server socket channel准备好接收新进入的连接称为“接收就绪”。一个有数据可读的通道可以说是“读就绪”。等待写数据的通道可以说是“写就绪”。</p>
+<p>这四种事件用SelectionKey的四个常量来表示：</p>
+<ul>
+<li>SelectionKey.OP_CONNECT</li>
+<li>SelectionKey.OP_ACCEPT</li>
+<li>SelectionKey.OP_READ</li>
+<li>SelectionKey.OP_WRITE</li>
+</ul>
+<p>如果你对不止一种事件感兴趣，那么可以用“位或”操作符将常量连接起来，如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">int interestSet = SelectionKey.OP_READ | SelectionKey.OP_WRITE;</span><br></pre></td></tr></table></figure>
+<p>在下面还会继续提到interest集合。</p>
+<h4 id="SelectionKey"><a href="#SelectionKey" class="headerlink" title="SelectionKey"></a>SelectionKey</h4><p>在上一小节中，当向Selector注册Channel时，register()方法会返回一个SelectionKey对象。这个对象包含了一些你感兴趣的属性：</p>
+<ul>
+<li>interest集合</li>
+<li>ready集合</li>
+<li>Channel</li>
+<li>Selector</li>
+</ul>
+<p>附加的对象（可选）<br>下面我会描述这些属性。</p>
+<h5 id="interest集合"><a href="#interest集合" class="headerlink" title="interest集合"></a>interest集合</h5><p>就像向Selector注册通道一节中所描述的，interest集合是你所选择的感兴趣的事件集合。可以通过SelectionKey读写interest集合，像这样：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">int interestSet = selectionKey.interestOps();</span><br><span class="line"></span><br><span class="line">boolean isInterestedInAccept  = (interestSet &amp; SelectionKey.OP_ACCEPT) == SelectionKey.OP_ACCEPT；</span><br><span class="line">boolean isInterestedInConnect = interestSet &amp; SelectionKey.OP_CONNECT;</span><br><span class="line">boolean isInterestedInRead    = interestSet &amp; SelectionKey.OP_READ;</span><br><span class="line">boolean isInterestedInWrite   = interestSet &amp; SelectionKey.OP_WRITE;</span><br></pre></td></tr></table></figure>
+<p>可以看到，用“位与”操作interest 集合和给定的SelectionKey常量，可以确定某个确定的事件是否在interest 集合中。</p>
+<h5 id="ready集合"><a href="#ready集合" class="headerlink" title="ready集合"></a>ready集合</h5><p>ready 集合是通道已经准备就绪的操作的集合。在一次选择(Selection)之后，你会首先访问这个ready set。Selection将在下一小节进行解释。可以这样访问ready集合：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">int readySet = selectionKey.readyOps();</span><br></pre></td></tr></table></figure>
+<p>可以用像检测interest集合那样的方法，来检测channel中什么事件或操作已经就绪。但是，也可以使用以下四个方法，它们都会返回一个布尔类型：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">selectionKey.isAcceptable();</span><br><span class="line">selectionKey.isConnectable();</span><br><span class="line">selectionKey.isReadable();</span><br><span class="line">selectionKey.isWritable();</span><br></pre></td></tr></table></figure>
+<h5 id="Channel-Selector"><a href="#Channel-Selector" class="headerlink" title="Channel + Selector"></a>Channel + Selector</h5><p>从SelectionKey访问Channel和Selector很简单。如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Channel  channel  = selectionKey.channel();</span><br><span class="line">Selector selector = selectionKey.selector();</span><br></pre></td></tr></table></figure>
+<h4 id="附加的对象"><a href="#附加的对象" class="headerlink" title="附加的对象"></a>附加的对象</h4><p>可以将一个对象或者更多信息附着到SelectionKey上，这样就能方便的识别某个给定的通道。例如，可以附加 与通道一起使用的Buffer，或是包含聚集数据的某个对象。使用方法如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">selectionKey.attach(theObject);</span><br><span class="line">Object attachedObj = selectionKey.attachment();</span><br></pre></td></tr></table></figure>
+<p>还可以在用register()方法向Selector注册Channel的时候附加对象。如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SelectionKey key = channel.register(selector, SelectionKey.OP_READ, theObject);</span><br></pre></td></tr></table></figure>
+<h4 id="通过Selector选择通道"><a href="#通过Selector选择通道" class="headerlink" title="通过Selector选择通道"></a>通过Selector选择通道</h4><p>一旦向Selector注册了一或多个通道，就可以调用几个重载的select()方法。这些方法返回你所感兴趣的事件（如连接、接受、读或写）已经准备就绪的那些通道。换句话说，如果你对“读就绪”的通道感兴趣，select()方法会返回读事件已经就绪的那些通道。</p>
+<p>下面是select()方法：</p>
+<ul>
+<li>int select()</li>
+<li>int select(long timeout)</li>
+<li>int selectNow()</li>
+</ul>
+<p>select()阻塞到至少有一个通道在你注册的事件上就绪了。</p>
+<p>select(long timeout)和select()一样，除了最长会阻塞timeout毫秒(参数)。</p>
+<p>selectNow()不会阻塞，不管什么通道就绪都立刻返回（译者注：此方法执行非阻塞的选择操作。如果自从前一次选择操作后，没有通道变成可选择的，则此方法直接返回零。）。</p>
+<p>select()方法返回的int值表示有多少通道已经就绪。亦即，自上次调用select()方法后有多少通道变成就绪状态。如果调用select()方法，因为有一个通道变成就绪状态，返回了1，若再次调用select()方法，如果另一个通道就绪了，它会再次返回1。如果对第一个就绪的channel没有做任何操作，现在就有两个就绪的通道，但在每次select()方法调用之间，只有一个通道就绪了。</p>
+<h5 id="selectedKeys"><a href="#selectedKeys" class="headerlink" title="selectedKeys()"></a>selectedKeys()</h5><p>一旦调用了select()方法，并且返回值表明有一个或更多个通道就绪了，然后可以通过调用selector的selectedKeys()方法，访问“已选择键集（selected key set）”中的就绪通道。如下所示：</p>
+<p>当像Selector注册Channel时，Channel.register()方法会返回一个SelectionKey 对象。这个对象代表了注册到该Selector的通道。可以通过SelectionKey的selectedKeySet()方法访问这些对象。</p>
+<p>可以遍历这个已选择的键集合来访问就绪的通道。如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">Set selectedKeys = selector.selectedKeys();</span><br><span class="line">Iterator keyIterator = selectedKeys.iterator();</span><br><span class="line">while(keyIterator.hasNext()) &#123;</span><br><span class="line">    SelectionKey key = keyIterator.next();</span><br><span class="line">    if(key.isAcceptable()) &#123;</span><br><span class="line">        // a connection was accepted by a ServerSocketChannel.</span><br><span class="line">    &#125; else if (key.isConnectable()) &#123;</span><br><span class="line">        // a connection was established with a remote server.</span><br><span class="line">    &#125; else if (key.isReadable()) &#123;</span><br><span class="line">        // a channel is ready for reading</span><br><span class="line">    &#125; else if (key.isWritable()) &#123;</span><br><span class="line">        // a channel is ready for writing</span><br><span class="line">    &#125;</span><br><span class="line">    keyIterator.remove();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这个循环遍历已选择键集中的每个键，并检测各个键所对应的通道的就绪事件。</p>
+<p>注意每次迭代末尾的keyIterator.remove()调用。Selector不会自己从已选择键集中移除SelectionKey实例。必须在处理完通道时自己移除。下次该通道变成就绪时，Selector会再次将其放入已选择键集中。</p>
+<p>SelectionKey.channel()方法返回的通道需要转型成你要处理的类型，如ServerSocketChannel或SocketChannel等。</p>
+<h5 id="wakeUp"><a href="#wakeUp" class="headerlink" title="wakeUp()"></a>wakeUp()</h5><p>某个线程调用select()方法后阻塞了，即使没有通道已经就绪，也有办法让其从select()方法返回。只要让其它线程在第一个线程调用select()方法的那个对象上调用Selector.wakeup()方法即可。阻塞在select()方法上的线程会立马返回。</p>
+<p>如果有其它线程调用了wakeup()方法，但当前没有线程阻塞在select()方法上，下个调用select()方法的线程会立即“醒来（wake up）”。</p>
+<h5 id="close"><a href="#close" class="headerlink" title="close()"></a>close()</h5><p>用完Selector后调用其close()方法会关闭该Selector，且使注册到该Selector上的所有SelectionKey实例无效。通道本身并不会关闭。</p>
+<h4 id="完整的示例"><a href="#完整的示例" class="headerlink" title="完整的示例"></a>完整的示例</h4><p>这里有一个完整的示例，打开一个Selector，注册一个通道注册到这个Selector上(通道的初始化过程略去),然后持续监控这个Selector的四种事件（接受，连接，读，写）是否就绪。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">Selector selector = Selector.open();</span><br><span class="line">channel.configureBlocking(false);</span><br><span class="line">SelectionKey key = channel.register(selector, SelectionKey.OP_READ);</span><br><span class="line">while(true) &#123;</span><br><span class="line">  int readyChannels = selector.select();</span><br><span class="line">  if(readyChannels == 0) continue;</span><br><span class="line">  Set selectedKeys = selector.selectedKeys();</span><br><span class="line">  Iterator keyIterator = selectedKeys.iterator();</span><br><span class="line">  while(keyIterator.hasNext()) &#123;</span><br><span class="line">    SelectionKey key = keyIterator.next();</span><br><span class="line">    if(key.isAcceptable()) &#123;</span><br><span class="line">        // a connection was accepted by a ServerSocketChannel.</span><br><span class="line">    &#125; else if (key.isConnectable()) &#123;</span><br><span class="line">        // a connection was established with a remote server.</span><br><span class="line">    &#125; else if (key.isReadable()) &#123;</span><br><span class="line">        // a channel is ready for reading</span><br><span class="line">    &#125; else if (key.isWritable()) &#123;</span><br><span class="line">        // a channel is ready for writing</span><br><span class="line">    &#125;</span><br><span class="line">    keyIterator.remove();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="7、FileChannel"><a href="#7、FileChannel" class="headerlink" title="7、FileChannel"></a>7、FileChannel</h3><p>Java NIO中的FileChannel是一个连接到文件的通道。可以通过文件通道读写文件。</p>
+<p>FileChannel无法设置为非阻塞模式，它总是运行在阻塞模式下。</p>
+<h4 id="打开FileChannel"><a href="#打开FileChannel" class="headerlink" title="打开FileChannel"></a>打开FileChannel</h4><p>在使用FileChannel之前，必须先打开它。但是，我们无法直接打开一个FileChannel，需要通过使用一个InputStream、OutputStream或RandomAccessFile来获取一个FileChannel实例。下面是通过RandomAccessFile打开FileChannel的示例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">RandomAccessFile aFile = new RandomAccessFile(&quot;data/nio-data.txt&quot;, &quot;rw&quot;);</span><br><span class="line">FileChannel inChannel = aFile.getChannel();</span><br></pre></td></tr></table></figure>
+<h4 id="从FileChannel读取数据"><a href="#从FileChannel读取数据" class="headerlink" title="从FileChannel读取数据"></a>从FileChannel读取数据</h4><p>调用多个read()方法之一从FileChannel中读取数据。如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ByteBuffer buf = ByteBuffer.allocate(48);</span><br><span class="line">int bytesRead = inChannel.read(buf);</span><br></pre></td></tr></table></figure>
+<p>首先，分配一个Buffer。从FileChannel中读取的数据将被读到Buffer中。</p>
+<p>然后，调用FileChannel.read()方法。该方法将数据从FileChannel读取到Buffer中。read()方法返回的int值表示了有多少字节被读到了Buffer中。如果返回-1，表示到了文件末尾。</p>
+<h4 id="向FileChannel写数据"><a href="#向FileChannel写数据" class="headerlink" title="向FileChannel写数据"></a>向FileChannel写数据</h4><p>使用FileChannel.write()方法向FileChannel写数据，该方法的参数是一个Buffer。如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">String newData = &quot;New String to write to file...&quot; + System.currentTimeMillis();</span><br><span class="line"></span><br><span class="line">ByteBuffer buf = ByteBuffer.allocate(48);</span><br><span class="line">buf.clear();</span><br><span class="line">buf.put(newData.getBytes());</span><br><span class="line"></span><br><span class="line">buf.flip();</span><br><span class="line"></span><br><span class="line">while(buf.hasRemaining()) &#123;</span><br><span class="line">	channel.write(buf);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>注意FileChannel.write()是在while循环中调用的。因为无法保证write()方法一次能向FileChannel写入多少字节，因此需要重复调用write()方法，直到Buffer中已经没有尚未写入通道的字节。</p>
+<h4 id="关闭FileChannel"><a href="#关闭FileChannel" class="headerlink" title="关闭FileChannel"></a>关闭FileChannel</h4><p>用完FileChannel后必须将其关闭。如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">channel.close();</span><br></pre></td></tr></table></figure></p>
+<h4 id="FileChannel的position方法"><a href="#FileChannel的position方法" class="headerlink" title="FileChannel的position方法"></a>FileChannel的position方法</h4><p>有时可能需要在FileChannel的某个特定位置进行数据的读/写操作。可以通过调用position()方法获取FileChannel的当前位置。</p>
+<p>也可以通过调用position(long pos)方法设置FileChannel的当前位置。</p>
+<p>这里有两个例子:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">long pos = channel.position();</span><br><span class="line">channel.position(pos +123);</span><br></pre></td></tr></table></figure></p>
+<p>如果将位置设置在文件结束符之后，然后试图从文件通道中读取数据，读方法将返回-1 —— 文件结束标志。</p>
+<p>如果将位置设置在文件结束符之后，然后向通道中写数据，文件将撑大到当前位置并写入数据。这可能导致“文件空洞”，磁盘上物理文件中写入的数据间有空隙。</p>
+<h4 id="FileChannel的size方法"><a href="#FileChannel的size方法" class="headerlink" title="FileChannel的size方法"></a>FileChannel的size方法</h4><p>FileChannel实例的size()方法将返回该实例所关联文件的大小。如:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">long fileSize = channel.size();</span><br></pre></td></tr></table></figure></p>
+<h4 id="FileChannel的truncate方法"><a href="#FileChannel的truncate方法" class="headerlink" title="FileChannel的truncate方法"></a>FileChannel的truncate方法</h4><p>可以使用FileChannel.truncate()方法截取一个文件。截取文件时，文件将中指定长度后面的部分将被删除。如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">channel.truncate(1024);</span><br></pre></td></tr></table></figure></p>
+<p>这个例子截取文件的前1024个字节。</p>
+<h4 id="FileChannel的force方法"><a href="#FileChannel的force方法" class="headerlink" title="FileChannel的force方法"></a>FileChannel的force方法</h4><p>FileChannel.force()方法将通道里尚未写入磁盘的数据强制写到磁盘上。出于性能方面的考虑，操作系统会将数据缓存在内存中，所以无法保证写入到FileChannel里的数据一定会即时写到磁盘上。要保证这一点，需要调用force()方法。</p>
+<p>force()方法有一个boolean类型的参数，指明是否同时将文件元数据（权限信息等）写到磁盘上。</p>
+<p>下面的例子同时将文件数据和元数据强制写到磁盘上：</p>
+<p>查看源代码打印帮助<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">channel.force(true);</span><br></pre></td></tr></table></figure></p>
+<hr>
+<h3 id="8、SocketChannel"><a href="#8、SocketChannel" class="headerlink" title="8、SocketChannel"></a>8、SocketChannel</h3><p>Java NIO中的SocketChannel是一个连接到TCP网络套接字的通道。可以通过以下2种方式创建SocketChannel：</p>
+<p>打开一个SocketChannel并连接到互联网上的某台服务器。<br>一个新连接到达ServerSocketChannel时，会创建一个SocketChannel。</p>
+<h4 id="打开-SocketChannel"><a href="#打开-SocketChannel" class="headerlink" title="打开 SocketChannel"></a>打开 SocketChannel</h4><p>下面是SocketChannel的打开方式：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">SocketChannel socketChannel = SocketChannel.open();</span><br><span class="line">socketChannel.connect(new InetSocketAddress(&quot;http://jenkov.com&quot;, 80));</span><br></pre></td></tr></table></figure>
+<p>关闭 SocketChannel</p>
+<p>当用完SocketChannel之后调用SocketChannel.close()关闭SocketChannel：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">socketChannel.close();</span><br></pre></td></tr></table></figure>
+<h4 id="从-SocketChannel-读取数据"><a href="#从-SocketChannel-读取数据" class="headerlink" title="从 SocketChannel 读取数据"></a>从 SocketChannel 读取数据</h4><p>要从SocketChannel中读取数据，调用一个read()的方法之一。以下是例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ByteBuffer buf = ByteBuffer.allocate(48);</span><br><span class="line">int bytesRead = socketChannel.read(buf);</span><br></pre></td></tr></table></figure>
+<p>首先，分配一个Buffer。从SocketChannel读取到的数据将会放到这个Buffer中。</p>
+<p>然后，调用SocketChannel.read()。该方法将数据从SocketChannel 读到Buffer中。read()方法返回的int值表示读了多少字节进Buffer里。如果返回的是-1，表示已经读到了流的末尾（连接关闭了）。</p>
+<h4 id="写入-SocketChannel"><a href="#写入-SocketChannel" class="headerlink" title="写入 SocketChannel"></a>写入 SocketChannel</h4><p>写数据到SocketChannel用的是SocketChannel.write()方法，该方法以一个Buffer作为参数。示例如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">String newData = &quot;New String to write to file...&quot; + System.currentTimeMillis();</span><br><span class="line"></span><br><span class="line">ByteBuffer buf = ByteBuffer.allocate(48);</span><br><span class="line">buf.clear();</span><br><span class="line">buf.put(newData.getBytes());</span><br><span class="line"></span><br><span class="line">buf.flip();</span><br><span class="line"></span><br><span class="line">while(buf.hasRemaining()) &#123;</span><br><span class="line">    channel.write(buf);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>注意SocketChannel.write()方法的调用是在一个while循环中的。Write()方法无法保证能写多少字节到SocketChannel。所以，我们重复调用write()直到Buffer没有要写的字节为止。</p>
+<h4 id="非阻塞模式"><a href="#非阻塞模式" class="headerlink" title="非阻塞模式"></a>非阻塞模式</h4><p>可以设置 SocketChannel 为非阻塞模式（non-blocking mode）.设置之后，就可以在异步模式下调用connect(), read() 和write()了。</p>
+<h5 id="connect"><a href="#connect" class="headerlink" title="connect()"></a>connect()</h5><p>如果SocketChannel在非阻塞模式下，此时调用connect()，该方法可能在连接建立之前就返回了。为了确定连接是否建立，可以调用finishConnect()的方法。像这样：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">socketChannel.configureBlocking(false);</span><br><span class="line">socketChannel.connect(new InetSocketAddress(&quot;http://jenkov.com&quot;, 80));</span><br><span class="line"></span><br><span class="line">while(! socketChannel.finishConnect() )&#123;</span><br><span class="line">    //wait, or do something else...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="write"><a href="#write" class="headerlink" title="write()"></a>write()</h5><p>非阻塞模式下，write()方法在尚未写出任何内容时可能就返回了。所以需要在循环中调用write()。前面已经有例子了，这里就不赘述了。</p>
+<h5 id="read"><a href="#read" class="headerlink" title="read()"></a>read()</h5><p>非阻塞模式下,read()方法在尚未读取到任何数据时可能就返回了。所以需要关注它的int返回值，它会告诉你读取了多少字节。</p>
+<h4 id="非阻塞模式与选择器"><a href="#非阻塞模式与选择器" class="headerlink" title="非阻塞模式与选择器"></a>非阻塞模式与选择器</h4><p>非阻塞模式与选择器搭配会工作的更好，通过将一或多个SocketChannel注册到Selector，可以询问选择器哪个通道已经准备好了读取，写入等。Selector与SocketChannel的搭配使用会在后面详讲。</p>
+<hr>
+<h3 id="9、ServerSocketChannel"><a href="#9、ServerSocketChannel" class="headerlink" title="9、ServerSocketChannel"></a>9、ServerSocketChannel</h3><p>Java NIO中的 ServerSocketChannel 是一个可以监听新进来的TCP连接的通道, 就像标准IO中的ServerSocket一样。ServerSocketChannel类在 java.nio.channels包中。</p>
+<p>这里有个例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">ServerSocketChannel serverSocketChannel = ServerSocketChannel.open();</span><br><span class="line"></span><br><span class="line">serverSocketChannel.socket().bind(new InetSocketAddress(9999));</span><br><span class="line"></span><br><span class="line">while(true)&#123;</span><br><span class="line">    SocketChannel socketChannel =</span><br><span class="line">            serverSocketChannel.accept();</span><br><span class="line"></span><br><span class="line">    //do something with socketChannel...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="打开-ServerSocketChannel"><a href="#打开-ServerSocketChannel" class="headerlink" title="打开 ServerSocketChannel"></a>打开 ServerSocketChannel</h4><p>通过调用 ServerSocketChannel.open() 方法来打开ServerSocketChannel.如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ServerSocketChannel serverSocketChannel = ServerSocketChannel.open();</span><br></pre></td></tr></table></figure>
+<h4 id="关闭-ServerSocketChannel"><a href="#关闭-ServerSocketChannel" class="headerlink" title="关闭 ServerSocketChannel"></a>关闭 ServerSocketChannel</h4><p>通过调用ServerSocketChannel.close() 方法来关闭ServerSocketChannel. 如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">serverSocketChannel.close();</span><br></pre></td></tr></table></figure>
+<h4 id="监听新进来的连接"><a href="#监听新进来的连接" class="headerlink" title="监听新进来的连接"></a>监听新进来的连接</h4><p>通过 ServerSocketChannel.accept() 方法监听新进来的连接。当 accept()方法返回的时候,它返回一个包含新进来的连接的 SocketChannel。因此, accept()方法会一直阻塞到有新连接到达。</p>
+<p>通常不会仅仅只监听一个连接,在while循环中调用 accept()方法. 如下面的例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">while(true)&#123;</span><br><span class="line">    SocketChannel socketChannel =</span><br><span class="line">            serverSocketChannel.accept();</span><br><span class="line"></span><br><span class="line">    //do something with socketChannel...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>当然,也可以在while循环中使用除了true以外的其它退出准则。</p>
+<h4 id="非阻塞模式-1"><a href="#非阻塞模式-1" class="headerlink" title="非阻塞模式"></a>非阻塞模式</h4><p>ServerSocketChannel可以设置成非阻塞模式。在非阻塞模式下，accept() 方法会立刻返回，如果还没有新进来的连接,返回的将是null。 因此，需要检查返回的SocketChannel是否是null.如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">ServerSocketChannel serverSocketChannel = ServerSocketChannel.open();</span><br><span class="line"></span><br><span class="line">serverSocketChannel.socket().bind(new InetSocketAddress(9999));</span><br><span class="line">serverSocketChannel.configureBlocking(false);</span><br><span class="line"></span><br><span class="line">while(true)&#123;</span><br><span class="line">    SocketChannel socketChannel =</span><br><span class="line">            serverSocketChannel.accept();</span><br><span class="line"></span><br><span class="line">    if(socketChannel != null)&#123;</span><br><span class="line">        //do something with socketChannel...</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="10、Java-NIO-DatagramChannel"><a href="#10、Java-NIO-DatagramChannel" class="headerlink" title="10、Java NIO DatagramChannel"></a>10、Java NIO DatagramChannel</h3><p>Java NIO中的DatagramChannel是一个能收发UDP包的通道。因为UDP是无连接的网络协议，所以不能像其它通道那样读取和写入。它发送和接收的是数据包。</p>
+<h4 id="打开-DatagramChannel"><a href="#打开-DatagramChannel" class="headerlink" title="打开 DatagramChannel"></a>打开 DatagramChannel</h4><p>下面是 DatagramChannel 的打开方式：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">DatagramChannel channel = DatagramChannel.open();</span><br><span class="line">channel.socket().bind(new InetSocketAddress(9999));</span><br></pre></td></tr></table></figure>
+<p>这个例子打开的 DatagramChannel可以在UDP端口9999上接收数据包。</p>
+<h4 id="接收数据"><a href="#接收数据" class="headerlink" title="接收数据"></a>接收数据</h4><p>通过receive()方法从DatagramChannel接收数据，如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ByteBuffer buf = ByteBuffer.allocate(48);</span><br><span class="line">buf.clear();</span><br><span class="line">channel.receive(buf);</span><br></pre></td></tr></table></figure>
+<p>receive()方法会将接收到的数据包内容复制到指定的Buffer. 如果Buffer容不下收到的数据，多出的数据将被丢弃。</p>
+<h4 id="发送数据"><a href="#发送数据" class="headerlink" title="发送数据"></a>发送数据</h4><p>通过send()方法从DatagramChannel发送数据，如:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">String newData = &quot;New String to write to file...&quot; + System.currentTimeMillis();</span><br><span class="line"></span><br><span class="line">ByteBuffer buf = ByteBuffer.allocate(48);</span><br><span class="line">buf.clear();</span><br><span class="line">buf.put(newData.getBytes());</span><br><span class="line">buf.flip();</span><br><span class="line"></span><br><span class="line">int bytesSent = channel.send(buf, new InetSocketAddress(&quot;jenkov.com&quot;, 80));</span><br></pre></td></tr></table></figure>
+<p>这个例子发送一串字符到”jenkov.com”服务器的UDP端口80。 因为服务端并没有监控这个端口，所以什么也不会发生。也不会通知你发出的数据包是否已收到，因为UDP在数据传送方面没有任何保证。</p>
+<h4 id="连接到特定的地址"><a href="#连接到特定的地址" class="headerlink" title="连接到特定的地址"></a>连接到特定的地址</h4><p>可以将DatagramChannel“连接”到网络中的特定地址的。由于UDP是无连接的，连接到特定地址并不会像TCP通道那样创建一个真正的连接。而是锁住DatagramChannel ，让其只能从特定地址收发数据。</p>
+<p>这里有个例子:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">channel.connect(new InetSocketAddress(&quot;jenkov.com&quot;, 80));</span><br></pre></td></tr></table></figure>
+<p>当连接后，也可以使用read()和write()方法，就像在用传统的通道一样。只是在数据传送方面没有任何保证。这里有几个例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">int bytesRead = channel.read(buf);</span><br><span class="line">int bytesWritten = channel.write(but);</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="11、Pipe"><a href="#11、Pipe" class="headerlink" title="11、Pipe"></a>11、Pipe</h3><p>Java NIO 管道是2个线程之间的单向数据连接。Pipe有一个source通道和一个sink通道。数据会被写到sink通道，从source通道读取。</p>
+<p>这里是Pipe原理的图示：</p>
+<p><img src="http://ifeve.com/wp-content/uploads/2013/06/pipe.bmp" alt=""></p>
+<h4 id="创建管道"><a href="#创建管道" class="headerlink" title="创建管道"></a>创建管道</h4><p>通过Pipe.open()方法打开管道。例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Pipe pipe = Pipe.open();</span><br></pre></td></tr></table></figure>
+<h4 id="向管道写数据"><a href="#向管道写数据" class="headerlink" title="向管道写数据"></a>向管道写数据</h4><p>要向管道写数据，需要访问sink通道。像这样：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Pipe.SinkChannel sinkChannel = pipe.sink();</span><br></pre></td></tr></table></figure>
+<p>通过调用SinkChannel的write()方法，将数据写入SinkChannel,像这样：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">String newData = &quot;New String to write to file...&quot; + System.currentTimeMillis();</span><br><span class="line">ByteBuffer buf = ByteBuffer.allocate(48);</span><br><span class="line">buf.clear();</span><br><span class="line">buf.put(newData.getBytes());</span><br><span class="line"></span><br><span class="line">buf.flip();</span><br><span class="line"></span><br><span class="line">while(buf.hasRemaining()) &#123;</span><br><span class="line">    sinkChannel.write(buf);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="从管道读取数据"><a href="#从管道读取数据" class="headerlink" title="从管道读取数据"></a>从管道读取数据</h4><p>从读取管道的数据，需要访问source通道，像这样：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Pipe.SourceChannel sourceChannel = pipe.source();</span><br></pre></td></tr></table></figure>
+<p>调用source通道的read()方法来读取数据，像这样：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ByteBuffer buf = ByteBuffer.allocate(48);</span><br><span class="line"></span><br><span class="line">int bytesRead = sourceChannel.read(buf);</span><br></pre></td></tr></table></figure>
+<p>read()方法返回的int值会告诉我们多少字节被读进了缓冲区。</p>
+<hr>
+<h3 id="12、Java-NIO与IO的对比"><a href="#12、Java-NIO与IO的对比" class="headerlink" title="12、Java NIO与IO的对比"></a>12、Java NIO与IO的对比</h3><p>当学习了Java NIO和IO的API后，一个问题马上涌入脑海：</p>
+<p>我应该何时使用IO，何时使用NIO呢？在本文中，我会尽量清晰地解析Java NIO和IO的差异、它们的使用场景，以及它们如何影响您的代码设计。</p>
+<h4 id="Java-NIO和IO的主要区别"><a href="#Java-NIO和IO的主要区别" class="headerlink" title="Java NIO和IO的主要区别"></a>Java NIO和IO的主要区别</h4><p>下表总结了Java NIO和IO之间的主要差别，我会更详细地描述表中每部分的差异。</p>
+<table>
+<thead>
+<tr>
+<th>IO</th>
+<th>NIO</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Stream oriented</td>
+<td>Buffer oriented</td>
+</tr>
+<tr>
+<td>Blocking IO</td>
+<td>Non blocking IO</td>
+</tr>
+<tr>
+<td>无</td>
+<td>Selectors</td>
+</tr>
+</tbody>
+</table>
+<h4 id="面向流与面向缓冲"><a href="#面向流与面向缓冲" class="headerlink" title="面向流与面向缓冲"></a>面向流与面向缓冲</h4><p>Java NIO和IO之间第一个<strong>最大</strong>的区别是，IO是面向流的，NIO是面向缓冲区的。</p>
+<p> Java IO面向流意味着每次从流中读一个或多个字节，直至读取所有字节，它们没有被缓存在任何地方。此外，它不能前后移动流中的数据。如果需要前后移动从流中读取的数据，需要先将它缓存到一个缓冲区。</p>
+<p>Java NIO的缓冲导向方法略有不同。数据读取到一个它稍后处理的缓冲区，需要时可在缓冲区中前后移动。这就增加了处理过程中的灵活性。但是，还需要检查是否该缓冲区中包含所有您需要处理的数据。而且，需确保当更多的数据读入缓冲区时，不要覆盖缓冲区里尚未处理的数据。</p>
+<h4 id="阻塞与非阻塞IO"><a href="#阻塞与非阻塞IO" class="headerlink" title="阻塞与非阻塞IO"></a>阻塞与非阻塞IO</h4><p>Java IO的各种流是阻塞的。这意味着，当一个线程调用read() 或 write()时，该线程被阻塞，直到有一些数据被读取，或数据完全写入。该线程在此期间不能再干任何事情了。</p>
+<p>Java NIO的非阻塞模式，使一个线程从某通道发送请求读取数据，但是它仅能得到目前可用的数据，如果目前没有数据可用时，就什么都不会获取。而不是保持线程阻塞，所以直至数据变的可以读取之前，该线程可以继续做其他的事情。 非阻塞写也是如此。一个线程请求写入一些数据到某通道，但不需要等待它完全写入，这个线程同时可以去做别的事情。 线程通常将非阻塞IO的空闲时间用于在其它通道上执行IO操作，所以一个单独的线程现在可以管理多个输入和输出通道（channel）。</p>
+<h4 id="选择器（Selectors）"><a href="#选择器（Selectors）" class="headerlink" title="选择器（Selectors）"></a>选择器（Selectors）</h4><p>Java NIO的选择器允许一个单独的线程来监视多个输入通道，你可以注册多个通道使用一个选择器，然后使用一个单独的线程来“选择”通道：这些通道里已经有可以处理的输入，或者选择已准备写入的通道。这种选择机制，使得一个单独的线程很容易来管理多个通道。</p>
+<h4 id="NIO和IO如何影响应用程序的设计"><a href="#NIO和IO如何影响应用程序的设计" class="headerlink" title="NIO和IO如何影响应用程序的设计"></a>NIO和IO如何影响应用程序的设计</h4><p>无论您选择IO或NIO工具箱，可能会影响您应用程序设计的以下几个方面：</p>
+<ul>
+<li>对NIO或IO类的API调用。</li>
+<li>数据处理。</li>
+<li>用来处理数据的线程数。</li>
+</ul>
+<h4 id="API调用"><a href="#API调用" class="headerlink" title="API调用"></a>API调用</h4><p>当然，使用NIO的API调用时看起来与使用IO时有所不同，但这并不意外，因为并不是仅从一个InputStream逐字节读取，而是数据必须先读入缓冲区再处理。</p>
+<h4 id="数据处理"><a href="#数据处理" class="headerlink" title="数据处理"></a>数据处理</h4><p>使用纯粹的NIO设计相较IO设计，数据处理也受到影响。</p>
+<p>在IO设计中，我们从InputStream或 Reader逐字节读取数据。假设你正在处理一基于行的文本数据流，例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Name: Anna</span><br><span class="line">Age: 25</span><br><span class="line">Email: anna@mailserver.com</span><br><span class="line">Phone: 1234567890</span><br></pre></td></tr></table></figure>
+<p>该文本行的流可以这样处理：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">InputStream input = … ; // get the InputStream from the client socket</span><br><span class="line">BufferedReader reader = new BufferedReader(new InputStreamReader(input));</span><br><span class="line"></span><br><span class="line">String nameLine   = reader.readLine();</span><br><span class="line">String ageLine    = reader.readLine();</span><br><span class="line">String emailLine  = reader.readLine();</span><br><span class="line">String phoneLine  = reader.readLine();</span><br></pre></td></tr></table></figure>
+<p>请注意处理状态由程序执行多久决定。换句话说，一旦reader.readLine()方法返回，你就知道肯定文本行就已读完， readline()阻塞直到整行读完，这就是原因。你也知道此行包含名称；同样，第二个readline()调用返回的时候，你知道这行包含年龄等。 正如你可以看到，该处理程序仅在有新数据读入时运行，并知道每步的数据是什么。一旦正在运行的线程已处理过读入的某些数据，该线程不会再回退数据（大多如此）。下图也说明了这条原则：</p>
+<p><img src="http://dl2.iteye.com/upload/attachment/0096/5635/d816b6e7-0b89-3cbf-bc24-dc7e1bb971de.png" alt="从一个阻塞的流中读数据"></p>
+<p>上图：从一个阻塞的流中读数据</p>
+<p>而一个NIO的实现会有所不同，下面是一个简单的例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ByteBuffer buffer = ByteBuffer.allocate(48);</span><br><span class="line"></span><br><span class="line">int bytesRead = inChannel.read(buffer);</span><br></pre></td></tr></table></figure>
+<p>注意第二行，从通道读取字节到ByteBuffer。当这个方法调用返回时，你不知道你所需的所有数据是否在缓冲区内。你所知道的是，该缓冲区包含一些字节，这使得处理有点困难。<br>假设第一次 read(buffer)调用后，读入缓冲区的数据只有半行，例如，“Name:An”，你能处理数据吗？显然不能，需要等待，直到整行数据读入缓存，在此之前，对数据的任何处理毫无意义。</p>
+<p>所以，你怎么知道是否该缓冲区包含足够的数据可以处理呢？好了，你不知道。发现的方法只能查看缓冲区中的数据。其结果是，在你知道所有数据都在缓冲区里之前，你必须检查几次缓冲区的数据。这不仅效率低下，而且可以使程序设计方案杂乱不堪。例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ByteBuffer buffer = ByteBuffer.allocate(48);</span><br><span class="line">int bytesRead = inChannel.read(buffer);</span><br><span class="line">while(! bufferFull(bytesRead) ) &#123;</span><br><span class="line">bytesRead = inChannel.read(buffer);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>bufferFull()方法必须跟踪有多少数据读入缓冲区，并返回真或假，这取决于缓冲区是否已满。换句话说，如果缓冲区准备好被处理，那么表示缓冲区满了。</p>
+<p>bufferFull()方法扫描缓冲区，但必须保持在bufferFull（）方法被调用之前状态相同。如果没有，下一个读入缓冲区的数据可能无法读到正确的位置。这是不可能的，但却是需要注意的又一问题。</p>
+<p>如果缓冲区已满，它可以被处理。如果它不满，并且在你的实际案例中有意义，你或许能处理其中的部分数据。但是许多情况下并非如此。下图展示了“缓冲区数据循环就绪”：</p>
+<p><img src="http://dl2.iteye.com/upload/attachment/0096/5637/e97ec9e9-62d4-3375-80a6-d4238d6a0664.png" alt=""></p>
+<p>上图：从一个通道里读数据，直到所有的数据都读到缓冲区里</p>
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p>NIO可让您只使用一个（或几个）单线程管理多个通道（网络连接或文件），但付出的代价是解析数据可能会比从一个阻塞流中读取数据更复杂。</p>
+<p>如果需要管理同时打开的成千上万个连接，这些连接每次只是发送少量的数据，例如聊天服务器，实现NIO的服务器可能是一个优势。同样，如果你需要维持许多打开的连接到其他计算机上，如P2P网络中，使用一个单独的线程来管理你所有出站连接，可能是一个优势。一个线程多个连接的设计方案如下图所示：</p>
+<p><img src="http://dl2.iteye.com/upload/attachment/0096/5639/8c8b13c9-0d38-3599-99d3-e0d1aa90589d.png" alt=""></p>
+<p>上图：单线程管理多个连接</p>
+<p>如果你有少量的连接使用非常高的带宽，一次发送大量的数据，也许典型的IO服务器实现可能非常契合。下图说明了一个典型的IO服务器设计：</p>
+<p><img src="http://dl2.iteye.com/upload/attachment/0096/5641/72c44e71-8219-3989-a787-b67ced3c7ab1.png" alt=""></p>
+<p>上图：一个典型的IO服务器设计：一个连接通过一个线程处理</p>
+<hr>
+<p>注明：文章转载自 <a href="http://ifeve.com/tag/nio/"><strong>NIO|并发编程网</strong></a>，二次转载请务必注明原出处！</p>
+<p><img src="https://ws3.sinaimg.cn/large/006tNc79gy1fp3jkmizmpj30o00didgn.jpg" alt=""></p>
+
+      
+      
+        <div class="page-reward">
+          <p><a href="javascript:void(0)" onclick="dashangToggle()" class="dashang">赏</a></p>
+          <div class="hide_box"></div>
+          <div class="shang_box">
+            <a class="shang_close" href="javascript:void(0)" onclick="dashangToggle()">×</a>
+            <div class="shang_tit">
+              <p>纯属好玩</p>
+            </div>
+            <div class="shang_payimg">
+              <img src="/img/alipayimg.jpg" alt="扫码支持" title="扫一扫" />
+            </div>
+              <div class="pay_explain">扫码打赏，你说多少就多少</div>
+            <div class="shang_payselect">
+              
+                <div class="pay_item checked" data-id="alipay">
+                  <span class="radiobox"></span>
+                  <span class="pay_logo"><img src="/img/alipay.png" alt="支付宝" /></span>
+                </div>
+              
+              
+                <div class="pay_item" data-id="wechat">
+                  <span class="radiobox"></span>
+                  <span class="pay_logo"><img src="/img/weixin.png" alt="微信" /></span>
+                </div>
+              
+            </div>
+            <div class="shang_info">
+              <p>打开<span id="shang_pay_txt">支付宝</span>扫一扫，即可进行扫码打赏哦</p>
+            </div>
+          </div>
+        </div>
+        <script src="https://my.openwrite.cn/js/readmore.js" type="text/javascript"></script>
+        <script type="text/javascript">
+            const btw = new BTWPlugin();
+            btw.init({
+                    id: 'article-entry',
+                    blogId: '15013-1596463967175-355',
+                    name: 'Java 指南者',
+                    qrcode: 'http://www.javaguider.com/java/img/wx.jpg',
+                    keyword: 'zhisheng',
+            });
+        </script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/zepto/1.2.0/zepto.min.js"></script>
+        <script type="text/javascript">
+          $(".pay_item").click(function(){
+            $(this).addClass('checked').siblings('.pay_item').removeClass('checked');
+            var dataid=$(this).attr('data-id');
+            $(".shang_payimg img").attr("src","/img/"+dataid+"img.jpg");
+            $("#shang_pay_txt").text(dataid=="alipay"?"支付宝":"微信");
+          });
+          function dashangToggle(){
+
+            $(".hide_box").fadeToggle();
+            $(".shang_box").fadeToggle();
+          }
+        </script>
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2017/06/13/Java NIO 系列教程/">Java NIO 系列教程</a></p>
+        <p><span>文章作者:</span><a href="/" title="访问 zhisheng 的个人博客">zhisheng</a></p>
+        <p><span>发布时间:</span>2017年06月13日 - 00时00分</p>
+        <p><span>最后更新:</span>2018年03月07日 - 00时12分</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2017/06/13/Java NIO 系列教程/" title="Java NIO 系列教程">http://www.54tianzhisheng.cn/2017/06/13/Java NIO 系列教程/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://www.54tianzhisheng.cn/2017/06/13/Java NIO 系列教程/　　作者: zhisheng" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script src="/js/clipboard.min.js"></script>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>公众号:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://www.54tianzhisheng.cn" title="微信公众号：zhisheng" target = "_blank">zhisheng</a> 欢迎关注。
+        </p>
+        <p>
+            <div align="center">
+                <img src="/img/wx.jpg"  alt="zhisheng" />
+            </div>
+        </p>
+    </div>
+
+
+
+<nav id="article-nav">
+  
+    <a href="/2017/06/13/通过项目逐步深入了解Mybatis(二)/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          通过项目逐步深入了解Mybatis（二）
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/06/13/Java-Thread/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">《Java 多线程编程核心技术》学习笔记及总结</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1、Java-NIO-概述"><span class="toc-number">1.</span> <span class="toc-text">1、Java NIO 概述</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Channel-和-Buffer"><span class="toc-number">1.1.</span> <span class="toc-text">Channel 和 Buffer</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Selector"><span class="toc-number">1.2.</span> <span class="toc-text">Selector</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2、Channel"><span class="toc-number">2.</span> <span class="toc-text">2、Channel</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Channel-的实现"><span class="toc-number">2.1.</span> <span class="toc-text">Channel 的实现</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#基本的-Channel-示例"><span class="toc-number">2.2.</span> <span class="toc-text">基本的 Channel 示例</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3、Buffer"><span class="toc-number">3.</span> <span class="toc-text">3、Buffer</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Buffer-的基本用法"><span class="toc-number">3.1.</span> <span class="toc-text">Buffer 的基本用法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Buffer-的-capacity、-position-和-limit"><span class="toc-number">3.2.</span> <span class="toc-text">Buffer 的 capacity、 position 和 limit</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Buffer的类型"><span class="toc-number">3.3.</span> <span class="toc-text">Buffer的类型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Buffer-的分配"><span class="toc-number">3.4.</span> <span class="toc-text">Buffer 的分配</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#向-Buffer-中写数据"><span class="toc-number">3.5.</span> <span class="toc-text">向 Buffer 中写数据</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#从Buffer中读取数据"><span class="toc-number">3.6.</span> <span class="toc-text">从Buffer中读取数据</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#rewind-方法"><span class="toc-number">3.7.</span> <span class="toc-text">rewind()方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#clear-与compact-方法"><span class="toc-number">3.8.</span> <span class="toc-text">clear()与compact()方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#mark-与reset-方法"><span class="toc-number">3.9.</span> <span class="toc-text">mark()与reset()方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#equals-与compareTo-方法"><span class="toc-number">3.10.</span> <span class="toc-text">equals()与compareTo()方法</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4、Scatter-Gather"><span class="toc-number">4.</span> <span class="toc-text">4、Scatter/Gather</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Scattering-Reads"><span class="toc-number">4.1.</span> <span class="toc-text">Scattering Reads</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Gathering-Writes"><span class="toc-number">4.2.</span> <span class="toc-text">Gathering Writes</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5、通道之间的数据传输"><span class="toc-number">5.</span> <span class="toc-text">5、通道之间的数据传输</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#transferFrom"><span class="toc-number">5.1.</span> <span class="toc-text">transferFrom()</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#transferTo"><span class="toc-number">5.2.</span> <span class="toc-text">transferTo()</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6、Selector"><span class="toc-number">6.</span> <span class="toc-text">6、Selector</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#为什么使用Selector"><span class="toc-number">6.1.</span> <span class="toc-text">为什么使用Selector?</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Selector的创建"><span class="toc-number">6.2.</span> <span class="toc-text">Selector的创建</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#向Selector注册通道"><span class="toc-number">6.3.</span> <span class="toc-text">向Selector注册通道</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#SelectionKey"><span class="toc-number">6.4.</span> <span class="toc-text">SelectionKey</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#interest集合"><span class="toc-number">6.4.1.</span> <span class="toc-text">interest集合</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#ready集合"><span class="toc-number">6.4.2.</span> <span class="toc-text">ready集合</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Channel-Selector"><span class="toc-number">6.4.3.</span> <span class="toc-text">Channel + Selector</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#附加的对象"><span class="toc-number">6.5.</span> <span class="toc-text">附加的对象</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#通过Selector选择通道"><span class="toc-number">6.6.</span> <span class="toc-text">通过Selector选择通道</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#selectedKeys"><span class="toc-number">6.6.1.</span> <span class="toc-text">selectedKeys()</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#wakeUp"><span class="toc-number">6.6.2.</span> <span class="toc-text">wakeUp()</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#close"><span class="toc-number">6.6.3.</span> <span class="toc-text">close()</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#完整的示例"><span class="toc-number">6.7.</span> <span class="toc-text">完整的示例</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7、FileChannel"><span class="toc-number">7.</span> <span class="toc-text">7、FileChannel</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#打开FileChannel"><span class="toc-number">7.1.</span> <span class="toc-text">打开FileChannel</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#从FileChannel读取数据"><span class="toc-number">7.2.</span> <span class="toc-text">从FileChannel读取数据</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#向FileChannel写数据"><span class="toc-number">7.3.</span> <span class="toc-text">向FileChannel写数据</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#关闭FileChannel"><span class="toc-number">7.4.</span> <span class="toc-text">关闭FileChannel</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#FileChannel的position方法"><span class="toc-number">7.5.</span> <span class="toc-text">FileChannel的position方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#FileChannel的size方法"><span class="toc-number">7.6.</span> <span class="toc-text">FileChannel的size方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#FileChannel的truncate方法"><span class="toc-number">7.7.</span> <span class="toc-text">FileChannel的truncate方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#FileChannel的force方法"><span class="toc-number">7.8.</span> <span class="toc-text">FileChannel的force方法</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8、SocketChannel"><span class="toc-number">8.</span> <span class="toc-text">8、SocketChannel</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#打开-SocketChannel"><span class="toc-number">8.1.</span> <span class="toc-text">打开 SocketChannel</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#从-SocketChannel-读取数据"><span class="toc-number">8.2.</span> <span class="toc-text">从 SocketChannel 读取数据</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#写入-SocketChannel"><span class="toc-number">8.3.</span> <span class="toc-text">写入 SocketChannel</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#非阻塞模式"><span class="toc-number">8.4.</span> <span class="toc-text">非阻塞模式</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#connect"><span class="toc-number">8.4.1.</span> <span class="toc-text">connect()</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#write"><span class="toc-number">8.4.2.</span> <span class="toc-text">write()</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#read"><span class="toc-number">8.4.3.</span> <span class="toc-text">read()</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#非阻塞模式与选择器"><span class="toc-number">8.5.</span> <span class="toc-text">非阻塞模式与选择器</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9、ServerSocketChannel"><span class="toc-number">9.</span> <span class="toc-text">9、ServerSocketChannel</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#打开-ServerSocketChannel"><span class="toc-number">9.1.</span> <span class="toc-text">打开 ServerSocketChannel</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#关闭-ServerSocketChannel"><span class="toc-number">9.2.</span> <span class="toc-text">关闭 ServerSocketChannel</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#监听新进来的连接"><span class="toc-number">9.3.</span> <span class="toc-text">监听新进来的连接</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#非阻塞模式-1"><span class="toc-number">9.4.</span> <span class="toc-text">非阻塞模式</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#10、Java-NIO-DatagramChannel"><span class="toc-number">10.</span> <span class="toc-text">10、Java NIO DatagramChannel</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#打开-DatagramChannel"><span class="toc-number">10.1.</span> <span class="toc-text">打开 DatagramChannel</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#接收数据"><span class="toc-number">10.2.</span> <span class="toc-text">接收数据</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#发送数据"><span class="toc-number">10.3.</span> <span class="toc-text">发送数据</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#连接到特定的地址"><span class="toc-number">10.4.</span> <span class="toc-text">连接到特定的地址</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#11、Pipe"><span class="toc-number">11.</span> <span class="toc-text">11、Pipe</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#创建管道"><span class="toc-number">11.1.</span> <span class="toc-text">创建管道</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#向管道写数据"><span class="toc-number">11.2.</span> <span class="toc-text">向管道写数据</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#从管道读取数据"><span class="toc-number">11.3.</span> <span class="toc-text">从管道读取数据</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#12、Java-NIO与IO的对比"><span class="toc-number">12.</span> <span class="toc-text">12、Java NIO与IO的对比</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Java-NIO和IO的主要区别"><span class="toc-number">12.1.</span> <span class="toc-text">Java NIO和IO的主要区别</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#面向流与面向缓冲"><span class="toc-number">12.2.</span> <span class="toc-text">面向流与面向缓冲</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#阻塞与非阻塞IO"><span class="toc-number">12.3.</span> <span class="toc-text">阻塞与非阻塞IO</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#选择器（Selectors）"><span class="toc-number">12.4.</span> <span class="toc-text">选择器（Selectors）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#NIO和IO如何影响应用程序的设计"><span class="toc-number">12.5.</span> <span class="toc-text">NIO和IO如何影响应用程序的设计</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#API调用"><span class="toc-number">12.6.</span> <span class="toc-text">API调用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#数据处理"><span class="toc-number">12.7.</span> <span class="toc-text">数据处理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#总结"><span class="toc-number">12.8.</span> <span class="toc-text">总结</span></a></li></ol></li></ol>
+</div>
+<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+<script src="http://apps.bdimg.com/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>
+    var valueHide = "隐藏目录";
+    var valueShow = "显示目录";
+
+    if ($(".left-col").is(":hidden")) {
+        $("#tocButton").attr("value", valueShow);
+    }
+    $("#tocButton").click(function() {
+        if ($("#toc").is(":hidden")) {
+            $("#tocButton").attr("value", valueHide);
+            $("#toc").slideDown(320);
+        }
+        else {
+            $("#tocButton").attr("value", valueShow);
+            $("#toc").slideUp(350);
+        }
+    })
+    if ($(".toc").length < 1) {
+        $("#toc, #tocButton").hide();
+    }
+</script>
+
+
+
+
+
+<div class="bdsharebuttonbox">
+	<a href="#" class="fx fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+	<a href="#" class="fx fa-weixin bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+	<a href="#" class="fx fa-qq bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+	<a href="#" class="fx fa-facebook-official bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+	<a href="#" class="fx fa-twitter bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+	<a href="#" class="fx fa-linkedin bds_linkedin" data-cmd="linkedin" title="分享到linkedin"></a>
+	<a href="#" class="fx fa-files-o bds_copy" data-cmd="copy" title="分享到复制网址"></a>
+</div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+
+
+
+    
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2017/06/13/通过项目逐步深入了解Mybatis(二)/" title="上一篇: 通过项目逐步深入了解Mybatis（二）">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+        
+            <a href="/2017/06/13/Java-Thread/" title="下一篇: 《Java 多线程编程核心技术》学习笔记及总结">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2021/11/11/flink-akka-framesize/">宕机一台机器，结果一百多个 Flink 作业挂了</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/09/26/realtime-platform-flink-version/">实时平台如何管理多个 Flink 版本？—— 为啥会出现多个版本？</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/13/flink-in-action-3.3/">《Flink 实战与性能优化》—— Flink 数据转换必须熟悉的算子（Operator)</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/12/flink-in-action-3.2/">《Flink 实战与性能优化》—— 如何使用 Flink Window 及 Window 基本概念与实现原理?</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/11/flink-in-action-3.1/">《Flink 实战与性能优化》—— Flink 中 Processing Time、Event Time、Ingestion Time 对比及其使用场景分析</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/10/flink-in-action-2.4/">《Flink 实战与性能优化》—— 案例2：实时处理 Socket 数据</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/09/flink-in-action-2.3/">《Flink 实战与性能优化》—— 案例1：WordCount 应用程序</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/08/flink-in-action-2.2/">《Flink 实战与性能优化》—— Flink 环境搭建</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/07/flink-in-action-2.1/">《Flink 实战与性能优化》—— Flink 环境准备</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/06/flink-in-action-1.3/">《Flink 实战与性能优化》—— 大数据计算框架对比</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/05/flink-in-action-1.2/">《Flink 实战与性能优化》—— 彻底了解大数据实时计算框架 Flink</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/04/flink-in-action-1.1/">《Flink 实战与性能优化》——你的公司是否需要引入实时计算引擎？</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/03/Flink-Fraud-Detection-engine-3/">基于 Flink 的动态欺诈检测系统(下)</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/23/Flink-Fraud-Detection-engine-2/">基于 Flink 的动态欺诈检测系统(中)</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/22/Flink-Fraud-Detection-engine/">基于 Flink 的动态欺诈检测系统(上)</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/12/21/flink-forward-Asia-2020/">Flink Forward Asia 2020 全部 PPT 开放下载</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/12/06/Flink-1.12/">Flink 1.12 Release 文档解读</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/10/18/Spark-book/">强烈推荐三本 Spark 新书籍</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/10/13/flink-history-server/">用了 Flink History Server，妈妈再也不用担心我的作业半夜挂了</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/10/05/flink-jvm-profiler/">如何生成 Flink 作业的交互式火焰图？</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/08/09/flink-zsxq/">Flink 精进学习知识星球内容整理</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/08/02/flink-1.11-log/">Flink 1.11 日志该如何配置？</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/29/flink-1.11/">Flink 1.11 Release 文档解读</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/16/flink-taskmanager-memory-model/">Apache Flink 1.10 TaskManager 内存管理优化</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/13/flink-forward-2020/">Flink Forward 2020 PPT 下载</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/07/flink-job-monitor/">如何实时监控 Flink 集群和作业？</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/15/flink-error-log-alert/">基于 Apache Flink 的实时 Error 日志告警</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/29/flink-nacos-checkpoint/">Flink 能否动态更改 Checkpoint 配置</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/23/flink-apollo/">Flink 整合 Apollo，动态更新 Flink 作业配置</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/22/flink-nacos/">Flink 整合 Nacos，让 Flink 作业配置动态更新不再是难事</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/22/flink-1.10-release/">Flink 1.10 新特性研究</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/20/flink-checkpoint/">Flink Checkpoint 问题排查实用指南</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/11/flink-1.10/">Apache Flink 1.10.0 重磅发布，新特性解读</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/31/Flink-resources/">Flink 视频、博客、PPT、入门、原理、实战、性能调优、源码解析、问答等持续更新</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/30/flink-meituan-real-time-warehouse/">美团点评基于 Flink 的实时数仓平台实践</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/23/flink-monitor-alert/">基于 Apache Flink 的监控告警系统</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/10/flink-real-time-data-analysis-platform/">基于 Apache Flink 的大规模准实时数据分析平台</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/07/Flink_Forward_Asia_2019/">Flink Forward Asia 2019 PPT 下载</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/30/flink-checkpoint-hdfs/">阿里巴巴 Flink 踩坑经验：如何大幅降低 HDFS 压力？</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/30/flink-in-58/">58 同城基于 Flink 的千亿级实时计算平台架构实践</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/30/flink-aqniu/">基于 Flink 构建关联分析引擎的挑战和实践</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/24/flink-in-action-directory/">《大数据实时计算引擎 Flink 实战与性能优化》目录大纲</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/23/real-time-warehouse/">数据仓库简介、发展、架构演进、实时数仓建设、与离线数仓对比</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/23/flink-metrics/">详解 Flink Metrics 原理与监控实战</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/15/flink-in-action/">《大数据实时计算引擎 Flink 实战与性能优化》新专栏</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/26/flink-back-pressure/">一文彻底搞懂 Flink 网络流控与反压机制</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/25/flink-didi/">滴滴实时计算发展之路及平台架构实践</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/24/Flink-Connector/">Flink Connector 深度解析</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/23/flink-ebay/">如何使用 Flink 每天实时处理百亿条日志？</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/22/flink-1.9/">修改代码150万行！Apache Flink 1.9.0做了这些重大修改！</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/21/Flink-Exactly_Once_vs_At_Least_Once/">一文搞懂 Flink 的 Exactly Once 和 At Least Once</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/20/Flink-meituan-dw/">美团点评基于 Flink 的实时数仓建设实践</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/19/flink/">一文让你彻底了解大数据实时计算引擎 Flink</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/18/flink-side-output/">Flink 从0到1学习 —— 如何使用 Side Output 来分流？</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/06/flink-streaming-system/">你公司到底需不需要引入实时计算引擎？</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/04/Flink-code-clients/">Flink Clients 源码解析</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/03/Flink-code-Annotations/">Flink Annotations 源码解析</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/02/Flink-code-metrics/">Flink Metrics 源码解析</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/01/flink-1.9-preview/">Apache Flink 1.9 重大特性提前解读</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/06/26/flink-TensorFlow/">如何基于Flink+TensorFlow打造实时智能异常检测平台？只看这一篇就够了</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/06/21/flink-in-360/">360深度实践：Flink与Storm协议级对比</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/06/20/flink-kafka-Exactly-Once/">Apache Flink 结合 Kafka 构建端到端的 Exactly-Once 处理</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/06/18/flink-state/">Flink状态管理和容错机制介绍</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/06/17/flink-vs-storm/">流计算框架 Flink 与 Storm 的性能对比</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/06/16/flink-sql-oppo/">OPPO 数据中台之基石：基于 Flink SQL 构建实时数据仓库</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/06/15/Stream-processing/">为什么说流处理即未来？</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/06/14/flink-architecture-deploy-test/">Flink 架构、原理与部署测试</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/06/13/flink-book-paper/">Flink 从0到1学习—— 分享四本 Flink 国外的书和二十多篇 Paper 论文</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/06/12/flink-split/">Flink 从0到1学习—— Flink 不可以连续 Split(分流)？</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/28/Flink-code-TaskManager-submitJob/">Flink 源码解析 —— TaskManager 处理 SubmitJob 的过程</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/28/flink-additional-data/">Flink 从0到1学习 —— Flink 中如何管理配置？</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/27/Flink-code-JobManager-submitJob/">Flink 源码解析 —— JobManager 处理 SubmitJob 的过程</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/26/Flink-code-ExecutionGraph/">Flink 源码解析 —— 如何获取 ExecutionGraph ？</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/25/Flink-code-jobmanager/">Flink 源码解析 —— Flink JobManager 有什么作用？</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/25/Flink-code-taskmanager/">Flink 源码解析 —— Flink TaskManager 有什么作用？</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/24/Flink-code-memory-management/">Flink 源码解析 —— 深度解析 Flink 是如何管理好内存的？</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/23/Flink-code-checkpoint/">Flink 源码解析 —— 深度解析 Flink Checkpoint 机制</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/22/Flink-code-serialize/">Flink 源码解析 —— 深度解析 Flink 序列化机制</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/21/Flink-code-JobGraph/">Flink 源码解析 —— 如何获取 JobGraph？</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/20/Flink-code-StreamGraph/">Flink 源码解析 —— 如何获取 StreamGraph？</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/19/Flink-code-streaming-wordcount-start/">Flink 源码解析 —— 分析 Streaming WordCount 程序的执行过程</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/18/Flink-code-batch-wordcount-start/">Flink 源码解析 —— 分析 Batch WordCount 程序的执行过程</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/17/Flink-code-Standalone-TaskManager-start/">Flink 源码解析 —— Standalone Session Cluster 启动流程深度分析之 Task Manager 启动</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/16/Flink-code-Standalone-JobManager-start/">Flink 源码解析 —— Standalone Session Cluster 启动流程深度分析之 Job Manager 启动</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/15/Flink-code-Standalone-start/">Flink 源码解析 —— Standalone session 模式启动流程</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/14/Flink-code-structure/">Flink 源码解析 —— 项目结构一览</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/13/flink-job-jars/">Flink 从 0 到 1 学习 —— 你上传的 jar 包藏到哪里去了?</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/02/28/blink/">阿里巴巴开源的 Blink 实时计算框架真香</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/01/30/Flink-code-compile/">Flink 源码解析 —— 源码编译运行</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/01/20/Flink-RabbitMQ-sink/">Flink 从 0 到 1 学习 —— Flink 读取 Kafka 数据写入到 RabbitMQ</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/01/15/Flink-MySQL-sink/">Flink 从 0 到 1 学习 —— Flink 读取 Kafka 数据批量写入到 MySQL</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/01/14/Flink-parallelism-slot/">Flink 从 0 到 1 学习 —— Flink parallelism 和 Slot 介绍</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/01/13/Flink-JobManager-High-availability/">Flink 从 0 到 1 学习 —— Flink JobManager 高可用性配置</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/01/06/Flink-Kafka-sink/">Flink 从 0 到 1 学习 —— Flink 写入数据到 Kafka</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/01/05/Flink-run/">Flink 从 0 到 1 学习 —— Flink 项目如何运行？</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/12/30/Flink-ElasticSearch-Sink/">Flink 从 0 到 1 学习 —— Flink 写入数据到 ElasticSearch</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/12/11/Flink-time/">Flink 从 0 到 1 学习 —— Flink 中几种 Time 详解</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/12/08/Flink-Stream-Windows/">Flink 从 0 到 1 学习 —— 介绍Flink中的Stream Windows</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/04/Flink-Data-transformation/">Flink 从 0 到 1 学习 —— Flink Data transformation(转换)</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/31/flink-create-sink/">Flink 从 0 到 1 学习 —— 如何自定义 Data Sink ？</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/30/flink-create-source/">Flink 从 0 到 1 学习 —— 如何自定义 Data Source ？</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/29/flink-sink/">Flink 从 0 到 1 学习 —— Data Sink 介绍</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/28/flink-sources/">Flink 从 0 到 1 学习 —— Data Source 介绍</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/27/flink-config/">Flink 从 0 到 1 学习 —— Flink 配置文件详解</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/13/flink-introduction/">Flink 从 0 到 1 学习 —— Apache Flink 介绍</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/18/flink-install/">Flink 从 0 到 1 学习 —— Mac 上搭建 Flink 1.6.0 环境并构建运行简单程序入门</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/30/go-sync/">Go 并发——实现协程同步的几种方式</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/14/idea-remote-debug-elasticsearch/">教你如何在 IDEA 远程 Debug ElasticSearch</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/12/es-code03/">渣渣菜鸡的 ElasticSearch 源码解析 —— 启动流程（下）</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/11/es-code02/">渣渣菜鸡的 ElasticSearch 源码解析 —— 启动流程（上）</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/05/es-code01/">渣渣菜鸡的 ElasticSearch 源码解析 —— 环境搭建</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/04/why-see-es-code/">渣渣菜鸡为什么要看 ElasticSearch 源码？</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/07/31/alipay02/">渣渣菜鸡的蚂蚁金服面试经历(二)</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/07/30/alipay01/">渣渣菜鸡的蚂蚁金服面试经历(一)</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/07/12/youzan/">渣渣菜鸡的有赞面试经历（一）</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/20/java-8-date/">20 个案例教你在 Java 8 中如何处理日期和时间?</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/19/SimpleDateFormat/">SimpleDateFormat 如何安全的使用？</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/26/paper/">苦逼的毕业论文经历</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/30/springboot_SpringApplication/">Spring Boot 2.0系列文章(七)：SpringApplication 深入探索</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/24/Distributed_lock/">分布式锁看这篇就够了</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/19/SpringBootApplication-annotation/">Spring Boot 2.0系列文章(六)：Spring Boot 2.0中SpringBootApplication注解详解</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/18/spring_boot2_project/">Spring Boot 2.0系列文章(五)：Spring Boot 2.0 项目源码结构预览</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/15/springboot2_code/">Spring Boot 2.0系列文章(四)：Spring Boot 2.0 源码阅读环境搭建</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/13/Spring_Boot_2.0_Configuration_Changelog/">Spring Boot 2.0系列文章(三)：Spring Boot 2.0 配置改变</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/03/27/blogs/">写这么多系列博客，怪不得找不到女朋友</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/03/06/SpringBoot2-new-features/">Spring Boot 2.0系列文章(二)：Spring Boot 2.0 新特性详解</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/03/06/SpringBoot2-Migration-Guide/">Spring Boot 2.0系列文章(一)：Spring Boot 2.0 迁移指南</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/02/28/Java-Memory-Model/">《深入理解 Java 内存模型》读书笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/02/07/rocketmq-example/">RocketMQ系列文章（三）：RocketMQ 简单的消息示例</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/02/07/SpringBoot-RocketMQ/">Spring Boot系列文章（六）：SpringBoot RocketMQ 整合使用和监控</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/02/06/RocketMQ-install/">RocketMQ系列文章（二）：RocketMQ 安装及快速入门</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/02/05/RocketMQ/">RocketMQ系列文章（一）：RocketMQ 初探</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/28/RabbitMQ/">Spring Boot系列文章（五）：SpringBoot RabbitMQ 整合进阶版</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/27/SpringBoot-ActiveMQ/">Spring Boot系列文章（四）：SpringBoot ActiveMQ 整合使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/26/SpringBoot-RabbitMQ/">Spring Boot系列文章（三）：SpringBoot  RabbitMQ 整合使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/25/Docker-install/">Docker系列文章（二）：Mac 安装 Docker 及常用命令</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/24/mac/">MacBook Pro 初体验</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/17/SpringBoot-Admin/">Spring Boot系列文章（二）：SpringBoot Admin 使用指南</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/09/lombok/">Lombok 看这篇就够了</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/05/SpringBoot-Kafka/">Spring Boot系列文章（一）：SpringBoot Kafka 整合使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/04/weixin/">为什么要重新运营以前的公众号呢？</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/04/Kafka/">Kafka 安装及快速入门</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/12/27/consul-install/">Windows 下安装 Consul</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/12/25/ELK/">Elasticsearch 系列文章（五）：ELK 实时日志分析平台环境搭建</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/12/18/hexo-yilia/">Hexo + yilia 搭建博客可能会遇到的所有疑问</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/12/13/Google-Developer-Days/">谷歌开发者大会收获满满，不去真 “可惜” 了</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/12/09/CodeMirror/">使用 CodeMirror 打造属于自己的在线代码编辑器</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/12/08/netty-01-env/">Netty系列文章（一）：Netty 源码阅读之初始环境搭建</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/12/03/RestTemplate/">RestTemplate 详解</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/12/02/wx-01/">实习圈群里提问小记</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/11/26/Docker-harbor/">Docker系列文章（一）：基于 Harbor 搭建 Docker 私有镜像仓库</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/11/18/Money-management/">谈谈我的理财</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/11/18/flow-control/">基于分布式环境下限流系统的设计</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/11/11/Maven-dependencies-dependencyManagement/">Maven 中 dependencies 与 dependencyManagement 的区别</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/11/11/recommended-books/">送你一份双十一剁手书单【墙裂推荐】</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/28/Data-Desensitization/">小白谈数据脱敏</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/21/HBase-metrics/">HBase 集群监控</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/18/ElasticSearch-nodes-metrics/">Elasticsearch 系列文章（四）：ElasticSearch 单个节点监控</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/15/ElasticSearch-cluster-health-metrics/">Elasticsearch 系列文章（三）：ElasticSearch 集群监控</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/14/JsonPath/">JsonPath —— JSON 解析神器</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/14/Nexus3-Maven/">Centos7 搭建最新 Nexus3 Maven 私服</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/23/Guava-limit/">Google Guava 缓存实现接口的限流</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/17/Interview-summary/">面试过阿里等互联网大公司，我知道了这些套路</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/15/linux-lua-lfs-install/">Linux 下 lua 开发环境安装及安装 luafilesystem</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/09/Elasticsearch-install/">Elasticsearch 系列文章（二）：全文搜索引擎 Elasticsearch 集群搭建入门教程</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/08/Elasticsearch-analyzers/">Elasticsearch 系列文章（一）：Elasticsearch 默认分词器和中分分词器之间的比较及使用方法</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/28/recommend-books/">那些年我看过的书 —— 致敬我的大学生活 —— Say Good Bye ！</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/18/Ubuntu-install-Nginx/">Ubuntu16.10 安装 Nginx</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/11/most-success/">马云热血励志演讲《最伟大的成功》</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/08/android-projects/">源码大招：不服来战！撸这些完整项目，你不牛逼都难！</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/05/Nginx/">Nginx 基本知识快速入门</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/04/alibaba/">秋招第三站 —— 内推阿里（一面）</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/04/iqiyi/">秋招第二站 —— 内推爱奇艺（一面二面）</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/04/yaxin/">秋招第一站 —— 亚信科技</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/29/ThreadPool/">Java 线程池艺术探索</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/25/Java-performance-tuning/">Java 性能调优需要格外注意的细节</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/21/Spring-MVC03/">Spring MVC系列文章（五）：看透 Spring MVC 源代码分析与实践 ——  Spring MVC 组件分析</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/14/Spring-MVC01/">Spring MVC系列文章（三）：看透 Spring MVC 源代码分析与实践 ——  网站基础知识</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/14/Spring-MVC02/">Spring MVC系列文章（四）：看透 Spring MVC 源代码分析与实践 ——  俯视 Spring MVC</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/09/servlet/">通过源码详解 Servlet</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/28/Velocity-foreach/">Velocity 循环指令一种好的解决方法</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/23/AJAX/">AJAX 学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/23/java-io/">Java IO流学习超详细总结（图文并茂）</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/20/Java-error1/">java.sql.SQLException Field 'id' doesn't have a default value</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/19/中缀表达式转换成前缀和后缀表达式这类题目的超实用解题技巧/">中缀表达式转换成前缀和后缀表达式这类题目的超实用解题技巧</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/18/循环队列的相关条件和公式/">循环队列的相关条件和公式</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/18/Bootstrap入门需掌握的知识点（二）/">Bootstrap入门需掌握的知识点（二）</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/18/Bootstrap入门需掌握的知识点（一）/">Bootstrap入门需掌握的知识点（一）</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/17/blog-talk/">搭建一个博客项目后的碎碎念</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/17/详解 Filter 过滤器/">详解 Filter 过滤器</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/17/详细深入分析 Java ClassLoader 工作机制/">详细深入分析 Java ClassLoader 工作机制</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/16/通过项目逐步深入了解Spring MVC（一）/">通过项目逐步深入了解Spring MVC（一）</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/15/通过项目逐步深入了解Mybatis(四)/">通过项目逐步深入了解Mybatis（四）</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/14/通过项目逐步深入了解Mybatis(三)/">通过项目逐步深入了解Mybatis（三）</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/13/Hexo-yilia-toc/">Hexo + yilia 主题实现文章目录</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/13/Java连接Oracle数据库的三种连接方式/">Java连接Oracle数据库的三种连接方式</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/13/MyBatis-foreach/">MyBatis的foreach语句详解</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/13/Spring MVC + Hibernate JPA + Bootstrap 搭建的博客系统/">Spring MVC系列文章（一）：Spring MVC + Hibernate JPA + Bootstrap 搭建的博客系统 Demo</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/13/String-new/">关于String s = new String("xyz"); 创建几个对象的问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/13/【字符串】判断两字符串是否互为旋转词？/">【字符串】判断两字符串是否互为旋转词？</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/13/【字符串】字符串逆序/">字符串</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/13/奇怪的Java题：为什么128 == 128返回为False，而127 == 127会返回为True-/">奇怪的Java题：为什么128 == 128返回为False，而127 == 127会返回为True?</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/13/程序访问文件的几种方式/">程序访问文件的几种方式</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/13/MySQL-select-good/">MySQL 处理海量数据时的一些优化查询速度方法</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/13/Pyspider框架 —— Python爬虫实战之爬取 V2EX 网站帖子/">Pyspider框架 —— Python爬虫实战之爬取 V2EX 网站帖子</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/13/Spring MVC+Hibernate JPA搭建的博客系统项目中所遇到的坑/">Spring MVC系列文章（二）：Spring MVC+Hibernate JPA搭建的博客系统项目中所遇到的坑</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/13/feiji/">记录下自己第一次坐飞机的感受</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/13/java-var/">从对象深入分析 Java 中实例变量和类变量的区别</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/13/java读取文件/">Java读取文件</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/13/利用Github Page 搭建个人博客网站/">利用Github Page 搭建个人博客网站</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/13/解决jdk1.8中发送邮件失败（handshake_failure）问题/">解决jdk1.8中发送邮件失败（handshake_failure）问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/13/HashMap-Hashtable/">HashMap、Hashtable、HashSet 和 ConcurrentHashMap 的比较</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/13/JVM性能调优监控工具jps、jstack、jmap、jhat、jstat等使用详解/">JVM性能调优监控工具jps、jstack、jmap、jhat、jstat等使用详解</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/13/Python爬虫实战之爬取百度贴吧帖子/">Python爬虫实战之爬取百度贴吧帖子</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/13/Python爬虫实战之爬取糗事百科段子/">Python爬虫实战之爬取糗事百科段子</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/13/深入分析 Java Web 中的中文编码问题/">深入分析 Java Web 中的中文编码问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/13/深度探究Java 中 finally 语句块/">深度探究Java 中 finally 语句块</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/13/通过项目逐步深入了解Mybatis(二)/">通过项目逐步深入了解Mybatis（二）</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/13/Java NIO 系列教程/">Java NIO 系列教程</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/13/Java-Thread/">《Java 多线程编程核心技术》学习笔记及总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/13/Java-16-lession/">《疯狂 Java 突破程序员基本功的 16 课》读书笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/12/通过项目逐步深入了解Mybatis(一)/">通过项目逐步深入了解Mybatis（一）</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/02/poetry2/"> 六月 —— 愿你做最美好的自己！</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/12/poetry/">最近很火的鸡汤，分享给大家</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/13/Hexo-yilia-changyan/">Github pages + Hexo 博客 yilia 主题使用畅言评论系统</a></li></ul>
+    <script src="http://apps.bdimg.com/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script>
+        $(".post-list").addClass("toc-article");
+        $(".post-list-item a").attr("target","_blank");
+        $("#post-nav-button > a:nth-child(2)").click(function() {
+            $(".fa-bars, .fa-times").toggle();
+            $(".post-list").toggle(300);
+            if ($(".toc").length > 0) {
+                $("#toc, #tocButton").toggle(200, function() {
+                    if ($(".switch-area").is(":visible")) {
+                        $("#tocButton").attr("value", valueHide);
+                        }
+                    })
+            }
+            else {
+            }
+        })
+    </script>
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                &copy; 2021 zhisheng
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" >本站总访问量: 
+                            <span id="busuanzi_value_site_pv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>, </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit">本文总阅读量: 
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                   <a href="http://beian.miit.gov.cn">赣ICP备16004176号</a>
+            </div>
+        
+    </div>
+</footer>
+
+    </div>
+    <script src="http://apps.bdimg.com/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="/js/main.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var backgroundnum = 24;
+            var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+            $("#mobile-nav").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+            $(".left-col").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+        })
+    </script>
+
+
+
+
+	<script>
+	var _hmt = _hmt || [];
+	(function() {
+	  var hm = document.createElement("script");
+	  hm.src = "https://hm.baidu.com/hm.js?c41be5a0c9f014e977695f66c065b5d3";
+	  var s = document.getElementsByTagName("script")[0]; 
+	  s.parentNode.insertBefore(hm, s);
+	})();
+	</script>
+
+
+<div class="scroll" id="scroll">
+    <a href="#"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    $(document).ready(function() {
+        if ($("#comments").length < 1) {
+            $("#scroll > a:nth-child(2)").hide();
+        };
+    })
+</script>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  <script language="javascript">
+    $(function() {
+        $("a[title]").each(function() {
+            var a = $(this);
+            var title = a.attr('title');
+            if (title == undefined || title == "") return;
+            a.data('title', title).removeAttr('title').hover(
+
+            function() {
+                var offset = a.offset();
+                $("<div id=\"anchortitlecontainer\"></div>").appendTo($("body")).html(title).css({
+                    top: offset.top - a.outerHeight() - 15,
+                    left: offset.left + a.outerWidth()/2 + 1
+                }).fadeIn(function() {
+                    var pop = $(this);
+                    setTimeout(function() {
+                        pop.remove();
+                    }, pop.text().length * 800);
+                });
+            }, function() {
+                $("#anchortitlecontainer").remove();
+            });
+        });
+    });
+</script>
+
+
+  </div>
+</body>
+</html>

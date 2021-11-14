@@ -1,0 +1,953 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+   <!-- 百度联盟 -->
+   <meta name="baidu_union_verify" content="46e227ad81d5513c6cd8288c18c6ebad">
+
+   <!-- google analytics -->
+   <meta name="google-site-verification" content="SzCGQVmA8Mtk40elee-bCGpq2YSCAmEulSNEZHYCkFc" />
+
+   <!--百度站长之家验证-->
+   <meta name="baidu-site-verification" content="4woRik4rfk" />
+
+   <meta name="description" content="坑要一个个填，路要一步步走！—— from zhisheng的博客">
+   <meta name="keywords" content="Flink,Spark,大数据,Hive,Java,架构,后端,服务端,RocketMQ,分布式消息队列,分布式存储,技术博客,HBase,ElasticSearch,Spring,Spring Boot,Spring Boot 2.0,Spring Cloud,Spring MVC,Java EE,前端,HTML,MyBatis,Android,Docker,Mac,Consul,Kafka,Logstash,Kibana,MySQL,Maven,Nginx,Python,RabbitMQ,ActiveMQ,JVM">
+
+
+  <title>面试过阿里等互联网大公司，我知道了这些套路 | zhisheng的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="keywords" content="面经">
+<meta property="og:type" content="article">
+<meta property="og:title" content="面试过阿里等互联网大公司，我知道了这些套路">
+<meta property="og:url" content="http://www.54tianzhisheng.cn/2017/09/17/Interview-summary/index.html">
+<meta property="og:site_name" content="zhisheng的博客">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://image.54tianzhisheng.cn/shanghai.jpeg-1">
+<meta property="og:image" content="http://image.54tianzhisheng.cn/201612031957235746.gif">
+<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tNc79gy1fp3jkmizmpj30o00didgn.jpg">
+<meta property="og:updated_time" content="2018-11-22T14:51:58.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="面试过阿里等互联网大公司，我知道了这些套路">
+<meta name="twitter:image" content="http://image.54tianzhisheng.cn/shanghai.jpeg-1">
+  
+    <link rel="alternative" href="/atom.xml" title="zhisheng的博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/img/favicon.ico">
+  
+  
+      <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  
+  
+      <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  
+  <!-- 加载特效 -->
+  <script src="/js/pace.js"></script>
+  <link href="/css/pace/pace-theme-flash.css" rel="stylesheet" />
+  <script>
+      var yiliaConfig = {
+          rootUrl: '/',
+          fancybox: true,
+          animate: true,
+          isHome: false,
+          isPost: true,
+          isArchive: false,
+          isTag: false,
+          isCategory: false,
+          open_in_new: true
+      }
+  </script>
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <!-- <a href="/" class="profilepic">
+            
+            <img src="//img/avatar.png" alt="zhisheng">
+            
+        </a> -->
+         <a href="/">
+        			<img src="/img/avatar.png" class="js-avatar" style="width: 70%;height: 70%;opacity: 1;">
+        </a>
+
+        <hgroup>
+          <h1 class="header-author"><a href="/">zhisheng</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">坑要一个个填，路要一步步走！</p>
+        
+        
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/tags/Flink/">Flink</a></li>
+                        
+                            <li><a href="/tags/ElasticSearch/">ElasticSearch</a></li>
+                        
+                            <li><a href="/tags/SpringBoot/">Spring Boot</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fl wechat" target="_blank" href="wechat:yuanblog_tzs" title="wechat">wechat</a>
+                            
+                                <a class="fl mail" target="_blank" href="mailto://zhisheng2018@gmail.com" title="mail">mail</a>
+                            
+                                <a class="fl github" target="_blank" href="https://github.com/zhisheng17/" title="github">github</a>
+                            
+                                <a class="fl zhihu" target="_blank" href="https://www.zhihu.com/people/zhisheng-34" title="zhihu">zhihu</a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <a href="/tags/AJAX/" style="font-size: 10px;">AJAX</a> <a href="/tags/ActiveMQ/" style="font-size: 10px;">ActiveMQ</a> <a href="/tags/Android/" style="font-size: 10px;">Android</a> <a href="/tags/Apollo/" style="font-size: 10px;">Apollo</a> <a href="/tags/Blink/" style="font-size: 10px;">Blink</a> <a href="/tags/Bootstrap/" style="font-size: 12.5px;">Bootstrap</a> <a href="/tags/Consul/" style="font-size: 10px;">Consul</a> <a href="/tags/Docker/" style="font-size: 10.83px;">Docker</a> <a href="/tags/ElasticSearch/" style="font-size: 15.83px;">ElasticSearch</a> <a href="/tags/Filter过滤器/" style="font-size: 10px;">Filter过滤器</a> <a href="/tags/Flink/" style="font-size: 20px;">Flink</a> <a href="/tags/GO/" style="font-size: 10px;">GO</a> <a href="/tags/Github-Page/" style="font-size: 10px;">Github Page</a> <a href="/tags/Guava/" style="font-size: 10px;">Guava</a> <a href="/tags/HBase/" style="font-size: 10px;">HBase</a> <a href="/tags/Hibernate-JPA/" style="font-size: 10.83px;">Hibernate JPA</a> <a href="/tags/IO/" style="font-size: 10.83px;">IO</a> <a href="/tags/JMM/" style="font-size: 10px;">JMM</a> <a href="/tags/JSON/" style="font-size: 10px;">JSON</a> <a href="/tags/JVM/" style="font-size: 10.83px;">JVM</a> <a href="/tags/Java/" style="font-size: 18.33px;">Java</a> <a href="/tags/Kafka/" style="font-size: 12.5px;">Kafka</a> <a href="/tags/Kibana/" style="font-size: 10px;">Kibana</a> <a href="/tags/LogStash/" style="font-size: 10px;">LogStash</a> <a href="/tags/Mac/" style="font-size: 10px;">Mac</a> <a href="/tags/Maven/" style="font-size: 10.83px;">Maven</a> <a href="/tags/MySQL/" style="font-size: 12.5px;">MySQL</a> <a href="/tags/Mybatis/" style="font-size: 13.33px;">Mybatis</a> <a href="/tags/NIO/" style="font-size: 10px;">NIO</a> <a href="/tags/Nacos/" style="font-size: 11.67px;">Nacos</a> <a href="/tags/Netty/" style="font-size: 10px;">Netty</a> <a href="/tags/Nginx/" style="font-size: 10.83px;">Nginx</a> <a href="/tags/Oracle/" style="font-size: 10px;">Oracle</a> <a href="/tags/Pyspider/" style="font-size: 10px;">Pyspider</a> <a href="/tags/Python/" style="font-size: 11.67px;">Python</a> <a href="/tags/RabbitMQ/" style="font-size: 11.67px;">RabbitMQ</a> <a href="/tags/Redis/" style="font-size: 10.83px;">Redis</a> <a href="/tags/RocketMQ/" style="font-size: 12.5px;">RocketMQ</a> <a href="/tags/Servlet/" style="font-size: 10px;">Servlet</a> <a href="/tags/Spark/" style="font-size: 10px;">Spark</a> <a href="/tags/Spring/" style="font-size: 11.67px;">Spring</a> <a href="/tags/Spring-MVC/" style="font-size: 14.17px;">Spring MVC</a> <a href="/tags/SpringBoot/" style="font-size: 16.67px;">SpringBoot</a> <a href="/tags/SpringMVC/" style="font-size: 12.5px;">SpringMVC</a> <a href="/tags/String/" style="font-size: 10px;">String</a> <a href="/tags/Velocity/" style="font-size: 10px;">Velocity</a> <a href="/tags/Zookeeper/" style="font-size: 10px;">Zookeeper</a> <a href="/tags/finally/" style="font-size: 10px;">finally</a> <a href="/tags/foreach/" style="font-size: 10px;">foreach</a> <a href="/tags/hexo/" style="font-size: 11.67px;">hexo</a> <a href="/tags/lombok/" style="font-size: 10px;">lombok</a> <a href="/tags/lua/" style="font-size: 10px;">lua</a> <a href="/tags/yilia/" style="font-size: 10.83px;">yilia</a> <a href="/tags/书籍/" style="font-size: 10px;">书籍</a> <a href="/tags/分布式锁/" style="font-size: 10px;">分布式锁</a> <a href="/tags/前端/" style="font-size: 11.67px;">前端</a> <a href="/tags/励志/" style="font-size: 10px;">励志</a> <a href="/tags/博客合集/" style="font-size: 10px;">博客合集</a> <a href="/tags/博客网站/" style="font-size: 10px;">博客网站</a> <a href="/tags/多线程/" style="font-size: 10.83px;">多线程</a> <a href="/tags/大数据/" style="font-size: 20px;">大数据</a> <a href="/tags/字符串/" style="font-size: 10.83px;">字符串</a> <a href="/tags/实习圈/" style="font-size: 10px;">实习圈</a> <a href="/tags/实时计算/" style="font-size: 17.5px;">实时计算</a> <a href="/tags/循环队列/" style="font-size: 10px;">循环队列</a> <a href="/tags/性能调优工具/" style="font-size: 10px;">性能调优工具</a> <a href="/tags/投资理财/" style="font-size: 10px;">投资理财</a> <a href="/tags/数据仓库/" style="font-size: 10px;">数据仓库</a> <a href="/tags/数据库/" style="font-size: 11.67px;">数据库</a> <a href="/tags/数据结构/" style="font-size: 12.5px;">数据结构</a> <a href="/tags/文件/" style="font-size: 10px;">文件</a> <a href="/tags/旋转词/" style="font-size: 10px;">旋转词</a> <a href="/tags/流式计算/" style="font-size: 19.17px;">流式计算</a> <a href="/tags/流控/" style="font-size: 10px;">流控</a> <a href="/tags/爬虫/" style="font-size: 11.67px;">爬虫</a> <a href="/tags/监控告警/" style="font-size: 10px;">监控告警</a> <a href="/tags/算法/" style="font-size: 11.67px;">算法</a> <a href="/tags/类加载机制/" style="font-size: 10px;">类加载机制</a> <a href="/tags/线程池/" style="font-size: 10px;">线程池</a> <a href="/tags/编码/" style="font-size: 10px;">编码</a> <a href="/tags/表达式/" style="font-size: 10px;">表达式</a> <a href="/tags/邮件发送/" style="font-size: 10px;">邮件发送</a> <a href="/tags/随笔/" style="font-size: 15px;">随笔</a> <a href="/tags/面经/" style="font-size: 15px;">面经</a>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://blog.csdn.net/tzs_1041218129">CSDN博客</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="https://juejin.im/user/57510b82128fe10056ca70fc">掘金</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">人在江湖飘，各种折腾！</div>
+                </section>
+                
+            </div>
+        </div>
+        <div>
+            <img src="/img/wx.jpg"  alt="zhisheng" />
+        </div>
+    </header>
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="Me">zhisheng</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+<!--             <a href="/" class="profilepic">
+                
+                    <img lazy-src="//img/avatar.png" class="js-avatar">
+                
+            </a> -->
+
+<!--             <a href="/">
+                <img src="//img/avatar.png" class="js-avatar" style="width: 100%; height: 100%; opacity: 1;">
+            </a> -->
+
+
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="Me">zhisheng</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">坑要一个个填，路要一步步走！</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/tags/Flink/">Flink</a></li>
+                
+                    <li><a href="/tags/ElasticSearch/">ElasticSearch</a></li>
+                
+                    <li><a href="/tags/SpringBoot/">Spring Boot</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a class="wechat" target="_blank" href="wechat:yuanblog_tzs" title="wechat">wechat</a>
+                    
+                        <a class="mail" target="_blank" href="mailto://zhisheng2018@gmail.com" title="mail">mail</a>
+                    
+                        <a class="github" target="_blank" href="https://github.com/zhisheng17/" title="github">github</a>
+                    
+                        <a class="zhihu" target="_blank" href="https://www.zhihu.com/people/zhisheng-34" title="zhihu">zhihu</a>
+                    
+                </div>
+            </nav>
+        </header>                
+    </div>
+</nav>
+      <div class="body-wrap"><article id="post-Interview-summary" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2017/09/17/Interview-summary/" class="article-date">
+      <time datetime="2017-09-16T16:00:00.000Z" itemprop="datePublished">2017-09-17</time>
+</a>
+    </div>
+  
+  <div class="article-inner" id="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      面试过阿里等互联网大公司，我知道了这些套路
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/面经/">面经</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody" id="article-entry">
+      
+          
+        <p><img src="http://image.54tianzhisheng.cn/shanghai.jpeg-1" alt=""></p>
+<a id="more"></a>
+<h3 id="前面感谢一波"><a href="#前面感谢一波" class="headerlink" title="前面感谢一波"></a>前面感谢一波</h3><p>因为看到掘金在做秋招求职征文大赛，赞助商也有牛客网，自己前段时间也稍微写了篇博客总结我的大学生活，<a href="http://www.54tianzhisheng.cn/2017/08/26/recommend-books/">那些年我看过的书 —— 致敬我的大学生活 —— Say Good Bye ！</a>  博客中稍微简单的介绍了下自己的求职，重点是推荐了下我自己看过的那些书籍，对我帮助真的很大。</p>
+<p>如今借这么个机会，回馈掘金和牛客网，想想自己这一年在掘金也写过不少文章，从 0 个粉丝到如今被 11047 人（截止写此篇文章时）关注，有点小激动，竟然这么多粉，也不知道真正活跃的用户有多少。不管怎样，这一年在掘金还是收获很多的，不仅可以阅读到很多大神的文章，学习新的知识，而且还遇到了好几个不错的哥们，如今平常也有和他们交流，比如 ：<a href="https://juejin.im/user/5904c637b123db3ee479d923">芋道源码</a> 老哥人就很不错，在上海还和老哥见过面，吃过饭，平常对我帮助也很大，会推荐一些很有用的书籍给我看。欢迎大家关注他的博客：<a href="http://vip.iocoder.cn/">芋道源码的博客</a>   ，里面有好几系列的源码分析博客文章呢。至于牛客网，我就更是老用户了，印象中好像是大一的时候注册的，那时有空的话就会去上面刷几道基础题，写写题解，坚持了好久了，如今早已是红名了。（其实是水出来的，哈哈）在牛客网遇到的大神也是超多，好多朋友几乎都是通过牛客网认识的，那时早的时候一起在一群讨论问题，别提那场面了，震惊，我等弱渣瑟瑟发抖。感谢叶神，左神，牛妹！</p>
+<p>说着说着，好像偏题了。<img src="http://image.54tianzhisheng.cn/201612031957235746.gif" alt=""></p>
+<p>正式进入话题吧！</p>
+<h3 id="正文开始"><a href="#正文开始" class="headerlink" title="正文开始"></a>正文开始</h3><p>本篇秋招求职征文主要分享如下几方面：<strong>招聘职位需求套路</strong> 、<strong>招聘面试的套路</strong>、<strong>简历撰写套路</strong>、<strong>简历投递套路</strong> 、<strong>找工作经历</strong> 、<strong>自己面试面经</strong> 、<strong>实习感悟</strong>、<strong>书籍推荐</strong> 、<strong>优秀网站推荐</strong> 、<strong>优秀博客推荐</strong> 、<strong>求职资料放送</strong>。</p>
+<h3 id="招聘职位需求套路"><a href="#招聘职位需求套路" class="headerlink" title="招聘职位需求套路"></a>招聘职位需求套路</h3><p>摘举下几个公司的招聘需求：（from lagou）</p>
+<p>1、Java开发校招生( 有赞 )</p>
+<blockquote>
+<p>职位诱惑：<br>福利好待遇佳，技术氛围浓，有大牛带成长快<br>职位描述：</p>
+<p>有赞2018校招官方网申地址（请在官网投递，勿直接在Lagou上投递）：<br><a href="https://job.youzan.com/campus">https://job.youzan.com/campus</a><br>岗位职责</p>
+<ol>
+<li>我们拥有世界级的 SaaS 电商解决方案，每天处理几百万订单、几亿条消息，并且量级不断攀升；</li>
+<li>我们开放了有赞云，连接了数十万开发者，大大提升了 SaaS 对商家产生的价值；</li>
+<li>我们正在新零售的潮流中激流勇进、开疆拓土，用产品技术撬动巨大的市场；</li>
+<li>而你的工作，就是参与这些大流量系统的研发，哪怕提升1%的性能和稳定性都将是激动人心的时刻。</li>
+</ol>
+<p>岗位要求</p>
+<ol>
+<li>2018届本科及以上学历应届毕业生，计算机或者软件工程相关专业；</li>
+<li>具备扎实的计算机基础知识，至少熟练使用一门主流开发语言；</li>
+<li>积极参与开发实践，如果拥有引以为豪的项目经历则加分；</li>
+<li>热衷数据结构与算法，如果一不小心在 ACM 赛场摘过金，夺过银则加分；</li>
+<li>能在 Linux 上写任何脚本，比王者荣耀上手还快则加分；</li>
+<li>快速学习新鲜事物，自我驱动追求卓越，积极应对问题和变化。</li>
+</ol>
+</blockquote>
+<p>2、京东居家生活事业部-汽车用品招聘实习生（2018届）</p>
+<blockquote>
+<p>职位诱惑：<br>京东商城</p>
+<p>职位描述：<br>京东商城-汽车用品部门招聘实习生</p>
+<p>我们需要这样的你：</p>
+<ul>
+<li>2018届毕业生（本科或硕士均可）</li>
+<li>学习能力强</li>
+<li>担当、抗压、接受变化</li>
+<li>能长期实习（优秀者有转正机会）</li>
+<li>需要一个大的平台来展示和发挥自己的能力</li>
+</ul>
+<p>你将收获：</p>
+<ul>
+<li>重新认识快速成长的自己</li>
+<li>一份世界500强的实习经历</li>
+<li>一群优秀的伙伴</li>
+</ul>
+</blockquote>
+<p>3、爱奇艺 Java 实习生 - 游戏事业部</p>
+<blockquote>
+<p>要求：至少 6 个月以上每周三天以上实习。</p>
+<ol>
+<li>本科以上学历，计算机、软件工程相关专业；</li>
+<li>基础扎实，熟悉 Java 编程，熟悉 Spring、MyBatis 等框架优先；</li>
+<li>熟悉 SQL 语句，熟练使用 MySQL 数据库；</li>
+<li>良好的沟通、表达、协调能力，富有激情，学习能力强；</li>
+<li>有 GitHub 账号或者技术博客优先；</li>
+<li>热爱游戏行业优先。</li>
+</ol>
+</blockquote>
+<p>这里随便找了三个，从招聘需求里看，好多公司目前招聘的话在招聘需求中并不怎么会写的很清楚，有的也不会说明要求的技术栈，这其实有时会对我们这种新人来说，有点不好的，这样的话我们就没有明确的目标去复习，还有就是一些加分项，其实也是有点帮助的。就比如有些招聘上面的说有优秀博客和 GitHub 者优先，这两点的话我们其实可以在大学慢慢积累出来的，对面试确实有帮助，我好些面试机会都是靠这两个的。还有套路就是，别光信他这招聘需求，进去面试可能就不问你这些方面的问题了，那些公司几乎都是这么个套路：<strong>面试造火箭，入职拧螺丝</strong> ！  进去公司之前可能需要你懂很多东西，但是进去的话还只是专门做一方面的东西。不管怎样，如果你有机会进去大公司的话（而且适合去），还是去大公司吧，出来大厂光环不少。</p>
+<ol>
+<li>认真耐心地拧螺丝钉，说不定有机会去造大火箭——正规大公司的节奏。</li>
+<li>短时间把螺丝拧出花，说不定有机会造小火箭——上升中创业公司的节奏。</li>
+</ol>
+<h3 id="招聘面试的套路"><a href="#招聘面试的套路" class="headerlink" title="招聘面试的套路"></a>招聘面试的套路</h3><p>参考：<a href="https://mp.weixin.qq.com/s/qRwDowetBkJqpeMeAZsIpA">https://mp.weixin.qq.com/s/qRwDowetBkJqpeMeAZsIpA</a>    一个在掘金上认识的老哥，在京东工作，写的不错，干脆分享下。大家可以去看他的博客，<a href="http://mindwind.me/">http://mindwind.me/</a>   当时我求职的时候通过作者博客也学到不少东西。</p>
+<p>一次集中的扩招需求，有点像每年一度的晋升评审，都需要对大量的候选人进行定级评审，因为每一个新招聘的人员都会对其有一个定级的过程。</p>
+<p>维度：</p>
+<blockquote>
+<ul>
+<li>通用能力：考察其沟通表达、学习成长等</li>
+<li>专业知识：考察其知识的掌握、深度、广度等</li>
+<li>专业能力：考察其技能应用的能力和结果</li>
+<li>工作业绩：考察其工作成果、产出、创新点等</li>
+<li>价值观：考察其认知、理解、行为等</li>
+</ul>
+</blockquote>
+<p>整个面试过程会包括下面几个部分：</p>
+<p><strong>自我介绍</strong><br>一开始的简短自我介绍，考察点在于对自我的总结、归纳和认知能力。观察其表达的逻辑性和清晰性，有个整体印象。</p>
+<p><strong>项目经历</strong><br>一般我不会专门问一些比较死的专业技术点之类的知识，都是套在候选人的项目经历和过往经验中穿插。通过其描述，来判断其掌握知识点的范围和深度，以及在实际的案例中如何运用这些知识与技能解决真正的问题的。</p>
+<p>所以，不会有所谓的题库。每一个我决定面试的候选人，都是提前细读其简历，提炼场景和发掘需要问的问题，相当于面试前有个二三十分钟的备课过程，组织好面试时的交互过程与场景，以顺利达到我想要了解的点。</p>
+<p><strong>团队合作</strong><br>通常还会问候选人其所在团队中的角色，他们的工作模式、协作方式，并给出一些真实的场景化案例观察其应对的反应。评价一下关于他周围的同事、下属或领导，了解他在团队中的自我定位。这里的考察点是沟通协作方面的通用能力。</p>
+<p><strong>学习成长</strong><br>这个维度考察的关键点包括：成长潜力、职业生涯规划的清晰度。人与人之间成长速度的关键差距，我自己观察得出的结论在于：自驱力。而路径的清晰性，也是产生自驱的一个源动力，否则可能会感觉迷茫，而陷于困顿。</p>
+<p><strong>文化匹配</strong><br>这算是价值观的一部分吧。其实，这是最难考核的，我没有什么好方法，基本靠感觉。曾经有过好几次碰到经历和技能都不错的人，但总是感觉哪里不对，但又着急要人，就放进来了。但最终感觉是对的，合作很快就结束了，人也走了。</p>
+<p><strong>综合评价</strong><br>总结点评候选人的优势、劣势并进行技术定级，定级也没有绝对标准，而是相对的。我一般就是和周围觉得差不多级别的人的平均水准比较下，大概就会有一个技术级别的判断。</p>
+<p><strong>套路</strong></p>
+<p>招聘面试，其实是一个对人的筛选，而筛选的本质是匹配 —— 匹配人与职位。第一，你得非常清楚地理解，这个职位需要什么样属性的人。第二，确定你的候选人是否拥有这个职位要求的必须属性。那么，首先回答第一个问题，一般的职位需要什么样的属性？</p>
+<p>属性，又可以进一步拆解为三个层次。第一层次是「技能（Skills）」，技能是你习得的一种工具，就像程序员会用某种语言和框架来编写某类应用程序。第二层次是「能力（Abilities）」，能力是你运用工具的思考和行为方式，用同样的语言和框架编写同样程序的程序员能力可以差别很大。而第三层次是「价值观（Values）」，价值观是一个人根深蒂固的信念以及驱动行为的原因与动力所在。</p>
+<h3 id="简历撰写套路"><a href="#简历撰写套路" class="headerlink" title="简历撰写套路"></a>简历撰写套路</h3><p>参考：<a href="https://mp.weixin.qq.com/s/3f8hGAQ-auLdkxkQ8XG3CQ">https://mp.weixin.qq.com/s/3f8hGAQ-auLdkxkQ8XG3CQ</a></p>
+<p>简历，是如此重要，它是获得一份满意工作的敲门砖，但不同的简历敲门的声响可不同。</p>
+<p>但很多时候简历给人的感觉也似乎微不足道，因为没有人会真正细致的去读一份简历。而仅仅是快速的浏览一遍，就几乎同时对一个候选人形成了一种要么强烈，要么无感的印象。现实中的真实情况是，你的简历只有十几二十秒的时间窗口机会会被浏览到，然后就决定了能否进入下一步。</p>
+<p>要让面试官看了你的简历后：知道你做过什么？看看技能、经历与岗位需求的匹配度，然后再问问你是谁？你通过简历散发出来的味道是什么感觉，我愿意和这样的人一起共事么？</p>
+<p>一份简历的最少必要内容包括：</p>
+<blockquote>
+<ul>
+<li><p>个人信息</p>
+</li>
+<li><ul>
+<li>姓名</li>
+<li>年龄</li>
+<li>手机</li>
+<li>邮箱</li>
+</ul>
+</li>
+<li><p>教育经历</p>
+</li>
+<li><ul>
+<li>博士（硕士、本科） 有多个全部写出来，最高学历写在上面</li>
+</ul>
+</li>
+<li><p>工作经历（最匹配职位需求的，挑选出来的 TOP3 的项目）</p>
+</li>
+<li><ul>
+<li><p>项目1</p>
+</li>
+<li><ul>
+<li>项目背景上下文（场景、问题）</li>
+<li>你在其中的角色（职责、发挥的作用、结果度量）</li>
+<li>与此项经历有关的知识与技能（技术栈）</li>
+</ul>
+</li>
+<li><p>项目2</p>
+</li>
+<li><p>项目3</p>
+</li>
+</ul>
+</li>
+<li><p>附加信息</p>
+</li>
+<li><ul>
+<li>博客：持续有内容，不碎碎念</li>
+<li>开源：GitHub 持续 commit</li>
+<li>社区：有一定专业影响力的</li>
+<li>书籍：用心写的</li>
+<li>演讲：行业大会级别的</li>
+<li>专利：凑数的就算了</li>
+<li>论文：学术界比较有影响力的</li>
+<li>爱好：真正的兴趣点</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<p>对于我们学生，缺乏工作经历，那就写写独特的学习或实习经历。同学们大家都共有的经历就不要随便写上去凑数了。对于学生，看重的是通用能力，学习能力，适应能力以及对工作的态度和热情。如果没有区分度高的经历，那么有作品也是很好的。比如将你的做的网站部署出来，把地址写在简历上。</p>
+<p>关于技术栈部分的技术术语，很多程序员不太注意。比如，把 Java 写成 java 或 JAVA，Java 已是一个专有品牌名词，大小写要完全符合，这一点和 iOS 类似（i 小写，OS 大写）。另外，像 HTML，CSS 则全部大写，因为这是多个单词的缩写。一些小小的细节就能读出你的专业性和散发出来的味道。最后，技术术语不是罗列得多就好，不是真正熟练的技能，不要轻易写进简历。因为这将给你自己挖坑。你可以将你自己擅长的或者很熟的知识点写进去，有时想着重就加粗或者打个括号，这样可以挖坑给面试官，让他去问你熟悉的（前提要确保你真的能讲清楚，我试过这个方法很有效的）。</p>
+<p>然后就是简历格式了，最好是 PDF 了，Word 在不同的电脑上的打开效果可能不一样，格式可能会变，况且有些人的电脑不一定装了 Word，不过我喜欢用 Markdown 写简历，简洁，适合程序员，然后把 Markdown 转换成 PDF 出来。</p>
+<h3 id="简历投递套路"><a href="#简历投递套路" class="headerlink" title="简历投递套路"></a>简历投递套路</h3><p><strong>内推</strong></p>
+<p>有内推通道尽量走内推通道，不知道方便多少，而且成功几率也很大！找熟人，找学长学姐吧！牛客网讨论区很多内推帖子，可以去找找。不过今年的好多公司的内推通道都不咋管用了，套路越来越多了。记得去年好多公司内推都是免笔试，直接进入面试阶段，今年直接变成内推免简历筛选，进入笔试。因为现在的内推越来越不靠谱，直接面试的话，会增加公司的面试成本，干脆笔试再筛选一部分人。</p>
+<p><strong>拉勾网</strong></p>
+<p>拉勾上还是算不错的。</p>
+<p><strong>Boss 直聘</strong></p>
+<p>虽说前段时间出现了程序员找工作进入传销最后导致死亡的惨事发生，但是里面总比智联招聘和前程无忧靠谱点。因为智联招聘和前程无忧几乎被广告党和培训机构给占领了。</p>
+<p><strong>脉脉</strong></p>
+<p>里面招应届生和实习生比较少，但是也有，可以试试。</p>
+<p>总之，简历投递给公司之前，请确认下这家公司到底咋样，先去百度了解下，别被坑了，每个平台都有一些居心不良的广告党等着你上钩，千万别上当！！！</p>
+<h3 id="找工作经历"><a href="#找工作经历" class="headerlink" title="找工作经历"></a>找工作经历</h3><p>这段经历，算是自己很难忘记的经历吧。既辛酸既充实的日子！也很感谢自己在这段时间的系统复习，感觉把自己的基础知识再次聚集在一起了，自己的能力在这一段时间提升的也很快。后面有机会的话我也想写一系列的相关文章，为后来准备工作（面试）的同学提供一些自己的帮助。自己在找工作的这段时间面过的公司也有几家大厂，但是结果都不是很好，对我自己有很大的压力，当时心里真的感觉 ：“自己真的有这么差”，为什么一直被拒，当时很怀疑自己的能力，自己也有总结原因。一是面试的时候自己准备的还不够充分，虽说自己脑子里对这些基础有点印象，但是面试的时候自己稍紧张下就描述不怎么清楚了，导致面试官觉得你可能广度够了，深度还不够（这是阿里面试官电话面试说的）；二是自己的表达能力还是有所欠缺，不能够将自己所要表达的东西说出来，这可能我要在后面加强的地方；三是我的学校问题。在面了几家公司失败后，终于面了家公司要我了，我也确定在这家公司了。很幸运，刚出来，就有一个很好（很负责）的架构师带我，这周就给了我一个很牛逼的项目给我看，里面新东西很多，说吃透了这个项目，以后绝对可以拿出去吹逼（一脸正经.jpg）。找工作期间，自己也经常去收集一些博客，并把它保存下来，这样能够让自己下次更好的系统复习，还在牛客网整理了很多面经，每天看几篇面经，知道面试一般问什么问题，都有啥套路，其实你看多了面经就会发现，面试考的题目几乎都差不多，区别不是很大。目前我的找工作经历就简短的介绍到这里了，如果感兴趣的话，可以加群：528776268   期待志同道合的你。</p>
+<h3 id="自己面试面经"><a href="#自己面试面经" class="headerlink" title="自己面试面经"></a>自己面试面经</h3><h4 id="亚信"><a href="#亚信" class="headerlink" title="亚信"></a>亚信</h4><p>地址：<a href="http://www.54tianzhisheng.cn/2017/08/04/yaxin/">http://www.54tianzhisheng.cn/2017/08/04/yaxin/</a></p>
+<p>1）自我介绍（说到一个亮点：长期坚持写博客，面试官觉得这个习惯很好，算加分项吧）</p>
+<p>2）看到简历项目中用到 Solr，详细的问了下 Solr（自己介绍了下 Solr 的使用场景和建立索引等东西）</p>
+<p>3）项目里面写了一个 “ 敏感词和 JS 标签过滤防 XSS 攻击”，面试官让我讲了下这个 XSS 攻击，并且是怎样实现的</p>
+<p>4）项目里写了支持 Markdown，问是不是自己写的解析代码，（回答不是，自己引用的是 GitHub上的一个开源项目解析的）</p>
+<p>5）想问我前端的知识，我回复到：自己偏后端开发，前端只是了解，然后面试官就不问了</p>
+<p>6）问我考不考研？</p>
+<p>7）觉得杭州怎么样？是打算就呆在杭州还是把杭州作为一个跳板？</p>
+<p>8）有啥小目标？以后是打算继续技术方向，还是先技术后管理（还开玩笑的说：是不是赚他几个亿，当时我笑了笑）</p>
+<p>9）有啥兴趣爱好？</p>
+<p><strong>总结</strong>：面试问的问题不算多，主要是通过简历上项目所涉及的东西提问的，如果自己不太会的切记不要写上去。面试主要考察你回答问题来判断你的逻辑是否很清楚。</p>
+<h4 id="爱奇艺"><a href="#爱奇艺" class="headerlink" title="爱奇艺"></a>爱奇艺</h4><p>地址：<a href="http://www.54tianzhisheng.cn/2017/08/04/iqiyi/">http://www.54tianzhisheng.cn/2017/08/04/iqiyi/</a></p>
+<h5 id="笔试（半个小时）"><a href="#笔试（半个小时）" class="headerlink" title="笔试（半个小时）"></a>笔试（半个小时）</h5><p>题目：（记得一些）</p>
+<p>1、重载重写的区别？</p>
+<p>2、转发和重定向的区别？</p>
+<p>3、画下 HashMap 的结构图？HashMap 、 HashTable 和 ConcurrentHashMap 的区别？</p>
+<p>4、statement 和 preparedstatement 区别？</p>
+<p>5、JSP 中一个 <c:value > 中取值与直接取值的区别？会有什么安全问题？</p>
+<p>6、实现一个线程安全的单例模式</p>
+<p>7、一个写 sql 语句的题目</p>
+<p>8、自己实现一个 List，（主要实现 add等常用方法）</p>
+<p>9、Spring 中 IOC 和 AOP 的理解？</p>
+<p>10、两个对象的 hashcode 相同，是否对象相同？equal() 相同呢？</p>
+<p>11、@RequestBody 和 @ResponseBody 区别？</p>
+<p>12、JVM 一个错误，什么情况下会发生？</p>
+<p>13、常用的 Linux 命令？</p>
+<h5 id="第一轮面试（80-分钟）"><a href="#第一轮面试（80-分钟）" class="headerlink" title="第一轮面试（80 分钟）"></a>第一轮面试（80 分钟）</h5><p>1、自我介绍</p>
+<p>2、介绍你最熟悉的一个项目</p>
+<p>3、讲下这个 XSS 攻击</p>
+<p>4、HashMap 的结构？HashMap 、 HashTable 和 ConcurrentHashMap 的区别？</p>
+<p>5、HashMap 中怎么解决冲突的？（要我详细讲下）</p>
+<p>6、ConcurrentHashMap 和 HashTable 中线程安全的区别？为啥建议用 ConcurrentHashMap ？能把 ConcurrentHashMap  里面的实现详细的讲下吗？</p>
+<p>7、Session 和 Cookie 的区别？</p>
+<p>8、你项目中登录是怎样做的，用的 Cookie 和 Session？</p>
+<p>9、讲讲你对 Spring 中的 IOC 和 AOP 的理解？</p>
+<p>10、问了好几个注解的作用？</p>
+<p>11、statement 和 preparedstatement 区别？</p>
+<p>12、$ 和 # 的区别？以及这两个在哪些地方用？</p>
+<p>13、前面项目介绍了数据是爬虫爬取过来的，那你讲讲你的爬虫是多线程的吧？</p>
+<p>14、讲讲 Python 中的多线程和 Java 中的多线程区别？</p>
+<p>15、自己刚好前几天在看线程池，立马就把面试官带到我熟悉的线程池，和面试官讲了下 JDK 自带的四种线程池、ThreadPoolExecutor 类中的最重要的构造器里面的七个参数，然后再讲了下线程任务进入线程池和核心线程数、缓冲队列、最大线程数量比较。</p>
+<p>16、线程同步，你了解哪几种方式？</p>
+<p>17、讲下 Synchronized？</p>
+<p>18、讲下 RecentLock 可重入锁？ 什么是可重入锁？为什么要设计可重入锁？</p>
+<p>19、讲下 Volatile 吧？他是怎样做到同步的？</p>
+<p>20、Volatile 为什么不支持原子性？举个例子</p>
+<p>21、Atomic 怎么设计的？（没看过源码，当时回答错了，后来才发现里面全部用 final 修饰的属性和方法）</p>
+<p>22、问几个前端的标签吧？（问了一个不会，直接说明我偏后端，前端只是了解，后面就不问了）</p>
+<p>23、SpringBoot 的了解？</p>
+<p>24、Linux 常用命令？</p>
+<p>25、JVM 里的几个问题？</p>
+<p>26、事务的特性？</p>
+<p>27、隔离级别？</p>
+<p>28、网络状态码？以 2、3、4、5 开头的代表什么意思。</p>
+<p>29、并发和并行的区别？</p>
+<p>30、你有什么问题想问我的？</p>
+<p>一面面完后面试官和说这份试卷是用来考 1~3 年开发工作经验的，让我准备一下，接下来的二面。</p>
+<h5 id="第二轮面试（半个小时）"><a href="#第二轮面试（半个小时）" class="headerlink" title="第二轮面试（半个小时）"></a>第二轮面试（半个小时）</h5><p>1、一上来就问怎么简历名字都没有，我指了简历第一行的我的名字，还特意大写了，然后就问学校是不是在上海，我回答在南昌（感觉被鄙视了一波，后面我在回答问题的时候面试官就一直在玩手机，估计后面对我的印象就不是很好了）</p>
+<p>2、自我介绍</p>
+<p>3、说一说数据库建表吧（从范式讲）</p>
+<p>4、讲讲多态？（这个我答出来了，可是面试官竟然说不是这样吧，可能面试官没听请，后面还说我是不是平时写多态比较少，感觉这个也让面试官对我印象减分）</p>
+<p>5、将两个数转换（不借助第三个参数）</p>
+<p>6、手写个插入排序吧（写完了和面试官讲了下执行流程）</p>
+<p>7、讲讲你对 Spring 中的 IOC 和 AOP 的理解？</p>
+<p>8、问了几个常用的 Linux 命令？</p>
+<p>9、也问到多线程？和一面一样把自己最近看的线程池也讲了一遍</p>
+<p>10、学 Java 多久了？</p>
+<p>11、你有什么想问的？</p>
+<h5 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h5><p>面试题目大概就是这么多了，有些问题自己也忘记了，面试题目顺序不一定是按照上面所写的。再次感谢爱奇艺的第一面面试官了，要不是他帮忙内推的，我可能还没有机会收到面试机会。自己接到爱奇艺面试邀请电话是星期一晚上快7点中的，之后加了面试官微信约好了星期四面试的（时间准备较短，之前没系统的复习过）。星期四一大早（5点就起床了），然后就收拾了下，去等公交车，转了两次车，然后再做地铁去爱奇艺公司的，总共路上花费时间四个多小时。总的来说，这次面试准备的时间不是很充裕，所以准备的个人觉得不是很好，通过这次的面试，发现面试还是比较注重基础和深度的，我也知道了自己的一些弱处，还需要在哪里加强，面试技巧上也要掌握些。为后面的其他公司继续做好充足的准备。加油！！！</p>
+<h4 id="阿里"><a href="#阿里" class="headerlink" title="阿里"></a>阿里</h4><p>地址：<a href="http://www.54tianzhisheng.cn/2017/08/04/alibaba/">http://www.54tianzhisheng.cn/2017/08/04/alibaba/</a></p>
+<p>（菜鸟网络部门）（49 分钟）</p>
+<p>2017.08.02   晚上9点21打电话过来，预约明天什么时候有空面试，约好第二天下午两点。</p>
+<p>2017.08.03   下午两点10分打过来了。</p>
+<p>说看了我的<a href="http://www.54tianzhisheng.cn/">博客</a>和 <a href="https://github.com/zhisheng17">GitHub</a>，觉得我学的还行，知识广度都还不错，但是还是要问问具体情况，为什么没看到你春招的记录，什么原因没投阿里？非得说一个原因，那就是：我自己太菜了，不敢投。</p>
+<p>1、先自我介绍</p>
+<p>2、什么是多态？哪里体现了多态的概念？</p>
+<p>3、HashMap 源码分析，把里面的东西问了个遍？最后问是不是线程安全？引出 ConcurrentHashMap</p>
+<p>4、ConcurrentHashMap 源码分析</p>
+<p>5、类加载，双亲委托机制</p>
+<p>6、Java内存模型（一开始说的不是他想要的，主要想问我堆和栈的细节）</p>
+<p>7、垃圾回收算法</p>
+<p>8、线程池，自己之前看过，所以说的比较多，最后面试官说了句：看你对线程池了解还是很深了</p>
+<p>9、事务的四种特性</p>
+<p>10、什么是死锁？</p>
+<p>11、乐观锁和悲观锁的策略</p>
+<p>12、高可用网站的设计（有什么技术实现）</p>
+<p>13、低耦合高内聚</p>
+<p>14、设计模式了解不？你用过哪几种，为什么用，单例模式帮我们做什么东西？有什么好处？</p>
+<p>15、你参与什么项目中成长比较快？学到了什么东西，以前是没有学过的？</p>
+<p>16、项目中遇到的最大困难是怎样的？是怎么解决的？</p>
+<p>17、智力题（两根不均匀的香，点一头烧完要一个小时，怎么确定15分钟）</p>
+<p>18、你有什么问题想要问我的？</p>
+<p>19、问了菜鸟网络他们部门主要做什么？</p>
+<p>20、对我这次面试做个评价：看了你<a href="http://www.54tianzhisheng.cn/">博客</a>和 <a href="https://github.com/zhisheng17">GitHub</a>，知道你对学习的热情还是很高的，花了不少功夫，后面有通知！</p>
+<p><strong>总结</strong>：面试总的来说，第一次电话面试，感觉好紧张，好多问题自己会点，但是其中的细节没弄清楚，自己准备的也不够充分。面试官很友好，看到我紧张，也安慰我说不要紧，不管以后出去面试啥的，不需要紧张，公司问的问题可能很广，你只需要把你知道的说出来就行，不会的直接说不会就行。之前一直不敢投阿里，因为自己准备的完全不够充分，但是在朋友磊哥的帮助下，还是试了下，不管结果怎么样，经历过总比没有的好。</p>
+<p>后面说有通知，结果并没有，只看到官网的投递按钮变灰了。在掘金上一个朋友（我隔壁学校的），当时看我挂了说要不要让他租一起的隔壁邻居再内推下淘宝，我想想还是算了，自己目前能力真的是有限，达不到进阿里的要求！不过还是要感谢那个哥们，人真的超级好，虽然我们未曾谋面，但是有机会的话，我一定会请你吃饭的。</p>
+<h4 id="哔哩哔哩"><a href="#哔哩哔哩" class="headerlink" title="哔哩哔哩"></a>哔哩哔哩</h4><p>首先直接根据简历项目开问，自我介绍都没有。</p>
+<p>1、登录从前端到后端整个过程描述一遍？越详细越好，说到密码加密，网络传输，后台验证用户名和密码，Cookie 设置等。具体问我密码加密是前台还是后台加密，说了在后台加密？面试官说，那你做这个项目有什么意思？密码传输都是明文的，默认 HTTP 传递是明文传输，当时被面试官带进前台加密还是后台加密的沟里去了，没想到用 HTTPS ，后来后来的路上查了些资料才知道的，面试过程中他很想我说前台加密，但是前台加密算法那代码就摆在那里，很容易就给破解了吧，也没给点提示说 HTTPS，我只好投降</p>
+<p>2、写一个查询的 sql 语句</p>
+<p>3、线程同步的方法？Synchronized、Volatile、（面试官好像觉得 Volatile 不可以做到同步，我和他说了半天的 Volatile 原理 ，他竟然不认同，我开始怀疑他的实力了）、ThreadLocal、Atomic。</p>
+<p>说到这些了，我当时竟然没把他带进我我给他挖的坑里去（线程池，之前好好研究过呢，可惜了）</p>
+<p>4、Spring IOC 和 AOP 的理解？叫我写 AOP 的代码，我没写</p>
+<p>5、JDK 动态代理和 Cglib 代理区别？</p>
+<p>5、你觉得项目里面你觉得哪些技术比较好？我指了两个，然后他也没有问下去。</p>
+<p>6、解释下 XSS 攻击</p>
+<p>7、Spring 和 SpringBoot 的区别？</p>
+<p>8、JVM 垃圾回收算法？分代中为什么要分三层？</p>
+<p>9、OOM 是什么？什么情况会发生？</p>
+<p>10、你觉得你有啥优点？</p>
+<p>然后就叫我等一会，一会有人事来通知我，结果过了一会人事叫我可以回去等通知了。</p>
+<p><strong>总结</strong>：到公司的时候已经一点多钟了，面试直接在一个很多人的地方（吃饭的地方）直接面的，周围还有人再吃饭，场景有点尴尬，面试过程感觉很随意，想到什么问题就问什么，完全没有衔接，问到的有些地方感觉面试官自己都不清楚，还怀疑我所说的，另外就是问题比较刁钻，总体技术也就那样吧！</p>
+<h4 id="目前所在公司"><a href="#目前所在公司" class="headerlink" title="目前所在公司"></a>目前所在公司</h4><p>当时是我现在的老大（架构师）面的，先是电话面试过一次，问的问题也比较难，不过最后还是觉得我基础还是不错的。最后叫我去公司面试下，来到公司面试问的问题那就更难了，几乎好多都回答不出来，但是简单的说了下思路，最后再叫主任面试了下，问的问题就很简单了，最后就是  HR 面了，主要说了下工资问题和什么时候能报道！这几次面试的问题当时由于时间比较紧，也没去整理，现在也记不清楚了！目前自己已经工作了快一个月了，给的项目也完全是新东西，对我的挑战也很大，有时自己也确实不怎么知道，不过我老大很耐心的教我，对我也很不错，这也是我打算留在这里的原因，碰到个好老大不易！必须好好珍惜！</p>
+<h3 id="实习感悟"><a href="#实习感悟" class="headerlink" title="实习感悟"></a>实习感悟</h3><p>进公司是架构运维组中的 Java 实习开发，目前实习已经快一个月了，说实话，实习后才发现一天真的很忙，写下这篇征文也是在周末整理大晚上写的。刚进公司就给了一个 Consul 的服务发现与注册和健康检查的项目，里面涉及的东西有 Consul、Docker、Nginx、Lua、ElasticSearch 还有几个很轻量级的框架，对我来说几乎都是新东西，确实需要时间去了解，再优化和改里面的 bug 的过程中，幸好我老大和我理了几次思路，才让我对整个项目有所进展，后续继续是在优化这项目（可能以后这个项目的所有东西都是我来做）。在上海，住的地方离公司有一定的距离，上班几乎要一个小时，每天花在上班路上的时间很多，这也导致我每天感觉很忙。公司上班时间比较弹性，无打卡，虽说公司不加班，但是每天自己都不怎么会按点下班，自己也想在实习阶段多学点东西！这段时间也是最关键的时间，碰到个问题，要花好久时间才能解决，也有可能未必解决得了，有时觉得自己啥都不会，这么点东西都做不好，有点否定自己。这也确实是自己的技术知识栈缺乏，和自己学的 SSM、Spring Boot 这些都不相关，也不怎么写业务逻辑代码。所以感觉很痛苦，不像自己以前写的代码那样顺畅，当然可能是自己以前自己写的项目太 low 了。</p>
+<p>看到掘金-凯伦征文中写到：</p>
+<blockquote>
+<p><strong>公司其实并不期望刚刚进来的你，能够创造多少价值。新人是要成长的，在成长期难免会遇到各种各样的小问题，这可能是大多数人的必经之路，因为你所看到的同事，他们都比你在工作领域待的时间更久，有更多的经验，可以把他们作为目标，但不要把他们作为现在自己的标准，那样会压力太大。</strong></p>
+</blockquote>
+<p>感觉这段话对我现在很受用！ <strong>加油，好好挺过这个阶段，别轻易说放弃！</strong></p>
+<h3 id="书籍推荐"><a href="#书籍推荐" class="headerlink" title="书籍推荐"></a>书籍推荐</h3><p>大学，我不怎么喜欢玩游戏，自己也还算不怎么堕落吧，看了以下的一些书籍，算是对我后面写博客、找工作也有很大的帮助。如果你是大神，请忽略，如果你还是还在大学，和我一样不想把时间浪费在游戏上，可以看看我推荐的一些书籍，有想讨论的请在评论下留下你的评论或者加上面给的群号。</p>
+<h4 id="Java"><a href="#Java" class="headerlink" title="Java"></a>Java</h4><p>1、《Java 核心技术》卷一 、卷二              两本书，算是入门比较好的书籍了</p>
+<p>2、《疯狂 Java 讲义》                                很厚的一本书，里面的内容也是很注重基础了</p>
+<p>3、《Java 并发编程的艺术》——  方腾飞 、魏鹏、程晓明著        方腾飞 是并发编程网的创始人，里面的文章确实还不错，可以多看看里面的文章，收获绝对很大。</p>
+<p>4、《 Java多线程编程核心技术》——  高洪岩著   这本书也算是入门多线程编程的不错书籍，我之前还写了一篇读书笔记呢，<a href="http://www.54tianzhisheng.cn/2017/06/04/Java-Thread/">《Java 多线程编程核心技术》学习笔记及总结</a>  , 大家如果不想看书的可以去看我的笔记。</p>
+<p>5、《Java 并发编程实战》 这本书讲的有点难懂啊，不过确实也是一本很好的书，以上三本书籍如果都弄懂了，我觉得你并发编程这块可能大概就 OK 了，然后再去看看线程池的源码，了解下线程池，我觉得那就更棒了。不想看的话，请看我的博客：<a href="http://www.54tianzhisheng.cn/2017/07/29/ThreadPool/">Java 线程池艺术探索</a>  我个人觉得还是写的很不错，那些大厂面试也几乎都会问线程池的东西，然后大概内容也就是我这博客写的</p>
+<p>6、《Effective Java》中文版 第二版       算是 Java 的进阶书籍了，面试好多问题也是从这出来的</p>
+<p>7、《深入理解 Java 虚拟机——JVM高级特性与最佳实践》第二版     这算是国内讲 JVM 最清楚的书了吧，目前还是只看了一遍，后面继续啃，大厂面试几乎也是都会考 JVM 的，阿里面 JVM 特别多，想进阿里的同学请一定要买这本书去看。</p>
+<p>8、《深入分析Java  Web技术内幕  修订版》许令波著   里面知识很广，每一章都是一个不同的知识，可见作者的优秀，不愧是阿里大神。</p>
+<p>9、《大型网站系统与 Java 中间件实践》—— 曽宪杰 著    作者是前淘宝技术总监，见证了淘宝网的发展，里面的讲的内容也是很好，看完能让自己也站在高处去思考问题。</p>
+<p>10、《大型网站技术架构 —— 核心原理与案例分析》 —— 李智慧 著   最好和上面那本书籍一起看，效果更好，两本看完了，提升思想的高度！</p>
+<p>11、《疯狂Java.突破程序员基本功的16课》 李刚 著       书中很注重 Java 的一些细节，讲的很深入，但是书中的错别字特多，可以看看我的读书笔记：<a href="http://www.54tianzhisheng.cn/2017/05/31/Java-16-lession/">《疯狂 Java 突破程序员基本功的 16 课》读书笔记</a></p>
+<p>12、《Spring 实战》   Spring 入门书籍</p>
+<p>13、《Spring 揭秘》—— 王福强  著   这本书别提多牛了，出版时期为 2009 年，豆瓣评分为 9.0 分，写的是真棒！把 Spring 的 IOC 和 AOP 特性写的很清楚，把 Spring 的来龙去脉讲的很全。墙裂推荐这本书籍，如果你想看 Spring，作者很牛，资深架构师，很有幸和作者有过一次交流，当时因为自己的一篇博客  <a href="http://www.54tianzhisheng.cn/2017/03/27/Pyspider%E6%A1%86%E6%9E%B6%20%E2%80%94%E2%80%94%20Python%E7%88%AC%E8%99%AB%E5%AE%9E%E6%88%98%E4%B9%8B%E7%88%AC%E5%8F%96%20V2EX%20%E7%BD%91%E7%AB%99%E5%B8%96%E5%AD%90/">Pyspider框架 —— Python爬虫实战之爬取 V2EX 网站帖子</a>，竟然找到我想叫我去实习，可惜了，当时差点就跟着他混了。作者还有一本书  《Spring Boot 揭秘》。</p>
+<p>14、《Spring 技术内幕》—— 深入解析 Spring 架构与设计原理     讲解 Spring 源码，深入了内部机制，个人觉得还是不错的。</p>
+<p>15、Spring 官方的英文文档          这个别提了，很好，能看英文尽量看英文</p>
+<p>16、《跟开涛学 Spring 3》  《跟开涛学 Spring MVC》  京东大神，膜</p>
+<p>17、《看透springMvc源代码分析与实践》    算是把 Spring MVC 源码讲的很好的了</p>
+<p>见我的笔记：</p>
+<p><a href="http://www.54tianzhisheng.cn/2017/07/09/servlet/">1、通过源码详解 Servlet</a></p>
+<p><a href="http://www.54tianzhisheng.cn/2017/07/14/Spring-MVC01/">2 、看透 Spring MVC 源代码分析与实践 —— 网站基础知识</a></p>
+<p><a href="http://www.54tianzhisheng.cn/2017/07/14/Spring-MVC02/">3 、看透 Spring MVC 源代码分析与实践 —— 俯视 Spring MVC</a></p>
+<p><a href="http://www.54tianzhisheng.cn/2017/07/21/Spring-MVC03/">4 、看透 Spring MVC 源代码分析与实践 —— Spring MVC 组件分析</a></p>
+<p>18、《Spring Boot 实战》</p>
+<p>19、Spring Boot 官方 Reference Guide        网上好多写 SpringBoot 的博客，几乎和这个差不多。</p>
+<p>20、《JavaEE开发的颠覆者: Spring Boot实战》</p>
+<p>21、MyBatis 当然是官方的文档最好了，而且还是中文的。</p>
+<p>自己也写过几篇文章，帮助过很多人入门，传送门：</p>
+<p>1、<a href="http://www.54tianzhisheng.cn/2017/03/28/%E9%80%9A%E8%BF%87%E9%A1%B9%E7%9B%AE%E9%80%90%E6%AD%A5%E6%B7%B1%E5%85%A5%E4%BA%86%E8%A7%A3Mybatis(%E4%B8%80">通过项目逐步深入了解Mybatis（一）</a>/)</p>
+<p>2、<a href="http://www.54tianzhisheng.cn/2017/03/28/%E9%80%9A%E8%BF%87%E9%A1%B9%E7%9B%AE%E9%80%90%E6%AD%A5%E6%B7%B1%E5%85%A5%E4%BA%86%E8%A7%A3Mybatis(%E4%BA%8C">通过项目逐步深入了解Mybatis（二）</a>/)</p>
+<p>3、<a href="http://www.54tianzhisheng.cn/2017/03/28/%E9%80%9A%E8%BF%87%E9%A1%B9%E7%9B%AE%E9%80%90%E6%AD%A5%E6%B7%B1%E5%85%A5%E4%BA%86%E8%A7%A3Mybatis(%E4%B8%89">通过项目逐步深入了解Mybatis（三）</a>/)</p>
+<p>4、<a href="http://www.54tianzhisheng.cn/2017/03/28/%E9%80%9A%E8%BF%87%E9%A1%B9%E7%9B%AE%E9%80%90%E6%AD%A5%E6%B7%B1%E5%85%A5%E4%BA%86%E8%A7%A3Mybatis(%E5%9B%9B">通过项目逐步深入了解Mybatis（四）</a>/)</p>
+<p>22、《深入理解 Java 内存模型》—— 程晓明 著      我觉得每个 Java 程序员都应该了解下 Java 的内存模型，该书籍我看的是电子版的，不多，但是讲的却很清楚，把重排序、顺序一致性、Volatile、锁、final等写的很清楚。</p>
+<h4 id="Linux"><a href="#Linux" class="headerlink" title="Linux"></a>Linux</h4><p>《鸟哥的Linux私房菜 基础学习篇(第三版)  》</p>
+<p>鸟哥的Linux私房菜：服务器架设篇(第3版)    鸟哥的书</p>
+<h4 id="计算机网络"><a href="#计算机网络" class="headerlink" title="计算机网络"></a>计算机网络</h4><p>《计算机网络第六版——谢希仁 编》</p>
+<p>《计算机网络自顶向下方法》</p>
+<h4 id="计算机系统"><a href="#计算机系统" class="headerlink" title="计算机系统"></a>计算机系统</h4><p>《代码揭秘：从C／C.的角度探秘计算机系统 —— 左飞》</p>
+<p>《深入理解计算机系统》</p>
+<p>《计算机科学导论_佛罗赞》</p>
+<h4 id="数据库"><a href="#数据库" class="headerlink" title="数据库"></a>数据库</h4><p>《高性能MySQL》</p>
+<p>《Mysql技术内幕InnoDB存储引擎》</p>
+<h4 id="Python"><a href="#Python" class="headerlink" title="Python"></a>Python</h4><p>这门语言语法很简单，上手快，不过我目前好久没用了，都忘得差不多了。当时是看的廖雪峰的 Python 博客</p>
+<p>自己也用 Python 做爬虫写过几篇博客，不过有些是在前人的基础上写的。感谢那些栽树的人！</p>
+<h4 id="工具"><a href="#工具" class="headerlink" title="工具"></a>工具</h4><p>Git   ： 廖雪峰的 Git 教程</p>
+<p>IDEA：<a href="https://github.com/judasn/IntelliJ-IDEA-Tutorial">IntelliJ IDEA 简体中文专题教程</a></p>
+<p>Maven：《Maven实战》</p>
+<h4 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h4><p>《如何高效学习-斯科特杨》   教你怎样高效学习的</p>
+<p>《软技能：代码之外的生存指南》    程序员除了写代码，还得懂点其他的软技能。</p>
+<p>《提问的智慧“中文版”》</p>
+<p><a href="https://github.com/ryanhanwu/How-To-Ask-Questions-The-Smart-Way">《How-To-Ask-Questions-The-Smart-Way》</a>   作为程序员的你，一定要学会咋提问，不然别人都不想鸟你。</p>
+<h3 id="优秀网站推荐"><a href="#优秀网站推荐" class="headerlink" title="优秀网站推荐"></a>优秀网站推荐</h3><p>1、GitHub     别和我说不知道</p>
+<p>2、InfoQ        文章很不错</p>
+<p>3、CSDN    经常看博客专家的博客，里面大牛很多，传送门：<a href="http://blog.csdn.net/tzs_1041218129">zhisheng</a></p>
+<p>4、知乎         多关注些大牛，看他们吹逼</p>
+<p>5、掘金        自己也在上面写专栏，粉丝已经超过一万了，传送门 ：<a href="https://juejin.im/user/57510b82128fe10056ca70fc">zhisheng</a></p>
+<p>6、并发编程网    前面已经介绍</p>
+<p>7、developerworks     上面的博客也很好</p>
+<p>8、博客园        里面应该大牛也很多，不过自己没在上面写过博客</p>
+<p>9、微信公众号    关注了很多人，有些人的文章确实很好，平时也经常看。</p>
+<p>10、牛客网        刷笔试题不错的地方，里面大牛超多，怀念叶神和左神讲课的时候，还有很有爱的牛妹。</p>
+<h3 id="优秀博客推荐"><a href="#优秀博客推荐" class="headerlink" title="优秀博客推荐"></a>优秀博客推荐</h3><p><a href="https://www.liaoxuefeng.com/">廖雪峰</a>  Git 和 Python 入门文章就是从他博客看的</p>
+<p><a href="http://www.ruanyifeng.com/blog/">阮一峰的网络日志</a></p>
+<p><a href="https://coolshell.cn/">酷壳-陈皓</a></p>
+<p><a href="https://www.zhihu.com/people/rednaxelafx/answers">RednaxelaFX</a>   R大，牛逼的不得了</p>
+<p><a href="http://calvin1978.blogcn.com/">江南白衣</a>      老司机</p>
+<p><a href="http://stormzhang.com/">stormzhang</a>     人称帅逼张，微信公众号写的不错</p>
+<p><a href="http://lovestblog.cn/">你假笨</a>    阿里搞 JVM 的，很厉害</p>
+<p><a href="http://www.jianshu.com/u/90ab66c248e6">占小狼</a></p>
+<p><a href="http://www.bysocket.com/">泥瓦匠BYSocket</a></p>
+<p><a href="http://cuiqingcai.com/">崔庆才</a>   写了好多 Python 爬虫相关的文章</p>
+<p><a href="http://www.ityouknow.com/">纯洁的微笑</a>    SpringBoot 系列不错，其他的文章自己看了感觉是自己喜欢的那种文笔</p>
+<p><a href="http://blog.didispace.com/">程序猿DD</a></p>
+<p><a href="http://itmuch.com/">周立</a></p>
+<p><a href="http://vip.iocoder.cn/">芋道源码的博客</a>     好多系列的源码分析</p>
+<p><a href="http://www.54tianzhisheng.cn/">zhisheng</a>       这个是我不要脸，竟然把自己博客地址的写上去了</p>
+<h3 id="求职资料放送"><a href="#求职资料放送" class="headerlink" title="求职资料放送"></a>求职资料放送</h3><p>自己在准备找工作那段时间，系统的复习了下大学所学的知识，期间在网上参考了很多不错的博客，并收集下来了，个人觉得还是不错的，因为这是包含了自己的心血，所以一直没怎么送出来，只给过我的几个同学，还有就是一些学习视频和实战项目视频。借着这次征文的机会，我想送给那些有缘人，希望你或许是那种在求职道路上正在艰难走着的人；或许是大一大二的学弟学妹们却想好好学习，有个奋斗的目标，不堪在大学堕落的；或许是工作一两年后感觉基础还比较薄弱的。要资料的时候期望你能简单的介绍下自己，期望你！联系方式请看文章最下面。</p>
+<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>送一句话，<strong>越努力，越幸运，祝早日成为大神！</strong></p>
+<p>这些地方可以找到我：</p>
+<ul>
+<li>blog:  <a href="http://www.54tianzhisheng.cn/">http://www.54tianzhisheng.cn/</a></li>
+<li>GitHub: <a href="https://github.com/zhisheng17">https://github.com/zhisheng17</a></li>
+<li>QQ 群：528776268</li>
+</ul>
+<hr>
+<p><img src="https://ws3.sinaimg.cn/large/006tNc79gy1fp3jkmizmpj30o00didgn.jpg" alt=""></p>
+
+      
+      
+        <div class="page-reward">
+          <p><a href="javascript:void(0)" onclick="dashangToggle()" class="dashang">赏</a></p>
+          <div class="hide_box"></div>
+          <div class="shang_box">
+            <a class="shang_close" href="javascript:void(0)" onclick="dashangToggle()">×</a>
+            <div class="shang_tit">
+              <p>纯属好玩</p>
+            </div>
+            <div class="shang_payimg">
+              <img src="/img/alipayimg.jpg" alt="扫码支持" title="扫一扫" />
+            </div>
+              <div class="pay_explain">扫码打赏，你说多少就多少</div>
+            <div class="shang_payselect">
+              
+                <div class="pay_item checked" data-id="alipay">
+                  <span class="radiobox"></span>
+                  <span class="pay_logo"><img src="/img/alipay.png" alt="支付宝" /></span>
+                </div>
+              
+              
+                <div class="pay_item" data-id="wechat">
+                  <span class="radiobox"></span>
+                  <span class="pay_logo"><img src="/img/weixin.png" alt="微信" /></span>
+                </div>
+              
+            </div>
+            <div class="shang_info">
+              <p>打开<span id="shang_pay_txt">支付宝</span>扫一扫，即可进行扫码打赏哦</p>
+            </div>
+          </div>
+        </div>
+        <script src="https://my.openwrite.cn/js/readmore.js" type="text/javascript"></script>
+        <script type="text/javascript">
+            const btw = new BTWPlugin();
+            btw.init({
+                    id: 'article-entry',
+                    blogId: '15013-1596463967175-355',
+                    name: 'Java 指南者',
+                    qrcode: 'http://www.javaguider.com/java/img/wx.jpg',
+                    keyword: 'zhisheng',
+            });
+        </script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/zepto/1.2.0/zepto.min.js"></script>
+        <script type="text/javascript">
+          $(".pay_item").click(function(){
+            $(this).addClass('checked').siblings('.pay_item').removeClass('checked');
+            var dataid=$(this).attr('data-id');
+            $(".shang_payimg img").attr("src","/img/"+dataid+"img.jpg");
+            $("#shang_pay_txt").text(dataid=="alipay"?"支付宝":"微信");
+          });
+          function dashangToggle(){
+
+            $(".hide_box").fadeToggle();
+            $(".shang_box").fadeToggle();
+          }
+        </script>
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2017/09/17/Interview-summary/">面试过阿里等互联网大公司，我知道了这些套路</a></p>
+        <p><span>文章作者:</span><a href="/" title="访问 zhisheng 的个人博客">zhisheng</a></p>
+        <p><span>发布时间:</span>2017年09月17日 - 00时00分</p>
+        <p><span>最后更新:</span>2018年11月22日 - 22时51分</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2017/09/17/Interview-summary/" title="面试过阿里等互联网大公司，我知道了这些套路">http://www.54tianzhisheng.cn/2017/09/17/Interview-summary/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://www.54tianzhisheng.cn/2017/09/17/Interview-summary/　　作者: zhisheng" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script src="/js/clipboard.min.js"></script>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>公众号:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://www.54tianzhisheng.cn" title="微信公众号：zhisheng" target = "_blank">zhisheng</a> 欢迎关注。
+        </p>
+        <p>
+            <div align="center">
+                <img src="/img/wx.jpg"  alt="zhisheng" />
+            </div>
+        </p>
+    </div>
+
+
+
+<nav id="article-nav">
+  
+    <a href="/2017/09/23/Guava-limit/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          Google Guava 缓存实现接口的限流
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/09/15/linux-lua-lfs-install/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Linux 下 lua 开发环境安装及安装 luafilesystem</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#前面感谢一波"><span class="toc-number">1.</span> <span class="toc-text">前面感谢一波</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#正文开始"><span class="toc-number">2.</span> <span class="toc-text">正文开始</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#招聘职位需求套路"><span class="toc-number">3.</span> <span class="toc-text">招聘职位需求套路</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#招聘面试的套路"><span class="toc-number">4.</span> <span class="toc-text">招聘面试的套路</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#简历撰写套路"><span class="toc-number">5.</span> <span class="toc-text">简历撰写套路</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#简历投递套路"><span class="toc-number">6.</span> <span class="toc-text">简历投递套路</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#找工作经历"><span class="toc-number">7.</span> <span class="toc-text">找工作经历</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#自己面试面经"><span class="toc-number">8.</span> <span class="toc-text">自己面试面经</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#亚信"><span class="toc-number">8.1.</span> <span class="toc-text">亚信</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#爱奇艺"><span class="toc-number">8.2.</span> <span class="toc-text">爱奇艺</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#笔试（半个小时）"><span class="toc-number">8.2.1.</span> <span class="toc-text">笔试（半个小时）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#第一轮面试（80-分钟）"><span class="toc-number">8.2.2.</span> <span class="toc-text">第一轮面试（80 分钟）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#第二轮面试（半个小时）"><span class="toc-number">8.2.3.</span> <span class="toc-text">第二轮面试（半个小时）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#总结："><span class="toc-number">8.2.4.</span> <span class="toc-text">总结：</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#阿里"><span class="toc-number">8.3.</span> <span class="toc-text">阿里</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#哔哩哔哩"><span class="toc-number">8.4.</span> <span class="toc-text">哔哩哔哩</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#目前所在公司"><span class="toc-number">8.5.</span> <span class="toc-text">目前所在公司</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#实习感悟"><span class="toc-number">9.</span> <span class="toc-text">实习感悟</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#书籍推荐"><span class="toc-number">10.</span> <span class="toc-text">书籍推荐</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Java"><span class="toc-number">10.1.</span> <span class="toc-text">Java</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Linux"><span class="toc-number">10.2.</span> <span class="toc-text">Linux</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#计算机网络"><span class="toc-number">10.3.</span> <span class="toc-text">计算机网络</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#计算机系统"><span class="toc-number">10.4.</span> <span class="toc-text">计算机系统</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#数据库"><span class="toc-number">10.5.</span> <span class="toc-text">数据库</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Python"><span class="toc-number">10.6.</span> <span class="toc-text">Python</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#工具"><span class="toc-number">10.7.</span> <span class="toc-text">工具</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#其他"><span class="toc-number">10.8.</span> <span class="toc-text">其他</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#优秀网站推荐"><span class="toc-number">11.</span> <span class="toc-text">优秀网站推荐</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#优秀博客推荐"><span class="toc-number">12.</span> <span class="toc-text">优秀博客推荐</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#求职资料放送"><span class="toc-number">13.</span> <span class="toc-text">求职资料放送</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#最后"><span class="toc-number">14.</span> <span class="toc-text">最后</span></a></li></ol>
+</div>
+<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+<script src="http://apps.bdimg.com/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>
+    var valueHide = "隐藏目录";
+    var valueShow = "显示目录";
+
+    if ($(".left-col").is(":hidden")) {
+        $("#tocButton").attr("value", valueShow);
+    }
+    $("#tocButton").click(function() {
+        if ($("#toc").is(":hidden")) {
+            $("#tocButton").attr("value", valueHide);
+            $("#toc").slideDown(320);
+        }
+        else {
+            $("#tocButton").attr("value", valueShow);
+            $("#toc").slideUp(350);
+        }
+    })
+    if ($(".toc").length < 1) {
+        $("#toc, #tocButton").hide();
+    }
+</script>
+
+
+
+
+
+<div class="bdsharebuttonbox">
+	<a href="#" class="fx fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+	<a href="#" class="fx fa-weixin bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+	<a href="#" class="fx fa-qq bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+	<a href="#" class="fx fa-facebook-official bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+	<a href="#" class="fx fa-twitter bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+	<a href="#" class="fx fa-linkedin bds_linkedin" data-cmd="linkedin" title="分享到linkedin"></a>
+	<a href="#" class="fx fa-files-o bds_copy" data-cmd="copy" title="分享到复制网址"></a>
+</div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+
+
+
+    
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2017/09/23/Guava-limit/" title="上一篇: Google Guava 缓存实现接口的限流">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+        
+            <a href="/2017/09/15/linux-lua-lfs-install/" title="下一篇: Linux 下 lua 开发环境安装及安装 luafilesystem">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2021/11/11/flink-akka-framesize/">宕机一台机器，结果一百多个 Flink 作业挂了</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/09/26/realtime-platform-flink-version/">实时平台如何管理多个 Flink 版本？—— 为啥会出现多个版本？</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/13/flink-in-action-3.3/">《Flink 实战与性能优化》—— Flink 数据转换必须熟悉的算子（Operator)</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/12/flink-in-action-3.2/">《Flink 实战与性能优化》—— 如何使用 Flink Window 及 Window 基本概念与实现原理?</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/11/flink-in-action-3.1/">《Flink 实战与性能优化》—— Flink 中 Processing Time、Event Time、Ingestion Time 对比及其使用场景分析</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/10/flink-in-action-2.4/">《Flink 实战与性能优化》—— 案例2：实时处理 Socket 数据</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/09/flink-in-action-2.3/">《Flink 实战与性能优化》—— 案例1：WordCount 应用程序</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/08/flink-in-action-2.2/">《Flink 实战与性能优化》—— Flink 环境搭建</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/07/flink-in-action-2.1/">《Flink 实战与性能优化》—— Flink 环境准备</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/06/flink-in-action-1.3/">《Flink 实战与性能优化》—— 大数据计算框架对比</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/05/flink-in-action-1.2/">《Flink 实战与性能优化》—— 彻底了解大数据实时计算框架 Flink</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/04/flink-in-action-1.1/">《Flink 实战与性能优化》——你的公司是否需要引入实时计算引擎？</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/07/03/Flink-Fraud-Detection-engine-3/">基于 Flink 的动态欺诈检测系统(下)</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/23/Flink-Fraud-Detection-engine-2/">基于 Flink 的动态欺诈检测系统(中)</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/01/22/Flink-Fraud-Detection-engine/">基于 Flink 的动态欺诈检测系统(上)</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/12/21/flink-forward-Asia-2020/">Flink Forward Asia 2020 全部 PPT 开放下载</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/12/06/Flink-1.12/">Flink 1.12 Release 文档解读</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/10/18/Spark-book/">强烈推荐三本 Spark 新书籍</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/10/13/flink-history-server/">用了 Flink History Server，妈妈再也不用担心我的作业半夜挂了</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/10/05/flink-jvm-profiler/">如何生成 Flink 作业的交互式火焰图？</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/08/09/flink-zsxq/">Flink 精进学习知识星球内容整理</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/08/02/flink-1.11-log/">Flink 1.11 日志该如何配置？</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/29/flink-1.11/">Flink 1.11 Release 文档解读</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/16/flink-taskmanager-memory-model/">Apache Flink 1.10 TaskManager 内存管理优化</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/13/flink-forward-2020/">Flink Forward 2020 PPT 下载</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/07/flink-job-monitor/">如何实时监控 Flink 集群和作业？</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/15/flink-error-log-alert/">基于 Apache Flink 的实时 Error 日志告警</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/29/flink-nacos-checkpoint/">Flink 能否动态更改 Checkpoint 配置</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/23/flink-apollo/">Flink 整合 Apollo，动态更新 Flink 作业配置</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/22/flink-nacos/">Flink 整合 Nacos，让 Flink 作业配置动态更新不再是难事</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/22/flink-1.10-release/">Flink 1.10 新特性研究</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/20/flink-checkpoint/">Flink Checkpoint 问题排查实用指南</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/11/flink-1.10/">Apache Flink 1.10.0 重磅发布，新特性解读</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/31/Flink-resources/">Flink 视频、博客、PPT、入门、原理、实战、性能调优、源码解析、问答等持续更新</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/30/flink-meituan-real-time-warehouse/">美团点评基于 Flink 的实时数仓平台实践</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/23/flink-monitor-alert/">基于 Apache Flink 的监控告警系统</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/10/flink-real-time-data-analysis-platform/">基于 Apache Flink 的大规模准实时数据分析平台</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/07/Flink_Forward_Asia_2019/">Flink Forward Asia 2019 PPT 下载</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/30/flink-checkpoint-hdfs/">阿里巴巴 Flink 踩坑经验：如何大幅降低 HDFS 压力？</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/30/flink-in-58/">58 同城基于 Flink 的千亿级实时计算平台架构实践</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/30/flink-aqniu/">基于 Flink 构建关联分析引擎的挑战和实践</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/24/flink-in-action-directory/">《大数据实时计算引擎 Flink 实战与性能优化》目录大纲</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/23/real-time-warehouse/">数据仓库简介、发展、架构演进、实时数仓建设、与离线数仓对比</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/23/flink-metrics/">详解 Flink Metrics 原理与监控实战</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/15/flink-in-action/">《大数据实时计算引擎 Flink 实战与性能优化》新专栏</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/26/flink-back-pressure/">一文彻底搞懂 Flink 网络流控与反压机制</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/25/flink-didi/">滴滴实时计算发展之路及平台架构实践</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/24/Flink-Connector/">Flink Connector 深度解析</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/23/flink-ebay/">如何使用 Flink 每天实时处理百亿条日志？</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/22/flink-1.9/">修改代码150万行！Apache Flink 1.9.0做了这些重大修改！</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/21/Flink-Exactly_Once_vs_At_Least_Once/">一文搞懂 Flink 的 Exactly Once 和 At Least Once</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/20/Flink-meituan-dw/">美团点评基于 Flink 的实时数仓建设实践</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/19/flink/">一文让你彻底了解大数据实时计算引擎 Flink</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/18/flink-side-output/">Flink 从0到1学习 —— 如何使用 Side Output 来分流？</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/06/flink-streaming-system/">你公司到底需不需要引入实时计算引擎？</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/04/Flink-code-clients/">Flink Clients 源码解析</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/03/Flink-code-Annotations/">Flink Annotations 源码解析</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/02/Flink-code-metrics/">Flink Metrics 源码解析</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/01/flink-1.9-preview/">Apache Flink 1.9 重大特性提前解读</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/06/26/flink-TensorFlow/">如何基于Flink+TensorFlow打造实时智能异常检测平台？只看这一篇就够了</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/06/21/flink-in-360/">360深度实践：Flink与Storm协议级对比</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/06/20/flink-kafka-Exactly-Once/">Apache Flink 结合 Kafka 构建端到端的 Exactly-Once 处理</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/06/18/flink-state/">Flink状态管理和容错机制介绍</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/06/17/flink-vs-storm/">流计算框架 Flink 与 Storm 的性能对比</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/06/16/flink-sql-oppo/">OPPO 数据中台之基石：基于 Flink SQL 构建实时数据仓库</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/06/15/Stream-processing/">为什么说流处理即未来？</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/06/14/flink-architecture-deploy-test/">Flink 架构、原理与部署测试</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/06/13/flink-book-paper/">Flink 从0到1学习—— 分享四本 Flink 国外的书和二十多篇 Paper 论文</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/06/12/flink-split/">Flink 从0到1学习—— Flink 不可以连续 Split(分流)？</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/28/Flink-code-TaskManager-submitJob/">Flink 源码解析 —— TaskManager 处理 SubmitJob 的过程</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/28/flink-additional-data/">Flink 从0到1学习 —— Flink 中如何管理配置？</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/27/Flink-code-JobManager-submitJob/">Flink 源码解析 —— JobManager 处理 SubmitJob 的过程</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/26/Flink-code-ExecutionGraph/">Flink 源码解析 —— 如何获取 ExecutionGraph ？</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/25/Flink-code-jobmanager/">Flink 源码解析 —— Flink JobManager 有什么作用？</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/25/Flink-code-taskmanager/">Flink 源码解析 —— Flink TaskManager 有什么作用？</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/24/Flink-code-memory-management/">Flink 源码解析 —— 深度解析 Flink 是如何管理好内存的？</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/23/Flink-code-checkpoint/">Flink 源码解析 —— 深度解析 Flink Checkpoint 机制</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/22/Flink-code-serialize/">Flink 源码解析 —— 深度解析 Flink 序列化机制</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/21/Flink-code-JobGraph/">Flink 源码解析 —— 如何获取 JobGraph？</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/20/Flink-code-StreamGraph/">Flink 源码解析 —— 如何获取 StreamGraph？</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/19/Flink-code-streaming-wordcount-start/">Flink 源码解析 —— 分析 Streaming WordCount 程序的执行过程</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/18/Flink-code-batch-wordcount-start/">Flink 源码解析 —— 分析 Batch WordCount 程序的执行过程</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/17/Flink-code-Standalone-TaskManager-start/">Flink 源码解析 —— Standalone Session Cluster 启动流程深度分析之 Task Manager 启动</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/16/Flink-code-Standalone-JobManager-start/">Flink 源码解析 —— Standalone Session Cluster 启动流程深度分析之 Job Manager 启动</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/15/Flink-code-Standalone-start/">Flink 源码解析 —— Standalone session 模式启动流程</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/14/Flink-code-structure/">Flink 源码解析 —— 项目结构一览</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/13/flink-job-jars/">Flink 从 0 到 1 学习 —— 你上传的 jar 包藏到哪里去了?</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/02/28/blink/">阿里巴巴开源的 Blink 实时计算框架真香</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/01/30/Flink-code-compile/">Flink 源码解析 —— 源码编译运行</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/01/20/Flink-RabbitMQ-sink/">Flink 从 0 到 1 学习 —— Flink 读取 Kafka 数据写入到 RabbitMQ</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/01/15/Flink-MySQL-sink/">Flink 从 0 到 1 学习 —— Flink 读取 Kafka 数据批量写入到 MySQL</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/01/14/Flink-parallelism-slot/">Flink 从 0 到 1 学习 —— Flink parallelism 和 Slot 介绍</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/01/13/Flink-JobManager-High-availability/">Flink 从 0 到 1 学习 —— Flink JobManager 高可用性配置</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/01/06/Flink-Kafka-sink/">Flink 从 0 到 1 学习 —— Flink 写入数据到 Kafka</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/01/05/Flink-run/">Flink 从 0 到 1 学习 —— Flink 项目如何运行？</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/12/30/Flink-ElasticSearch-Sink/">Flink 从 0 到 1 学习 —— Flink 写入数据到 ElasticSearch</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/12/11/Flink-time/">Flink 从 0 到 1 学习 —— Flink 中几种 Time 详解</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/12/08/Flink-Stream-Windows/">Flink 从 0 到 1 学习 —— 介绍Flink中的Stream Windows</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/04/Flink-Data-transformation/">Flink 从 0 到 1 学习 —— Flink Data transformation(转换)</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/31/flink-create-sink/">Flink 从 0 到 1 学习 —— 如何自定义 Data Sink ？</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/30/flink-create-source/">Flink 从 0 到 1 学习 —— 如何自定义 Data Source ？</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/29/flink-sink/">Flink 从 0 到 1 学习 —— Data Sink 介绍</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/28/flink-sources/">Flink 从 0 到 1 学习 —— Data Source 介绍</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/27/flink-config/">Flink 从 0 到 1 学习 —— Flink 配置文件详解</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/13/flink-introduction/">Flink 从 0 到 1 学习 —— Apache Flink 介绍</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/18/flink-install/">Flink 从 0 到 1 学习 —— Mac 上搭建 Flink 1.6.0 环境并构建运行简单程序入门</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/30/go-sync/">Go 并发——实现协程同步的几种方式</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/14/idea-remote-debug-elasticsearch/">教你如何在 IDEA 远程 Debug ElasticSearch</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/12/es-code03/">渣渣菜鸡的 ElasticSearch 源码解析 —— 启动流程（下）</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/11/es-code02/">渣渣菜鸡的 ElasticSearch 源码解析 —— 启动流程（上）</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/05/es-code01/">渣渣菜鸡的 ElasticSearch 源码解析 —— 环境搭建</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/04/why-see-es-code/">渣渣菜鸡为什么要看 ElasticSearch 源码？</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/07/31/alipay02/">渣渣菜鸡的蚂蚁金服面试经历(二)</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/07/30/alipay01/">渣渣菜鸡的蚂蚁金服面试经历(一)</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/07/12/youzan/">渣渣菜鸡的有赞面试经历（一）</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/20/java-8-date/">20 个案例教你在 Java 8 中如何处理日期和时间?</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/19/SimpleDateFormat/">SimpleDateFormat 如何安全的使用？</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/26/paper/">苦逼的毕业论文经历</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/30/springboot_SpringApplication/">Spring Boot 2.0系列文章(七)：SpringApplication 深入探索</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/24/Distributed_lock/">分布式锁看这篇就够了</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/19/SpringBootApplication-annotation/">Spring Boot 2.0系列文章(六)：Spring Boot 2.0中SpringBootApplication注解详解</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/18/spring_boot2_project/">Spring Boot 2.0系列文章(五)：Spring Boot 2.0 项目源码结构预览</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/15/springboot2_code/">Spring Boot 2.0系列文章(四)：Spring Boot 2.0 源码阅读环境搭建</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/13/Spring_Boot_2.0_Configuration_Changelog/">Spring Boot 2.0系列文章(三)：Spring Boot 2.0 配置改变</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/03/27/blogs/">写这么多系列博客，怪不得找不到女朋友</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/03/06/SpringBoot2-new-features/">Spring Boot 2.0系列文章(二)：Spring Boot 2.0 新特性详解</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/03/06/SpringBoot2-Migration-Guide/">Spring Boot 2.0系列文章(一)：Spring Boot 2.0 迁移指南</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/02/28/Java-Memory-Model/">《深入理解 Java 内存模型》读书笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/02/07/rocketmq-example/">RocketMQ系列文章（三）：RocketMQ 简单的消息示例</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/02/07/SpringBoot-RocketMQ/">Spring Boot系列文章（六）：SpringBoot RocketMQ 整合使用和监控</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/02/06/RocketMQ-install/">RocketMQ系列文章（二）：RocketMQ 安装及快速入门</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/02/05/RocketMQ/">RocketMQ系列文章（一）：RocketMQ 初探</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/28/RabbitMQ/">Spring Boot系列文章（五）：SpringBoot RabbitMQ 整合进阶版</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/27/SpringBoot-ActiveMQ/">Spring Boot系列文章（四）：SpringBoot ActiveMQ 整合使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/26/SpringBoot-RabbitMQ/">Spring Boot系列文章（三）：SpringBoot  RabbitMQ 整合使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/25/Docker-install/">Docker系列文章（二）：Mac 安装 Docker 及常用命令</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/24/mac/">MacBook Pro 初体验</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/17/SpringBoot-Admin/">Spring Boot系列文章（二）：SpringBoot Admin 使用指南</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/09/lombok/">Lombok 看这篇就够了</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/05/SpringBoot-Kafka/">Spring Boot系列文章（一）：SpringBoot Kafka 整合使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/04/weixin/">为什么要重新运营以前的公众号呢？</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/04/Kafka/">Kafka 安装及快速入门</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/12/27/consul-install/">Windows 下安装 Consul</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/12/25/ELK/">Elasticsearch 系列文章（五）：ELK 实时日志分析平台环境搭建</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/12/18/hexo-yilia/">Hexo + yilia 搭建博客可能会遇到的所有疑问</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/12/13/Google-Developer-Days/">谷歌开发者大会收获满满，不去真 “可惜” 了</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/12/09/CodeMirror/">使用 CodeMirror 打造属于自己的在线代码编辑器</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/12/08/netty-01-env/">Netty系列文章（一）：Netty 源码阅读之初始环境搭建</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/12/03/RestTemplate/">RestTemplate 详解</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/12/02/wx-01/">实习圈群里提问小记</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/11/26/Docker-harbor/">Docker系列文章（一）：基于 Harbor 搭建 Docker 私有镜像仓库</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/11/18/Money-management/">谈谈我的理财</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/11/18/flow-control/">基于分布式环境下限流系统的设计</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/11/11/Maven-dependencies-dependencyManagement/">Maven 中 dependencies 与 dependencyManagement 的区别</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/11/11/recommended-books/">送你一份双十一剁手书单【墙裂推荐】</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/28/Data-Desensitization/">小白谈数据脱敏</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/21/HBase-metrics/">HBase 集群监控</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/18/ElasticSearch-nodes-metrics/">Elasticsearch 系列文章（四）：ElasticSearch 单个节点监控</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/15/ElasticSearch-cluster-health-metrics/">Elasticsearch 系列文章（三）：ElasticSearch 集群监控</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/14/JsonPath/">JsonPath —— JSON 解析神器</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/14/Nexus3-Maven/">Centos7 搭建最新 Nexus3 Maven 私服</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/23/Guava-limit/">Google Guava 缓存实现接口的限流</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/17/Interview-summary/">面试过阿里等互联网大公司，我知道了这些套路</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/15/linux-lua-lfs-install/">Linux 下 lua 开发环境安装及安装 luafilesystem</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/09/Elasticsearch-install/">Elasticsearch 系列文章（二）：全文搜索引擎 Elasticsearch 集群搭建入门教程</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/08/Elasticsearch-analyzers/">Elasticsearch 系列文章（一）：Elasticsearch 默认分词器和中分分词器之间的比较及使用方法</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/28/recommend-books/">那些年我看过的书 —— 致敬我的大学生活 —— Say Good Bye ！</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/18/Ubuntu-install-Nginx/">Ubuntu16.10 安装 Nginx</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/11/most-success/">马云热血励志演讲《最伟大的成功》</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/08/android-projects/">源码大招：不服来战！撸这些完整项目，你不牛逼都难！</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/05/Nginx/">Nginx 基本知识快速入门</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/04/alibaba/">秋招第三站 —— 内推阿里（一面）</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/04/iqiyi/">秋招第二站 —— 内推爱奇艺（一面二面）</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/04/yaxin/">秋招第一站 —— 亚信科技</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/29/ThreadPool/">Java 线程池艺术探索</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/25/Java-performance-tuning/">Java 性能调优需要格外注意的细节</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/21/Spring-MVC03/">Spring MVC系列文章（五）：看透 Spring MVC 源代码分析与实践 ——  Spring MVC 组件分析</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/14/Spring-MVC01/">Spring MVC系列文章（三）：看透 Spring MVC 源代码分析与实践 ——  网站基础知识</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/14/Spring-MVC02/">Spring MVC系列文章（四）：看透 Spring MVC 源代码分析与实践 ——  俯视 Spring MVC</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/09/servlet/">通过源码详解 Servlet</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/28/Velocity-foreach/">Velocity 循环指令一种好的解决方法</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/23/AJAX/">AJAX 学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/23/java-io/">Java IO流学习超详细总结（图文并茂）</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/20/Java-error1/">java.sql.SQLException Field 'id' doesn't have a default value</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/19/中缀表达式转换成前缀和后缀表达式这类题目的超实用解题技巧/">中缀表达式转换成前缀和后缀表达式这类题目的超实用解题技巧</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/18/循环队列的相关条件和公式/">循环队列的相关条件和公式</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/18/Bootstrap入门需掌握的知识点（二）/">Bootstrap入门需掌握的知识点（二）</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/18/Bootstrap入门需掌握的知识点（一）/">Bootstrap入门需掌握的知识点（一）</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/17/blog-talk/">搭建一个博客项目后的碎碎念</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/17/详解 Filter 过滤器/">详解 Filter 过滤器</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/17/详细深入分析 Java ClassLoader 工作机制/">详细深入分析 Java ClassLoader 工作机制</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/16/通过项目逐步深入了解Spring MVC（一）/">通过项目逐步深入了解Spring MVC（一）</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/15/通过项目逐步深入了解Mybatis(四)/">通过项目逐步深入了解Mybatis（四）</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/14/通过项目逐步深入了解Mybatis(三)/">通过项目逐步深入了解Mybatis（三）</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/13/Hexo-yilia-toc/">Hexo + yilia 主题实现文章目录</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/13/Java连接Oracle数据库的三种连接方式/">Java连接Oracle数据库的三种连接方式</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/13/MyBatis-foreach/">MyBatis的foreach语句详解</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/13/Spring MVC + Hibernate JPA + Bootstrap 搭建的博客系统/">Spring MVC系列文章（一）：Spring MVC + Hibernate JPA + Bootstrap 搭建的博客系统 Demo</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/13/String-new/">关于String s = new String("xyz"); 创建几个对象的问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/13/【字符串】判断两字符串是否互为旋转词？/">【字符串】判断两字符串是否互为旋转词？</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/13/【字符串】字符串逆序/">字符串</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/13/奇怪的Java题：为什么128 == 128返回为False，而127 == 127会返回为True-/">奇怪的Java题：为什么128 == 128返回为False，而127 == 127会返回为True?</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/13/程序访问文件的几种方式/">程序访问文件的几种方式</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/13/MySQL-select-good/">MySQL 处理海量数据时的一些优化查询速度方法</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/13/Pyspider框架 —— Python爬虫实战之爬取 V2EX 网站帖子/">Pyspider框架 —— Python爬虫实战之爬取 V2EX 网站帖子</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/13/Spring MVC+Hibernate JPA搭建的博客系统项目中所遇到的坑/">Spring MVC系列文章（二）：Spring MVC+Hibernate JPA搭建的博客系统项目中所遇到的坑</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/13/feiji/">记录下自己第一次坐飞机的感受</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/13/java-var/">从对象深入分析 Java 中实例变量和类变量的区别</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/13/java读取文件/">Java读取文件</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/13/利用Github Page 搭建个人博客网站/">利用Github Page 搭建个人博客网站</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/13/解决jdk1.8中发送邮件失败（handshake_failure）问题/">解决jdk1.8中发送邮件失败（handshake_failure）问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/13/HashMap-Hashtable/">HashMap、Hashtable、HashSet 和 ConcurrentHashMap 的比较</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/13/JVM性能调优监控工具jps、jstack、jmap、jhat、jstat等使用详解/">JVM性能调优监控工具jps、jstack、jmap、jhat、jstat等使用详解</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/13/Python爬虫实战之爬取百度贴吧帖子/">Python爬虫实战之爬取百度贴吧帖子</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/13/Python爬虫实战之爬取糗事百科段子/">Python爬虫实战之爬取糗事百科段子</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/13/深入分析 Java Web 中的中文编码问题/">深入分析 Java Web 中的中文编码问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/13/深度探究Java 中 finally 语句块/">深度探究Java 中 finally 语句块</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/13/通过项目逐步深入了解Mybatis(二)/">通过项目逐步深入了解Mybatis（二）</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/13/Java NIO 系列教程/">Java NIO 系列教程</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/13/Java-Thread/">《Java 多线程编程核心技术》学习笔记及总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/13/Java-16-lession/">《疯狂 Java 突破程序员基本功的 16 课》读书笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/12/通过项目逐步深入了解Mybatis(一)/">通过项目逐步深入了解Mybatis（一）</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/02/poetry2/"> 六月 —— 愿你做最美好的自己！</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/05/12/poetry/">最近很火的鸡汤，分享给大家</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/13/Hexo-yilia-changyan/">Github pages + Hexo 博客 yilia 主题使用畅言评论系统</a></li></ul>
+    <script src="http://apps.bdimg.com/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script>
+        $(".post-list").addClass("toc-article");
+        $(".post-list-item a").attr("target","_blank");
+        $("#post-nav-button > a:nth-child(2)").click(function() {
+            $(".fa-bars, .fa-times").toggle();
+            $(".post-list").toggle(300);
+            if ($(".toc").length > 0) {
+                $("#toc, #tocButton").toggle(200, function() {
+                    if ($(".switch-area").is(":visible")) {
+                        $("#tocButton").attr("value", valueHide);
+                        }
+                    })
+            }
+            else {
+            }
+        })
+    </script>
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                &copy; 2021 zhisheng
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" >本站总访问量: 
+                            <span id="busuanzi_value_site_pv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>, </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit">本文总阅读量: 
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                   <a href="http://beian.miit.gov.cn">赣ICP备16004176号</a>
+            </div>
+        
+    </div>
+</footer>
+
+    </div>
+    <script src="http://apps.bdimg.com/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="/js/main.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var backgroundnum = 24;
+            var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+            $("#mobile-nav").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+            $(".left-col").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+        })
+    </script>
+
+
+
+
+	<script>
+	var _hmt = _hmt || [];
+	(function() {
+	  var hm = document.createElement("script");
+	  hm.src = "https://hm.baidu.com/hm.js?c41be5a0c9f014e977695f66c065b5d3";
+	  var s = document.getElementsByTagName("script")[0]; 
+	  s.parentNode.insertBefore(hm, s);
+	})();
+	</script>
+
+
+<div class="scroll" id="scroll">
+    <a href="#"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    $(document).ready(function() {
+        if ($("#comments").length < 1) {
+            $("#scroll > a:nth-child(2)").hide();
+        };
+    })
+</script>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  <script language="javascript">
+    $(function() {
+        $("a[title]").each(function() {
+            var a = $(this);
+            var title = a.attr('title');
+            if (title == undefined || title == "") return;
+            a.data('title', title).removeAttr('title').hover(
+
+            function() {
+                var offset = a.offset();
+                $("<div id=\"anchortitlecontainer\"></div>").appendTo($("body")).html(title).css({
+                    top: offset.top - a.outerHeight() - 15,
+                    left: offset.left + a.outerWidth()/2 + 1
+                }).fadeIn(function() {
+                    var pop = $(this);
+                    setTimeout(function() {
+                        pop.remove();
+                    }, pop.text().length * 800);
+                });
+            }, function() {
+                $("#anchortitlecontainer").remove();
+            });
+        });
+    });
+</script>
+
+
+  </div>
+</body>
+</html>
