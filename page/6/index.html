@@ -250,6 +250,574 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-Flink-parallelism-slot" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2019/01/14/Flink-parallelism-slot/" class="article-date">
+      <time datetime="2019-01-13T16:00:00.000Z" itemprop="datePublished">2019-01-14</time>
+</a>
+    </div>
+  
+  <div class="article-inner" id="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/01/14/Flink-parallelism-slot/">Flink 从 0 到 1 学习 —— Flink parallelism 和 Slot 介绍</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody" id="article-entry">
+      
+          
+              <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>之所以写这个是因为前段时间自己的项目出现过这样的一个问题：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Caused by: akka.pattern.AskTimeoutException: </span><br><span class="line">Ask timed out on [Actor[akka://flink/user/taskmanager_0#15608456]] after [10000 ms]. </span><br><span class="line">Sender[null] sent message of type &quot;org.apache.flink.runtime.rpc.messages.LocalRpcInvocation&quot;.</span><br></pre></td></tr></table></figure>
+          
+      
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Flink/">Flink</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/大数据/">大数据</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/流式计算/">流式计算</a></li></ul>
+    </div>
+
+      
+        <p class="article-more-link">
+          <a  href="/2019/01/14/Flink-parallelism-slot/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-Flink-JobManager-High-availability" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2019/01/13/Flink-JobManager-High-availability/" class="article-date">
+      <time datetime="2019-01-12T16:00:00.000Z" itemprop="datePublished">2019-01-13</time>
+</a>
+    </div>
+  
+  <div class="article-inner" id="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/01/13/Flink-JobManager-High-availability/">Flink 从 0 到 1 学习 —— Flink JobManager 高可用性配置</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody" id="article-entry">
+      
+          
+              <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>之前在 <a href="http://www.54tianzhisheng.cn/2018/10/27/flink-config/">《从0到1学习Flink》—— Flink 配置文件详解</a> 讲过 Flink 的配置，但是后面陆续有人来问我一些配置相关的东西，在加上我现在对 Flink 也更熟悉了些，这里我就再写下 Flink JobManager 的配置相关信息。</p>
+          
+      
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Flink/">Flink</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/大数据/">大数据</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/流式计算/">流式计算</a></li></ul>
+    </div>
+
+      
+        <p class="article-more-link">
+          <a  href="/2019/01/13/Flink-JobManager-High-availability/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-Flink-Kafka-sink" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2019/01/06/Flink-Kafka-sink/" class="article-date">
+      <time datetime="2019-01-05T16:00:00.000Z" itemprop="datePublished">2019-01-06</time>
+</a>
+    </div>
+  
+  <div class="article-inner" id="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/01/06/Flink-Kafka-sink/">Flink 从 0 到 1 学习 —— Flink 写入数据到 Kafka</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody" id="article-entry">
+      
+          
+              <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>之前文章 <a href="http://www.54tianzhisheng.cn/2018/12/30/Flink-ElasticSearch-Sink/">《从0到1学习Flink》—— Flink 写入数据到 ElasticSearch</a> 写了如何将 Kafka 中的数据存储到 ElasticSearch 中，里面其实就已经用到了 Flink 自带的 Kafka source connector（FlinkKafkaConsumer）。存入到 ES 只是其中一种情况，那么如果我们有多个地方需要这份通过 Flink 转换后的数据，是不是又要我们继续写个 sink 的插件呢？确实，所以 Flink 里面就默认支持了不少 sink，比如也支持 Kafka sink connector（FlinkKafkaProducer），那么这篇文章我们就讲讲如何将数据写入到 Kafka。</p>
+          
+      
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Flink/">Flink</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Kafka/">Kafka</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/大数据/">大数据</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/流式计算/">流式计算</a></li></ul>
+    </div>
+
+      
+        <p class="article-more-link">
+          <a  href="/2019/01/06/Flink-Kafka-sink/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-Flink-run" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2019/01/05/Flink-run/" class="article-date">
+      <time datetime="2019-01-04T16:00:00.000Z" itemprop="datePublished">2019-01-05</time>
+</a>
+    </div>
+  
+  <div class="article-inner" id="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/01/05/Flink-run/">Flink 从 0 到 1 学习 —— Flink 项目如何运行？</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody" id="article-entry">
+      
+          
+              <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>之前写了不少 Flink 文章了，也有不少 demo，但是文章写的时候都是在本地直接运行 Main 类的 main 方法，其实 Flink 是支持在 UI 上上传 Flink Job 的 jar 包，然后运行得。最开始在第一篇 <a href="http://www.54tianzhisheng.cn/2018/09/18/flink-install/">《从0到1学习Flink》—— Mac 上搭建 Flink 1.6.0 环境并构建运行简单程序入门</a> 中其实提到过了 Flink 自带的 UI 界面，今天我们就来看看如何将我们的项目打包在这里发布运行。</p>
+          
+      
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Flink/">Flink</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/大数据/">大数据</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/流式计算/">流式计算</a></li></ul>
+    </div>
+
+      
+        <p class="article-more-link">
+          <a  href="/2019/01/05/Flink-run/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-Flink-ElasticSearch-Sink" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2018/12/30/Flink-ElasticSearch-Sink/" class="article-date">
+      <time datetime="2018-12-29T16:00:00.000Z" itemprop="datePublished">2018-12-30</time>
+</a>
+    </div>
+  
+  <div class="article-inner" id="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/12/30/Flink-ElasticSearch-Sink/">Flink 从 0 到 1 学习 —— Flink 写入数据到 ElasticSearch</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody" id="article-entry">
+      
+          
+              <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>前面 FLink 的文章中我们已经介绍了说 Flink 已经有很多自带的 Connector。</p>
+          
+      
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ElasticSearch/">ElasticSearch</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Flink/">Flink</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/大数据/">大数据</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/流式计算/">流式计算</a></li></ul>
+    </div>
+
+      
+        <p class="article-more-link">
+          <a  href="/2018/12/30/Flink-ElasticSearch-Sink/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-Flink-time" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2018/12/11/Flink-time/" class="article-date">
+      <time datetime="2018-12-10T16:00:00.000Z" itemprop="datePublished">2018-12-11</time>
+</a>
+    </div>
+  
+  <div class="article-inner" id="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/12/11/Flink-time/">Flink 从 0 到 1 学习 —— Flink 中几种 Time 详解</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody" id="article-entry">
+      
+          
+              <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>Flink 在流程序中支持不同的 <strong>Time</strong> 概念，就比如有 Processing Time、Event Time 和 Ingestion Time。</p>
+          
+      
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Flink/">Flink</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/大数据/">大数据</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/流式计算/">流式计算</a></li></ul>
+    </div>
+
+      
+        <p class="article-more-link">
+          <a  href="/2018/12/11/Flink-time/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-Flink-Stream-Windows" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2018/12/08/Flink-Stream-Windows/" class="article-date">
+      <time datetime="2018-12-07T16:00:00.000Z" itemprop="datePublished">2018-12-08</time>
+</a>
+    </div>
+  
+  <div class="article-inner" id="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/12/08/Flink-Stream-Windows/">Flink 从 0 到 1 学习 —— 介绍Flink中的Stream Windows</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody" id="article-entry">
+      
+          
+              <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>目前有许多数据分析的场景从批处理到流处理的演变， 虽然可以将批处理作为流处理的特殊情况来处理，但是分析无穷集的流数据通常需要思维方式的转变并且具有其自己的术语（例如，“windowing（窗口化）”、“at-least-once（至少一次）”、“exactly-once（只有一次）” ）。</p>
+          
+      
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Flink/">Flink</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/大数据/">大数据</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/流式计算/">流式计算</a></li></ul>
+    </div>
+
+      
+        <p class="article-more-link">
+          <a  href="/2018/12/08/Flink-Stream-Windows/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-Flink-Data-transformation" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2018/11/04/Flink-Data-transformation/" class="article-date">
+      <time datetime="2018-11-03T16:00:00.000Z" itemprop="datePublished">2018-11-04</time>
+</a>
+    </div>
+  
+  <div class="article-inner" id="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/11/04/Flink-Data-transformation/">Flink 从 0 到 1 学习 —— Flink Data transformation(转换)</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody" id="article-entry">
+      
+          
+              <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>在第一篇介绍 Flink 的文章 <a href="http://www.54tianzhisheng.cn/2018/10/13/flink-introduction/#Flink-%E7%A8%8B%E5%BA%8F%E4%B8%8E%E6%95%B0%E6%8D%AE%E6%B5%81%E7%BB%93%E6%9E%84">《《从0到1学习Flink》—— Apache Flink 介绍》</a> 中就说过 Flink 程序的结构</p>
+          
+      
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Flink/">Flink</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/大数据/">大数据</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/流式计算/">流式计算</a></li></ul>
+    </div>
+
+      
+        <p class="article-more-link">
+          <a  href="/2018/11/04/Flink-Data-transformation/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-flink-create-sink" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2018/10/31/flink-create-sink/" class="article-date">
+      <time datetime="2018-10-30T16:00:00.000Z" itemprop="datePublished">2018-10-31</time>
+</a>
+    </div>
+  
+  <div class="article-inner" id="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/10/31/flink-create-sink/">Flink 从 0 到 1 学习 —— 如何自定义 Data Sink ？</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody" id="article-entry">
+      
+          
+              <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>前篇文章 <a href="http://www.54tianzhisheng.cn/2018/10/29/flink-sink/">《从0到1学习Flink》—— Data Sink 介绍</a> 介绍了 Flink Data Sink，也介绍了 Flink 自带的 Sink，那么如何自定义自己的 Sink 呢？这篇文章将写一个 demo 教大家将从 Kafka Source 的数据 Sink 到 MySQL 中去。</p>
+          
+      
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Flink/">Flink</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/大数据/">大数据</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/流式计算/">流式计算</a></li></ul>
+    </div>
+
+      
+        <p class="article-more-link">
+          <a  href="/2018/10/31/flink-create-sink/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-flink-create-source" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -925,575 +1493,6 @@
       
         <p class="article-more-link">
           <a  href="/2018/08/05/es-code01/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-why-see-es-code" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2018/08/04/why-see-es-code/" class="article-date">
-      <time datetime="2018-08-03T16:00:00.000Z" itemprop="datePublished">2018-08-04</time>
-</a>
-    </div>
-  
-  <div class="article-inner" id="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/08/04/why-see-es-code/">渣渣菜鸡为什么要看 ElasticSearch 源码？</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody" id="article-entry">
-      
-          
-              <p><img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-04-25-134007.jpg" alt=""></p>
-          
-      
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ElasticSearch/">ElasticSearch</a></li></ul>
-    </div>
-
-      
-        <p class="article-more-link">
-          <a  href="/2018/08/04/why-see-es-code/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-alipay02" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2018/07/31/alipay02/" class="article-date">
-      <time datetime="2018-07-30T16:00:00.000Z" itemprop="datePublished">2018-07-31</time>
-</a>
-    </div>
-  
-  <div class="article-inner" id="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/07/31/alipay02/">渣渣菜鸡的蚂蚁金服面试经历(二)</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody" id="article-entry">
-      
-          
-              <p><img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-04-25-133309.jpg" alt=""></p>
-          
-      
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/面经/">面经</a></li></ul>
-    </div>
-
-      
-        <p class="article-more-link">
-          <a  href="/2018/07/31/alipay02/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-alipay01" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2018/07/30/alipay01/" class="article-date">
-      <time datetime="2018-07-29T16:00:00.000Z" itemprop="datePublished">2018-07-30</time>
-</a>
-    </div>
-  
-  <div class="article-inner" id="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/07/30/alipay01/">渣渣菜鸡的蚂蚁金服面试经历(一)</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody" id="article-entry">
-      
-          
-              <p><img src="https://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/images/rAXoqj.jpg" alt="cafe-3537801_1280"></p>
-          
-      
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/面经/">面经</a></li></ul>
-    </div>
-
-      
-        <p class="article-more-link">
-          <a  href="/2018/07/30/alipay01/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-youzan" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2018/07/12/youzan/" class="article-date">
-      <time datetime="2018-07-11T16:00:00.000Z" itemprop="datePublished">2018-07-12</time>
-</a>
-    </div>
-  
-  <div class="article-inner" id="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/07/12/youzan/">渣渣菜鸡的有赞面试经历（一）</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody" id="article-entry">
-      
-          
-              <p><img src="https://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/images/X2e9Nn.jpg" alt="003"></p>
-<p>出去面试的话还是得好好准备，不然会被虐的有点惨！<br>
-          
-      
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/面经/">面经</a></li></ul>
-    </div>
-
-      
-        <p class="article-more-link">
-          <a  href="/2018/07/12/youzan/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-java-8-date" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2018/06/20/java-8-date/" class="article-date">
-      <time datetime="2018-06-19T16:00:00.000Z" itemprop="datePublished">2018-06-20</time>
-</a>
-    </div>
-  
-  <div class="article-inner" id="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/06/20/java-8-date/">20 个案例教你在 Java 8 中如何处理日期和时间?</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody" id="article-entry">
-      
-          
-              <p><img src="https://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/images/B3QQZ7.jpg" alt="002"><br>
-          
-      
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li></ul>
-    </div>
-
-      
-        <p class="article-more-link">
-          <a  href="/2018/06/20/java-8-date/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-SimpleDateFormat" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2018/06/19/SimpleDateFormat/" class="article-date">
-      <time datetime="2018-06-18T16:00:00.000Z" itemprop="datePublished">2018-06-19</time>
-</a>
-    </div>
-  
-  <div class="article-inner" id="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/06/19/SimpleDateFormat/">SimpleDateFormat 如何安全的使用？</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody" id="article-entry">
-      
-          
-              <p><img src="https://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/images/r7KtsP.jpg" alt="001"></p>
-          
-      
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li></ul>
-    </div>
-
-      
-        <p class="article-more-link">
-          <a  href="/2018/06/19/SimpleDateFormat/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-paper" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2018/05/26/paper/" class="article-date">
-      <time datetime="2018-05-25T16:00:00.000Z" itemprop="datePublished">2018-05-26</time>
-</a>
-    </div>
-  
-  <div class="article-inner" id="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/05/26/paper/">苦逼的毕业论文经历</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody" id="article-entry">
-      
-          
-              <p><img src="https://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/images/4wwF6b.jpg" alt="2018-05-26_15-01-42"></p>
-<h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>最近一直在学校忙毕业论文的事，抱歉了，很长一段时间没更新文章了，今天星期六，昨天星期五，幸好所有资料都在周末前交齐了，昨晚还到参加班上的聚会，也喝了不少酒，但幸好没醉，不然今天肯定不会写下这篇文章的。这篇文章就把从接触到毕业论文指导老师到现在的这半年时间有关毕业论文的事都讲讲，希望能够留下点回忆！<br>
-          
-      
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/随笔/">随笔</a></li></ul>
-    </div>
-
-      
-        <p class="article-more-link">
-          <a  href="/2018/05/26/paper/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-springboot_SpringApplication" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2018/04/30/springboot_SpringApplication/" class="article-date">
-      <time datetime="2018-04-29T16:00:00.000Z" itemprop="datePublished">2018-04-30</time>
-</a>
-    </div>
-  
-  <div class="article-inner" id="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/04/30/springboot_SpringApplication/">Spring Boot 2.0系列文章(七)：SpringApplication 深入探索</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody" id="article-entry">
-      
-          
-              <p><img src="http://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/img/2019-04-24-172022.jpg" alt="sunset-3325080_1920"></p>
-          
-      
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SpringBoot/">SpringBoot</a></li></ul>
-    </div>
-
-      
-        <p class="article-more-link">
-          <a  href="/2018/04/30/springboot_SpringApplication/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Distributed_lock" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2018/04/24/Distributed_lock/" class="article-date">
-      <time datetime="2018-04-23T16:00:00.000Z" itemprop="datePublished">2018-04-24</time>
-</a>
-    </div>
-  
-  <div class="article-inner" id="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/04/24/Distributed_lock/">分布式锁看这篇就够了</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody" id="article-entry">
-      
-          
-              <p><img src="https://zhisheng-blog.oss-cn-hangzhou.aliyuncs.com/images/oKi5En.jpg" alt="meadow-811339_1920"></p>
-          
-      
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Redis/">Redis</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Zookeeper/">Zookeeper</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/分布式锁/">分布式锁</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据库/">数据库</a></li></ul>
-    </div>
-
-      
-        <p class="article-more-link">
-          <a  href="/2018/04/24/Distributed_lock/#more">more >></a>
         </p>
       
       <div class="clearfix"></div>
