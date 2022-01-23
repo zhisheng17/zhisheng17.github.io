@@ -510,6 +510,512 @@
 
 
   
+    <article id="post-flink-in-action-10.2" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2021/08/13/flink-in-action-10.2/" class="article-date">
+      <time datetime="2021-08-12T16:00:00.000Z" itemprop="datePublished">2021-08-13</time>
+</a>
+    </div>
+  
+  <div class="article-inner" id="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/08/13/flink-in-action-10.2/">《Flink 实战与性能优化》—— 如何设置 Flink Job RestartStrategy（重启策略）？</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody" id="article-entry">
+      
+          
+              <h2 id="10-2-如何使用-Flink-ParameterTool-读取配置？"><a href="#10-2-如何使用-Flink-ParameterTool-读取配置？" class="headerlink" title="10.2 如何使用 Flink ParameterTool 读取配置？"></a>10.2 如何使用 Flink ParameterTool 读取配置？</h2><p>在使用 Flink 中不知道你有没有觉得配置的管理很不方便，比如像算子的并行度配置、Kafka 数据源的配置（broker 地址、topic 名、group.id）、Checkpoint 是否开启、状态后端存储路径、数据库地址、用户名和密码等，反正各种各样的配置都杂乱在一起，当然你可能说我就在代码里面写死不就好了，但是你有没有想过你的作业是否可以不修改任何配置就直接在各种环境（开发、测试、预发、生产）运行呢？可能每个环境的这些配置对应的值都是不一样的，如果你是直接在代码里面写死的配置，那这下子就比较痛苦了，每次换个环境去运行测试你的作业，你都要重新去修改代码中的配置，然后编译打包，提交运行，这样你就要花费很多时间在这些重复的劳动力上了。有没有什么办法可以解决这种问题呢？</p>
+          
+      
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Flink/">Flink</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/大数据/">大数据</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/流式计算/">流式计算</a></li></ul>
+    </div>
+
+      
+        <p class="article-more-link">
+          <a  href="/2021/08/13/flink-in-action-10.2/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-flink-in-action-10.1" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2021/08/12/flink-in-action-10.1/" class="article-date">
+      <time datetime="2021-08-11T16:00:00.000Z" itemprop="datePublished">2021-08-12</time>
+</a>
+    </div>
+  
+  <div class="article-inner" id="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/08/12/flink-in-action-10.1/">《Flink 实战与性能优化》—— 如何设置 Flink Job RestartStrategy（重启策略）？</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody" id="article-entry">
+      
+          
+              <h1 id="第十章-——-Flink-最佳实践"><a href="#第十章-——-Flink-最佳实践" class="headerlink" title="第十章 —— Flink 最佳实践"></a>第十章 —— Flink 最佳实践</h1><p>本章将介绍两个最佳实践，第一个是如何合理的配置重启策略，笔者通过自己的亲身经历来讲述配置重启策略的重要性，接着介绍了 Flink 中的重启策略和恢复策略的发展实现过程；第二个是如何去管理 Flink 作业的配置。两个实践大家可以参考，不一定要照搬运用在自己的公司，同时也希望你可以思考下自己是否有啥最佳实践可以分享。</p>
+<h2 id="10-1-如何设置-Flink-Job-RestartStrategy（重启策略）？"><a href="#10-1-如何设置-Flink-Job-RestartStrategy（重启策略）？" class="headerlink" title="10.1 如何设置 Flink Job RestartStrategy（重启策略）？"></a>10.1 如何设置 Flink Job RestartStrategy（重启策略）？</h2><p>从使用 Flink 到至今，遇到的 Flink 有很多，解决的问题更多（含帮助微信好友解决问题），所以对于 Flink 可能遇到的问题及解决办法都比较清楚，那么在这章就给大家讲解下几个 Flink 中比较常遇到的问题的解决办法。</p>
+          
+      
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Flink/">Flink</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/大数据/">大数据</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/流式计算/">流式计算</a></li></ul>
+    </div>
+
+      
+        <p class="article-more-link">
+          <a  href="/2021/08/12/flink-in-action-10.1/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-flink-in-action-9.6" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2021/08/11/flink-in-action-9.6/" class="article-date">
+      <time datetime="2021-08-10T16:00:00.000Z" itemprop="datePublished">2021-08-11</time>
+</a>
+    </div>
+  
+  <div class="article-inner" id="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/08/11/flink-in-action-9.6/">《Flink 实战与性能优化》—— 如何处理 Flink 中数据倾斜问题？</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody" id="article-entry">
+      
+          
+              <h2 id="9-6-如何处理-Flink-中数据倾斜问题？"><a href="#9-6-如何处理-Flink-中数据倾斜问题？" class="headerlink" title="9.6 如何处理 Flink 中数据倾斜问题？"></a>9.6 如何处理 Flink 中数据倾斜问题？</h2><p>在大数据计算场景，无论使用 MapReduce、Spark 还是 Flink 计算框架，无论是批处理还是流处理都存在数据倾斜的问题，通过本节学习产生数据倾斜的原因及如何在生产环境解决数据倾斜。</p>
+          
+      
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Flink/">Flink</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/大数据/">大数据</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/流式计算/">流式计算</a></li></ul>
+    </div>
+
+      
+        <p class="article-more-link">
+          <a  href="/2021/08/11/flink-in-action-9.6/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-flink-in-action-9.5" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2021/08/11/flink-in-action-9.5/" class="article-date">
+      <time datetime="2021-08-10T16:00:00.000Z" itemprop="datePublished">2021-08-11</time>
+</a>
+    </div>
+  
+  <div class="article-inner" id="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/08/11/flink-in-action-9.5/">《Flink 实战与性能优化》—— Flink 中如何保证 Exactly Once？</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody" id="article-entry">
+      
+          
+              <h2 id="9-5-Flink-中如何保证-Exactly-Once？"><a href="#9-5-Flink-中如何保证-Exactly-Once？" class="headerlink" title="9.5 Flink 中如何保证 Exactly Once？"></a>9.5 Flink 中如何保证 Exactly Once？</h2><p>在分布式场景下，我们的应用程序随时可能出现任何形式的故障，例如：机器硬件故障、程序 OOM 等。当应用程序出现故障时，Flink 为了保证数据消费的 Exactly Once，需要有相应的故障容错能力。Flink 是通过周期性 Checkpoint 的方式来实现故障容错，这里使用的是基于 Chandy-Lamport 改进的算法。本节会介绍 Flink 内部如何保证 Exactly Once 以及端对端如何保证 Exactly Once。</p>
+          
+      
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Flink/">Flink</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/大数据/">大数据</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/流式计算/">流式计算</a></li></ul>
+    </div>
+
+      
+        <p class="article-more-link">
+          <a  href="/2021/08/11/flink-in-action-9.5/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-flink-in-action-9.4" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2021/08/10/flink-in-action-9.4/" class="article-date">
+      <time datetime="2021-08-09T16:00:00.000Z" itemprop="datePublished">2021-08-10</time>
+</a>
+    </div>
+  
+  <div class="article-inner" id="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/08/10/flink-in-action-9.4/">《Flink 实战与性能优化》—— 如何合理的设置 Flink 作业并行度？</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody" id="article-entry">
+      
+          
+              <h2 id="9-4-如何合理的设置-Flink-作业并行度？"><a href="#9-4-如何合理的设置-Flink-作业并行度？" class="headerlink" title="9.4 如何合理的设置 Flink 作业并行度？"></a>9.4 如何合理的设置 Flink 作业并行度？</h2><p>在 9.2 节中讲解了 Flink Job 中的执行计划，并详细分析了 Flink 中的 operator chain 在一起的各种条件，在 9.3 节中也通过真实生产环境的案例来分享并行度与 Slot 的概念与关系。相信大家也都有一定的理解，但是有时候生产环境如果 Job 突然消费不及时了，或者 Job 就根本不在消费数据了，那么该怎么办？首先得看下相关的监控查看 Job 是否在正常运行，是否出现反压的情况，是否这会生产数据量过大然而并行度却是根据之前数据量设置的，种种原因都需要一个个排查一下，然后找到根因才能够对应的去解决。这节来讲解下遇到这种问题后如何合理配置并行度呢？</p>
+          
+      
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Flink/">Flink</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/大数据/">大数据</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/流式计算/">流式计算</a></li></ul>
+    </div>
+
+      
+        <p class="article-more-link">
+          <a  href="/2021/08/10/flink-in-action-9.4/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-flink-in-action-9.3" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2021/08/09/flink-in-action-9.3/" class="article-date">
+      <time datetime="2021-08-08T16:00:00.000Z" itemprop="datePublished">2021-08-09</time>
+</a>
+    </div>
+  
+  <div class="article-inner" id="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/08/09/flink-in-action-9.3/">《Flink 实战与性能优化》—— Flink Parallelism 和 Slot 深度理解</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody" id="article-entry">
+      
+          
+              <h2 id="9-3-Flink-Parallelism-和-Slot-深度理解"><a href="#9-3-Flink-Parallelism-和-Slot-深度理解" class="headerlink" title="9.3 Flink Parallelism 和 Slot 深度理解"></a>9.3 Flink Parallelism 和 Slot 深度理解</h2><p>相信使用过 Flink 的你或多或少遇到过下面这个问题（笔者自己的项目曾经也出现过这样的问题），错误信息如下：</p>
+          
+      
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Flink/">Flink</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/大数据/">大数据</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/流式计算/">流式计算</a></li></ul>
+    </div>
+
+      
+        <p class="article-more-link">
+          <a  href="/2021/08/09/flink-in-action-9.3/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-flink-in-action-9.2" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2021/08/08/flink-in-action-9.2/" class="article-date">
+      <time datetime="2021-08-07T16:00:00.000Z" itemprop="datePublished">2021-08-08</time>
+</a>
+    </div>
+  
+  <div class="article-inner" id="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/08/08/flink-in-action-9.2/">《Flink 实战与性能优化》—— 如何查看 Flink 作业执行计划？</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody" id="article-entry">
+      
+          
+              <h2 id="9-2-如何查看-Flink-作业执行计划？"><a href="#9-2-如何查看-Flink-作业执行计划？" class="headerlink" title="9.2 如何查看 Flink 作业执行计划？"></a>9.2 如何查看 Flink 作业执行计划？</h2><p>当一个应用程序需求比较简单的情况下，数据转换涉及的 operator（算子）可能不多，但是当应用的需求变得越来越复杂时，可能在一个 Job 里面算子的个数会达到几十个、甚至上百个，在如此多算子的情况下，整个应用程序就会变得非常复杂，所以在编写 Flink Job 的时候要是能够随时知道 Job 的执行计划那就很方便了。</p>
+          
+      
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Flink/">Flink</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/大数据/">大数据</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/流式计算/">流式计算</a></li></ul>
+    </div>
+
+      
+        <p class="article-more-link">
+          <a  href="/2021/08/08/flink-in-action-9.2/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-flink-in-action-9.1" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2021/08/07/flink-in-action-9.1/" class="article-date">
+      <time datetime="2021-08-06T16:00:00.000Z" itemprop="datePublished">2021-08-07</time>
+</a>
+    </div>
+  
+  <div class="article-inner" id="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/08/07/flink-in-action-9.1/">《Flink 实战与性能优化》—— 如何处理 Flink Job BackPressure （反压）问题?</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody" id="article-entry">
+      
+          
+              <h1 id="第九章-——-Flink-性能调优"><a href="#第九章-——-Flink-性能调优" class="headerlink" title="第九章 —— Flink 性能调优"></a>第九章 —— Flink 性能调优</h1><p>通过第八章的监控图表信息，我们可以发现问题，在发现问题后，需要去分析为什么会发生这些问题以及我们该如何去解决这些问题。本章将会介绍很多 Flink 生产环境遇到的问题，比如作业出现反压、作业并行度配置不合理、作业数据倾斜等，除了引出这种常见问题之外，笔者还将和你一起去分析这种问题造成的原因以及如何去优化作业。比如合理的配置并行度、让作业算子尽可能的 chain 在一起已达到最优等。希望通过本章的内容，你可以将这些解决方法运用在你的公司，帮助公司解决类似的问题。</p>
+<h2 id="9-1-如何处理-Flink-Job-BackPressure-（反压）问题"><a href="#9-1-如何处理-Flink-Job-BackPressure-（反压）问题" class="headerlink" title="9.1 如何处理 Flink Job BackPressure （反压）问题?"></a>9.1 如何处理 Flink Job BackPressure （反压）问题?</h2><p>反压（BackPressure）机制被广泛应用到实时流处理系统中，流处理系统需要能优雅地处理反压问题。反压通常产生于这样的场景：短时间的负载高峰导致系统接收数据的速率远高于它处理数据的速率。许多日常问题都会导致反压，例如，垃圾回收停顿可能会导致流入的数据快速堆积，或遇到大促、秒杀活动导致流量陡增。反压如果不能得到正确的处理，可能会导致资源耗尽甚至系统崩溃。反压机制是指系统能够自己检测到被阻塞的 Operator，然后自适应地降低源头或上游数据的发送速率，从而维持整个系统的稳定。Flink 任务一般运行在多个节点上，数据从上游算子发送到下游算子需要网络传输，若系统在反压时想要降低数据源头或上游算子数据的发送速率，那么肯定也需要网络传输。所以下面先来了解一下 Flink 的网络流控（Flink 对网络数据流量的控制）机制。</p>
+          
+      
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Flink/">Flink</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/大数据/">大数据</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/流式计算/">流式计算</a></li></ul>
+    </div>
+
+      
+        <p class="article-more-link">
+          <a  href="/2021/08/07/flink-in-action-9.1/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-flink-in-action-8.2" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -998,513 +1504,6 @@
       
         <p class="article-more-link">
           <a  href="/2021/07/29/flink-in-action-6.2/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-flink-in-action-6.1" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2021/07/28/flink-in-action-6.1/" class="article-date">
-      <time datetime="2021-07-27T16:00:00.000Z" itemprop="datePublished">2021-07-28</time>
-</a>
-    </div>
-  
-  <div class="article-inner" id="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/07/28/flink-in-action-6.1/">《Flink 实战与性能优化》—— Flink CEP 简介及其使用场景</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody" id="article-entry">
-      
-          
-              <h1 id="第六章-——-扩展库"><a href="#第六章-——-扩展库" class="headerlink" title="第六章 —— 扩展库"></a>第六章 —— 扩展库</h1><p>Flink 源码中有单独的 <code>flink-libraries</code> 模块用来存放一些扩展库，比如 CEP、Gelly、Machine Learning、State Processor API。本章将分别介绍这几种扩展库以及如何应用在我们的项目中。</p>
-<h2 id="6-1-Flink-CEP-简介及其使用场景"><a href="#6-1-Flink-CEP-简介及其使用场景" class="headerlink" title="6.1 Flink CEP 简介及其使用场景"></a>6.1 Flink CEP 简介及其使用场景</h2>
-          
-      
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Flink/">Flink</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/大数据/">大数据</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/流式计算/">流式计算</a></li></ul>
-    </div>
-
-      
-        <p class="article-more-link">
-          <a  href="/2021/07/28/flink-in-action-6.1/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-flink-in-action-5.1" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2021/07/27/flink-in-action-5.1/" class="article-date">
-      <time datetime="2021-07-26T16:00:00.000Z" itemprop="datePublished">2021-07-27</time>
-</a>
-    </div>
-  
-  <div class="article-inner" id="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/07/27/flink-in-action-5.1/">《Flink 实战与性能优化》—— Flink Table &amp; SQL 概念与通用 API</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody" id="article-entry">
-      
-          
-              <h1 id="第五章-——-Table-API-amp-SQL"><a href="#第五章-——-Table-API-amp-SQL" class="headerlink" title="第五章 —— Table API &amp; SQL"></a>第五章 —— Table API &amp; SQL</h1><p>Flink 中除了 DataStream 和 DataSet API，还有比较高级的 Table API &amp; SQL，它可以帮助我们简化开发的过程，能够快读的运用 Flink 去完成一些需求，本章将对 Flink Table API &amp; SQL 进行讲解，并将与其他的 API 结合对比分析。</p>
-<h2 id="5-1-Flink-Table-amp-SQL-概念与通用-API"><a href="#5-1-Flink-Table-amp-SQL-概念与通用-API" class="headerlink" title="5.1 Flink Table &amp; SQL 概念与通用 API"></a>5.1 Flink Table &amp; SQL 概念与通用 API</h2>
-          
-      
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Flink/">Flink</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/大数据/">大数据</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/流式计算/">流式计算</a></li></ul>
-    </div>
-
-      
-        <p class="article-more-link">
-          <a  href="/2021/07/27/flink-in-action-5.1/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-flink-in-action-5.2" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2021/07/27/flink-in-action-5.2/" class="article-date">
-      <time datetime="2021-07-26T16:00:00.000Z" itemprop="datePublished">2021-07-27</time>
-</a>
-    </div>
-  
-  <div class="article-inner" id="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/07/27/flink-in-action-5.2/">《Flink 实战与性能优化》—— Flink Table API &amp; SQL 功能</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody" id="article-entry">
-      
-          
-              <h2 id="5-2-Flink-Table-API-amp-SQL-功能"><a href="#5-2-Flink-Table-API-amp-SQL-功能" class="headerlink" title="5.2 Flink Table API &amp; SQL 功能"></a>5.2 Flink Table API &amp; SQL 功能</h2><p>在 5.1 节中对 Flink Table API &amp; SQL 的概述和常见 API 都做了介绍，这篇文章先来看下其与 DataStream 和 DataSet API 的集成。</p>
-          
-      
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Flink/">Flink</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/大数据/">大数据</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/流式计算/">流式计算</a></li></ul>
-    </div>
-
-      
-        <p class="article-more-link">
-          <a  href="/2021/07/27/flink-in-action-5.2/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-flink-in-action-4.3" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2021/07/26/flink-in-action-4.3/" class="article-date">
-      <time datetime="2021-07-25T16:00:00.000Z" itemprop="datePublished">2021-07-26</time>
-</a>
-    </div>
-  
-  <div class="article-inner" id="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/07/26/flink-in-action-4.3/">《Flink 实战与性能优化》—— Flink Checkpoint 和 Savepoint 的区别及其配置使用</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody" id="article-entry">
-      
-          
-              <h2 id="4-3-Flink-Checkpoint-和-Savepoint-的区别及其配置使用"><a href="#4-3-Flink-Checkpoint-和-Savepoint-的区别及其配置使用" class="headerlink" title="4.3 Flink Checkpoint 和 Savepoint 的区别及其配置使用"></a>4.3 Flink Checkpoint 和 Savepoint 的区别及其配置使用</h2><p>Checkpoint 在 Flink 中是一个非常重要的 Feature，Checkpoint 使 Flink 的状态具有良好的容错性，通过 Checkpoint 机制，Flink 可以对作业的状态和计算位置进行恢复。本节主要讲述在 Flink 中 Checkpoint 和 Savepoint 的使用方式及它们之间的区别。</p>
-          
-      
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Flink/">Flink</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/大数据/">大数据</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/流式计算/">流式计算</a></li></ul>
-    </div>
-
-      
-        <p class="article-more-link">
-          <a  href="/2021/07/26/flink-in-action-4.3/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-flink-in-action-4.2" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2021/07/25/flink-in-action-4.2/" class="article-date">
-      <time datetime="2021-07-24T16:00:00.000Z" itemprop="datePublished">2021-07-25</time>
-</a>
-    </div>
-  
-  <div class="article-inner" id="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/07/25/flink-in-action-4.2/">《Flink 实战与性能优化》—— Flink 状态后端存储</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody" id="article-entry">
-      
-          
-              <h2 id="4-2-Flink-状态后端存储"><a href="#4-2-Flink-状态后端存储" class="headerlink" title="4.2 Flink 状态后端存储"></a>4.2 Flink 状态后端存储</h2><p>在 4.1 节中介绍了 Flink 中的状态，那么在生产环境中，随着作业的运行时间变长，状态会变得越来越大，那么如何将这些状态存储也是 Flink 要解决的一大难点，本节来讲解下 Flink 中不同类型的状态后端存储。</p>
-          
-      
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Flink/">Flink</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/大数据/">大数据</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/流式计算/">流式计算</a></li></ul>
-    </div>
-
-      
-        <p class="article-more-link">
-          <a  href="/2021/07/25/flink-in-action-4.2/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-flink-in-action-4.1" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2021/07/24/flink-in-action-4.1/" class="article-date">
-      <time datetime="2021-07-23T16:00:00.000Z" itemprop="datePublished">2021-07-24</time>
-</a>
-    </div>
-  
-  <div class="article-inner" id="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/07/24/flink-in-action-4.1/">《Flink 实战与性能优化》—— 深度讲解 Flink 中的状态</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody" id="article-entry">
-      
-          
-              <h1 id="第四章-——-Flink-中的状态及容错机制"><a href="#第四章-——-Flink-中的状态及容错机制" class="headerlink" title="第四章 —— Flink 中的状态及容错机制"></a>第四章 —— Flink 中的状态及容错机制</h1><p>Flink 对比其他的流处理框架最大的特点是其支持状态，本章将深度的讲解 Flink 中的状态分类，如何在不同的场景使用不同的状态，接着会介绍 Flink 中的多种状态存储，最后会介绍 Checkpoint 和 Savepoint 的使用方式以及如何恢复状态。</p>
-<h2 id="4-1-深度讲解-Flink-中的状态"><a href="#4-1-深度讲解-Flink-中的状态" class="headerlink" title="4.1 深度讲解 Flink 中的状态"></a>4.1 深度讲解 Flink 中的状态</h2>
-          
-      
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Flink/">Flink</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/大数据/">大数据</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/流式计算/">流式计算</a></li></ul>
-    </div>
-
-      
-        <p class="article-more-link">
-          <a  href="/2021/07/24/flink-in-action-4.1/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-flink-in-action-3.12" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2021/07/23/flink-in-action-3.12/" class="article-date">
-      <time datetime="2021-07-22T16:00:00.000Z" itemprop="datePublished">2021-07-23</time>
-</a>
-    </div>
-  
-  <div class="article-inner" id="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/07/23/flink-in-action-3.12/">《Flink 实战与性能优化》—— 使用 Side Output 分流</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody" id="article-entry">
-      
-          
-              <h2 id="3-12-使用-Side-Output-分流"><a href="#3-12-使用-Side-Output-分流" class="headerlink" title="3.12 使用 Side Output 分流"></a>3.12 使用 Side Output 分流</h2><p>通常，在 Kafka 的 topic 中会有很多数据，这些数据虽然结构是一致的，但是类型可能不一致，举个例子：Kafka 中的监控数据有很多种：机器、容器、应用、中间件等，如果要对这些数据分别处理，就需要对这些数据流进行一个拆分，那么在 Flink 中该怎么完成这需求呢，有如下这些方法。</p>
-          
-      
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Flink/">Flink</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/大数据/">大数据</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/流式计算/">流式计算</a></li></ul>
-    </div>
-
-      
-        <p class="article-more-link">
-          <a  href="/2021/07/23/flink-in-action-3.12/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-flink-in-action-3.11" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2021/07/22/flink-in-action-3.11/" class="article-date">
-      <time datetime="2021-07-21T16:00:00.000Z" itemprop="datePublished">2021-07-22</time>
-</a>
-    </div>
-  
-  <div class="article-inner" id="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/07/22/flink-in-action-3.11/">《Flink 实战与性能优化》—— Flink Connector —— Redis 的用法</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody" id="article-entry">
-      
-          
-              <h2 id="3-11-Flink-Connector-——-Redis-的用法"><a href="#3-11-Flink-Connector-——-Redis-的用法" class="headerlink" title="3.11 Flink Connector —— Redis 的用法"></a>3.11 Flink Connector —— Redis 的用法</h2><p>在生产环境中，通常会将一些计算后的数据存储在 Redis 中，以供第三方的应用去 Redis 查找对应的数据，至于 Redis 的特性笔者不会在本节做过多的讲解。</p>
-          
-      
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Flink/">Flink</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/大数据/">大数据</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/流式计算/">流式计算</a></li></ul>
-    </div>
-
-      
-        <p class="article-more-link">
-          <a  href="/2021/07/22/flink-in-action-3.11/#more">more >></a>
         </p>
       
       <div class="clearfix"></div>
