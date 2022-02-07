@@ -510,6 +510,322 @@
 
 
   
+    <article id="post-flink-in-action-11.5" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2021/08/18/flink-in-action-11.5/" class="article-date">
+      <time datetime="2021-08-17T16:00:00.000Z" itemprop="datePublished">2021-08-18</time>
+</a>
+    </div>
+  
+  <div class="article-inner" id="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/08/18/flink-in-action-11.5/">《Flink 实战与性能优化》—— 如何实时将应用 Error 日志告警？</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody" id="article-entry">
+      
+          
+              <h2 id="11-5-如何实时将应用-Error-日志告警？"><a href="#11-5-如何实时将应用-Error-日志告警？" class="headerlink" title="11.5 如何实时将应用 Error 日志告警？"></a>11.5 如何实时将应用 Error 日志告警？</h2><p>大数据时代，随着公司业务不断的增长，数据量自然也会跟着不断的增长，那么业务应用和集群服务器的的规模也会逐渐扩大，几百台服务器在一般的公司已经是很常见的了。那么将应用服务部署在如此多的服务器上，对开发和运维人员来说都是一个挑战。一个优秀的系统运维平台是需要将部署在这么多服务器上的应用监控信息汇总成一个统一的数据展示平台，方便运维人员做日常的监测、提升运维效率，还可以及时反馈应用的运行状态给应用开发人员。举个例子，应用的运行日志需要按照时间排序做一个展示，并且提供日志下载和日志搜索等服务，这样如果应用出现问题开发人员首先可以根据应用日志的错误信息进行问题的排查。那么该如何实时的将应用的 Error 日志推送给应用开发人员呢，接下来我们将讲解日志的处理方案。</p>
+          
+      
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Flink/">Flink</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/大数据/">大数据</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/流式计算/">流式计算</a></li></ul>
+    </div>
+
+      
+        <p class="article-more-link">
+          <a  href="/2021/08/18/flink-in-action-11.5/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-flink-in-action-11.4" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2021/08/17/flink-in-action-11.4/" class="article-date">
+      <time datetime="2021-08-16T16:00:00.000Z" itemprop="datePublished">2021-08-17</time>
+</a>
+    </div>
+  
+  <div class="article-inner" id="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/08/17/flink-in-action-11.4/">《Flink 实战与性能优化》—— 如何利用广播变量动态更新告警规则？</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody" id="article-entry">
+      
+          
+              <h2 id="11-4-如何利用广播变量动态更新告警规则？"><a href="#11-4-如何利用广播变量动态更新告警规则？" class="headerlink" title="11.4 如何利用广播变量动态更新告警规则？"></a>11.4 如何利用广播变量动态更新告警规则？</h2><p>一个在生产环境运行的流作业有时候会想变更一些作业的配置或者数据流的配置，然后作业可以读取并使用新的配置，而不是通过修改配置然后重启作业来读取配置，毕竟重启一个有状态的流作业代价挺大，本节将带你熟悉 Broadcast，并通过一个案例来教会你如何去动态的更新作业的配置。</p>
+          
+      
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Flink/">Flink</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/大数据/">大数据</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/流式计算/">流式计算</a></li></ul>
+    </div>
+
+      
+        <p class="article-more-link">
+          <a  href="/2021/08/17/flink-in-action-11.4/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-flink-in-action-11.3" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2021/08/16/flink-in-action-11.3/" class="article-date">
+      <time datetime="2021-08-15T16:00:00.000Z" itemprop="datePublished">2021-08-16</time>
+</a>
+    </div>
+  
+  <div class="article-inner" id="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/08/16/flink-in-action-11.3/">《Flink 实战与性能优化》—— 如何利用 Async I/O 读取告警规则？</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody" id="article-entry">
+      
+          
+              <h2 id="11-3-如何利用-Async-I-O-读取告警规则？"><a href="#11-3-如何利用-Async-I-O-读取告警规则？" class="headerlink" title="11.3 如何利用 Async I/O 读取告警规则？"></a>11.3 如何利用 Async I/O 读取告警规则？</h2><p>Async 中文是异步的意思，在流计算中，使用异步 I/O 能够提升作业整体的计算能力，本节中不仅会讲解异步 I/O 的 API 原理，还会通过一个实战需求（读取告警规则）来讲解异步 I/O 的使用。</p>
+          
+      
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Flink/">Flink</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/大数据/">大数据</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/流式计算/">流式计算</a></li></ul>
+    </div>
+
+      
+        <p class="article-more-link">
+          <a  href="/2021/08/16/flink-in-action-11.3/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-flink-in-action-11.2" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2021/08/15/flink-in-action-11.2/" class="article-date">
+      <time datetime="2021-08-14T16:00:00.000Z" itemprop="datePublished">2021-08-15</time>
+</a>
+    </div>
+  
+  <div class="article-inner" id="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/08/15/flink-in-action-11.2/">《Flink 实战与性能优化》—— 如何使用 Flink ProcessFunction 处理宕机告警?</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody" id="article-entry">
+      
+          
+              <h2 id="11-2-如何使用-Flink-ProcessFunction-处理宕机告警"><a href="#11-2-如何使用-Flink-ProcessFunction-处理宕机告警" class="headerlink" title="11.2 如何使用 Flink ProcessFunction 处理宕机告警?"></a>11.2 如何使用 Flink ProcessFunction 处理宕机告警?</h2><p>在 3.3 节中讲解了 Process 算子的概念，本节中将更详细的讲解 Flink ProcessFunction，然后教大家如何使用 ProcessFunction 来解决公司中常见的问题 —— 宕机，这个宕机不仅仅包括机器宕机，还包含应用宕机，通常出现宕机带来的影响是会很大的，所以能及时收到告警会减少损失。</p>
+          
+      
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Flink/">Flink</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/大数据/">大数据</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/流式计算/">流式计算</a></li></ul>
+    </div>
+
+      
+        <p class="article-more-link">
+          <a  href="/2021/08/15/flink-in-action-11.2/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-flink-in-action-11.1" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2021/08/14/flink-in-action-11.1/" class="article-date">
+      <time datetime="2021-08-13T16:00:00.000Z" itemprop="datePublished">2021-08-14</time>
+</a>
+    </div>
+  
+  <div class="article-inner" id="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/08/14/flink-in-action-11.1/">《Flink 实战与性能优化》—— 如何统计网站各页面一天内的 PV 和 UV？</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody" id="article-entry">
+      
+          
+              <h1 id="第十一章-——-Flink-实战"><a href="#第十一章-——-Flink-实战" class="headerlink" title="第十一章 —— Flink 实战"></a>第十一章 —— Flink 实战</h1><p>本章主要是 Flink 实战，介绍了一些常见的需求，比如实时统计网站页面的 PV/UV、宕机告警、动态更新配置、应用 Error 日志实时告警等，然后分别去分析这些需求的实现方式，明白该使用 Flink 中的哪些知识点才能够很好的完成这种需求，并提供完整的案例代码供大家参考。在实现完成这些需求之后，笔者还将会更深一步的去讲解下这些知识点背后的实现方式，希望可以加深你对这些知识点的印象，以便后面你可以灵活的处理类似的需求。</p>
+<h2 id="11-1-如何统计网站各页面一天内的-PV-和-UV？"><a href="#11-1-如何统计网站各页面一天内的-PV-和-UV？" class="headerlink" title="11.1 如何统计网站各页面一天内的 PV 和 UV？"></a>11.1 如何统计网站各页面一天内的 PV 和 UV？</h2><p>大数据开发最常统计的需求可能就是 PV、UV。PV 全拼 PageView，即页面访问量，用户每次对网站的访问均被记录，按照访问量进行累计，假如用户对同一页面访问了 5 次，那该页面的 PV 就应该加 5。UV 全拼为 UniqueVisitor，即独立访问用户数，访问该页面的一台电脑客户端为一个访客，假如用户对同一页面访问了 5 次，那么该页面的 UV 只应该加 1，因为 UV 计算的是去重后的用户数而不是访问次数。当然如果是按天统计，那么当天 0 点到 24 点相同的客户端只被计算一次，如果过了今天 24 点，第二天该用户又访问了该页面，那么第二天该页面的 UV 应该加 1。 概念明白了那如何使用 Flink 来统计网站各页面的 PV 和 UV 呢？通过本节来详细描述。</p>
+          
+      
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Flink/">Flink</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/大数据/">大数据</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/流式计算/">流式计算</a></li></ul>
+    </div>
+
+      
+        <p class="article-more-link">
+          <a  href="/2021/08/14/flink-in-action-11.1/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-flink-in-action-10.2" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -1206,325 +1522,9 @@
 
 
   
-    <article id="post-flink-in-action-7.1" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2021/08/03/flink-in-action-7.1/" class="article-date">
-      <time datetime="2021-08-02T16:00:00.000Z" itemprop="datePublished">2021-08-03</time>
-</a>
-    </div>
-  
-  <div class="article-inner" id="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/08/03/flink-in-action-7.1/">《Flink 实战与性能优化》—— Flink 配置详解及如何配置高可用？</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody" id="article-entry">
-      
-          
-              <h1 id="第七章-——-Flink-作业环境部署"><a href="#第七章-——-Flink-作业环境部署" class="headerlink" title="第七章 —— Flink 作业环境部署"></a>第七章 —— Flink 作业环境部署</h1><p>在第一章中介绍过 Flink 是可以以多种方式部署的，比如 Standalone、YARN、Mesos、K8S。本章将先对 Flink 中的所有配置文件做一个详细的讲解，接下来将讲解 JobManager 高可用部署相关的配置，最后会分别讲解如何在不同的平台上部署运行 Flink 作业。虽然在你们公司可能只会用到其中的一种，但是仍然建议你将每种方式都熟悉一下。</p>
-<h2 id="7-1-Flink-配置详解及如何配置高可用？"><a href="#7-1-Flink-配置详解及如何配置高可用？" class="headerlink" title="7.1 Flink 配置详解及如何配置高可用？"></a>7.1 Flink 配置详解及如何配置高可用？</h2>
-          
-      
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Flink/">Flink</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/大数据/">大数据</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/流式计算/">流式计算</a></li></ul>
-    </div>
-
-      
-        <p class="article-more-link">
-          <a  href="/2021/08/03/flink-in-action-7.1/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-flink-in-action-6.5" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2021/08/02/flink-in-action-6.5/" class="article-date">
-      <time datetime="2021-08-01T16:00:00.000Z" itemprop="datePublished">2021-08-02</time>
-</a>
-    </div>
-  
-  <div class="article-inner" id="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/08/02/flink-in-action-6.5/">《Flink 实战与性能优化》—— Flink 扩展库——Gelly</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody" id="article-entry">
-      
-          
-              <h2 id="6-5-Flink-扩展库——Gelly"><a href="#6-5-Flink-扩展库——Gelly" class="headerlink" title="6.5 Flink 扩展库——Gelly"></a>6.5 Flink 扩展库——Gelly</h2><p>在 1.9 版本中还剩最后一个扩展库就是 Gelly，本节将带你了解一下 Gelly 的功能以及如何使用。</p>
-          
-      
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Flink/">Flink</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/大数据/">大数据</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/流式计算/">流式计算</a></li></ul>
-    </div>
-
-      
-        <p class="article-more-link">
-          <a  href="/2021/08/02/flink-in-action-6.5/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-flink-in-action-6.4" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2021/08/01/flink-in-action-6.4/" class="article-date">
-      <time datetime="2021-07-31T16:00:00.000Z" itemprop="datePublished">2021-08-01</time>
-</a>
-    </div>
-  
-  <div class="article-inner" id="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/08/01/flink-in-action-6.4/">《Flink 实战与性能优化》—— Flink 扩展库——Machine Learning</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody" id="article-entry">
-      
-          
-              <h2 id="6-4-Flink-扩展库——Machine-Learning"><a href="#6-4-Flink-扩展库——Machine-Learning" class="headerlink" title="6.4 Flink 扩展库——Machine Learning"></a>6.4 Flink 扩展库——Machine Learning</h2><p>随着人工智能的火热，机器学习这门技术也变得异常重要，Flink 作为一个数据处理的引擎，虽然目前在该方面还较弱，但是在 Flink Forward Asia 2019 北京站后，阿里开源了 <a href="https://github.com/alibaba/Alink">Alink</a> 平台的核心代码，并上传了一系列的算法库，该项目是基于 Flink 的通用算法平台，开发者和数据分析师可以利用 Alink 提供的一系列算法来构建软件功能，例如统计分析、机器学习、实时预测、个性化推荐和异常检测。相信未来 Flink 的机器学习库将会应用到更多的场景去，本节将带你了解一下 Flink 中的机器学习库。</p>
-          
-      
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Flink/">Flink</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/大数据/">大数据</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/流式计算/">流式计算</a></li></ul>
-    </div>
-
-      
-        <p class="article-more-link">
-          <a  href="/2021/08/01/flink-in-action-6.4/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-flink-in-action-6.3" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2021/07/30/flink-in-action-6.3/" class="article-date">
-      <time datetime="2021-07-29T16:00:00.000Z" itemprop="datePublished">2021-07-30</time>
-</a>
-    </div>
-  
-  <div class="article-inner" id="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/07/30/flink-in-action-6.3/">《Flink 实战与性能优化》—— Flink 扩展库——State Processor API</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody" id="article-entry">
-      
-          
-              <h2 id="6-3-Flink-扩展库——State-Processor-API"><a href="#6-3-Flink-扩展库——State-Processor-API" class="headerlink" title="6.3 Flink 扩展库——State Processor API"></a>6.3 Flink 扩展库——State Processor API</h2><p>State Processor API 功能是在 1.9 版本中新增加的一个功能，本节将带你了解一下其功能和如何使用？</p>
-          
-      
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Flink/">Flink</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/大数据/">大数据</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/流式计算/">流式计算</a></li></ul>
-    </div>
-
-      
-        <p class="article-more-link">
-          <a  href="/2021/07/30/flink-in-action-6.3/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-flink-in-action-6.2" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2021/07/29/flink-in-action-6.2/" class="article-date">
-      <time datetime="2021-07-28T16:00:00.000Z" itemprop="datePublished">2021-07-29</time>
-</a>
-    </div>
-  
-  <div class="article-inner" id="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/07/29/flink-in-action-6.2/">《Flink 实战与性能优化》—— 使用 Flink CEP 处理复杂事件</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody" id="article-entry">
-      
-          
-              <h2 id="6-2-使用-Flink-CEP-处理复杂事件"><a href="#6-2-使用-Flink-CEP-处理复杂事件" class="headerlink" title="6.2 使用 Flink CEP 处理复杂事件"></a>6.2 使用 Flink CEP 处理复杂事件</h2><p>6.1 节中介绍 Flink CEP 和其使用场景，本节将详细介绍 Flink CEP 的 API，教会大家如何去使用 Flink CEP。</p>
-          
-      
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Flink/">Flink</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/大数据/">大数据</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/流式计算/">流式计算</a></li></ul>
-    </div>
-
-      
-        <p class="article-more-link">
-          <a  href="/2021/07/29/flink-in-action-6.2/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
   
     <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
     </nav>
   
 </div>
