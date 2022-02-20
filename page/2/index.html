@@ -250,6 +250,133 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-flink-in-action-8.2" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2021/08/06/flink-in-action-8.2/" class="article-date">
+      <time datetime="2021-08-05T16:00:00.000Z" itemprop="datePublished">2021-08-06</time>
+</a>
+    </div>
+  
+  <div class="article-inner" id="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/08/06/flink-in-action-8.2/">《Flink 实战与性能优化》—— 如何搭建一套 Flink 监控系统?</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody" id="article-entry">
+      
+          
+              <h2 id="8-2-搭建一套-Flink-监控系统"><a href="#8-2-搭建一套-Flink-监控系统" class="headerlink" title="8.2 搭建一套 Flink 监控系统"></a>8.2 搭建一套 Flink 监控系统</h2><p>8.1 节中讲解了 JobManager、TaskManager 和 Flink Job 的监控，以及需要关注的监控指标有哪些。本节带大家讲解一下如何搭建一套完整的 Flink 监控系统，如果你所在的公司没有专门的监控平台，那么可以根据本节的内容来为公司搭建一套属于自己公司的 Flink 监控系统。</p>
+          
+      
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Flink/">Flink</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/大数据/">大数据</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/流式计算/">流式计算</a></li></ul>
+    </div>
+
+      
+        <p class="article-more-link">
+          <a  href="/2021/08/06/flink-in-action-8.2/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-flink-in-action-8.1" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2021/08/05/flink-in-action-8.1/" class="article-date">
+      <time datetime="2021-08-04T16:00:00.000Z" itemprop="datePublished">2021-08-05</time>
+</a>
+    </div>
+  
+  <div class="article-inner" id="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/08/05/flink-in-action-8.1/">《Flink 实战与性能优化》—— 如何实时监控 Flink 及其作业？</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody" id="article-entry">
+      
+          
+              <h1 id="第八章-——-Flink-监控"><a href="#第八章-——-Flink-监控" class="headerlink" title="第八章 —— Flink 监控"></a>第八章 —— Flink 监控</h1><p>Flink 相关的组件和作业的稳定性通常是比较关键的，所以得需要对它们进行监控，如果有异常，则需要及时告警通知。本章先会教会教会大家如何利用现有 Flink UI 上面的信息去发现和排查问题，会指明一些比较重要和我们非常关心的指标，通过这些指标我们能够立马定位到问题的根本原因。接着笔者会教大家如何去利用现有的 Metrics Reporter 去构建一个 Flink 的监控系统，它可以收集到所有作业的监控指标，并会存储这些监控指标数据，最后还会有一个监控大盘做数据可视化，通过这个大盘可以方便排查问题。</p>
+<h2 id="8-1-实时监控-Flink-及其作业"><a href="#8-1-实时监控-Flink-及其作业" class="headerlink" title="8.1 实时监控 Flink 及其作业"></a>8.1 实时监控 Flink 及其作业</h2>
+          
+      
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Flink/">Flink</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/大数据/">大数据</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/流式计算/">流式计算</a></li></ul>
+    </div>
+
+      
+        <p class="article-more-link">
+          <a  href="/2021/08/05/flink-in-action-8.1/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-flink-in-action-7.2" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -1370,132 +1497,6 @@
       
         <p class="article-more-link">
           <a  href="/2021/07/17/flink-in-action-3.7/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-flink-in-action-3.6" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2021/07/16/flink-in-action-3.6/" class="article-date">
-      <time datetime="2021-07-15T16:00:00.000Z" itemprop="datePublished">2021-07-16</time>
-</a>
-    </div>
-  
-  <div class="article-inner" id="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/07/16/flink-in-action-3.6/">《Flink 实战与性能优化》—— Flink 常用的 Source Connector 和 Sink Connector 介绍</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody" id="article-entry">
-      
-          
-              <h2 id="3-6-Flink-常用的-Source-Connector-和-Sink-Connector-介绍"><a href="#3-6-Flink-常用的-Source-Connector-和-Sink-Connector-介绍" class="headerlink" title="3.6 Flink 常用的 Source Connector 和 Sink Connector 介绍"></a>3.6 Flink 常用的 Source Connector 和 Sink Connector 介绍</h2><p>通过前面我们可以知道 Flink Job 的大致结构就是 <code>Source ——&gt; Transformation ——&gt; Sink</code>。</p>
-          
-      
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Flink/">Flink</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/大数据/">大数据</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/流式计算/">流式计算</a></li></ul>
-    </div>
-
-      
-        <p class="article-more-link">
-          <a  href="/2021/07/16/flink-in-action-3.6/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-flink-in-action-3.5" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2021/07/15/flink-in-action-3.5/" class="article-date">
-      <time datetime="2021-07-14T16:00:00.000Z" itemprop="datePublished">2021-07-15</time>
-</a>
-    </div>
-  
-  <div class="article-inner" id="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/07/15/flink-in-action-3.5/">《Flink 实战与性能优化》—— Watermark 的用法和结合 Window 处理延迟数据</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody" id="article-entry">
-      
-          
-              <h2 id="3-5-Watermark-的用法和结合-Window-处理延迟数据"><a href="#3-5-Watermark-的用法和结合-Window-处理延迟数据" class="headerlink" title="3.5 Watermark 的用法和结合 Window 处理延迟数据"></a>3.5 Watermark 的用法和结合 Window 处理延迟数据</h2><p>在 3.1 节中讲解了 Flink 中的三种 Time 和其对应的使用场景，然后在 3.2 节中深入的讲解了 Flink 中窗口的机制以及 Flink 中自带的 Window 的实现原理和使用方法。如果在进行 Window 计算操作的时候，如果使用的时间是 Processing Time，那么在 Flink 消费数据的时候，它完全不需要关心的数据本身的时间，意思也就是说不需要关心数据到底是延迟数据还是乱序数据。因为 Processing Time 只是代表数据在 Flink 被处理时的时间，这个时间是顺序的。但是如果你使用的是 Event Time 的话，那么你就不得不面临着这么个问题：事件乱序 &amp; 事件延迟。</p>
-          
-      
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Flink/">Flink</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/大数据/">大数据</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/流式计算/">流式计算</a></li></ul>
-    </div>
-
-      
-        <p class="article-more-link">
-          <a  href="/2021/07/15/flink-in-action-3.5/#more">more >></a>
         </p>
       
       <div class="clearfix"></div>
