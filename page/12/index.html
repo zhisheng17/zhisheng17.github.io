@@ -250,6 +250,71 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-Velocity-foreach" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2017/06/28/Velocity-foreach/" class="article-date">
+      <time datetime="2017-06-27T16:00:00.000Z" itemprop="datePublished">2017-06-28</time>
+</a>
+    </div>
+  
+  <div class="article-inner" id="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/06/28/Velocity-foreach/">Velocity 循环指令一种好的解决方法</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody" id="article-entry">
+      
+          
+              <h3 id="前提"><a href="#前提" class="headerlink" title="前提"></a>前提</h3><p>前台的数据经常是由需要通过 foreach 循环获取。</p>
+<h3 id="好的解决方案：（拿我最近做的一个项目做例子）"><a href="#好的解决方案：（拿我最近做的一个项目做例子）" class="headerlink" title="好的解决方案：（拿我最近做的一个项目做例子）"></a>好的解决方案：（拿我最近做的一个项目做例子）</h3><p>购物商城左边的导航栏，商品大分类和小分类（Category）</p>
+<p><strong>1、在 model 包下创建一个 ViewObject 类</strong></p>
+          
+      
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Velocity/">Velocity</a></li></ul>
+    </div>
+
+      
+        <p class="article-more-link">
+          <a  href="/2017/06/28/Velocity-foreach/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-AJAX" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -1456,10 +1521,10 @@
 
 
   
-    <article id="post-MySQL-select-good" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-【字符串】判断两字符串是否互为旋转词？" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2017/06/13/MySQL-select-good/" class="article-date">
+      <a href="/2017/06/13/【字符串】判断两字符串是否互为旋转词？/" class="article-date">
       <time datetime="2017-06-12T16:00:00.000Z" itemprop="datePublished">2017-06-13</time>
 </a>
     </div>
@@ -1473,7 +1538,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/06/13/MySQL-select-good/">MySQL 处理海量数据时的一些优化查询速度方法</a>
+      <a class="article-title" href="/2017/06/13/【字符串】判断两字符串是否互为旋转词？/">【字符串】判断两字符串是否互为旋转词？</a>
     </h1>
   
 
@@ -1483,7 +1548,11 @@
     <div class="article-entry" itemprop="articleBody" id="article-entry">
       
           
-              <p>在参与实际项目中，当 MySQL 表的数据量达到百万级时，普通的 SQL 查询效率呈直线下降，而且如果 where 中的查询条件较多时，其查询速度无法容忍。想想可知，假如我们查询淘宝的一个订单详情，如果查询时间高达几十秒，这么高的查询延时，任何用户都会抓狂。因此如何提高 SQL 语句查询效率，显得十分重要。<br>
+              <h4 id="相关阅读："><a href="#相关阅读：" class="headerlink" title="相关阅读："></a>相关阅读：</h4><h3 id="字符串逆序问题的解决方法"><a href="#字符串逆序问题的解决方法" class="headerlink" title="字符串逆序问题的解决方法"></a><a href="http://blog.csdn.net/tzs_1041218129/article/details/54645569">字符串逆序问题的解决方法</a></h3><p>题目：</p>
+<p>如果对于一个字符串A，将A的前面任意一部分挪到后边去形成的字符串称为A的旋转词。</p>
+<p>比如A=”12345”,A的旋转词有”12345”,”23451”,”34512”,”45123”和”51234”。</p>
+<p>对于两个字符串A和B，请判断A和B是否互为旋转词。</p>
+<p>给定两个字符串A和B及他们的长度lena，lenb，请返回一个bool值，代表他们是否互为旋转词。<br>
           
       
       
@@ -1495,79 +1564,12 @@
 
       
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/">MySQL</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/字符串/">字符串</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据结构/">数据结构</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/旋转词/">旋转词</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/算法/">算法</a></li></ul>
     </div>
 
       
         <p class="article-more-link">
-          <a  href="/2017/06/13/MySQL-select-good/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Pyspider框架 —— Python爬虫实战之爬取 V2EX 网站帖子" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2017/06/13/Pyspider框架 —— Python爬虫实战之爬取 V2EX 网站帖子/" class="article-date">
-      <time datetime="2017-06-12T16:00:00.000Z" itemprop="datePublished">2017-06-13</time>
-</a>
-    </div>
-  
-  <div class="article-inner" id="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/06/13/Pyspider框架 —— Python爬虫实战之爬取 V2EX 网站帖子/">Pyspider框架 —— Python爬虫实战之爬取 V2EX 网站帖子</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody" id="article-entry">
-      
-          
-              <p><strong>背景：</strong></p>
-<p><strong>PySpider</strong>：一个国人编写的强大的网络爬虫系统并带有强大的WebUI。采用Python语言编写，分布式架构，支持多种数据库后端，强大的WebUI支持脚本编辑器，任务监视器，项目管理器以及结果查看器。在线示例： <strong><a href="http://demo.pyspider.org/">http://demo.pyspider.org/</a></strong></p>
-<p><strong>官方文档： <a href="http://docs.pyspider.org/en/latest/">http://docs.pyspider.org/en/latest/</a> </strong></p>
-<p><strong>Github :  <a href="https://github.com/binux/pyspider">https://github.com/binux/pyspider</a> </strong></p>
-<p>本文爬虫代码 Github 地址：<strong><a href="https://github.com/zhisheng17/Python-Projects/blob/master/v2ex/V2EX.py">https://github.com/zhisheng17/Python-Projects/blob/master/v2ex/V2EX.py</a></strong></p>
-          
-      
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Pyspider/">Pyspider</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/">Python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/爬虫/">爬虫</a></li></ul>
-    </div>
-
-      
-        <p class="article-more-link">
-          <a  href="/2017/06/13/Pyspider框架 —— Python爬虫实战之爬取 V2EX 网站帖子/#more">more >></a>
+          <a  href="/2017/06/13/【字符串】判断两字符串是否互为旋转词？/#more">more >></a>
         </p>
       
       <div class="clearfix"></div>

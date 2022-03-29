@@ -384,6 +384,69 @@
 
 
   
+    <article id="post-flink-k8s-pod-add-request-and-limit" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2022/03/26/flink-k8s-pod-add-request-and-limit/" class="article-date">
+      <time datetime="2022-03-25T16:00:00.000Z" itemprop="datePublished">2022-03-26</time>
+</a>
+    </div>
+  
+  <div class="article-inner" id="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/03/26/flink-k8s-pod-add-request-and-limit/">如何提高 Flink K8s 机器资源使用率？</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody" id="article-entry">
+      
+          
+              <h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h3><p>在 flink on k8s 默认提交作业的命令下，我们会指定作业的 JM/TM 的 CPU 和 Memory，最后作业生成的 pod 它的 CPU/Memory 的 request/limit 都是一样的资源，但是作业真实运行时使用的资源远达不到 limit 的值，这样就会<strong>造成机器资源浪费</strong>（水位不高，但是机器又不能再申请 pod）。</p>
+          
+      
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Flink/">Flink</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/大数据/">大数据</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/流式计算/">流式计算</a></li></ul>
+    </div>
+
+      
+        <p class="article-more-link">
+          <a  href="/2022/03/26/flink-k8s-pod-add-request-and-limit/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-flink-akka-framesize" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -1440,70 +1503,6 @@
       
         <p class="article-more-link">
           <a  href="/2021/08/08/flink-in-action-9.2/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-flink-in-action-9.1" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2021/08/07/flink-in-action-9.1/" class="article-date">
-      <time datetime="2021-08-06T16:00:00.000Z" itemprop="datePublished">2021-08-07</time>
-</a>
-    </div>
-  
-  <div class="article-inner" id="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/08/07/flink-in-action-9.1/">《Flink 实战与性能优化》—— 如何处理 Flink Job BackPressure （反压）问题?</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody" id="article-entry">
-      
-          
-              <h1 id="第九章-——-Flink-性能调优"><a href="#第九章-——-Flink-性能调优" class="headerlink" title="第九章 —— Flink 性能调优"></a>第九章 —— Flink 性能调优</h1><p>通过第八章的监控图表信息，我们可以发现问题，在发现问题后，需要去分析为什么会发生这些问题以及我们该如何去解决这些问题。本章将会介绍很多 Flink 生产环境遇到的问题，比如作业出现反压、作业并行度配置不合理、作业数据倾斜等，除了引出这种常见问题之外，笔者还将和你一起去分析这种问题造成的原因以及如何去优化作业。比如合理的配置并行度、让作业算子尽可能的 chain 在一起已达到最优等。希望通过本章的内容，你可以将这些解决方法运用在你的公司，帮助公司解决类似的问题。</p>
-<h2 id="9-1-如何处理-Flink-Job-BackPressure-（反压）问题"><a href="#9-1-如何处理-Flink-Job-BackPressure-（反压）问题" class="headerlink" title="9.1 如何处理 Flink Job BackPressure （反压）问题?"></a>9.1 如何处理 Flink Job BackPressure （反压）问题?</h2><p>反压（BackPressure）机制被广泛应用到实时流处理系统中，流处理系统需要能优雅地处理反压问题。反压通常产生于这样的场景：短时间的负载高峰导致系统接收数据的速率远高于它处理数据的速率。许多日常问题都会导致反压，例如，垃圾回收停顿可能会导致流入的数据快速堆积，或遇到大促、秒杀活动导致流量陡增。反压如果不能得到正确的处理，可能会导致资源耗尽甚至系统崩溃。反压机制是指系统能够自己检测到被阻塞的 Operator，然后自适应地降低源头或上游数据的发送速率，从而维持整个系统的稳定。Flink 任务一般运行在多个节点上，数据从上游算子发送到下游算子需要网络传输，若系统在反压时想要降低数据源头或上游算子数据的发送速率，那么肯定也需要网络传输。所以下面先来了解一下 Flink 的网络流控（Flink 对网络数据流量的控制）机制。</p>
-          
-      
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Flink/">Flink</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/大数据/">大数据</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/流式计算/">流式计算</a></li></ul>
-    </div>
-
-      
-        <p class="article-more-link">
-          <a  href="/2021/08/07/flink-in-action-9.1/#more">more >></a>
         </p>
       
       <div class="clearfix"></div>
