@@ -250,133 +250,6 @@
 </nav>
       <div class="body-wrap">
   
-    <article id="post-flink-in-action-9.1" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2021/08/07/flink-in-action-9.1/" class="article-date">
-      <time datetime="2021-08-06T16:00:00.000Z" itemprop="datePublished">2021-08-07</time>
-</a>
-    </div>
-  
-  <div class="article-inner" id="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/08/07/flink-in-action-9.1/">《Flink 实战与性能优化》—— 如何处理 Flink Job BackPressure （反压）问题?</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody" id="article-entry">
-      
-          
-              <h1 id="第九章-——-Flink-性能调优"><a href="#第九章-——-Flink-性能调优" class="headerlink" title="第九章 —— Flink 性能调优"></a>第九章 —— Flink 性能调优</h1><p>通过第八章的监控图表信息，我们可以发现问题，在发现问题后，需要去分析为什么会发生这些问题以及我们该如何去解决这些问题。本章将会介绍很多 Flink 生产环境遇到的问题，比如作业出现反压、作业并行度配置不合理、作业数据倾斜等，除了引出这种常见问题之外，笔者还将和你一起去分析这种问题造成的原因以及如何去优化作业。比如合理的配置并行度、让作业算子尽可能的 chain 在一起已达到最优等。希望通过本章的内容，你可以将这些解决方法运用在你的公司，帮助公司解决类似的问题。</p>
-<h2 id="9-1-如何处理-Flink-Job-BackPressure-（反压）问题"><a href="#9-1-如何处理-Flink-Job-BackPressure-（反压）问题" class="headerlink" title="9.1 如何处理 Flink Job BackPressure （反压）问题?"></a>9.1 如何处理 Flink Job BackPressure （反压）问题?</h2><p>反压（BackPressure）机制被广泛应用到实时流处理系统中，流处理系统需要能优雅地处理反压问题。反压通常产生于这样的场景：短时间的负载高峰导致系统接收数据的速率远高于它处理数据的速率。许多日常问题都会导致反压，例如，垃圾回收停顿可能会导致流入的数据快速堆积，或遇到大促、秒杀活动导致流量陡增。反压如果不能得到正确的处理，可能会导致资源耗尽甚至系统崩溃。反压机制是指系统能够自己检测到被阻塞的 Operator，然后自适应地降低源头或上游数据的发送速率，从而维持整个系统的稳定。Flink 任务一般运行在多个节点上，数据从上游算子发送到下游算子需要网络传输，若系统在反压时想要降低数据源头或上游算子数据的发送速率，那么肯定也需要网络传输。所以下面先来了解一下 Flink 的网络流控（Flink 对网络数据流量的控制）机制。</p>
-          
-      
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Flink/">Flink</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/大数据/">大数据</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/流式计算/">流式计算</a></li></ul>
-    </div>
-
-      
-        <p class="article-more-link">
-          <a  href="/2021/08/07/flink-in-action-9.1/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-flink-in-action-8.2" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2021/08/06/flink-in-action-8.2/" class="article-date">
-      <time datetime="2021-08-05T16:00:00.000Z" itemprop="datePublished">2021-08-06</time>
-</a>
-    </div>
-  
-  <div class="article-inner" id="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/08/06/flink-in-action-8.2/">《Flink 实战与性能优化》—— 如何搭建一套 Flink 监控系统?</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody" id="article-entry">
-      
-          
-              <h2 id="8-2-搭建一套-Flink-监控系统"><a href="#8-2-搭建一套-Flink-监控系统" class="headerlink" title="8.2 搭建一套 Flink 监控系统"></a>8.2 搭建一套 Flink 监控系统</h2><p>8.1 节中讲解了 JobManager、TaskManager 和 Flink Job 的监控，以及需要关注的监控指标有哪些。本节带大家讲解一下如何搭建一套完整的 Flink 监控系统，如果你所在的公司没有专门的监控平台，那么可以根据本节的内容来为公司搭建一套属于自己公司的 Flink 监控系统。</p>
-          
-      
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Flink/">Flink</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/大数据/">大数据</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/流式计算/">流式计算</a></li></ul>
-    </div>
-
-      
-        <p class="article-more-link">
-          <a  href="/2021/08/06/flink-in-action-8.2/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
     <article id="post-flink-in-action-8.1" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -884,6 +757,69 @@
 
 
   
+    <article id="post-flink-in-action-5.2" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2021/07/27/flink-in-action-5.2/" class="article-date">
+      <time datetime="2021-07-26T16:00:00.000Z" itemprop="datePublished">2021-07-27</time>
+</a>
+    </div>
+  
+  <div class="article-inner" id="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/07/27/flink-in-action-5.2/">《Flink 实战与性能优化》—— Flink Table API &amp; SQL 功能</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody" id="article-entry">
+      
+          
+              <h2 id="5-2-Flink-Table-API-amp-SQL-功能"><a href="#5-2-Flink-Table-API-amp-SQL-功能" class="headerlink" title="5.2 Flink Table API &amp; SQL 功能"></a>5.2 Flink Table API &amp; SQL 功能</h2><p>在 5.1 节中对 Flink Table API &amp; SQL 的概述和常见 API 都做了介绍，这篇文章先来看下其与 DataStream 和 DataSet API 的集成。</p>
+          
+      
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Flink/">Flink</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/大数据/">大数据</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/流式计算/">流式计算</a></li></ul>
+    </div>
+
+      
+        <p class="article-more-link">
+          <a  href="/2021/07/27/flink-in-action-5.2/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-flink-in-action-5.1" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -930,69 +866,6 @@
       
         <p class="article-more-link">
           <a  href="/2021/07/27/flink-in-action-5.1/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-flink-in-action-5.2" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2021/07/27/flink-in-action-5.2/" class="article-date">
-      <time datetime="2021-07-26T16:00:00.000Z" itemprop="datePublished">2021-07-27</time>
-</a>
-    </div>
-  
-  <div class="article-inner" id="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/07/27/flink-in-action-5.2/">《Flink 实战与性能优化》—— Flink Table API &amp; SQL 功能</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody" id="article-entry">
-      
-          
-              <h2 id="5-2-Flink-Table-API-amp-SQL-功能"><a href="#5-2-Flink-Table-API-amp-SQL-功能" class="headerlink" title="5.2 Flink Table API &amp; SQL 功能"></a>5.2 Flink Table API &amp; SQL 功能</h2><p>在 5.1 节中对 Flink Table API &amp; SQL 的概述和常见 API 都做了介绍，这篇文章先来看下其与 DataStream 和 DataSet API 的集成。</p>
-          
-      
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Flink/">Flink</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/大数据/">大数据</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/流式计算/">流式计算</a></li></ul>
-    </div>
-
-      
-        <p class="article-more-link">
-          <a  href="/2021/07/27/flink-in-action-5.2/#more">more >></a>
         </p>
       
       <div class="clearfix"></div>
@@ -1498,6 +1371,132 @@
       
         <p class="article-more-link">
           <a  href="/2021/07/19/flink-in-action-3.8/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-flink-in-action-3.7" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2021/07/17/flink-in-action-3.7/" class="article-date">
+      <time datetime="2021-07-16T16:00:00.000Z" itemprop="datePublished">2021-07-17</time>
+</a>
+    </div>
+  
+  <div class="article-inner" id="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/07/17/flink-in-action-3.7/">《Flink 实战与性能优化》—— Flink Connector —— Kafka 的使用和源码分析</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody" id="article-entry">
+      
+          
+              <h2 id="3-7-Flink-Connector-——-Kafka-的使用和源码分析"><a href="#3-7-Flink-Connector-——-Kafka-的使用和源码分析" class="headerlink" title="3.7 Flink Connector —— Kafka 的使用和源码分析"></a>3.7 Flink Connector —— Kafka 的使用和源码分析</h2><p>在前面 3.6 节中介绍了 Flink 中的 Data Source 和 Data Sink，然后还讲诉了自带的一些 Source 和 Sink 的 Connector。本篇文章将讲解一下用的最多的 Connector —— Kafka，带大家利用 Kafka Connector 读取 Kafka 数据，做一些计算操作后然后又通过 Kafka Connector 写入到 kafka 消息队列去，整个案例的执行流程如下图所示。</p>
+          
+      
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Flink/">Flink</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/大数据/">大数据</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/流式计算/">流式计算</a></li></ul>
+    </div>
+
+      
+        <p class="article-more-link">
+          <a  href="/2021/07/17/flink-in-action-3.7/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-flink-in-action-3.6" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2021/07/16/flink-in-action-3.6/" class="article-date">
+      <time datetime="2021-07-15T16:00:00.000Z" itemprop="datePublished">2021-07-16</time>
+</a>
+    </div>
+  
+  <div class="article-inner" id="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/07/16/flink-in-action-3.6/">《Flink 实战与性能优化》—— Flink 常用的 Source Connector 和 Sink Connector 介绍</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody" id="article-entry">
+      
+          
+              <h2 id="3-6-Flink-常用的-Source-Connector-和-Sink-Connector-介绍"><a href="#3-6-Flink-常用的-Source-Connector-和-Sink-Connector-介绍" class="headerlink" title="3.6 Flink 常用的 Source Connector 和 Sink Connector 介绍"></a>3.6 Flink 常用的 Source Connector 和 Sink Connector 介绍</h2><p>通过前面我们可以知道 Flink Job 的大致结构就是 <code>Source ——&gt; Transformation ——&gt; Sink</code>。</p>
+          
+      
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Flink/">Flink</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/大数据/">大数据</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/流式计算/">流式计算</a></li></ul>
+    </div>
+
+      
+        <p class="article-more-link">
+          <a  href="/2021/07/16/flink-in-action-3.6/#more">more >></a>
         </p>
       
       <div class="clearfix"></div>
