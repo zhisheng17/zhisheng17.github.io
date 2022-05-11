@@ -250,6 +250,69 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-flink-in-action-9.4" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2021/08/10/flink-in-action-9.4/" class="article-date">
+      <time datetime="2021-08-09T16:00:00.000Z" itemprop="datePublished">2021-08-10</time>
+</a>
+    </div>
+  
+  <div class="article-inner" id="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/08/10/flink-in-action-9.4/">《Flink 实战与性能优化》—— 如何合理的设置 Flink 作业并行度？</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody" id="article-entry">
+      
+          
+              <h2 id="9-4-如何合理的设置-Flink-作业并行度？"><a href="#9-4-如何合理的设置-Flink-作业并行度？" class="headerlink" title="9.4 如何合理的设置 Flink 作业并行度？"></a>9.4 如何合理的设置 Flink 作业并行度？</h2><p>在 9.2 节中讲解了 Flink Job 中的执行计划，并详细分析了 Flink 中的 operator chain 在一起的各种条件，在 9.3 节中也通过真实生产环境的案例来分享并行度与 Slot 的概念与关系。相信大家也都有一定的理解，但是有时候生产环境如果 Job 突然消费不及时了，或者 Job 就根本不在消费数据了，那么该怎么办？首先得看下相关的监控查看 Job 是否在正常运行，是否出现反压的情况，是否这会生产数据量过大然而并行度却是根据之前数据量设置的，种种原因都需要一个个排查一下，然后找到根因才能够对应的去解决。这节来讲解下遇到这种问题后如何合理配置并行度呢？</p>
+          
+      
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Flink/">Flink</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/大数据/">大数据</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/流式计算/">流式计算</a></li></ul>
+    </div>
+
+      
+        <p class="article-more-link">
+          <a  href="/2021/08/10/flink-in-action-9.4/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-flink-in-action-9.3" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -1435,69 +1498,6 @@
       
         <p class="article-more-link">
           <a  href="/2021/07/22/flink-in-action-3.11/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-flink-in-action-3.10" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2021/07/21/flink-in-action-3.10/" class="article-date">
-      <time datetime="2021-07-20T16:00:00.000Z" itemprop="datePublished">2021-07-21</time>
-</a>
-    </div>
-  
-  <div class="article-inner" id="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/07/21/flink-in-action-3.10/">《Flink 实战与性能优化》—— Flink Connector —— HBase 的用法</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody" id="article-entry">
-      
-          
-              <h2 id="3-10-Flink-Connector-——-HBase-的用法"><a href="#3-10-Flink-Connector-——-HBase-的用法" class="headerlink" title="3.10 Flink Connector —— HBase 的用法"></a>3.10 Flink Connector —— HBase 的用法</h2><p>HBase 是一个分布式的、面向列的开源数据库，同样，很多公司也有使用该技术存储数据的，本节将对 HBase 做些简单的介绍，以及利用 Flink HBase Connector 读取 HBase 中的数据和写入数据到 HBase 中。</p>
-          
-      
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Flink/">Flink</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/大数据/">大数据</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/流式计算/">流式计算</a></li></ul>
-    </div>
-
-      
-        <p class="article-more-link">
-          <a  href="/2021/07/21/flink-in-action-3.10/#more">more >></a>
         </p>
       
       <div class="clearfix"></div>
