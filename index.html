@@ -384,6 +384,69 @@
 
 
   
+    <article id="post-flink-disable-checkpoint" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2022/10/09/flink-disable-checkpoint/" class="article-date">
+      <time datetime="2022-10-08T16:00:00.000Z" itemprop="datePublished">2022-10-09</time>
+</a>
+    </div>
+  
+  <div class="article-inner" id="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/10/09/flink-disable-checkpoint/">关闭 Flink Checkpoint，引发 P3 故障</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody" id="article-entry">
+      
+          
+              <p>记录一个比较有意义的故障，没遇到的可以避坑，已经被坑过的只能握手🤝了。</p>
+          
+      
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Flink/">Flink</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/大数据/">大数据</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/流式计算/">流式计算</a></li></ul>
+    </div>
+
+      
+        <p class="article-more-link">
+          <a  href="/2022/10/09/flink-disable-checkpoint/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-flink-table-store" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -1440,69 +1503,6 @@
       
         <p class="article-more-link">
           <a  href="/2021/08/11/flink-in-action-9.6/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-flink-in-action-9.5" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2021/08/11/flink-in-action-9.5/" class="article-date">
-      <time datetime="2021-08-10T16:00:00.000Z" itemprop="datePublished">2021-08-11</time>
-</a>
-    </div>
-  
-  <div class="article-inner" id="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/08/11/flink-in-action-9.5/">《Flink 实战与性能优化》—— Flink 中如何保证 Exactly Once？</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody" id="article-entry">
-      
-          
-              <h2 id="9-5-Flink-中如何保证-Exactly-Once？"><a href="#9-5-Flink-中如何保证-Exactly-Once？" class="headerlink" title="9.5 Flink 中如何保证 Exactly Once？"></a>9.5 Flink 中如何保证 Exactly Once？</h2><p>在分布式场景下，我们的应用程序随时可能出现任何形式的故障，例如：机器硬件故障、程序 OOM 等。当应用程序出现故障时，Flink 为了保证数据消费的 Exactly Once，需要有相应的故障容错能力。Flink 是通过周期性 Checkpoint 的方式来实现故障容错，这里使用的是基于 Chandy-Lamport 改进的算法。本节会介绍 Flink 内部如何保证 Exactly Once 以及端对端如何保证 Exactly Once。</p>
-          
-      
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Flink/">Flink</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/大数据/">大数据</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/流式计算/">流式计算</a></li></ul>
-    </div>
-
-      
-        <p class="article-more-link">
-          <a  href="/2021/08/11/flink-in-action-9.5/#more">more >></a>
         </p>
       
       <div class="clearfix"></div>

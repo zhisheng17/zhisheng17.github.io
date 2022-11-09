@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://www.54tianzhisheng.cn/2022/10/09/flink-disable-checkpoint/</loc>
+    
+    <lastmod>2022-11-09T16:27:04.077Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://www.54tianzhisheng.cn/2022/05/12/flink-table-store/</loc>
     
     <lastmod>2022-05-11T16:06:12.752Z</lastmod>
@@ -856,13 +863,6 @@
   </url>
   
   <url>
-    <loc>http://www.54tianzhisheng.cn/2019/03/15/Flink-code-Standalone-start/</loc>
-    
-    <lastmod>2019-11-05T10:23:14.000Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://www.54tianzhisheng.cn/2019/03/17/Flink-code-Standalone-TaskManager-start/</loc>
     
     <lastmod>2019-11-05T10:23:14.000Z</lastmod>
@@ -871,6 +871,13 @@
   
   <url>
     <loc>http://www.54tianzhisheng.cn/2019/03/16/Flink-code-Standalone-JobManager-start/</loc>
+    
+    <lastmod>2019-11-05T10:23:14.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://www.54tianzhisheng.cn/2019/03/15/Flink-code-Standalone-start/</loc>
     
     <lastmod>2019-11-05T10:23:14.000Z</lastmod>
     
@@ -926,13 +933,6 @@
   </url>
   
   <url>
-    <loc>http://www.54tianzhisheng.cn/2018/10/28/flink-sources/</loc>
-    
-    <lastmod>2019-11-05T10:23:14.000Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://www.54tianzhisheng.cn/2019/06/12/flink-split/</loc>
     
     <lastmod>2019-11-05T10:23:14.000Z</lastmod>
@@ -940,14 +940,21 @@
   </url>
   
   <url>
-    <loc>http://www.54tianzhisheng.cn/2019/03/26/Flink-code-ExecutionGraph/</loc>
+    <loc>http://www.54tianzhisheng.cn/2018/10/28/flink-sources/</loc>
+    
+    <lastmod>2019-11-05T10:23:14.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://www.54tianzhisheng.cn/2019/07/03/Flink-code-Annotations/</loc>
     
     <lastmod>2019-11-05T10:23:13.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://www.54tianzhisheng.cn/2019/07/03/Flink-code-Annotations/</loc>
+    <loc>http://www.54tianzhisheng.cn/2019/03/26/Flink-code-ExecutionGraph/</loc>
     
     <lastmod>2019-11-05T10:23:13.000Z</lastmod>
     
@@ -1297,14 +1304,14 @@
   </url>
   
   <url>
-    <loc>http://www.54tianzhisheng.cn/2017/12/09/CodeMirror/</loc>
+    <loc>http://www.54tianzhisheng.cn/2017/06/23/AJAX/</loc>
     
     <lastmod>2019-04-24T17:04:38.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://www.54tianzhisheng.cn/2017/06/23/AJAX/</loc>
+    <loc>http://www.54tianzhisheng.cn/2017/12/09/CodeMirror/</loc>
     
     <lastmod>2019-04-24T17:04:38.000Z</lastmod>
     
@@ -1479,14 +1486,14 @@
   </url>
   
   <url>
-    <loc>http://www.54tianzhisheng.cn/2018/01/09/lombok/</loc>
+    <loc>http://www.54tianzhisheng.cn/2018/01/24/mac/</loc>
     
     <lastmod>2018-11-22T14:51:58.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://www.54tianzhisheng.cn/2018/01/24/mac/</loc>
+    <loc>http://www.54tianzhisheng.cn/2018/01/09/lombok/</loc>
     
     <lastmod>2018-11-22T14:51:58.000Z</lastmod>
     
@@ -1500,14 +1507,14 @@
   </url>
   
   <url>
-    <loc>http://www.54tianzhisheng.cn/2018/01/04/weixin/</loc>
+    <loc>http://www.54tianzhisheng.cn/2017/12/02/wx-01/</loc>
     
     <lastmod>2018-11-22T14:51:58.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://www.54tianzhisheng.cn/2017/12/02/wx-01/</loc>
+    <loc>http://www.54tianzhisheng.cn/2018/01/04/weixin/</loc>
     
     <lastmod>2018-11-22T14:51:58.000Z</lastmod>
     
@@ -1612,14 +1619,14 @@
   </url>
   
   <url>
-    <loc>http://www.54tianzhisheng.cn/2017/09/17/Interview-summary/</loc>
+    <loc>http://www.54tianzhisheng.cn/2017/06/13/%E9%80%9A%E8%BF%87%E9%A1%B9%E7%9B%AE%E9%80%90%E6%AD%A5%E6%B7%B1%E5%85%A5%E4%BA%86%E8%A7%A3Mybatis(%E4%BA%8C)/</loc>
     
     <lastmod>2018-11-22T14:51:58.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://www.54tianzhisheng.cn/2017/06/13/%E9%80%9A%E8%BF%87%E9%A1%B9%E7%9B%AE%E9%80%90%E6%AD%A5%E6%B7%B1%E5%85%A5%E4%BA%86%E8%A7%A3Mybatis(%E4%BA%8C)/</loc>
+    <loc>http://www.54tianzhisheng.cn/2017/09/17/Interview-summary/</loc>
     
     <lastmod>2018-11-22T14:51:58.000Z</lastmod>
     

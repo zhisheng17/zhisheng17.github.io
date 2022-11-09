@@ -250,6 +250,69 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-flink-in-action-9.5" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2021/08/11/flink-in-action-9.5/" class="article-date">
+      <time datetime="2021-08-10T16:00:00.000Z" itemprop="datePublished">2021-08-11</time>
+</a>
+    </div>
+  
+  <div class="article-inner" id="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/08/11/flink-in-action-9.5/">《Flink 实战与性能优化》—— Flink 中如何保证 Exactly Once？</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody" id="article-entry">
+      
+          
+              <h2 id="9-5-Flink-中如何保证-Exactly-Once？"><a href="#9-5-Flink-中如何保证-Exactly-Once？" class="headerlink" title="9.5 Flink 中如何保证 Exactly Once？"></a>9.5 Flink 中如何保证 Exactly Once？</h2><p>在分布式场景下，我们的应用程序随时可能出现任何形式的故障，例如：机器硬件故障、程序 OOM 等。当应用程序出现故障时，Flink 为了保证数据消费的 Exactly Once，需要有相应的故障容错能力。Flink 是通过周期性 Checkpoint 的方式来实现故障容错，这里使用的是基于 Chandy-Lamport 改进的算法。本节会介绍 Flink 内部如何保证 Exactly Once 以及端对端如何保证 Exactly Once。</p>
+          
+      
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Flink/">Flink</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/大数据/">大数据</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/流式计算/">流式计算</a></li></ul>
+    </div>
+
+      
+        <p class="article-more-link">
+          <a  href="/2021/08/11/flink-in-action-9.5/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-flink-in-action-9.4" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -1073,6 +1136,69 @@
 
 
   
+    <article id="post-flink-in-action-5.2" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2021/07/27/flink-in-action-5.2/" class="article-date">
+      <time datetime="2021-07-26T16:00:00.000Z" itemprop="datePublished">2021-07-27</time>
+</a>
+    </div>
+  
+  <div class="article-inner" id="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/07/27/flink-in-action-5.2/">《Flink 实战与性能优化》—— Flink Table API &amp; SQL 功能</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody" id="article-entry">
+      
+          
+              <h2 id="5-2-Flink-Table-API-amp-SQL-功能"><a href="#5-2-Flink-Table-API-amp-SQL-功能" class="headerlink" title="5.2 Flink Table API &amp; SQL 功能"></a>5.2 Flink Table API &amp; SQL 功能</h2><p>在 5.1 节中对 Flink Table API &amp; SQL 的概述和常见 API 都做了介绍，这篇文章先来看下其与 DataStream 和 DataSet API 的集成。</p>
+          
+      
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Flink/">Flink</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/大数据/">大数据</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/流式计算/">流式计算</a></li></ul>
+    </div>
+
+      
+        <p class="article-more-link">
+          <a  href="/2021/07/27/flink-in-action-5.2/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-flink-in-action-5.1" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -1119,69 +1245,6 @@
       
         <p class="article-more-link">
           <a  href="/2021/07/27/flink-in-action-5.1/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-flink-in-action-5.2" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2021/07/27/flink-in-action-5.2/" class="article-date">
-      <time datetime="2021-07-26T16:00:00.000Z" itemprop="datePublished">2021-07-27</time>
-</a>
-    </div>
-  
-  <div class="article-inner" id="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/07/27/flink-in-action-5.2/">《Flink 实战与性能优化》—— Flink Table API &amp; SQL 功能</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody" id="article-entry">
-      
-          
-              <h2 id="5-2-Flink-Table-API-amp-SQL-功能"><a href="#5-2-Flink-Table-API-amp-SQL-功能" class="headerlink" title="5.2 Flink Table API &amp; SQL 功能"></a>5.2 Flink Table API &amp; SQL 功能</h2><p>在 5.1 节中对 Flink Table API &amp; SQL 的概述和常见 API 都做了介绍，这篇文章先来看下其与 DataStream 和 DataSet API 的集成。</p>
-          
-      
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Flink/">Flink</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/大数据/">大数据</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/流式计算/">流式计算</a></li></ul>
-    </div>
-
-      
-        <p class="article-more-link">
-          <a  href="/2021/07/27/flink-in-action-5.2/#more">more >></a>
         </p>
       
       <div class="clearfix"></div>
@@ -1435,69 +1498,6 @@
       
         <p class="article-more-link">
           <a  href="/2021/07/23/flink-in-action-3.12/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-flink-in-action-3.11" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2021/07/22/flink-in-action-3.11/" class="article-date">
-      <time datetime="2021-07-21T16:00:00.000Z" itemprop="datePublished">2021-07-22</time>
-</a>
-    </div>
-  
-  <div class="article-inner" id="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/07/22/flink-in-action-3.11/">《Flink 实战与性能优化》—— Flink Connector —— Redis 的用法</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody" id="article-entry">
-      
-          
-              <h2 id="3-11-Flink-Connector-——-Redis-的用法"><a href="#3-11-Flink-Connector-——-Redis-的用法" class="headerlink" title="3.11 Flink Connector —— Redis 的用法"></a>3.11 Flink Connector —— Redis 的用法</h2><p>在生产环境中，通常会将一些计算后的数据存储在 Redis 中，以供第三方的应用去 Redis 查找对应的数据，至于 Redis 的特性笔者不会在本节做过多的讲解。</p>
-          
-      
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Flink/">Flink</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/大数据/">大数据</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/流式计算/">流式计算</a></li></ul>
-    </div>
-
-      
-        <p class="article-more-link">
-          <a  href="/2021/07/22/flink-in-action-3.11/#more">more >></a>
         </p>
       
       <div class="clearfix"></div>
