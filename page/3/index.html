@@ -250,6 +250,69 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-flink-in-action-3.12" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2021/07/23/flink-in-action-3.12/" class="article-date">
+      <time datetime="2021-07-22T16:00:00.000Z" itemprop="datePublished">2021-07-23</time>
+</a>
+    </div>
+  
+  <div class="article-inner" id="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/07/23/flink-in-action-3.12/">《Flink 实战与性能优化》—— 使用 Side Output 分流</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody" id="article-entry">
+      
+          
+              <h2 id="3-12-使用-Side-Output-分流"><a href="#3-12-使用-Side-Output-分流" class="headerlink" title="3.12 使用 Side Output 分流"></a>3.12 使用 Side Output 分流</h2><p>通常，在 Kafka 的 topic 中会有很多数据，这些数据虽然结构是一致的，但是类型可能不一致，举个例子：Kafka 中的监控数据有很多种：机器、容器、应用、中间件等，如果要对这些数据分别处理，就需要对这些数据流进行一个拆分，那么在 Flink 中该怎么完成这需求呢，有如下这些方法。</p>
+          
+      
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Flink/">Flink</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/大数据/">大数据</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/流式计算/">流式计算</a></li></ul>
+    </div>
+
+      
+        <p class="article-more-link">
+          <a  href="/2021/07/23/flink-in-action-3.12/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-flink-in-action-3.11" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -1450,69 +1513,6 @@
 
 
   
-    <article id="post-Flink-Fraud-Detection-engine-2" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2021/01/23/Flink-Fraud-Detection-engine-2/" class="article-date">
-      <time datetime="2021-01-22T16:00:00.000Z" itemprop="datePublished">2021-01-23</time>
-</a>
-    </div>
-  
-  <div class="article-inner" id="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/01/23/Flink-Fraud-Detection-engine-2/">基于 Flink 的动态欺诈检测系统(中)</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody" id="article-entry">
-      
-          
-              <p>如何实现呢？</p>
-          
-      
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Flink/">Flink</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/大数据/">大数据</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/实时计算/">实时计算</a></li></ul>
-    </div>
-
-      
-        <p class="article-more-link">
-          <a  href="/2021/01/23/Flink-Fraud-Detection-engine-2/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/2/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><a class="extend next" rel="next" href="/page/4/">Next &raquo;</a>
@@ -1523,7 +1523,7 @@
     <div class="outer">
         <div id="footer-info">
             <div class="footer-left">
-                &copy; 2022 zhisheng
+                &copy; 2023 zhisheng
             </div>
         </div>
         
